@@ -58,7 +58,8 @@ do
 	
 	case ${TYPE_REGRESSION[$i]} in 
 	'constant')
-		gnuplot <<< "set fit logfile '$LOG_FILE';     \
+		gnuplot <<< "set fit quiet;                   \
+                     set fit logfile '$LOG_FILE';     \
                      f(x)=a;                          \
                      fit f(x) '$table' via a;"
         
@@ -71,7 +72,8 @@ do
         fi
 		;;
 	'logarithmic')
-		gnuplot <<< "set fit logfile '$LOG_FILE';     \
+		gnuplot <<< "set fit quiet;                   \
+                     set fit logfile '$LOG_FILE';     \
                      f(x)=a*log(x) + b;               \
                      fit f(x) '$table' via a,b;"
         
@@ -85,7 +87,8 @@ do
         fi
 		;;
 	'lineal')
-		gnuplot <<< "set fit logfile '$LOG_FILE';     \
+		gnuplot <<< "set fit quiet;                   \
+                     set fit logfile '$LOG_FILE';     \
                      f(x)=a*x + b;                    \
                      fit f(x) '$table' via a,b;"
         
@@ -99,7 +102,8 @@ do
         fi
 		;;
 	'sublogarithmic')
-		gnuplot <<< "set fit logfile '$LOG_FILE';     \
+		gnuplot <<< "set fit quiet;                   \
+                     set fit logfile '$LOG_FILE';     \
                      f(x)=a*x*log(x) + b;             \
                      fit f(x) '$table' via a,b;"
         
@@ -113,7 +117,8 @@ do
 		fi
 		;;
 	'quadratic')
-		gnuplot <<< "set fit logfile '$LOG_FILE';     \
+		gnuplot <<< "set fit quiet;                   \
+                     set fit logfile '$LOG_FILE';     \
                      f(x)=a*x*x + b*x + c;            \
                      fit f(x) '$table' via a,b,c;"
         
@@ -128,7 +133,8 @@ do
         fi
 		;;
 	'cubic')
-		gnuplot <<< "set fit logfile '$LOG_FILE';     \
+		gnuplot <<< "set fit quiet;                   \
+                     set fit logfile '$LOG_FILE';     \
                      f(x)=a*x*x*x + b*x*x + c*x + d;  \
                      fit f(x) '$table' via a,b,c,d;"
         
@@ -144,8 +150,9 @@ do
         fi
 		;;
 	'exponential')
-		gnuplot <<< "set fit logfile '$LOG_FILE';     \
-                     f(x)=a*exp(b*x);  \
+		gnuplot <<< "set fit quiet;                   \
+                     set fit logfile '$LOG_FILE';     \
+                     f(x)=a*exp(b*x);                 \
                      fit f(x) '$table' via a,b;"
         
         parameter_a=$(find_value $LOG_FILE "a");
