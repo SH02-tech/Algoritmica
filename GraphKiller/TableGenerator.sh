@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash 
 
 # ARGUMENTS: program(.cpp) min max nºjumps repeats nombre
 
