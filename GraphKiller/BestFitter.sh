@@ -9,20 +9,27 @@
 # 1. Archieve that contais the information of the best type of adjust.
 #######################################################################
 
-# Obtain the ERM separated with \n
-
+FILENAME=$1
+OUTPUT=$2
 
 # Now, we have to determinate which is the maximum value
 
-maxERM=-1
+min_rms="10^99"
+min_line=""
 
-cut -d ' ' -f 3 $1 | cut -d ":" -f 2 | while IFS= read -r line 
-do
-	echo "Linea leída: $line"
-	if [ $line > $maxERM ];
+while read line
+do 
+	data=$(echo $line | grep -Eo "RMS:.*")
+	arr_rms=(${data//:/ })
+	
+	rms=$(sed -E 's/([+-]?[0-9.]+)[eE]\+?(-?)([0-9]+)/(\1*10^\2\3)/g' <<< ${arr_rms[1]})
+	
+	if (( $(echo "$rms < $min_rms" | bc -l) ))
 	then
-		maxERM=$line;
-	fi;
-done
+		min_rms="$rms"
+		min_line="$line"
+	fi
+	
+done < $FILENAME
 
-echo "The biggest number is: $maxERM"
+echo "$min_line" > $OUTPUT
