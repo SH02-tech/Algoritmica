@@ -20,9 +20,8 @@ do
 	do
 	  s=`./exe $ini`
 	  sum=$(echo $sum + $s | bc)
-	  echo "$s $sum" 
 	done
-	echo -e "\n"
+
 	med=`bc <<< "scale=7; $sum/$repeats"`  
 	lim=1
 	
