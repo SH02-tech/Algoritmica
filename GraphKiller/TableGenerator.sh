@@ -1,8 +1,9 @@
-#!/bin/bash 
+#!/bin/bash
 
 # ARGUMENTS: program(.cpp) min max nºjumps repeats nombre
 
-
+g++ $1 -o exe
+chmod u+x exe
 
 ini=`bc <<< "scale=4; $2"` 
 fin=`bc <<< "scale=4; $3"` 
@@ -13,12 +14,15 @@ sum=0
 
 while (( $(echo "$ini < $fin" |bc -l) ))
 do
+	sum=0
+	
 	for (( j=0; j<$repeats;j++ ))
 	do
-	  s=`./$1 $ini`
+	  s=`./exe $ini`
 	  sum=$(echo $sum + $s | bc)
+	  echo "$s $sum" 
 	done
-	
+	echo -e "\n"
 	med=`bc <<< "scale=7; $sum/$repeats"`  
 	lim=1
 	
@@ -33,3 +37,5 @@ do
 	
 	ini=`bc <<< "scale=4; $ini+$jump"`
 done
+
+rm exe
