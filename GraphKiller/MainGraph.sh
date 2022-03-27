@@ -71,5 +71,3 @@ else
 	printf "Non C++ source file provided.\n";
 	exit 1;
 fi
-
-

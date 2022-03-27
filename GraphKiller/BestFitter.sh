@@ -3,16 +3,15 @@
 # Archive: BestFitter.sh
 # Input:
 # 1. Archive with the information of all the regresions obtain in 
-#    Regresions.ss, including the fit function, the parameters of the 
-#    function and the ERM.
+#    Regresions.sh, including the fit function, the parameters of the 
+#    function and the ERM. <name1.txt>
+# 2. The name of the output file <name2.txt>
 # Output:
 # 1. Archieve that contais the information of the best type of adjust.
 #######################################################################
 
 FILENAME=$1
 OUTPUT=$2
-
-# Now, we have to determinate which is the maximum value
 
 min_rms="10^99"
 min_line=""
