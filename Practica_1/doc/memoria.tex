@@ -202,8 +202,14 @@
     mencionados, que interan sobre el número de elementos del vector que denotaremos por $n$, luego realizaremos la eficiencia en torno a este dato. Ambos ciclos son 
     independientes, luego vamos a analizar cada uno por separado.
     
-    El primero sta función está formada por cuatro operaciones elementales al inicio del código, de eficiencia $O(1)$, al tratarse de declaraciones y asignaciones, y un bucle while 
-    cuyo contenido va iterando en torno a potencias de dos, pues k se va decrementando a la mitad en cada iteración.
+    El primero itera $n/2 + 1$ veces la función reajustar, que está formada por cuatro operaciones elementales al inicio del código, de eficiencia $O(1)$, al tratarse 
+    de declaraciones y asignaciones, y un bucle while cuyo contenido va iterando en torno a potencias de dos, pues k se va decrementando a la mitad en cada iteración, así 
+    que si $T(n)$ es el números de operaciones asociadas al algoritmo, tenemos que:
+
+    \begin{equation*}
+        T(n) = \sum_{i=0}^{log_2(n)} k = k(n/2) => log_2(n).
+    \end{equation*} 
+
 
     la función reajustar, cuya eficiencia teórica acabamos de estudiar que es $k*n/2$. El primer ciclo va iterando $n/2 + 1$ veces y en su cuerpo posee la función reajustar, 
     que llama en cada iteración, así que:
@@ -230,6 +236,13 @@
     \begin{equation}
         T(n) = \left\{ \begin{array}{lr} T(k_n) + T(n-k_n) + n & \text{si } n > \text{UMBRAL}\\ n^2 & \text{si } n \leq \text{UMBRAL} \end{array} \right.
     \end{equation}
+
+    Resolvamos la recurrencia de (1):
+    
+    \begin{equation}
+        T(n) = \left\{ \begin{array}{lr} T(k_n) + T(n-k_n) + n 
+    \end{equation}
+    
     
     \subsection{Algoritmo Floyd}
 
