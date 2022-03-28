@@ -12,12 +12,14 @@ label_y=$7
 pdf=$8
 
 gnuplot -persist <<-EOFMarker
-    set title "Analysis $title"
+	unset key
+    set title "$title"
     set xlabel "$label_x"
     set xrange [$min_x:$max_x]
-    set ylabel"$label_y"
+    set ylabel "$label_y"
     set terminal pdf
     set output "$pdf"
-    plot "$table" with linespoints , $regresion with linespoints
+    plot "$table", $regresion with lines
 
 EOFMarker
+
