@@ -9,15 +9,17 @@
 #               --max-x <number>.                    Maximum value of X axis.
 #               --num-points <number>.               Number of points to measure.
 #               --repetitions-per-point <number>.    Number of repetitions per point. 
-#               <cpp-name>.cpp.       C++ source file.
+#               <cpp-name>.cpp.                      C++ source file.
 # Return:       A directory structure with the following information:
-#               data/<cpp-name>-tab.dat    Table obtained from the source.
-#               data/<cpp-name>-graph.pdf  PDF with graphics obtained from the
-#                                          source.
-#               data/<cpp-name>-stat.txt   File with information about type
-#                                          of regression, reg function and RMS. 
+#               data/<cpp-name>-tab.dat              Table obtained from the source.
+#               data/<cpp-name>-graph.pdf            PDF with graphics obtained from the
+#                                                    source.
+#               data/<cpp-name>-general-stat.txt     File with information about types
+#                                                    of regression, reg function and RMS. 
+#               data/<cpp-name>-best-stat.txt        File with best fit of the file. 
 # Example:      ./MainGraph.sh example.cpp --xlabel "This is X label." --ylabel
-#               "This is Y label."
+#               "This is Y label." --min-x 5 --max-x 10 --num-points 10 
+#               --repetitions-per-point 10 insercion.cpp
 
 DATA_PATH="data/"
 
@@ -82,24 +84,18 @@ then
 	exit 1;
 fi
 
-IFS='.'; 
-arr_src=($src_file); 
-unset IFS;
+#if test ! -f "$src_file";
+#then
+#	printf "Non valid source file: $src_file.\n";
+#	exit 1;
+#fi
 
-if test ! -f "$src_file";
-then
-	printf "Non valid source file: $src_file.\n";
-	exit 1;
-fi
+src_path=${src_file%%.cpp}
+src_name=${src_path##*/}
 
-if [[ ${#arr_src[@]} -eq 2 && ${arr_src[1]} == "cpp" ]];
-then
-	src_name="${arr_src[0]}";
-else
-	printf "Non C++ source file provided.\n";
-	exit 1;
-fi
+printf "$src_name"
 
+./TableGenerator.sh "$src_file" $min_x $max_x $num_points $repetitions "$DATA_PATH/$src_name-tab.dat"
+./Regressions.sh "$DATA_PATH/$src_name-tab.dat" "$DATA_PATH/$src_name-general-stat.txt"
+./BestFitter.sh "$DATA_PATH/$src_name-general-stat.txt" "$DATA_PATH/$src_name-best-stat.txt"
 
-./TableGenerator.sh "$src_name.cpp" $min_x $max_x $num_points $repetitions "$src_name-tab.dat"
-# ./Regressions.sh 
