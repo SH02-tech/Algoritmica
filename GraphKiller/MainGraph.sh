@@ -3,8 +3,12 @@
 # Name:         MainGraph
 # Author:       Shao Jie Hu Chen
 # Description:  This file obtain GNUPLOT graphs from a C++ source file.
-# Parameters:   --xlabel <label>.     Label of X axis.
-#               --ylabel <label>.     Label of Y axis.
+# Parameters:   --xlabel <label>.                    Label of X axis.
+#               --ylabel <label>.                    Label of Y axis.
+#               --min-x <number>.                    Minimum value of X axis.
+#               --max-x <number>.                    Maximum value of X axis.
+#               --num-points <number>.               Number of points to measure.
+#               --repetitions-per-point <number>.    Number of repetitions per point. 
 #               <cpp-name>.cpp.       C++ source file.
 # Return:       A directory structure with the following information:
 #               data/<cpp-name>-tab.dat    Table obtained from the source.
@@ -17,9 +21,13 @@
 
 DATA_PATH="data/"
 
-src_file=""
 xlabel="X Axis"
 ylabel="Y Axis"
+min_x=5
+max_x=10
+num_points=2
+src_file=""
+repetitions=1
 
 # Parameters filter.
 
@@ -35,6 +43,26 @@ while [[ $# -gt 0 ]]; do
 			shift # past argument
 			shift # past value
       	;;
+      	--min-x)
+			min_x="$2"
+			shift # past argument
+			shift # past value
+      	;;
+      	--max-x)
+			max_x="$2"
+			shift # past argument
+			shift # past value
+      	;;
+      	--num-points)
+      		num_points="$2"
+      		shift # past argument
+			shift # past value
+		;;
+		--repetitions-per-point)
+			repetitions="$2"
+			shift # past argument
+			shift # past value
+		;;
       	-*|--*)
 			echo "Unknown option $1"
 			exit 1
@@ -71,3 +99,7 @@ else
 	printf "Non C++ source file provided.\n";
 	exit 1;
 fi
+
+
+./TableGenerator.sh "$src_name.cpp" $min_x $max_x $num_points $repetitions "$src_name-tab.dat"
+# ./Regressions.sh 
