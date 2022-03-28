@@ -6,7 +6,7 @@ ini=`bc <<< "scale=4; $2"`
 fin=`bc <<< "scale=4; $3"` 
 jump=`bc <<< "scale=4; ($fin-$ini)/$4"` 
 repeats=$5
-nombre="$6.dat"
+nombre="$6"
 sum=0
 
 while (( $(echo "$ini < $fin" |bc -l) ))
@@ -33,3 +33,4 @@ do
 
         ini=`bc <<< "scale=4; $ini+$jump"`
 done
+
