@@ -33,4 +33,3 @@ do
 
         ini=`bc <<< "scale=4; $ini+$jump"`
 done
-
