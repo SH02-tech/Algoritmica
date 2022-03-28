@@ -1,0 +1,253 @@
+\documentclass{homework}
+
+\usepackage{bookmark}
+\usepackage{hyperref}
+\usepackage{xcolor}
+\usepackage{listings}
+\lstset{literate=
+	{á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1
+	{Á}{{\'A}}1 {É}{{\'E}}1 {Í}{{\'I}}1 {Ó}{{\'O}}1 {Ú}{{\'U}}1
+	{à}{{\`a}}1 {è}{{\`e}}1 {ì}{{\`i}}1 {ò}{{\`o}}1 {ù}{{\`u}}1
+	{À}{{\`A}}1 {È}{{\'E}}1 {Ì}{{\`I}}1 {Ò}{{\`O}}1 {Ù}{{\`U}}1
+	{ä}{{\"a}}1 {ë}{{\"e}}1 {ï}{{\"i}}1 {ö}{{\"o}}1 {ü}{{\"u}}1
+	{Ä}{{\"A}}1 {Ë}{{\"E}}1 {Ï}{{\"I}}1 {Ö}{{\"O}}1 {Ü}{{\"U}}1
+	{â}{{\^a}}1 {ê}{{\^e}}1 {î}{{\^i}}1 {ô}{{\^o}}1 {û}{{\^u}}1
+	{Â}{{\^A}}1 {Ê}{{\^E}}1 {Î}{{\^I}}1 {Ô}{{\^O}}1 {Û}{{\^U}}1
+	{ã}{{\~a}}1 {ẽ}{{\~e}}1 {ĩ}{{\~i}}1 {õ}{{\~o}}1 {ũ}{{\~u}}1
+	{Ã}{{\~A}}1 {Ẽ}{{\~E}}1 {Ĩ}{{\~I}}1 {Õ}{{\~O}}1 {Ũ}{{\~U}}1
+	{œ}{{\oe}}1 {Œ}{{\OE}}1 {æ}{{\ae}}1 {Æ}{{\AE}}1 {ß}{{\ss}}1
+	{ű}{{\H{u}}}1 {Ű}{{\H{U}}}1 {ő}{{\H{o}}}1 {Ő}{{\H{O}}}1
+	{ç}{{\c c}}1 {Ç}{{\c C}}1 {ø}{{\o}}1 {å}{{\r a}}1 {Å}{{\r A}}1
+	{€}{{\euro}}1 {£}{{\pounds}}1 {«}{{\guillemotleft}}1
+	{»}{{\guillemotright}}1 {ñ}{{\~n}}1 {Ñ}{{\~N}}1 {¿}{{?`}}1 {¡}{{!`}}1 
+}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.95}
+
+\lstdefinestyle{mystyle}{
+	backgroundcolor=\color{backcolour},   
+	commentstyle=\color{codegreen},
+	keywordstyle=\color{blue},
+	numberstyle=\tiny\color{codegray},
+	stringstyle=\color{codepurple},
+	basicstyle=\ttfamily\footnotesize,
+	breakatwhitespace=false,         
+	breaklines=true,                 
+	captionpos=b,                    
+	keepspaces=true,                 
+	numbers=left,                    
+	numbersep=5pt,                  
+	showspaces=false,                
+	showstringspaces=false,
+	showtabs=false,                  
+	tabsize=2,
+	xleftmargin=.25in
+}
+
+\lstset{style=mystyle}
+
+\title{Práctica 1: Análisis de Eficiencia de Algoritmos}
+\author{Shao Jie Hu Chen \\ Mario Megías Mateo \\ Jesús Samuel García Carballo}
+\renewcommand{\course}{Algorítmica}
+\date{1 de abril de 2022}
+
+\begin{document}
+	\maketitle
+
+    \newpage
+
+    \begin{abstract}
+		Esto es una prueba
+	\end{abstract}
+	
+    \newpage
+
+	\tableofcontents
+	\newpage
+	\setcounter{page}{1}
+	
+	\section{Introducción}
+
+    En esta primera práctica de la asignatura Algorítmica vamos a realizar un análisis teórico y empírico de
+    diversos algoritmos vistos en la asignatura. En particular, dicho análisis se hará de los siguientes:
+
+    \begin{itemize}
+        \item \textbf{Algoritmos de ordenación:} Inserción, selección, quicksort y mergesort. 
+        \item \textbf{Algoritmo de análisis de caminos mínimos sobre grafos:} Algoritmo de Floyd.
+        \item \textbf{Hanoi.} Resolución del juego de las torres de Hanoi. 
+    \end{itemize}
+
+    \subsection{Estructura de la memoria}
+    
+	Esta memoria presenta la estructura típica de un trabajo académico. En primer lugar, presentamos
+    brevemente el contexto en el que nos manejamos en esta práctica. Posteriormente, analizaremos teóricamente
+    cada uno de los algoritmos propuestos para, seguidamente, comprobar mediante un 
+    análisis empírico las soluciones obtenidas. 
+    
+    Además, para cada uno de los algoritmos considerados, se ha
+    elaborado conjuntamente entre los miembros del grupo tablas asociadas a cada una de ellas, que se
+    irán presentando a lo largo de esta memoria. Finalmente, se escribirán unas
+    líneas asociadas a las conclusiones obtenidas tras el desarrollo de esta práctica, así como los resultados
+    más relevantes obtenidos. 
+
+    \subsection{Objetivos} 
+
+    Entre los objetivos que vamos a realizar asociadas a esta práctica, caben destacar los siguientes: 
+
+    \begin{itemize}
+        \item \textbf{Estudio empírico} y \textbf{comparación} de los algoritmos de ordenación más empleados, verificando los resultados teóricos.
+        \item \textbf{Estudio empírico} de algoritmos de alta complejidad, poniendo especial énfasis en su \textbf{viabilidad} en diferentes equipos. 
+        \item Estudio del \textbf{aumento de eficiencia} de un mismo algoritmo para diferentes \textbf{tipos de optimización} del compilador. 
+        \item Determinación del algoritmo \textbf{más adecuado} para cada situación en función del estado de los datos.
+    \end{itemize}
+
+    \subsection{Equipo empleado}
+
+    Para el desarrollo de esta práctica, se han empleado diferentes equipos, cuyas respectivas especificaciones técnicas se 
+    especifican a continuación:
+    
+    \begin{itemize}
+        \item \textbf{ASUS} 
+        \begin{itemize}
+            \item \textbf{Modelo}: ZenBook 15 UX534F
+            \item \textbf{Procesador}: Intel(R) Core(TM) i7-10510U CPU @ 1.80GHz5
+            \item \textbf{Memoria Ram}: 16 GB DDR4 @ 2.133 MHz.
+            \item \textbf{Sistema Operativo} Ubuntu 20.04.2 LTS
+        \end{itemize}
+        
+        \item \textbf{LENOVO}
+        \begin{itemize}
+            \item \textbf{Modelo}: YOGA 530-14IKB
+            \item \textbf{Procesador}: Intel(R) Core(TM) i5-8250U CPU @ 1.60GHz
+            \item \textbf{Memoria RAM:} 8 GB DDR4
+            \item \textbf{Sistema Operativo}: Ubuntu 20.04.4 LTS
+        \end{itemize}
+        
+        \item \textbf{HP}
+        \begin{itemize}
+            \item \textbf{Modelo}: HP Pavilion Gaming Laptop 15-dk0xxx
+            \item \textbf{Procesador}: Intel(R) Core(TM) i7-9750H CPU @ 2.60GHz
+            \item \textbf{Memoria RAM:} 32 GB DDR4
+            \item \textbf{Sistema Operativo}: Ubuntu 20.04.4 LTS
+        \end{itemize}
+    \end{itemize}
+    
+    Debido a las limitaciones técnicas de estos equipos, para el cálculo de la eficiencia empírica se ha 
+    optado por medir tiempos de ejecución en tiempos y \textbf{tamaños razonables} para obtener datos relevantes
+    para el comportamiento tanto a pequeñas escalas como a nivel asintótico de ellas. 
+
+    \section{Eficiencia teórica}
+
+    Para el análisis de los siguientes algoritmos se ha empleado la notación $O(.)$. 
+
+    \subsection{Algoritmo de inserción}
+
+    El código de este algoritmo lo podemos encontrar a continuación.
+
+    \lstinputlisting[language=C++, firstline=66, lastline=79, caption=Implementación en C++ del algoritmo de inserción.]{../src/insercion.cpp}
+    
+    El análisis de eficiencia se ha de hacer sobre el número de elementos del vector $n$. 
+
+    Para el análisis asintótico, calculamos el número de operaciones elementales asociadas al código. 
+    Las tres primeras líneas tienen complejidad $O(1)$. Para el ciclo for, démonos cuenta de que itera sobre el número de
+    componentes del vector. Por su parte, dentro del for existe un while que realiza un conjunto de operaciones de orden
+    $O(1)$ tantas veces como se indica en el iterador. Por tanto, llamando $T(n)$ al números de operaciones asociadas
+    al algoritmo, tenemos que:
+
+    \begin{equation*}
+        T(n) = \sum_{i=0}^{n-1} \sum_{j=0}^{i-1} k = \sum_{i=0}^{n-1} ki = k \frac{n(n-1)}{2} 
+    \end{equation*}
+
+    Por tanto, deducimos que $T(n) \in O(n^2)$. 
+
+    \subsection{Algoritmo de selección}
+
+    \lstinputlisting[language=C++, firstline=66, lastline=82, caption=Implementación en C++ del algoritmo de selección.]{../src/seleccion.cpp}    
+
+    La estructura principal del código anterior consta de dos bucles for anidados. Las primeras sentencias de declaración antes del inicio del primer 
+    bucle for no repercuten en el análisis. Procedamos a analizar la estructura repetitiva: el primer for recorre el vector desde su inicio hasta
+    la penúltima componente del mismo incluída. El segundo for comienza en la posición dada por el índice del primero hasta la última componente del vector incluída.
+    Dentro del bucle interno tenemos una operación elemental correspondiente a la comparación realizada en el if, que es $O(1)$. Dentro del bucle externo excluyendo 
+    el código del bucle interno nos encontramos con dos sentencias de asignación que no se tendrán en cuenta para el análisis. De igual modo, fuera del bucle externo
+    al final del código nos encontramos con otras sentencias de asignación que también serán despreciadas. También tendremos en cuenta las operaciones elementales
+    aritméticos correspondientes a la gestión de los bucles, que son $O(1)$. En conclusion, acotando las expresiones $O(1)$ por k tenemos que: 
+
+    \begin{equation*}
+        \begin{split}
+            T(n) = \sum_{i=0}^{n-2} \sum_{j=i}^{n-1} k = \sum_{i=0}^{n-2} k(n-1-i+1) = \sum_{i=0}^{n-2} k(n-i) = kn \sum_{i=0}^{n-2} 1  - k \sum_{i=0}^{n-2} i \\
+            = kn(n-2+1) - k \frac{(n-2)(n-1)}{2} = kn^2 + kn - \frac{kn^2 - 3kn + 2k}{2}
+        \end{split}
+    \end{equation*}
+    
+    Deducimos, por tanto, que $T(n) \in O(n^2)$. 
+    
+    \subsection{Algoritmo heapsort}
+    
+    \lstinputlisting[language=C++, firstline=59, lastline=71, caption=Implementación en C++ del algoritmo heapsort.]{../src/heapsort.cpp} 
+
+    El heapsort es un algoritmo de ordenación por montículos que consta de dos bucles for independientes, que llaman a una función llamada reajustar.
+    
+    \lstinputlisting[language=C++, firstline=75, lastline=92, caption=Implementación en C++ del algoritmo reajustar.]{../src/heapsort.cpp} 
+
+
+
+    \begin{equation*}
+        T(n) = \sum_{i=0}^{log_2(n)} k = k(n/2) => log_2(n).
+    \end{equation*}
+
+    En la primera línea de código de la función heapsort podemos encontrar una declaración de variable cuya eficiencia es $O(1)$ y luego los dos ciclos 
+    mencionados, que interan sobre el número de elementos del vector que denotaremos por $n$, luego realizaremos la eficiencia en torno a este dato. Ambos ciclos son 
+    independientes, luego vamos a analizar cada uno por separado.
+    
+    El primero sta función está formada por cuatro operaciones elementales al inicio del código, de eficiencia $O(1)$, al tratarse de declaraciones y asignaciones, y un bucle while 
+    cuyo contenido va iterando en torno a potencias de dos, pues k se va decrementando a la mitad en cada iteración.
+
+    la función reajustar, cuya eficiencia teórica acabamos de estudiar que es $k*n/2$. El primer ciclo va iterando $n/2 + 1$ veces y en su cuerpo posee la función reajustar, 
+    que llama en cada iteración, así que:
+    
+    \begin{equation*}
+        T(n) = \sum_{i=0}^{(n/2)+1} i*(log_2(n)) =  
+    \end{equation*}
+
+    Para el siguiente ciclo podemos darnos cuenta de que 
+
+    \subsection{Algoritmo QuickSort}
+    
+    \lstinputlisting[language=C++, firstline=141, lastline=184, caption=Implementación en C++ del algoritmo QuickSort.]{../src/quicksort.cpp} 
+
+    En este apartado, consideramos $n$ como el número de componentes del vector. 
+
+    Para el análisis de este algoritmo, vamos a calcular previamente la complejidad de las funciones auxiliares. 
+    Para la función dividir\_qs, tenemos que su eficiencia es $O(n)$. En efecto, para cada bucle 
+    de la función tenemos que se procesa 1 (o una cantidad finita de veces) un elemento del vector. 
+    
+    Ahora bien, para la eficiencia del algoritmo, sea $T(n)$ el número de operaciones elementales que realiza el algoritmo. 
+    Tenemos que:
+
+    \begin{equation}
+        T(n) = \left\{ \begin{array}{lr} T(k_n) + T(n-k_n) + n & \text{si } n > \text{UMBRAL}\\ n^2 & \text{si } n \leq \text{UMBRAL} \end{array} \right.
+    \end{equation}
+    
+    \subsection{Algoritmo Floyd}
+
+    A continuación se presenta el código de este algoritmo:
+
+    \lstinputlisting[language=C++, firstline=129, lastline=138, caption=Implementación en C++ del algoritmo de Floyd.]{../src/floyd.cpp}
+
+    En este caso, consideramos como $n$ el número de filas/columnas de la matriz. Como los tres bucles iteran cada uno sobre n, siendo el número de iteraciones
+    independientes entre sí y se realizan $k$ operaciones en cada una de ellas, tenemos que llamando $T(n)$ al número de operaciones para un tamaño n, se verifica:
+    
+    \begin{equation*}
+        T(n) = \sum_{i=1}^n \sum_{j=1}^{n} \sum_{k=1}^{n} k = kn^3
+    \end{equation*}
+
+    Deducimos fácilmente que $T(n) \in O(n^3)$. 
+
+    \section{Eficiencia empírica}
+
+
+    
+\end{document}
