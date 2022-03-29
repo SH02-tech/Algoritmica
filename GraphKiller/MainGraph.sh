@@ -101,4 +101,5 @@ src_name=${src_file##*/}
 ./TableGenerator.sh "$src_file" $min_x $max_x $num_points $repetitions "$DATA_PATH/$src_name-tab.dat"
 ./Regressions.sh "$DATA_PATH/$src_name-tab.dat" "$DATA_PATH/$src_name-general-stat.txt"
 ./BestFitter.sh "$DATA_PATH/$src_name-general-stat.txt" "$DATA_PATH/$src_name-best-stat.txt"
-./GraphPlotter.sh "$DATA_PATH/$src_name-tab.dat" "$DATA_PATH/$src_name-best-stat.txt" "$src_file" "$xlabel" $min_x $max_x "$ylabel" "$DATA_PATH/$src_name-graph.pdf"
+./PointsPlotter.sh "$DATA_PATH/$src_name-tab.dat" "$src_name" "$xlabel" $min_x $max_x "$ylabel" "$DATA_PATH/$src_name-points.pdf"
+./GraphPlotter.sh "$DATA_PATH/$src_name-tab.dat" "$DATA_PATH/$src_name-best-stat.txt" "$src_name" "$xlabel" $min_x $max_x "$ylabel" "$DATA_PATH/$src_name-graph.pdf"

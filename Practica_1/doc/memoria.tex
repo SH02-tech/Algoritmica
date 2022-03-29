@@ -1,5 +1,8 @@
 \documentclass{homework}
 
+\usepackage{subfig}
+\usepackage{multicol}
+\usepackage{float}
 \usepackage{bookmark}
 \usepackage{hyperref}
 \usepackage{xcolor}
@@ -85,7 +88,9 @@
 	Esta memoria presenta la estructura típica de un trabajo académico. En primer lugar, presentamos
     brevemente el contexto en el que nos manejamos en esta práctica. Posteriormente, analizaremos teóricamente
     cada uno de los algoritmos propuestos para, seguidamente, comprobar mediante un 
-    análisis empírico las soluciones obtenidas. 
+    análisis empírico las soluciones obtenidas. Asimismo, se ha realizado un análisis híbrido contrastando
+    los resultados teóricos con los experimentales. Este análisis se ha realizado para cada algoritmo, 
+    extrayéndose información relevante asociada a ellas. 
     
     Además, para cada uno de los algoritmos considerados, se ha
     elaborado conjuntamente entre los miembros del grupo tablas asociadas a cada una de ellas, que se
@@ -98,8 +103,8 @@
     Entre los objetivos que vamos a realizar asociadas a esta práctica, caben destacar los siguientes: 
 
     \begin{itemize}
-        \item \textbf{Estudio empírico} y \textbf{comparación} de los algoritmos de ordenación más empleados, verificando los resultados teóricos.
-        \item \textbf{Estudio empírico} de algoritmos de alta complejidad, poniendo especial énfasis en su \textbf{viabilidad} en diferentes equipos. 
+        \item \textbf{Estudio teórico, empírico e híbrido} y \textbf{comparación} de los algoritmos de ordenación más empleados, verificando los resultados teóricos.
+        \item \textbf{Estudio teórico, empírico e híbrido} de algoritmos de alta complejidad, poniendo especial énfasis en su \textbf{viabilidad} en diferentes equipos. 
         \item Estudio del \textbf{aumento de eficiencia} de un mismo algoritmo para diferentes \textbf{tipos de optimización} del compilador. 
         \item Determinación del algoritmo \textbf{más adecuado} para cada situación en función del estado de los datos.
     \end{itemize}
@@ -184,41 +189,30 @@
     
     Deducimos, por tanto, que $T(n) \in O(n^2)$. 
     
-    \subsection{Algoritmo heapsort}
+    \subsection{Algoritmo HeapSort}
     
     \lstinputlisting[language=C++, firstline=59, lastline=71, caption=Implementación en C++ del algoritmo heapsort.]{../src/heapsort.cpp} 
 
     El heapsort es un algoritmo de ordenación por montículos que consta de dos bucles for independientes, que llaman a una función llamada reajustar.
+    En la primera línea de código podemos encontrar una declaración de variable cuya eficiencia es $O(1)$ y luego los dos ciclos mencionados, que interan 
+    sobre el número de elementos del vector que denotaremos por $n$, luego realizaremos la eficiencia en torno a este dato. Ambos ciclos son independientes, 
+    así que vamos a analizar cada uno por separado y aplicando la regla del máximo nos quedaremos con el mayor.
     
-    \lstinputlisting[language=C++, firstline=75, lastline=92, caption=Implementación en C++ del algoritmo reajustar.]{../src/heapsort.cpp} 
-
-
-
-    \begin{equation*}
-        T(n) = \sum_{i=0}^{log_2(n)} k = k(n/2) => log_2(n).
-    \end{equation*}
-
-    En la primera línea de código de la función heapsort podemos encontrar una declaración de variable cuya eficiencia es $O(1)$ y luego los dos ciclos 
-    mencionados, que interan sobre el número de elementos del vector que denotaremos por $n$, luego realizaremos la eficiencia en torno a este dato. Ambos ciclos son 
-    independientes, luego vamos a analizar cada uno por separado.
+    La función reajustar trata de imitar el uso de un árbol APO mediante vectores y recorrerlo insertando elementos, luego como en un árbol APO la inserción se 
+    realiza con eficiencia $O(log_2(n))$. Así que respecto a ambos ciclos tenemos lo siguiente:
     
-    El primero itera $n/2 + 1$ veces la función reajustar, que está formada por cuatro operaciones elementales al inicio del código, de eficiencia $O(1)$, al tratarse 
-    de declaraciones y asignaciones, y un bucle while cuyo contenido va iterando en torno a potencias de dos, pues k se va decrementando a la mitad en cada iteración, así 
-    que si $T(n)$ es el números de operaciones asociadas al algoritmo, tenemos que:
+    \begin{itemize}
+        \item \textbf{Primer ciclo}
+        \begin{equation*}
+            T(n) = \sum_{i=0}^{n/2 + 1} log_2(k) = ((n/2 +1)*(n/2 + 2))/2 * log_2(k) \in O(n*log(n))
+        \end{equation*} 
 
-    \begin{equation*}
-        T(n) = \sum_{i=0}^{log_2(n)} k = k(n/2) => log_2(n).
-    \end{equation*} 
-
-
-    la función reajustar, cuya eficiencia teórica acabamos de estudiar que es $k*n/2$. El primer ciclo va iterando $n/2 + 1$ veces y en su cuerpo posee la función reajustar, 
-    que llama en cada iteración, así que:
-    
-    \begin{equation*}
-        T(n) = \sum_{i=0}^{(n/2)+1} i*(log_2(n)) =  
-    \end{equation*}
-
-    Para el siguiente ciclo podemos darnos cuenta de que 
+        \item \textbf{Segundo ciclo}
+        \begin{equation*}
+            T(n) = \sum_{i=1}^{n-1} log_2(k) = (((n-1)*n)/2) * log_2(n). \in O(n*log(n))
+        \end{equation*}
+        
+    \end{itemize}
 
     \subsection{Algoritmo QuickSort}
     
@@ -226,27 +220,74 @@
 
     En este apartado, consideramos $n$ como el número de componentes del vector. 
 
-    Para el análisis de este algoritmo, vamos a calcular previamente la complejidad de las funciones auxiliares. 
+    El código del algoritmo comienza en la función quicksort\_lims en la línea 6. Tomaremos inicial 
+    como ñaa posición de comienzo del vector ($inicial = 0$), y final como el siguiente al último elemento, 
+    que coincide con el número de componentes del vector ($final = n$).
+    Tenemos una estructura condicional que determina el comportamiento del algoritmo según si el tamaño del vector 
+    supera o no un cierto umbral, por lo que el tiempo de ejecución será una función definida a trozos. Si es menor 
+    que el umbral, ejecutamos la ordenación con el algoritmo de inserción previamente analizado, que es $O(n^2)$. De lo
+    contrario, realizamos la ordenación según el propio algoritmo quicksort. Dicho algoritmo se basa en la técnica de Divide
+    y Vencerás, implementándose de forma recursiva. En primer lugar, se realiza una llamada a la función dividir dividir\_qs, 
+    cuya eficiencia procedemos a analizar. En las líneas 24-26 y 40-43 tenemos sentencias de asignación que serán despreciadas. 
+    Siguiendo código de forma secuencial, en las líneas 27 y 30 tenemos dos bucles do-while, si consideramos el peor caso para 
+    el primero (el pivote es mayor que el resto de elemento) tiene eficiencia $O(n)$, y el caso contrario al anterior sería el 
+    más desfavorable para el segundo (el pivote es menor que el resto de los elementos), luego tendríamos $O(n)$. Como el caso más 
+    favorable para uno (eficiencia $O(1)$) es el más desfavorable para el otro, aplicando la regla del Máximo tenemos que la 
+    eficiencia de la parte del código de los do-while sería $O(n)$.  
+    
     Para la función dividir\_qs, tenemos que su eficiencia es $O(n)$. En efecto, para cada bucle 
     de la función tenemos que se procesa 1 (o una cantidad finita de veces) un elemento del vector. 
     
-    Ahora bien, para la eficiencia del algoritmo, sea $T(n)$ el número de operaciones elementales que realiza el algoritmo. 
-    Tenemos que:
+    Ahora bien, para la eficiencia del algoritmo, sea $T(n)$ el número de operaciones elementales que realiza el algoritmo, y
+    $k_n$ el número de componentes del vector desde el inicio hasta la posición para el pivote calculada por dividir\_qs. Tenemos que:
 
     \begin{equation}
-        T(n) = \left\{ \begin{array}{lr} T(k_n) + T(n-k_n) + n & \text{si } n > \text{UMBRAL}\\ n^2 & \text{si } n \leq \text{UMBRAL} \end{array} \right.
+        T(n) = \left\{ \begin{array}{lr} T(k_n) + T(n-k_n) + n & \text{si } n \geq \text{UMBRAL}\\ n^2 & \text{si } n < \text{UMBRAL} \end{array} \right.
     \end{equation}
 
-    Resolvamos la recurrencia de (1):
+    Supongamos que $k_{n} = \frac{n}{2}$. Resolvamos la recurrencia de (1):
     
     \begin{equation}
-        T(n) = T(k_n) + T(n-k_n) + n.
+        T(n) = T(k_n) + T(n-k_n) + n \text{si n $\geq$ UMBRAL}
     \end{equation}
 
-    Supongamos que \[k_{n}\]
-        
-        
-    \subsection{Algoritmo Floyd}
+    Realizamos el cambio de variable $n = 2^{n}$ en la ecuación (2) obtenemos:
+
+    \begin{equation}
+        T(2^{m}) = 2T(2^{m-1}) + 2^{m} si n \leqslant log_{2}(\text{UMBRAL}) 
+    \end{equation}
+
+    \begin{equation}
+        T(2^{m}) - 2T(2^{m-1}) = 2^{m}
+    \end{equation}
+
+    Renombramos la expresión anterior como $T(2^{m}) = t_{m}$ obtenemos:
+
+    \begin{equation}
+        t_{m} - 2t_{m-1} = 2^{m}
+    \end{equation}
+    
+    Obtenemos la siguiente ecuación de recurrencia de la ecuación (4):
+
+    \begin{equation}
+        (x-2)^{2} = 0
+    \end{equation}
+
+    Luego la solución general de la recurrencia es:
+
+    \begin{equation}
+        t_{m} = c_{1}2^{m} + c_{2}m2^{m}
+    \end{equation}
+
+    Deshacemos el cambio de variabe:
+
+    \begin{equation}
+        T(n) = c_{1}n + c_{2}nlog_{2}(n)
+    \end{equation}
+
+    Por tanto $T(n) \in O(nlog_{2}(n))$
+    
+    \subsection{Algoritmo de Floyd}
 
     A continuación se presenta el código de este algoritmo:
 
@@ -256,13 +297,99 @@
     independientes entre sí y se realizan $k$ operaciones en cada una de ellas, tenemos que llamando $T(n)$ al número de operaciones para un tamaño n, se verifica:
     
     \begin{equation*}
-        T(n) = \sum_{i=1}^n \sum_{j=1}^{n} \sum_{k=1}^{n} k = kn^(3)
+        T(n) = \sum_{i=1}^n \sum_{j=1}^{n} \sum_{k=1}^{n} k = kn^3
     \end{equation*}
 
     Deducimos fácilmente que $T(n) \in O(n^3)$. 
+    
+    \subsection{Algoritmo Hanoi}
+    
+    \lstinputlisting[language=C++, firstline=30, lastline=38, caption=Implementación en C++ del algoritmo de resolución de las torres de Hanoi.]{../src/hanoi.cpp} 
+
+    
 
     \section{Eficiencia empírica}
 
+    Para esta práctica hemos ejecutado en cada uno de los equipos los diversos algoritmos presentados previamente.
+    Las tablas obtenidas, así como las gráficas que representan estas tablas se representan a continuación.
+
+    \subsection{Algoritmo de inserción}
+    \subsection{Algoritmo de selección}
+    \subsection{Algoritmo HeapSort}
+    \subsection{Algoritmo QuickSort}
+    
+    \newpage 
+    
+    \subsection{Algoritmo de Floyd}
+
+    En la siguiente tabla se encuentran los datos obtenidos en este algoritmo por cada uno de los
+    equipos en los que hemos corrido el algoritmo. 
+
+    \begin{table}[h]
+        \footnotesize
+        \centering
+        \begin{tabular}{|r|r|r|r|}
+            \hline
+            \text{$N_{nod}$} & \text{$t_{ASUS}$} & \text{$t_{HP}$} & \text{$t_{LENOVO}$} \\
+            \hline
+            5 & 0.09 & 0.1 & 0.13 \\ 
+            35 & 4.635 & 5.045 & 3.795 \\ 
+            65 & 28.105 & 36.27 & 22.685 \\ 
+            95 & 98.975 & 59.425 & 76.2 \\ 
+            125 & 206.65 & 291.02 & 171.845 \\ 
+            155 & 250.735 & 340.205 & 294.25 \\ 
+            185 & 368.585 & 490.165 & 466.895 \\ 
+            215 & 572.04 & 588.29 & 727.49 \\ 
+            245 & 846.54 & 873.175 & 1069.24 \\ 
+            275 & 1193.13 & 1234.555 & 1530.57 \\ 
+            305 & 1642.2 & 1666.67 & 2058.385 \\ 
+            335 & 2164.105 & 2205.705 & 2755.755 \\ 
+            365 & 2826.06 & 2846.01 & 3574.31 \\ 
+            395 & 3528.345 & 3583.4 & 4484.645 \\ 
+            425 & 4410.26 & 4465.635 & 5606.11 \\ 
+            455 & 5383.555 & 5485.51 & 6820.05 \\ 
+            485 & 6554.765 & 6483.905 & 8154.31 \\ 
+            515 & 7855.67 & 7928.895 & 9760.62 \\ 
+            545 & 9386.4 & 9268.545 & 11542.12 \\ 
+            575 & 10957.08 & 10777.34 & 13740.255 \\ 
+            605 & 12786.025 & 12425.0 & 15864.585 \\ 
+            635 & 14618.06 & 14709.94 & 18181.38 \\ 
+            665 & 16823.92 & 16768.84 & 21031.77 \\ 
+            695 & 19147.07 & 18815.95 & 23953.145 \\ 
+            725 & 21807.535 & 21948.21 & 27128.6 \\ 
+            \hline
+        \end{tabular}
+        \caption{Tiempos de ejecución (en $\mu$s) del algoritmo de Floyd}
+    \end{table}
+
+    En concordancia con los resultados obtenidos en las anteriores tablas, el ordenador que ofrece peores
+    tiempos es el LENOVO, siendo el de ASUS el que ofrece resultados con mayor rapidez. 
+
+    \begin{figure}[h]
+        \centering
+         \subfloat[ASUS]{
+          \label{asus:floyd-emp}
+           \includegraphics[width=0.3\textwidth]{../data/asus/floyd-points.pdf}}
+         \subfloat[HP]{
+          \label{hp:floyd-emp}
+           \includegraphics[width=0.3\textwidth]{../data/hp/floyd-points.pdf}}
+         \subfloat[LENOVO]{
+          \label{lenovo:floyd-emp}
+           \includegraphics[width=0.3\textwidth]{../data/lenovo/floyd-points.pdf}}
+        \caption{Representación gráfica de tiempos de ejecución del algoritmo Floyd.}
+        \label{emp:floyd}
+       \end{figure}
+
+    \section{Eficiencia híbrida}
+    
+    En esta sección trataremos los datos obtenidos de la sección anterior mediante técnicas estadísticas para
+    comprobar la consistencia de los datos experimentales con los calculados teóricamente. 
+
+    \subsection{Algoritmo de inserción}
+    \subsection{Algoritmo de selección}
+    \subsection{Algoritmo HeapSort}
+    \subsection{Algoritmo QuickSort}
+    \subsection{Algoritmo de Floyd}
 
     
 \end{document}
