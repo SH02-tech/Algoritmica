@@ -18,7 +18,7 @@ programs=('heapsort.cpp' 'quicksort.cpp' 'insercion.cpp' 'seleccion.cpp' 'floyd.
 #	4. number of repeats
 
 declare -a OrdenData
-OrdenData=(50 100000 25 20)
+OrdenData=(50 300050 30 50)
 
 declare -a FloydData
 FloydData=(5 755 25 20)
@@ -38,19 +38,19 @@ do
 	
 	if [[ ${programs[i]} == "floyd.cpp" ]]
 	then
-		./MainGraph.sh  --xlabel "Number of nodes" --ylabel "Time (microseconds)" \
+		./MainGraph.sh  --xlabel "Número de nodos" --ylabel "Tiempo (en microsegundos)" \
 				--min-x ${FloydData[0]} --max-x ${FloydData[1]} \
 				--num-points ${FloydData[2]} --repetitions-per-point ${FloydData[3]} \
 				$output
 		
 	elif [[ ${programs[i]} == "hanoi.cpp" ]]
 	then
-		./MainGraph.sh  --xlabel "Number of discs" --ylabel "Time (microseconds)" \
+		./MainGraph.sh  --xlabel "Número de discos" --ylabel "Tiempo (en microsegundos)" \
 				--min-x ${HanoiData[0]} --max-x ${HanoiData[1]} \ 
 				--num-points ${HanoiData[2]} --repetitions-per-point ${HanoiData[3]} \
 				$output
 	else
-		./MainGraph.sh  --xlabel "Number of components of vectors" --ylabel "Time (microseconds)" \
+		./MainGraph.sh  --xlabel "Número de componentes del vector" --ylabel "Tiempo (en microsegundos)" \
 				--min-x ${OrdenData[0]} --max-x ${OrdenData[1]} \
 				--num-points ${OrdenData[2]} --repetitions-per-point ${OrdenData[3]} \
 				$output

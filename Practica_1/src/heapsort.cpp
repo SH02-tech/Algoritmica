@@ -20,11 +20,9 @@ using namespace std;
 
 /**
    @brief Ordena un vector por el método de montones.
-
    @param T: vector de elementos. Debe tener num_elem elementos.
              Es MODIFICADO.
    @param num_elem: número de elementos. num_elem > 0.
-
    Cambia el orden de los elementos de T de forma que los dispone
    en sentido creciente de menor a mayor.
    Aplica el algoritmo de ordenación por montones.
@@ -36,7 +34,6 @@ void heapsort(int T[], int num_elem);
 
 /**
    @brief Reajusta parte de un vector para que sea un montón.
-
    @param T: vector de elementos. Debe tener num_elem elementos.
              Es MODIFICADO.
    @param num_elem: número de elementos. num_elem > 0.

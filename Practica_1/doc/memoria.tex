@@ -199,20 +199,24 @@
     así que vamos a analizar cada uno por separado y aplicando la regla del máximo nos quedaremos con el mayor.
     
     La función reajustar trata de imitar el uso de un árbol APO mediante vectores y recorrerlo insertando elementos, luego como en un árbol APO la inserción se 
-    realiza con eficiencia $O(log_2(n))$. Así que respecto a ambos ciclos tenemos lo siguiente:
+    realiza con eficiencia $O(log_2(n))$. Así que llamando $T(n)$ al números de operaciones asociadas al algoritmo, tenemos lo siguiente:
     
     \begin{itemize}
         \item \textbf{Primer ciclo}
         \begin{equation*}
-            T(n) = \sum_{i=0}^{n/2 + 1} log_2(k) = ((n/2 +1)*(n/2 + 2))/2 * log_2(k) \in O(n*log(n))
+            T(n) = \sum_{i=0}^{n/2 + 1} log_2(i) = log_2(k) \in O(n*log(n))
         \end{equation*} 
 
         \item \textbf{Segundo ciclo}
         \begin{equation*}
-            T(n) = \sum_{i=1}^{n-1} log_2(k) = (((n-1)*n)/2) * log_2(n). \in O(n*log(n))
+            T(n) = \sum_{i=1}^{n-1} log_2(i) = log_2(1) + ... + log_2(n-1) = log_2(1*2*3*(n-1)) 
+            = log_2((n-1)!) \leq (n-1) * log_2((n-1)) \in O(n*log(n))
         \end{equation*}
         
     \end{itemize}
+
+    En conclusión vemos que como tenemos que aplicar la regla del máximo y ambos ciclos tienen de eficiencia $O(n*log(n))$ podemos afirmar que esa es la eficiencia
+    teórica del algoritmo, 
 
     \subsection{Algoritmo QuickSort}
     
@@ -233,13 +237,13 @@
     el primero (el pivote es mayor que el resto de elemento) tiene eficiencia $O(n)$, y el caso contrario al anterior sería el 
     más desfavorable para el segundo (el pivote es menor que el resto de los elementos), luego tendríamos $O(n)$. Como el caso más 
     favorable para uno (eficiencia $O(1)$) es el más desfavorable para el otro, aplicando la regla del Máximo tenemos que la 
-    eficiencia de la parte del código de los do-while sería $O(n)$.  
-    
-    Para la función dividir\_qs, tenemos que su eficiencia es $O(n)$. En efecto, para cada bucle 
-    de la función tenemos que se procesa 1 (o una cantidad finita de veces) un elemento del vector. 
-    
-    Ahora bien, para la eficiencia del algoritmo, sea $T(n)$ el número de operaciones elementales que realiza el algoritmo, y
-    $k_n$ el número de componentes del vector desde el inicio hasta la posición para el pivote calculada por dividir\_qs. Tenemos que:
+    eficiencia de la parte del código de los do-while sería $O(n)$.  A continuación, encontramos un bucle while que se ejecuta un 
+    número indeterminado de veces en función de la condición, luego podemos acotar estas ejecuciones por una constante c. En las 
+    líneas 34-36 tenemos sentencias de asignación que serán ignoradas, y a continuación dos bucles do-while con la misma funcionalidad
+    que los analizados anteriormente. Por tanto, deducimos que la eficiencia del bucle while es $O(n)$, y aplicando la regla del 
+    máximo con el bloque de código de los bucles do-while obtenemos que la eficiencia de la función es $O(n)$. A continuación hacemos dos llamadas
+    recursivas, una que procesará los datos desde el comienzo del mismo hasta la posición en la que hemos ubicado el pivote con la 
+    función dividir\_qs, y la otra se encarga de procesar el resto del vector. Por tanto, el tiempo de ejecución sería:
 
     \begin{equation}
         T(n) = \left\{ \begin{array}{lr} T(k_n) + T(n-k_n) + n & \text{si } n \geq \text{UMBRAL}\\ n^2 & \text{si } n < \text{UMBRAL} \end{array} \right.
@@ -306,7 +310,7 @@
     
     \lstinputlisting[language=C++, firstline=30, lastline=38, caption=Implementación en C++ del algoritmo de resolución de las torres de Hanoi.]{../src/hanoi.cpp} 
 
-    
+    Estamos ante el estudio de un algoritmo recursivo 
 
     \section{Eficiencia empírica}
 
@@ -383,7 +387,7 @@
     \section{Eficiencia híbrida}
     
     En esta sección trataremos los datos obtenidos de la sección anterior mediante técnicas estadísticas para
-    comprobar la consistencia de los datos experimentales con los calculados teóricamente. 
+    comprobar la consistencia de los datos experimentales con los calculados teóricamente.  
 
     \subsection{Algoritmo de inserción}
     \subsection{Algoritmo de selección}
