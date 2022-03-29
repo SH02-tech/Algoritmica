@@ -240,10 +240,12 @@
     Resolvamos la recurrencia de (1):
     
     \begin{equation}
-        T(n) = \left\{ \begin{array}{lr} T(k_n) + T(n-k_n) + n 
+        T(n) = T(k_n) + T(n-k_n) + n.
     \end{equation}
-    
-    
+
+    Supongamos que \[k_{n}\]
+        
+        
     \subsection{Algoritmo Floyd}
 
     A continuación se presenta el código de este algoritmo:
@@ -254,7 +256,7 @@
     independientes entre sí y se realizan $k$ operaciones en cada una de ellas, tenemos que llamando $T(n)$ al número de operaciones para un tamaño n, se verifica:
     
     \begin{equation*}
-        T(n) = \sum_{i=1}^n \sum_{j=1}^{n} \sum_{k=1}^{n} k = kn^3
+        T(n) = \sum_{i=1}^n \sum_{j=1}^{n} \sum_{k=1}^{n} k = kn^(3)
     \end{equation*}
 
     Deducimos fácilmente que $T(n) \in O(n^3)$. 
