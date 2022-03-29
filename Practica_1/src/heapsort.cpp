@@ -113,7 +113,7 @@ int main(int argc,char* argv[])
   tantes = clock();
   heapsort(T, n);
   tdespues = clock();
-  cout << ((double)(tdespues-tantes))/CLOCKS_PER_SEC << endl;
+  cout << ((double)(tdespues-tantes))/(CLOCKS_PER_SEC*10E-6) << endl;
 
   // escribe_vector(T, n);
 

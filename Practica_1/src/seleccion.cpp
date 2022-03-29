@@ -116,7 +116,7 @@ int main(int argc, char * argv[])
       
       clock_t t_despues = clock();
   
-      cout << ((double)(t_despues - t_antes)) / CLOCKS_PER_SEC << endl;
+      cout << ((double)(t_despues - t_antes)) / (CLOCKS_PER_SEC*10E-6) << endl;
     } else {
       int * U = new int[n];
       assert(U);
