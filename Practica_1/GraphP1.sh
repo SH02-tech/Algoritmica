@@ -9,7 +9,7 @@ SRC_PATH="src/"
 OUTPUT="exe"
 
 declare -a programs
-programs=('heapsort.cpp' 'quicksort.cpp' 'seleccion.cpp' 'hanoi.cpp')
+programs=('heapsort.cpp' 'quicksort.cpp' 'seleccion.cpp' 'hanoi.cpp' 'insercion.cpp' 'floyd.cpp')
 
 # Arrays of data:
 #	1. min
@@ -18,13 +18,13 @@ programs=('heapsort.cpp' 'quicksort.cpp' 'seleccion.cpp' 'hanoi.cpp')
 #	4. number of repeats
 
 declare -a OrdenData
-OrdenData=(50 300050 30 50)
+OrdenData=(50 350000 30 10)
 
 declare -a FloydData
 FloydData=(5 755 25 20)
 
-declare -a HanoyData
-HanoiData=(2 27 25 20)
+declare -a HanoiData
+HanoiData=(2 27 20 5)
 
 # Copy the scripts from ../GraphKiller, so we have them in the current directory of GraphP1.sh
 cp ../GraphKiller/*.sh .
@@ -46,7 +46,7 @@ do
 	elif [[ ${programs[i]} == "hanoi.cpp" ]]
 	then
 		./MainGraph.sh  --xlabel "Número de discos" --ylabel "Tiempo (en microsegundos)" \
-				--min-x ${HanoiData[0]} --max-x ${HanoiData[1]} \ 
+				--min-x ${HanoiData[0]} --max-x ${HanoiData[1]} \
 				--num-points ${HanoiData[2]} --repetitions-per-point ${HanoiData[3]} \
 				$output
 	else
@@ -60,6 +60,6 @@ do
 done
 
 # Delete the scripts imported from ../GraphKiller.
-rm {BestFitter,GraphPlotter,MainGraph,Regressions,TableGenerator}.sh
+rm {BestFitter,GraphPlotter,PointsPlotter,MainGraph,Regressions,TableGenerator}.sh
 
 ### END
