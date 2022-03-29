@@ -6,4 +6,8 @@
 *.toc
 */data/*
 */bin/*
-Pract*/{BestFitter,GraphPlotter,MainGraph,Regressions,TableGenerator}.sh
+Pract*/BestFitter.sh
+Pract*/GraphPlotter.sh
+Pract*/MainGraph.sh
+Pract*/Regressions.sh
+Pract*/TableGenerator.sh
