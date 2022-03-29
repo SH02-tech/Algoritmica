@@ -9,7 +9,8 @@ SRC_PATH="src/"
 OUTPUT="exe"
 
 declare -a programs
-programs=('heapsort.cpp' 'quicksort.cpp' 'seleccion.cpp' 'hanoi.cpp' 'insercion.cpp' 'floyd.cpp')
+#programs=('heapsort.cpp' 'quicksort.cpp' 'seleccion.cpp' 'hanoi.cpp' 'insercion.cpp' 'floyd.cpp')
+programs=('seleccion.cpp')
 
 # Arrays of data:
 #	1. min
@@ -18,7 +19,7 @@ programs=('heapsort.cpp' 'quicksort.cpp' 'seleccion.cpp' 'hanoi.cpp' 'insercion.
 #	4. number of repeats
 
 declare -a OrdenData
-OrdenData=(50 350000 30 10)
+OrdenData=(50 45050 30 20)
 
 declare -a FloydData
 FloydData=(5 755 25 20)

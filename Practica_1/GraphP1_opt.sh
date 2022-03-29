@@ -64,6 +64,6 @@ do
 done
 
 # Delete the scripts imported from ../GraphKiller.
-rm {BestFitter,GraphPlotter,MainGraph,Regressions,TableGenerator}.sh
+rm {BestFitter,PointsPlotter,GraphPlotter,MainGraph,Regressions,TableGenerator}.sh
 
 ### END
