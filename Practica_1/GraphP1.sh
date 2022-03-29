@@ -9,8 +9,8 @@ SRC_PATH="src/"
 OUTPUT="exe"
 
 declare -a programs
-#programs=('heapsort.cpp' 'quicksort.cpp' 'seleccion.cpp' 'hanoi.cpp' 'insercion.cpp' 'floyd.cpp')
-programs=('seleccion.cpp')
+programs=('heapsort.cpp' 'quicksort.cpp' 'seleccion.cpp' 'hanoi.cpp' 'insercion.cpp' 'floyd.cpp')
+# programs=('seleccion.cpp')
 
 # Arrays of data:
 #	1. min
