@@ -209,8 +209,7 @@
 
         \item \textbf{Segundo ciclo}
         \begin{equation*}
-            T(n) = \sum_{i=1}^{n-1} log_2(i) = log_2(1) + ... + log_2(n-1) = log_2(1*2*3*(n-1)) 
-            = log_2((n-1)!) \leq (n-1) * log_2((n-1)) \in O(n*log(n))
+            \sum_{i=2}^{n} \log_2(i) = \log_2(2) + ... + \log_2(n) = \log_2(n!) \in \mathcal{O}(n·\log_2(n))
         \end{equation*}
         
     \end{itemize}
@@ -241,7 +240,7 @@
     número indeterminado de veces en función de la condición, luego podemos acotar estas ejecuciones por una constante c. En las 
     líneas 34-36 tenemos sentencias de asignación que serán ignoradas, y a continuación dos bucles do-while con la misma funcionalidad
     que los analizados anteriormente. Por tanto, deducimos que la eficiencia del bucle while es $O(n)$, y aplicando la regla del 
-    máximo con el bloque de código de los bucles do-while obtenemos que la eficiencia de la función es $O(n)$. A continuación hacemos dos llamadas
+    Máximo con el bloque de código de los bucles do-while obtenemos que la eficiencia de la función es $O(n)$. A continuación hacemos dos llamadas
     recursivas, una que procesará los datos desde el comienzo del mismo hasta la posición en la que hemos ubicado el pivote con la 
     función dividir\_qs, y la otra se encarga de procesar el resto del vector. Por tanto, el tiempo de ejecución sería:
 
@@ -310,14 +309,94 @@
     
     \lstinputlisting[language=C++, firstline=30, lastline=38, caption=Implementación en C++ del algoritmo de resolución de las torres de Hanoi.]{../src/hanoi.cpp} 
 
-    Estamos ante el estudio de un algoritmo recursivo 
+    Estamos ante el estudio de un algoritmo recursivo, así que si T(n) es el número de movimientos necesarios para mover n discos, tenemos que el algoritmo sigue la 
+    recurrencia $T(n) = 2T(n-1) + 1 \forall n \geq 1 y con T(0) = 0 como caso base$. Por lo tanto, vamos a resolverla para hallar su eficiencia teórica:
+    Tenemos $t_n - 2t_(n-1) = 1 $ luego si hacemos un cambio de varible nos queda como ecuación característica $(x-2)(x-1) = 0$  que son las propias raíces de la 
+    recurrencia luego la solución nos queda $t_n = c_1 1**n  + c_2 2**n  $, entonces como $t_0=0$ nos sale que $t_0 = c_1 + c_2$ y $t_1 = 2 t_0 + 1 = 1$ luego en la 
+    solución $t_1=c_1 + 2 c_2 $, luego si resolvemos el sistema $c_1 = 1$ y $c_2 = -1$nos queda la ecuación $2**n - 1**n$, por lo que como se trata de la ecuación que 
+    modela la recurrencia, podemos concluir con que la eficiencia teórica del algoritmo es $O(2**n)$.
 
     \section{Eficiencia empírica}
 
     Para esta práctica hemos ejecutado en cada uno de los equipos los diversos algoritmos presentados previamente.
     Las tablas obtenidas, así como las gráficas que representan estas tablas se representan a continuación.
 
+    \newpage
+    
     \subsection{Algoritmo de inserción}
+    
+    En la siguiente tabla se encuentran los datos obtenidos en este algoritmo por cada uno de los
+    equipos en los que hemos ejecutado el algoritmo. 
+    
+    \begin{table}[h]
+        \footnotesize
+        \centering
+        \begin{tabular}{|r|r|r|r|}
+            \hline
+            \text{$N_{componentes}$} & \text{$t_{ASUS}$} & \text{$t_{HP}$} & \text{$t_{LENOVO}$} \\
+            \hline
+            50 & 0.14 & 0.17 & 0.33 \\ 
+            4048 & 453.56 & 515.99 & 651.62 \\ 
+            8046 & 1754.95 & 1812.13 & 2302.02 \\ 
+            12044 & 3939.03 & 3964.86 & 5151.86 \\ 
+            16042 & 7001.02 & 7121.99 & 9086.88 \\ 
+            20040 & 10881.51 & 11267.74 & 14199.60 \\ 
+            24038 & 15631.83 & 16306.35 & 20487.40 \\ 
+            28036 & 21153.50 & 22116.26 & 27616.21 \\ 
+            32034 & 27637.29 & 28858.12 & 36049.05 \\ 
+            36032 & 34987.36 & 36138.26 & 45555.31 \\ 
+            40030 & 43165.74 & 44968.61 & 55917.47 \\ 
+            44028 & 52206.10 & 54424.15 & 67842.75 \\ 
+            48026 & 62037.85 & 64616.22 & 80669.90 \\ 
+            52024 & 72855.27 & 75586.21 & 94386.29 \\ 
+            56022 & 84416.77 & 86679.96 & 109490.70 \\ 
+            60020 & 97044.37 & 98427.26 & 125816.55 \\ 
+            64018 & 110296.65 & 112276.70 & 143332.05 \\ 
+            68016 & 124351.80 & 125903.00 & 161613.60 \\ 
+            72014 & 139565.40 & 140651.00 & 180965.90 \\ 
+            76012 & 155826.80 & 154545.50 & 201664.70 \\ 
+            80010 & 172265.90 & 171206.85 & 223414.75 \\ 
+            84008 & 189906.35 & 187602.35 & 246361.85 \\ 
+            88006 & 208708.60 & 206964.30 & 269969.40 \\ 
+            92004 & 228250.85 & 229561.45 & 295370.30 \\ 
+            96002 & 248827.55 & 245400.70 & 321198.25 \\ 
+
+            \hline
+        \end{tabular}
+        \caption{Tiempos de ejecución (en $\mu$s) del algoritmo de inserción}
+    \end{table}
+
+    Tal y como podemos observar, tenemos que nuevamente el equipo de ASUS ofrece un \textbf{mejor rendimiento} respecto a los otros
+    dos equipos en los que se ha realizado el análisis. Asimismo, el tiempo de ejecución aumenta considerablemente
+    en cuanto el número de componentes de vector en comparación con los algoritmos de QuickSort o MergeSort. 
+
+    \begin{figure}[h]
+        \centering
+        \includegraphics[width=0.5\textwidth]{img/insercion.png}
+        \caption{Ilustración del funcionamiento interno del algoritmo de inserción}
+    \end{figure}
+
+    Las gráficas asociadas a cada equipo se pueden encontrar a continuación:
+
+    \begin{figure}
+        \centering
+         \subfloat[ASUS]{
+          \label{asus:insercion-emp}
+           \includegraphics[width=0.7\textwidth]{../data/asus/insercion-points.pdf}}
+
+         \subfloat[HP]{
+          \label{hp:insercion-emp}
+           \includegraphics[width=0.7\textwidth]{../data/hp/insercion-points.pdf}}
+
+         \subfloat[LENOVO]{
+          \label{lenovo:insercion-emp}
+           \includegraphics[width=0.7\textwidth]{../data/lenovo/insercion-points.pdf}}
+        \caption{Representación gráfica de tiempos de ejecución del algoritmo de inserción.}
+
+        \label{emp:insercion}
+    \end{figure}
+
+
     \subsection{Algoritmo de selección}
     \subsection{Algoritmo HeapSort}
     \subsection{Algoritmo QuickSort}
@@ -327,40 +406,39 @@
     \subsection{Algoritmo de Floyd}
 
     En la siguiente tabla se encuentran los datos obtenidos en este algoritmo por cada uno de los
-    equipos en los que hemos corrido el algoritmo. 
+    equipos en los que hemos ejecutado el algoritmo. 
 
     \begin{table}[h]
-        \footnotesize
         \centering
         \begin{tabular}{|r|r|r|r|}
             \hline
             \text{$N_{nod}$} & \text{$t_{ASUS}$} & \text{$t_{HP}$} & \text{$t_{LENOVO}$} \\
             \hline
-            5 & 0.09 & 0.1 & 0.13 \\ 
-            35 & 4.635 & 5.045 & 3.795 \\ 
-            65 & 28.105 & 36.27 & 22.685 \\ 
-            95 & 98.975 & 59.425 & 76.2 \\ 
-            125 & 206.65 & 291.02 & 171.845 \\ 
-            155 & 250.735 & 340.205 & 294.25 \\ 
-            185 & 368.585 & 490.165 & 466.895 \\ 
+            5 & 0.09 & 0.10 & 0.13 \\ 
+            35 & 4.63 & 5.04 & 3.79 \\ 
+            65 & 28.11 & 36.27 & 22.68 \\ 
+            95 & 98.97 & 59.42 & 76.20 \\ 
+            125 & 206.65 & 291.02 & 171.84 \\ 
+            155 & 250.74 & 340.20 & 294.25 \\ 
+            185 & 368.58 & 490.17 & 466.89 \\ 
             215 & 572.04 & 588.29 & 727.49 \\ 
-            245 & 846.54 & 873.175 & 1069.24 \\ 
-            275 & 1193.13 & 1234.555 & 1530.57 \\ 
-            305 & 1642.2 & 1666.67 & 2058.385 \\ 
-            335 & 2164.105 & 2205.705 & 2755.755 \\ 
+            245 & 846.54 & 873.17 & 1069.24 \\ 
+            275 & 1193.13 & 1234.56 & 1530.57 \\ 
+            305 & 1642.20 & 1666.67 & 2058.39 \\ 
+            335 & 2164.11 & 2205.70 & 2755.76 \\ 
             365 & 2826.06 & 2846.01 & 3574.31 \\ 
-            395 & 3528.345 & 3583.4 & 4484.645 \\ 
-            425 & 4410.26 & 4465.635 & 5606.11 \\ 
-            455 & 5383.555 & 5485.51 & 6820.05 \\ 
-            485 & 6554.765 & 6483.905 & 8154.31 \\ 
-            515 & 7855.67 & 7928.895 & 9760.62 \\ 
-            545 & 9386.4 & 9268.545 & 11542.12 \\ 
-            575 & 10957.08 & 10777.34 & 13740.255 \\ 
-            605 & 12786.025 & 12425.0 & 15864.585 \\ 
+            395 & 3528.34 & 3583.40 & 4484.65 \\ 
+            425 & 4410.26 & 4465.64 & 5606.11 \\ 
+            455 & 5383.56 & 5485.51 & 6820.05 \\ 
+            485 & 6554.77 & 6483.90 & 8154.31 \\ 
+            515 & 7855.67 & 7928.90 & 9760.62 \\ 
+            545 & 9386.40 & 9268.55 & 11542.12 \\ 
+            575 & 10957.08 & 10777.34 & 13740.25 \\ 
+            605 & 12786.02 & 12425.00 & 15864.58 \\ 
             635 & 14618.06 & 14709.94 & 18181.38 \\ 
             665 & 16823.92 & 16768.84 & 21031.77 \\ 
-            695 & 19147.07 & 18815.95 & 23953.145 \\ 
-            725 & 21807.535 & 21948.21 & 27128.6 \\ 
+            695 & 19147.07 & 18815.95 & 23953.15 \\ 
+            725 & 21807.53 & 21948.21 & 27128.60 \\ 
             \hline
         \end{tabular}
         \caption{Tiempos de ejecución (en $\mu$s) del algoritmo de Floyd}
@@ -371,29 +449,65 @@
 
     \begin{figure}[h]
         \centering
+        \includegraphics[width=0.4\textwidth]{img/graf-floyd.jpeg}
+        \caption{Representacion gráfica de un grafo.}
+    \end{figure}
+
+    \begin{center}
+        
+    \end{center}
+    
+    \begin{figure}
+        \centering
          \subfloat[ASUS]{
           \label{asus:floyd-emp}
-           \includegraphics[width=0.3\textwidth]{../data/asus/floyd-points.pdf}}
+           \includegraphics[width=0.7\textwidth]{../data/asus/floyd-points.pdf}}
+
          \subfloat[HP]{
           \label{hp:floyd-emp}
-           \includegraphics[width=0.3\textwidth]{../data/hp/floyd-points.pdf}}
+           \includegraphics[width=0.7\textwidth]{../data/hp/floyd-points.pdf}}
+
          \subfloat[LENOVO]{
           \label{lenovo:floyd-emp}
-           \includegraphics[width=0.3\textwidth]{../data/lenovo/floyd-points.pdf}}
+           \includegraphics[width=0.7\textwidth]{../data/lenovo/floyd-points.pdf}}
         \caption{Representación gráfica de tiempos de ejecución del algoritmo Floyd.}
+
         \label{emp:floyd}
-       \end{figure}
+    \end{figure}
 
-    \section{Eficiencia híbrida}
+    A continuación, usaremos el algoritmo de Floyd para ilustrar uno de los objetivos mencionados de la práctica, 
+    el cual consiste en analizar la eficiencia de un mismo algoritmo para optimizaciones del compilador diferentes.
+    En concreto, al igual que en el resto de ejecuciones, usamos g++ como compilador, y analizaremos las siguientes
+    opciones de optimización:
+
+    \begin{itemize}
+        \item \textbf{-O0 (sin optimización)}: Desconecta por completo la optimización y es el predeterminado si 
+        no se especifica ningún nivel.
+        \item \textbf{-O1}: El nivel de optimización más básico. El compilador intentará producir un código rápido
+        y pequeño sin tomar mucho tiempo de compilación. 
+        \item \textbf{-O2}: Un paso delante de -O1. Es el nivel recomendado de optimización, a no ser que el sistema
+        tenga necesidades especiales. -O2 activará algunas opciones añadidas a las que se activan con -O1. 
+        Con -O2, el compilador intentará aumentar el rendimiento del código sin comprometer el tamaño y sin tomar 
+        mucho más tiempo de compilación.
+        \item \textbf{-O3}:  El nivel más alto de optimización posible. Activa optimizaciones que son caras en términos 
+        de tiempo de compilación y uso de memoria. El hecho de compilar con -O3 no garantiza una forma de mejorar el 
+        rendimiento y, de hecho, en muchos casos puede ralentizar un sistema debido al uso de binarios de gran tamaño y 
+        mucho uso de la memoria.
+    \end{itemize} 
     
-    En esta sección trataremos los datos obtenidos de la sección anterior mediante técnicas estadísticas para
-    comprobar la consistencia de los datos experimentales con los calculados teóricamente.  
 
-    \subsection{Algoritmo de inserción}
-    \subsection{Algoritmo de selección}
-    \subsection{Algoritmo HeapSort}
-    \subsection{Algoritmo QuickSort}
-    \subsection{Algoritmo de Floyd}
 
+
+
+    % \section{Eficiencia híbrida}
+    
+    % En esta sección trataremos los datos obtenidos de la sección anterior mediante técnicas estadísticas para
+    % comprobar la consistencia de los datos experimentales con los calculados teóricamente.  
+
+    % \subsection{Algoritmo de inserción}
+    % \subsection{Algoritmo de selección}
+    % \subsection{Algoritmo HeapSort}
+    % \subsection{Algoritmo QuickSort}
+    % \subsection{Algoritmo de Floyd}
     
 \end{document}
