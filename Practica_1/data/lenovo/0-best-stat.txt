@@ -1,0 +1,1 @@
+type:quadratic function:f(x)=0.694023*x*x+-194.223*x+10279.4  RMS:12718.6

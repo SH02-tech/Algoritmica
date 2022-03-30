@@ -1,0 +1,1 @@
+type:exponential function:f(x)=0.00231633*exp(0.618424*x)  RMS:113.646
