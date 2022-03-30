@@ -204,17 +204,16 @@
     \begin{itemize}
         \item \textbf{Primer ciclo}
         \begin{equation*}
-            T(n) = \sum_{i=0}^{n/2 + 1} log_2(i) = log_2(k) \in O(n*log(n))
+            T(n) = \sum_{i=0}^{n/2 + 1} log_2(i) = log_2(k) \in O(nlog(n))
         \end{equation*} 
 
         \item \textbf{Segundo ciclo}
-        \begin{equation*}
-            \sum_{i=2}^{n} \log_2(i) = \log_2(2) + ... + \log_2(n) = \log_2(n!) \in \mathcal{O}(n·\log_2(n))
-        \end{equation*}
+            $$\sum_{i=2}^{n} \log_2(i) = \log_2(2) + ... + \log_2(n) = \log_2(n!) \in O(n \log_2(n))$$
+        
         
     \end{itemize}
 
-    En conclusión vemos que como tenemos que aplicar la regla del máximo y ambos ciclos tienen de eficiencia $O(n*log(n))$ podemos afirmar que esa es la eficiencia
+    En conclusión vemos que como tenemos que aplicar la regla del máximo y ambos ciclos tienen de eficiencia $O(nlog(n))$ podemos afirmar que esa es la eficiencia
     teórica del algoritmo, 
 
     \subsection{Algoritmo QuickSort}
@@ -248,16 +247,16 @@
         T(n) = \left\{ \begin{array}{lr} T(k_n) + T(n-k_n) + n & \text{si } n \geq \text{UMBRAL}\\ n^2 & \text{si } n < \text{UMBRAL} \end{array} \right.
     \end{equation}
 
-    Supongamos que $k_{n} = \frac{n}{2}$. Resolvamos la recurrencia de (1):
+    Para el caso promedio, podemos considerar que $k_{n} = \frac{n}{2}$. Resolvamos la recurrencia de (1):
     
     \begin{equation}
-        T(n) = T(k_n) + T(n-k_n) + n \text{si n $\geq$ UMBRAL}
+        T(n) = T(k_n) + T(n-k_n) + n \text{ si n $\geq$ UMBRAL}
     \end{equation}
 
     Realizamos el cambio de variable $n = 2^{n}$ en la ecuación (2) obtenemos:
 
     \begin{equation}
-        T(2^{m}) = 2T(2^{m-1}) + 2^{m} si n \leqslant log_{2}(\text{UMBRAL}) 
+        T(2^{m}) = 2T(2^{m-1}) + 2^{m} \text{ si n $\geq log_{2}$(UMBRAL)} 
     \end{equation}
 
     \begin{equation}
@@ -270,7 +269,7 @@
         t_{m} - 2t_{m-1} = 2^{m}
     \end{equation}
     
-    Obtenemos la siguiente ecuación de recurrencia de la ecuación (4):
+    Obtenemos la siguiente ecuación de recurrencia de la ecuación (5):
 
     \begin{equation}
         (x-2)^{2} = 0
@@ -282,13 +281,13 @@
         t_{m} = c_{1}2^{m} + c_{2}m2^{m}
     \end{equation}
 
-    Deshacemos el cambio de variabe:
+    Deshacemos el cambio de variable:
 
     \begin{equation}
         T(n) = c_{1}n + c_{2}nlog_{2}(n)
     \end{equation}
 
-    Por tanto $T(n) \in O(nlog_{2}(n))$
+    Por tanto $T(n) \in O(nlog_{2}(n))$ si n $\geq$ UMBRAL.
     
     \subsection{Algoritmo de Floyd}
 
@@ -310,16 +309,36 @@
     \lstinputlisting[language=C++, firstline=30, lastline=38, caption=Implementación en C++ del algoritmo de resolución de las torres de Hanoi.]{../src/hanoi.cpp} 
 
     Estamos ante el estudio de un algoritmo recursivo, así que si T(n) es el número de movimientos necesarios para mover n discos, tenemos que el algoritmo sigue la 
-    recurrencia $T(n) = 2T(n-1) + 1 \forall n \geq 1 y con T(0) = 0 como caso base$. Por lo tanto, vamos a resolverla para hallar su eficiencia teórica:
-    Tenemos $t_n - 2t_(n-1) = 1 $ luego si hacemos un cambio de varible nos queda como ecuación característica $(x-2)(x-1) = 0$  que son las propias raíces de la 
-    recurrencia luego la solución nos queda $t_n = c_1 1**n  + c_2 2**n  $, entonces como $t_0=0$ nos sale que $t_0 = c_1 + c_2$ y $t_1 = 2 t_0 + 1 = 1$ luego en la 
-    solución $t_1=c_1 + 2 c_2 $, luego si resolvemos el sistema $c_1 = 1$ y $c_2 = -1$nos queda la ecuación $2**n - 1**n$, por lo que como se trata de la ecuación que 
-    modela la recurrencia, podemos concluir con que la eficiencia teórica del algoritmo es $O(2**n)$.
+    recurrencia $T(n) = 2T(n-1) + 1$ $\forall n \geq 1$ y con $T(0) = 0$ como caso base. Por lo tanto, vamos a resolverla para hallar su eficiencia teórica.
+
+    Tenemos que $t_n - 2t_{n-1} = 1 $ luego si hacemos un cambio de varible nos queda como ecuación característica $(x-2)(x-1) = 0$, que son las propias raíces de la 
+    recurrencia luego la solución nos queda $t_n = c_1 1^n  + c_2 2^n  $. Como $t_0=0$, nos sale que $t_0 = c_1 + c_2$ y $t_1 = 2 t_0 + 1 = 1$, luego en la 
+    solución $t_1=c_1 + 2 c_2 $, de donde si resolvemos el sistema $c_1 = 1$ y $c_2 = -1$ nos queda la ecuación $2^n - 1^n$. 
+    
+    En consecuencia, deducimos que se trata de la ecuación que 
+    modela la recurrencia, lo que nos permite concluir que la eficiencia teórica del algoritmo es $O(2^n)$.
 
     \section{Eficiencia empírica}
 
-    Para esta práctica hemos ejecutado en cada uno de los equipos los diversos algoritmos presentados previamente.
-    Las tablas obtenidas, así como las gráficas que representan estas tablas se representan a continuación.
+    Para esta práctica hemos ejecutado en cada uno de los equipos un algoritmo de cada orden de eficiencia.
+    Las tablas obtenidas, así como las gráficas correspondientes se representan a continuación.
+
+    Las tablas de los siguientes epígrafes presentan las siguientes características:
+
+    \begin{itemize}
+        \item La \textbf{primera columna} es el parámetro respecto al cual se busca la eficiencia del algoritmo.
+        \item Las siguientes columnas $t_{ASUS}$, $t_{HP}$ y $t_{LENOVO}$ indican, respectivamente, el tiempo, en $\mu$s, empleado para ejecutar el algoritmo para el 
+        tamaño considerado por el equipo Asus, HP y Lenovo.
+    \end{itemize}
+
+    \newpage
+
+    \subsection{Algoritmo HeapSort}
+
+    Empezamos analizando el algoritmo de menor orden de complejidad. La tabla con los valores obtenidos de la ejecución
+    de cada algoritmo con sus respectivos tiempos de ejecución se pueden observar a continuación.
+
+    
 
     \newpage
     
@@ -360,7 +379,6 @@
             88006 & 208708.60 & 206964.30 & 269969.40 \\ 
             92004 & 228250.85 & 229561.45 & 295370.30 \\ 
             96002 & 248827.55 & 245400.70 & 321198.25 \\ 
-
             \hline
         \end{tabular}
         \caption{Tiempos de ejecución (en $\mu$s) del algoritmo de inserción}
@@ -395,11 +413,6 @@
 
         \label{emp:insercion}
     \end{figure}
-
-
-    \subsection{Algoritmo de selección}
-    \subsection{Algoritmo HeapSort}
-    \subsection{Algoritmo QuickSort}
     
     \newpage 
     
@@ -453,10 +466,6 @@
         \caption{Representacion gráfica de un grafo.}
     \end{figure}
 
-    \begin{center}
-        
-    \end{center}
-    
     \begin{figure}
         \centering
          \subfloat[ASUS]{
@@ -474,6 +483,139 @@
 
         \label{emp:floyd}
     \end{figure}
+    
+    \subsection{Algoritmo Hanoi}
+
+    En la siguiente tabla se encuentran los datos obtenidos en este algoritmo por cada uno de los
+    equipos en los que hemos ejecutado el algoritmo. 
+
+    \begin{table}[h]
+        \centering
+        \begin{tabular}{|r|r|r|r|}
+            \hline
+            \text{$N_{disk}$} & \text{$t_{ASUS}$} & \text{$t_{HP}$} & \text{$t_{LENOVO}$} \\
+            \hline
+            2 & 0.04 & 0.10 & 0.16 \\ 
+            3 & 0.08 & 0.10 & 0.20 \\ 
+            4 & 0.08 & 0.14 & 0.20 \\ 
+            6 & 0.08 & 0.42 & 0.22 \\ 
+            7 & 0.24 & 0.36 & 0.26 \\ 
+            8 & 0.18 & 0.50 & 0.48 \\ 
+            10 & 0.22 & 0.84 & 0.52 \\ 
+            11 & 0.36 & 1.22 & 0.74 \\ 
+            12 & 1.10 & 3.90 & 1.88 \\ 
+            13 & 2.38 & 6.52 & 4.06 \\ 
+            14 & 5.26 & 6.26 & 6.98 \\ 
+            16 & 10.40 & 11.82 & 14.02 \\ 
+            17 & 41.72 & 47.08 & 51.68 \\ 
+            18 & 83.38 & 97.78 & 101.66 \\ 
+            20 & 170.68 & 313.84 & 199.10 \\ 
+            21 & 340.14 & 494.60 & 373.10 \\ 
+            22 & 1185.76 & 1084.10 & 1605.38 \\ 
+            23 & 1776.36 & 2082.46 & 2712.62 \\ 
+            24 & 3295.08 & 3465.74 & 4693.84 \\ 
+            26 & 6642.10 & 6844.50 & 9232.04 \\ 
+            \hline
+        \end{tabular}
+        \caption{Tiempos de ejecución (en $\mu$s) del algoritmo de Floyd}
+    \end{table}
+
+    Así que como preveíamos, puesto que habíamos estudiado las características de cada ordenador, hemos visto que el ASUS al 
+    tener un i7 de 10ª generación ejecuta más rápido el algoritmo, mientras que el LENOVO es el computador que más tarda, 
+    lógicamente al tratarse de un i5.
+
+    \begin{figure}[h]
+        \centering
+        \includegraphics[width=0.4\textwidth]{img/hanoi.png}
+        \caption{Representacion gráfica del juego de las Torres de Hanoi.}
+    \end{figure}
+
+    Ahora vamos a mostrar las gráficas resultantes tras calcular el tiempo que tarda la ejecución de este algoritmo para diferentes
+    tamaños, en este caso, para distinto número de discos.
+
+    \begin{figure}
+        \centering
+         \subfloat[ASUS]{
+          \label{asus:hanoi-emp}
+           \includegraphics[width=0.7\textwidth]{../data/asus/hanoi-points.pdf}}
+
+         \subfloat[HP]{
+          \label{hp:hanoi-emp}
+           \includegraphics[width=0.7\textwidth]{../data/hp/hanoi-points.pdf}}
+
+         \subfloat[LENOVO]{
+          \label{lenovo:hanoi-emp}
+           \includegraphics[width=0.7\textwidth]{../data/lenovo/hanoi-points.pdf}}
+        \caption{Representación gráfica de tiempos de ejecución del algoritmo de resolución del juego de las Torres de Hanoi.}
+
+        \label{emp:hanoi}
+    \end{figure}
+
+    \subsection{Algoritmo QuickSort}
+
+    En la siguiente tabla se encuentran los datos obtenidos en este algoritmo por cada uno de los
+    equipos en los que hemos ejecutado el algoritmo. 
+
+    \begin{table}[h]
+        \centering
+            \begin{tabular}{|r|r|r|r|}
+                50 & 0.16 & 0.18 & 0.27 \\ 
+                4048 & 19.29 & 24.45 & 24.92 \\ 
+                8046 & 42.21 & 66.50 & 56.88 \\ 
+                12044 & 74.38 & 139.50 & 91.61 \\ 
+                16042 & 103.62 & 167.75 & 123.66 \\ 
+                20040 & 139.89 & 211.38 & 159.78 \\ 
+                24038 & 146.56 & 147.53 & 186.41 \\ 
+                28036 & 146.95 & 276.40 & 227.16 \\ 
+                32034 & 177.87 & 177.81 & 226.21 \\ 
+                36032 & 173.07 & 188.60 & 229.00 \\ 
+                40030 & 211.38 & 213.28 & 296.18 \\ 
+                44028 & 242.43 & 239.34 & 330.69 \\ 
+                48026 & 234.97 & 334.85 & 319.62 \\ 
+                52024 & 280.48 & 295.87 & 370.98 \\ 
+                56022 & 320.01 & 345.99 & 434.99 \\ 
+                60020 & 301.64 & 370.33 & 400.67 \\ 
+                64018 & 606.27 & 347.55 & 442.90 \\ 
+                68016 & 350.49 & 357.49 & 502.76 \\ 
+                72014 & 368.94 & 384.36 & 473.06 \\ 
+                76012 & 392.19 & 415.22 & 553.44 \\ 
+                80010 & 414.08 & 453.30 & 600.55 \\ 
+                84008 & 430.25 & 456.19 & 582.07 \\ 
+                88006 & 462.48 & 482.36 & 714.90 \\ 
+                92004 & 483.76 & 514.01 & 645.11 \\ 
+                96002 & 527.66 & 528.58 & 730.75 \\ 
+            \end{tabular}
+        \caption{Tiempos de ejecución (en $\mu$s) del algoritmo de QuickSort}
+    \end{table}
+
+    En este caso podemos observar que para el ASUS los tiempos de ejecución son ligeramente 
+    mejores que el HP, aunque estos dos equipos guardan distancias con el LENOVO el cual 
+    presenta tiempos de ejecución mucho más lentos.
+
+    Ahora vamos a mostrar las gráficas resultantes tras calcular el tiempo que tarda la ejecución de este algoritmo para diferentes
+    tamaños, en este caso, para distintos tamaños del vector.
+
+    \begin{figure}
+        \centering
+         \subfloat[ASUS]{
+          \label{asus:quicksort-emp}
+           \includegraphics[width=0.7\textwidth]{../data/asus/quicksort-points.pdf}}
+
+         \subfloat[HP]{
+          \label{hp:quicksort-emp}
+           \includegraphics[width=0.7\textwidth]{../data/hp/quicksort-points.pdf}}
+
+         \subfloat[LENOVO]{
+          \label{lenovo:qicksort-emp}
+           \includegraphics[width=0.7\textwidth]{../data/lenovo/quicksort-points.pdf}}
+        \caption{Representación gráfica de tiempos de ejecución del algoritmo de ordenación QuickSort.}
+
+        \label{emp:quicksort}
+    \end{figure}
+
+    \section{Comparación de ejecuciones con diferentes niveles de optimización}
+
+    \subsection{Conceptos teóricas}
 
     A continuación, usaremos el algoritmo de Floyd para ilustrar uno de los objetivos mencionados de la práctica, 
     el cual consiste en analizar la eficiencia de un mismo algoritmo para optimizaciones del compilador diferentes.
@@ -495,17 +637,218 @@
         mucho uso de la memoria.
     \end{itemize} 
     
+    \subsection{Tablas de ejecución} 
+
+    % TABLA 1
 
 
+    % TABLA 2
+    % TABLA 3
+
+    Los tiempos de ejecución para los diferentes niveles de optimización se presentan en la siguiente tabla. 
+
+    \begin{table}[h]
+        \centering
+        \begin{tabular}{|r|r|r|r|r|}
+            \hline
+            $N_{nodos}$ & $T_{O0}$ & $T_{O1}$ & $T_{O2}$ & $T_{O3}$ \\
+            \hline
+            5 & 0.17 & 0.08 & 0.06 & 0.07 \\ 
+            35 & 53.95 & 4.47 & 3.02 & 3.52 \\ 
+            65 & 380.01 & 27.30 & 26.04 & 35.80 \\ 
+            95 & 490.60 & 92.52 & 124.14 & 127.20 \\ 
+            125 & 841.45 & 205.10 & 275.73 & 198.03 \\ 
+            155 & 1494.98 & 386.86 & 360.05 & 219.22 \\ 
+            185 & 2494.07 & 447.26 & 367.53 & 368.06 \\ 
+            215 & 3892.51 & 688.94 & 564.97 & 573.63 \\ 
+            245 & 5761.86 & 1032.51 & 849.70 & 843.58 \\ 
+            275 & 8168.23 & 1443.59 & 1183.75 & 1205.76 \\ 
+            305 & 10994.11 & 1997.49 & 1617.42 & 1629.11 \\ 
+            335 & 14597.46 & 2648.92 & 2166.47 & 2158.78 \\ 
+            365 & 19297.67 & 3386.93 & 2794.19 & 2793.36 \\ 
+            395 & 24360.22 & 4255.16 & 3517.28 & 3520.41 \\ 
+            425 & 30149.47 & 5370.36 & 4386.85 & 4494.97 \\ 
+            455 & 37490.57 & 6552.51 & 5482.11 & 5511.59 \\ 
+            485 & 46042.69 & 7993.95 & 6694.07 & 6717.87 \\ 
+            515 & 53611.57 & 9620.67 & 7998.24 & 7933.97 \\ 
+            545 & 63969.28 & 11346.75 & 9421.14 & 9432.59 \\ 
+            575 & 76580.04 & 13442.25 & 11065.08 & 11010.14 \\ 
+            605 & 87898.27 & 15581.91 & 12906.25 & 12797.45 \\ 
+            635 & 102621.15 & 18516.74 & 14833.09 & 14603.30 \\ 
+            665 & 117634.85 & 21025.31 & 16875.94 & 16933.83 \\ 
+            695 & 133193.50 & 23857.43 & 19786.48 & 19152.38 \\ 
+            725 & 152998.80 & 27005.65 & 22494.99 & 22495.65 \\ 
+            \hline
+        \end{tabular}
+        \caption{Tiempos de ejecución (en $\mu$s) para algoritmo Floyd (Asus)}
+    \end{table}
+
+    \begin{figure}[h]
+        \centering
+        \includegraphics[width=0.6\textwidth]{../data/asus-opt.pdf}
+        \caption{Gráfica de tiempos de ejecución (Asus)}
+    \end{figure}
+
+    \begin{table}[h]
+        \centering
+        \begin{tabular}{|r|r|r|r|r|}
+            \hline
+            $N_{nodos}$ & $T_{O0}$ & $T_{O1}$ & $T_{O2}$ & $T_{O3}$ \\
+            \hline
+            5 & 0.21 & 0.10 & 0.09 & 0.10 \\ 
+            35 & 39.48 & 3.78 & 6.07 & 5.20 \\ 
+            65 & 251.96 & 46.40 & 48.65 & 42.72 \\ 
+            95 & 574.10 & 179.56 & 146.43 & 145.99 \\ 
+            125 & 793.83 & 301.52 & 266.95 & 175.65 \\ 
+            155 & 1510.12 & 286.76 & 318.89 & 309.46 \\ 
+            185 & 2495.91 & 449.75 & 376.88 & 404.58 \\ 
+            215 & 3914.89 & 708.44 & 577.90 & 586.26 \\ 
+            245 & 5701.98 & 1028.52 & 853.82 & 875.53 \\ 
+            275 & 8082.82 & 1492.51 & 1207.13 & 1231.23 \\ 
+            305 & 10928.36 & 1971.31 & 1638.46 & 1670.67 \\ 
+            335 & 14455.55 & 2698.91 & 2178.86 & 2174.05 \\ 
+            365 & 18929.88 & 3473.24 & 2837.69 & 2833.66 \\ 
+            395 & 24332.74 & 4414.80 & 3564.82 & 3646.11 \\ 
+            425 & 29848.49 & 5443.34 & 4421.02 & 4510.19 \\ 
+            455 & 36908.89 & 6591.26 & 5360.57 & 5432.05 \\ 
+            485 & 44582.97 & 8053.35 & 6493.54 & 6667.46 \\ 
+            515 & 53470.68 & 9527.39 & 7778.40 & 7889.72 \\ 
+            545 & 63172.00 & 11443.67 & 9345.16 & 9462.12 \\ 
+            575 & 75819.62 & 13436.56 & 10767.32 & 10656.11 \\ 
+            605 & 86390.05 & 15466.07 & 12933.42 & 12717.99 \\ 
+            635 & 100187.65 & 17941.33 & 14708.66 & 14143.55 \\ 
+            665 & 117042.70 & 20676.88 & 16400.16 & 16729.92 \\ 
+            695 & 131518.20 & 23515.96 & 18637.03 & 19198.70 \\ 
+            725 & 147998.15 & 26638.71 & 21326.99 & 21331.96 \\ 
+            \hline
+        \end{tabular}
+        \caption{Tiempos de ejecución (en $\mu$s) para algoritmo Floyd (HP)}
+    \end{table}
+
+    \begin{figure}[h]
+        \centering
+        \includegraphics[width=0.6\textwidth]{../data/hp_opt.pdf}
+        \caption{Gráfica de tiempos de ejecución (HP)}
+    \end{figure}
 
 
-    % \section{Eficiencia híbrida}
+    \begin{table}[h]
+        \centering
+        \begin{tabular}{|r|r|r|r|r|}
+            \hline
+            $N_{nodos}$ & $T_{O0}$ & $T_{O1}$ & $T_{O2}$ & $T_{O3}$ \\
+            \hline
+            5 & 0.23 & 0.17 & 0.23 & 0.33 \\ 
+            35 & 29.84 & 6.48 & 5.50 & 5.55 \\ 
+            65 & 203.45 & 35.44 & 31.70 & 37.05 \\ 
+            95 & 645.68 & 135.50 & 126.25 & 116.51 \\ 
+            125 & 1138.86 & 294.69 & 266.38 & 199.54 \\ 
+            155 & 2220.49 & 530.83 & 466.20 & 370.52 \\ 
+            185 & 3524.26 & 866.54 & 794.60 & 661.22 \\ 
+            215 & 5531.06 & 1340.55 & 1108.49 & 1120.88 \\ 
+            245 & 9879.07 & 2039.46 & 1490.56 & 1765.31 \\ 
+            275 & 14760.01 & 2775.61 & 1988.81 & 2839.12 \\ 
+            305 & 21002.12 & 3709.97 & 2736.05 & 2645.93 \\ 
+            335 & 21130.67 & 4774.23 & 3574.84 & 4324.62 \\ 
+            365 & 28563.90 & 5061.25 & 4065.97 & 4587.72 \\ 
+            395 & 35266.89 & 7312.15 & 5092.35 & 6049.83 \\ 
+            425 & 43856.27 & 9466.16 & 6145.76 & 7357.14 \\ 
+            455 & 63704.19 & 11719.27 & 8768.52 & 9735.48 \\ 
+            485 & 71028.24 & 15156.26 & 10372.40 & 9273.38 \\ 
+            515 & 85424.65 & 24115.51 & 13265.73 & 11000.40 \\ 
+            545 & 103213.98 & 16958.10 & 14592.08 & 12854.59 \\ 
+            575 & 123200.59 & 18765.49 & 15596.62 & 24142.65 \\ 
+            605 & 134205.15 & 20772.30 & 17569.12 & 29495.03 \\ 
+            635 & 197191.95 & 31057.76 & 20804.73 & 34560.04 \\ 
+            665 & 224866.25 & 27874.88 & 28951.74 & 32018.41 \\ 
+            695 & 203138.40 & 35154.18 & 46677.95 & 27752.09 \\ 
+            725 & 214510.65 & 50098.56 & 40081.61 & 35497.00 \\ 
+            \hline
+        \end{tabular}
+        \caption{Tiempos de ejecución (en $\mu$s) para algoritmo Floyd (Lenovo)}
+    \end{table}
+
+    \begin{figure}[h]
+        \centering
+        \includegraphics[width=0.6\textwidth]{../data/lenovo-opt.pdf}
+        \caption{Gráfica de tiempos de ejecución (Lenovo)}
+    \end{figure}
+
+    \subsection{Observaciones}
+
+    Observando las gráficas se puede apreciar que, para pequeños valores del número de nodos, las diferencias entre los
+    tiempos de ejecución para diferentes niveles de optimización son prácticamente despreciables. Sin embargo, a medida
+    que va aumentando la complejidad del grafo, los tiempos de ejecución para diferentes niveles de optimización se hacen
+    más significativos, siendo que para el valor $n=725$, el algoritmo optimizado es prácticamente el cuádruple de rápido que
+    el algoritmo sin optimizar. 
+
+    Por tanto, concluimos que, para ejecuciones de tamaños pequeños, las diferencias son apenas apreciables, mientras que
+    para grandes valores la optimización sí que puede aumentar considerablemente los tiempos de ejecución. Se trata, por
+    consiguiente, de un buen mecanismo de optimización del código. 
+
+
+    \section{Comparación de los algoritmos de ordenación}
+
+    \subsection{Objetivos}
+
+    En esta sección compararemos los algoritmos de ordenación presentados previamente. El objetivo será
+    sacar conclusiones relevantes relacionados con la adecuación de cada algoritmo a cada situación. 
+
+    A continuación se presentan los tiempos de ejecución de cada algoritmo en cada equipo en los que se ha realizado
+    esta experiencia. 
+
+    \section{Eficiencia híbrida}
     
-    % En esta sección trataremos los datos obtenidos de la sección anterior mediante técnicas estadísticas para
-    % comprobar la consistencia de los datos experimentales con los calculados teóricamente.  
+    En esta sección trataremos los datos obtenidos de la sección anterior mediante técnicas estadísticas para
+    comprobar la consistencia de los datos experimentales con los calculados teóricamente. 
 
-    % \subsection{Algoritmo de inserción}
-    % \subsection{Algoritmo de selección}
+    \subsection{Algoritmo de inserción}
+
+    Las gráficas con las curvas de regresión son las siguientes:
+
+    \begin{figure}[h]
+        \centering
+         \subfloat[ASUS]{
+          \label{asus:insercion-hib}
+           \includegraphics[width=0.7\textwidth]{../data/asus/insercion-graph.pdf}}
+
+         \subfloat[HP]{
+          \label{hp:insercion-hib}
+           \includegraphics[width=0.7\textwidth]{../data/hp/insercion-graph.pdf}}
+
+         \subfloat[LENOVO]{
+          \label{lenovo:insercion-hib}
+           \includegraphics[width=0.7\textwidth]{../data/lenovo/insercion-graph.pdf}}
+        \caption{Gráficas de regresión de los algoritmos de inserción.}
+
+        \label{hib:insercion}
+    \end{figure}
+
+    Para cada una de ellas se han obtenido los siguientes datos:
+
+    \begin{itemize}
+
+        \item \textbf{Asus}
+            \begin{itemize}
+                \item Mejor funcion de ajuste: $ $
+            \end{itemize}
+        \item 
+
+        \item \textbf{HP}
+            \begin{itemize}
+                \item Mejor funcion de ajuste
+            \end{itemize}
+        \item 
+
+        \item \textbf{Lenovo}
+            \begin{itemize}
+                \item Mejor funcion de ajuste
+            \end{itemize}
+        \item 
+
+        
+    \end{itemize}
+
     % \subsection{Algoritmo HeapSort}
     % \subsection{Algoritmo QuickSort}
     % \subsection{Algoritmo de Floyd}
