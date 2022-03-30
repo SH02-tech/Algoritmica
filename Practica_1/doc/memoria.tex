@@ -140,9 +140,34 @@
         \end{itemize}
     \end{itemize}
     
+
+    \section{Metodología}
+
     Debido a las limitaciones técnicas de estos equipos, para el cálculo de la eficiencia empírica se ha 
     optado por medir tiempos de ejecución en tiempos y \textbf{tamaños razonables} para obtener datos relevantes
     para el comportamiento tanto a pequeñas escalas como a nivel asintótico de ellas. 
+
+    Con el fin de automatizar el desarrollo de esta práctica, se ha diseñado un proyecto a la que hemos llamado 
+    \textbf{GraphKiller}. Se trata de un conjunto de 6 scripts cuya última finalidad es la de automatizar la generación
+    de los parámetros que aparecen en este práctica. Un esquema de este proyecto puede encontrar en la 
+    figura \ref{graph-killer}. 
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.9\textwidth]{img/esquema_graphkiller.pdf}
+        \caption{Esquema del funcionamiento de GraphKiller}
+        \label{graph-killer}
+    \end{figure}
+
+    Consta de las siguientes partes:
+
+    \begin{enumerate}
+        \item \textbf{TableGenerator.sh}. Se encarga de generar las tablas de datos, teniendo en cuenta número de repeticiones, valores iniciales y finales y cantidad de medidas experimentales a tomar.
+        \item \textbf{Regressions.sh}. Se encarga de generar una lista de las regresiones más empleadas en Algorítmica, dando información como función de ajuste y parámetros estadísticos como la varianza residual de la regresión.
+        \item \textbf{BestFitter.sh}. Su labor es la de escoger siempre la regresión que mejor se ajusta (con menor varianza residual). Presenta el inconveniente de que no sabe discriminar los datos, únicamente compara residuos.
+        \item \textbf{PointsPlotter.sh}. Produce un gráfico con los puntos de la tabla de datos obtenida.
+        \item \textbf{GraphPlotter.sh}. Produce un gráfico con los puntos de la tabla de datos obtenida, así como la curva de regresión óptima. 
+    \end{enumerate}
 
     \section{Eficiencia teórica}
 
@@ -333,10 +358,70 @@
 
     \newpage
 
-    \subsection{Algoritmo HeapSort}
+    \subsection{Algoritmo QuickSort}
 
     Empezamos analizando el algoritmo de menor orden de complejidad. La tabla con los valores obtenidos de la ejecución
     de cada algoritmo con sus respectivos tiempos de ejecución se pueden observar a continuación.
+
+    En la siguiente tabla se encuentran los datos obtenidos en este algoritmo por cada uno de los
+    equipos en los que hemos ejecutado el algoritmo. 
+
+    \begin{table}[h]
+        \centering
+            \begin{tabular}{|r|r|r|r|}
+                50 & 0.16 & 0.18 & 0.27 \\ 
+                4048 & 19.29 & 24.45 & 24.92 \\ 
+                8046 & 42.21 & 66.50 & 56.88 \\ 
+                12044 & 74.38 & 139.50 & 91.61 \\ 
+                16042 & 103.62 & 167.75 & 123.66 \\ 
+                20040 & 139.89 & 211.38 & 159.78 \\ 
+                24038 & 146.56 & 147.53 & 186.41 \\ 
+                28036 & 146.95 & 276.40 & 227.16 \\ 
+                32034 & 177.87 & 177.81 & 226.21 \\ 
+                36032 & 173.07 & 188.60 & 229.00 \\ 
+                40030 & 211.38 & 213.28 & 296.18 \\ 
+                44028 & 242.43 & 239.34 & 330.69 \\ 
+                48026 & 234.97 & 334.85 & 319.62 \\ 
+                52024 & 280.48 & 295.87 & 370.98 \\ 
+                56022 & 320.01 & 345.99 & 434.99 \\ 
+                60020 & 301.64 & 370.33 & 400.67 \\ 
+                64018 & 606.27 & 347.55 & 442.90 \\ 
+                68016 & 350.49 & 357.49 & 502.76 \\ 
+                72014 & 368.94 & 384.36 & 473.06 \\ 
+                76012 & 392.19 & 415.22 & 553.44 \\ 
+                80010 & 414.08 & 453.30 & 600.55 \\ 
+                84008 & 430.25 & 456.19 & 582.07 \\ 
+                88006 & 462.48 & 482.36 & 714.90 \\ 
+                92004 & 483.76 & 514.01 & 645.11 \\ 
+                96002 & 527.66 & 528.58 & 730.75 \\ 
+            \end{tabular}
+        \caption{Tiempos de ejecución (en $\mu$s) del algoritmo de QuickSort}
+    \end{table}
+
+    En este caso podemos observar que para el ASUS los tiempos de ejecución son ligeramente 
+    mejores que el HP, aunque estos dos equipos guardan distancias con el LENOVO el cual 
+    presenta tiempos de ejecución mucho más lentos.
+
+    Ahora vamos a mostrar las gráficas resultantes tras calcular el tiempo que tarda la ejecución de este algoritmo para diferentes
+    tamaños, en este caso, para distintos tamaños del vector.
+
+    \begin{figure}
+        \centering
+         \subfloat[ASUS]{
+          \label{asus:quicksort-emp}
+           \includegraphics[width=0.7\textwidth]{../data/asus/quicksort-points.pdf}}
+
+         \subfloat[HP]{
+          \label{hp:quicksort-emp}
+           \includegraphics[width=0.7\textwidth]{../data/hp/quicksort-points.pdf}}
+
+         \subfloat[LENOVO]{
+          \label{lenovo:qicksort-emp}
+           \includegraphics[width=0.7\textwidth]{../data/lenovo/quicksort-points.pdf}}
+        \caption{Representación gráfica de tiempos de ejecución del algoritmo de ordenación QuickSort.}
+
+        \label{emp:quicksort}
+    \end{figure}
 
     
 
@@ -466,23 +551,23 @@
         \caption{Representacion gráfica de un grafo.}
     \end{figure}
 
-    \begin{figure}
-        \centering
-         \subfloat[ASUS]{
-          \label{asus:floyd-emp}
-           \includegraphics[width=0.7\textwidth]{../data/asus/floyd-points.pdf}}
+    % \begin{figure}
+    %     \centering
+    %      \subfloat[ASUS]{
+    %       \label{asus:floyd-emp}
+    %        \includegraphics[width=0.7\textwidth]{../data/asus/floyd-points.pdf}}
 
-         \subfloat[HP]{
-          \label{hp:floyd-emp}
-           \includegraphics[width=0.7\textwidth]{../data/hp/floyd-points.pdf}}
+    %      \subfloat[HP]{
+    %       \label{hp:floyd-emp}
+    %        \includegraphics[width=0.7\textwidth]{../data/hp/floyd-points.pdf}}
 
-         \subfloat[LENOVO]{
-          \label{lenovo:floyd-emp}
-           \includegraphics[width=0.7\textwidth]{../data/lenovo/floyd-points.pdf}}
-        \caption{Representación gráfica de tiempos de ejecución del algoritmo Floyd.}
+    %      \subfloat[LENOVO]{
+    %       \label{lenovo:floyd-emp}
+    %        \includegraphics[width=0.7\textwidth]{../data/lenovo/floyd-points.pdf}}
+    %     \caption{Representación gráfica de tiempos de ejecución del algoritmo Floyd.}
 
-        \label{emp:floyd}
-    \end{figure}
+    %     \label{emp:floyd}
+    % \end{figure}
     
     \subsection{Algoritmo Hanoi}
 
@@ -551,68 +636,6 @@
         \label{emp:hanoi}
     \end{figure}
 
-    \subsection{Algoritmo QuickSort}
-
-    En la siguiente tabla se encuentran los datos obtenidos en este algoritmo por cada uno de los
-    equipos en los que hemos ejecutado el algoritmo. 
-
-    \begin{table}[h]
-        \centering
-            \begin{tabular}{|r|r|r|r|}
-                50 & 0.16 & 0.18 & 0.27 \\ 
-                4048 & 19.29 & 24.45 & 24.92 \\ 
-                8046 & 42.21 & 66.50 & 56.88 \\ 
-                12044 & 74.38 & 139.50 & 91.61 \\ 
-                16042 & 103.62 & 167.75 & 123.66 \\ 
-                20040 & 139.89 & 211.38 & 159.78 \\ 
-                24038 & 146.56 & 147.53 & 186.41 \\ 
-                28036 & 146.95 & 276.40 & 227.16 \\ 
-                32034 & 177.87 & 177.81 & 226.21 \\ 
-                36032 & 173.07 & 188.60 & 229.00 \\ 
-                40030 & 211.38 & 213.28 & 296.18 \\ 
-                44028 & 242.43 & 239.34 & 330.69 \\ 
-                48026 & 234.97 & 334.85 & 319.62 \\ 
-                52024 & 280.48 & 295.87 & 370.98 \\ 
-                56022 & 320.01 & 345.99 & 434.99 \\ 
-                60020 & 301.64 & 370.33 & 400.67 \\ 
-                64018 & 606.27 & 347.55 & 442.90 \\ 
-                68016 & 350.49 & 357.49 & 502.76 \\ 
-                72014 & 368.94 & 384.36 & 473.06 \\ 
-                76012 & 392.19 & 415.22 & 553.44 \\ 
-                80010 & 414.08 & 453.30 & 600.55 \\ 
-                84008 & 430.25 & 456.19 & 582.07 \\ 
-                88006 & 462.48 & 482.36 & 714.90 \\ 
-                92004 & 483.76 & 514.01 & 645.11 \\ 
-                96002 & 527.66 & 528.58 & 730.75 \\ 
-            \end{tabular}
-        \caption{Tiempos de ejecución (en $\mu$s) del algoritmo de QuickSort}
-    \end{table}
-
-    En este caso podemos observar que para el ASUS los tiempos de ejecución son ligeramente 
-    mejores que el HP, aunque estos dos equipos guardan distancias con el LENOVO el cual 
-    presenta tiempos de ejecución mucho más lentos.
-
-    Ahora vamos a mostrar las gráficas resultantes tras calcular el tiempo que tarda la ejecución de este algoritmo para diferentes
-    tamaños, en este caso, para distintos tamaños del vector.
-
-    \begin{figure}
-        \centering
-         \subfloat[ASUS]{
-          \label{asus:quicksort-emp}
-           \includegraphics[width=0.7\textwidth]{../data/asus/quicksort-points.pdf}}
-
-         \subfloat[HP]{
-          \label{hp:quicksort-emp}
-           \includegraphics[width=0.7\textwidth]{../data/hp/quicksort-points.pdf}}
-
-         \subfloat[LENOVO]{
-          \label{lenovo:qicksort-emp}
-           \includegraphics[width=0.7\textwidth]{../data/lenovo/quicksort-points.pdf}}
-        \caption{Representación gráfica de tiempos de ejecución del algoritmo de ordenación QuickSort.}
-
-        \label{emp:quicksort}
-    \end{figure}
-
     \section{Comparación de ejecuciones con diferentes niveles de optimización}
 
     \subsection{Conceptos teóricas}
@@ -639,15 +662,9 @@
     
     \subsection{Tablas de ejecución} 
 
-    % TABLA 1
-
-
-    % TABLA 2
-    % TABLA 3
-
     Los tiempos de ejecución para los diferentes niveles de optimización se presentan en la siguiente tabla. 
 
-    \begin{table}[h]
+    \begin{table}[H]
         \centering
         \begin{tabular}{|r|r|r|r|r|}
             \hline
@@ -683,13 +700,13 @@
         \caption{Tiempos de ejecución (en $\mu$s) para algoritmo Floyd (Asus)}
     \end{table}
 
-    \begin{figure}[h]
+    \begin{figure}[H]
         \centering
         \includegraphics[width=0.6\textwidth]{../data/asus-opt.pdf}
         \caption{Gráfica de tiempos de ejecución (Asus)}
     \end{figure}
 
-    \begin{table}[h]
+    \begin{table}[H]
         \centering
         \begin{tabular}{|r|r|r|r|r|}
             \hline
@@ -725,14 +742,14 @@
         \caption{Tiempos de ejecución (en $\mu$s) para algoritmo Floyd (HP)}
     \end{table}
 
-    \begin{figure}[h]
+    \begin{figure}[H]
         \centering
         \includegraphics[width=0.6\textwidth]{../data/hp_opt.pdf}
         \caption{Gráfica de tiempos de ejecución (HP)}
     \end{figure}
 
 
-    \begin{table}[h]
+    \begin{table}[H]
         \centering
         \begin{tabular}{|r|r|r|r|r|}
             \hline
@@ -768,7 +785,7 @@
         \caption{Tiempos de ejecución (en $\mu$s) para algoritmo Floyd (Lenovo)}
     \end{table}
 
-    \begin{figure}[h]
+    \begin{figure}[H]
         \centering
         \includegraphics[width=0.6\textwidth]{../data/lenovo-opt.pdf}
         \caption{Gráfica de tiempos de ejecución (Lenovo)}
