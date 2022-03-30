@@ -4,7 +4,6 @@
 *.log
 *.synctex.gz
 *.toc
-*/data/*
 */bin/*
 Pract*/BestFitter.sh
 Pract*/PointsPlotter.sh
