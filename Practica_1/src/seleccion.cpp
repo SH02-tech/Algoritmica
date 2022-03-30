@@ -85,7 +85,7 @@ static void seleccion_lims(int T[], int inicial, int final)
 
 int main(int argc, char * argv[])
 {
-
+  const int MAX_VECTOR = 60;
   if (argc != 2)
     {
       cerr << "Formato " << argv[0] << " <num_elem>" << endl;
@@ -94,61 +94,36 @@ int main(int argc, char * argv[])
 
   int n = atoi(argv[1]);
 
-  int * T = new int[n];
+  int *T[MAX_VECTOR];
+  
+  for (int i=0; i<MAX_VECTOR; ++i)
+    T[i] = new int[n];
   assert(T);
 
   srandom(time(0));
 
-  for (int i = 0; i < n; i++)
-    {
-      T[i] = random();
-    };
+  for (int k=0; k<MAX_VECTOR; ++k)
+    for (int i = 0; i < n; i++)
+      T[k][i] = random();
 
 
   const int TAM_GRANDE = 2000;
   const int NUM_VECES = 100;
 
-  if (n > TAM_GRANDE)
-    {
-      clock_t t_antes = clock();
-      
-      seleccion(T, n);
-      
-      clock_t t_despues = clock();
+  int num_repetitions = max(1,MAX_VECTOR - n/20000);
+
+  clock_t t_antes = clock();
   
-      cout << ((double)(t_despues - t_antes)) / (CLOCKS_PER_SEC*10E-6) << endl;
-    } else {
-      int * U = new int[n];
-      assert(U);
+  
+  for (int i=0; i<num_repetitions; ++i)
+    seleccion(T[i], n);
+  
+  clock_t t_despues = clock();
 
-      for (int i = 0; i < n; i++)
-	U[i] = T[i];
-      
-      clock_t t_antes_vacio = clock();
-      for (int veces = 0; veces < NUM_VECES; veces++)
-	{
-	  for (int i = 0; i < n; i++)
-	    U[i] = T[i];
-	}
-      clock_t t_despues_vacio = clock();
+  cout << ((double)(t_despues - t_antes)/num_repetitions) / (CLOCKS_PER_SEC*10E-6) << endl;
 
-      clock_t t_antes = clock();
-      for (int veces = 0; veces < NUM_VECES; veces++)
-	{
-	  for (int i = 0; i < n; i++)
-	    U[i] = T[i];
-	  seleccion(U, n);
-	}
-      clock_t t_despues = clock();
-      cout << ((double) ((t_despues - t_antes) - 
-			 (t_despues_vacio - t_antes_vacio))) / 
-	(CLOCKS_PER_SEC * NUM_VECES)
-	   << endl;
-
-      delete [] U;
-    }
-
-  delete [] T;
+  for (int i=0; i<MAX_VECTOR; ++i)
+    delete [] T[i];
 
   return 0;
 };
