@@ -18,7 +18,7 @@ programs=('floyd.cpp')
 #	4. number of repeats
 
 declare -a OrdenData
-OrdenData=(50 300050 30 50)
+OrdenData=(50 45050 30 20)
 
 declare -a FloydData
 FloydData=(5 755 25 20)
