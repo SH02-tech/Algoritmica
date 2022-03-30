@@ -9,7 +9,7 @@ using namespace std;
 #include <cstdlib>
 #include <climits>
 #include <cassert>
-
+#include <cmath>
 
 
 
@@ -91,31 +91,39 @@ static void reajustar(int T[], int num_elem, int k)
 int main(int argc,char* argv[])
 {
 
+  const int MAX_VECTOR = 50;
+
   clock_t tantes;    // Valor del reloj antes de la ejecución
   clock_t tdespues;  // Valor del reloj después de la ejecución
   int n = stoi(argv[1]);
 
-  int * T = new int[n];
-  assert(T);
+  int *T[MAX_VECTOR];
+  
+  for (int i=0; i<MAX_VECTOR; ++i)
+    T[i] = new int[n];
 
   srandom(time(0));
 
-  for (int i = 0; i < n; i++)
-    {
-      T[i] = random();
-    };
+  for (int k=0; k<MAX_VECTOR; ++k)
+    for (int i = 0; i < n; i++)
+      T[k][i] = random();
 
   // escribe_vector(T, n);
+  
+  int num_repetitions = max(1,MAX_VECTOR - n/20000);
 
   tantes = clock();
-  heapsort(T, n);
+  
+  for (int i=0; i<num_repetitions; ++i)
+    heapsort(T[i], n);
+    
   tdespues = clock();
-  cout << ((double)(tdespues-tantes))/(CLOCKS_PER_SEC*10E-6) << endl;
+  cout << ((double)(tdespues-tantes)/num_repetitions)/(CLOCKS_PER_SEC*10E-6) << endl;
 
   // escribe_vector(T, n);
 
-
-  delete [] T;
+  for (int i=0; i<MAX_VECTOR; ++i)
+    delete [] T[i];
 
   return 0;
 };

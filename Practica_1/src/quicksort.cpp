@@ -189,27 +189,39 @@ static void dividir_qs(int T[], int inicial, int final, int & pp)
 int main(int argc,char* argv[])
 {
 
+  const int MAX_VECTOR = 80;
+
   clock_t tantes;    // Valor del reloj antes de la ejecución
   clock_t tdespues;  // Valor del reloj después de la ejecución
   int n = stoi(argv[1]);
 
-  int * T = new int[n];
-  assert(T);
+  int *T[MAX_VECTOR];
+  
+  for (int i=0; i<MAX_VECTOR; ++i)
+    T[i] = new int[n];
 
   srandom(time(0));
 
-  for (int i = 0; i < n; i++)
-    {
-      T[i] = random();
-    };
-    
-    
-  tantes = clock();
-  quicksort(T, n);
-  tdespues = clock();
-  cout << ((double)(tdespues-tantes))/(CLOCKS_PER_SEC*10E-6) << endl;
+  for (int k=0; k<MAX_VECTOR; ++k)
+    for (int i = 0; i < n; i++)
+      T[k][i] = random();
 
-  delete [] T;
+  // escribe_vector(T, n);
+  
+  int num_repetitions = max(1,MAX_VECTOR - n/20000);
+
+  tantes = clock();
+  
+  for (int i=0; i<num_repetitions; ++i)
+    quicksort(T[i], n);
+    
+  tdespues = clock();
+  cout << ((double)(tdespues-tantes)/num_repetitions)/(CLOCKS_PER_SEC*10E-6) << endl;
+
+  // escribe_vector(T, n);
+
+  for (int i=0; i<MAX_VECTOR; ++i)
+    delete [] T[i];
 
   return 0;
 };
