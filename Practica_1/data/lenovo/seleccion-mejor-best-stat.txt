@@ -1,0 +1,1 @@
+type:quadratic function:f(x)=2.61748e-05*x*x+0.299813*x+-1010.87  RMS:1682.53
