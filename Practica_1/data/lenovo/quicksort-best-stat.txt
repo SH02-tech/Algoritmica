@@ -1,1 +1,1 @@
-type:quadratic function:f(x)=3.09313e-08*x*x+0.00690479*x+7.1779  RMS:5.76609
+type:sublogarithmic function:f(x)=0.000762063*x*log(x)+8.17714  RMS:5.96496
