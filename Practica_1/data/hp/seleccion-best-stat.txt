@@ -1,1 +1,1 @@
-type:quadratic function:f(x)=3.45421e-05*x*x+-0.0145856*x+1.01929  RMS:1319.24
+type:quadratic function:f(x)=3.15088e-05*x*x+0.153196*x+-551.147  RMS:1070.51
