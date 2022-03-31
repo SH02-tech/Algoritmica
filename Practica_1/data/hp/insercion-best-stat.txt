@@ -1,1 +1,1 @@
-type:cubic function:f(x)=1.64655e-10*x*x*x+1.96232e-05*x*x+0.088927*x+-152.241  RMS:189.059
+type:cubic function:f(x)=-5.30458e-11*x*x*x+3.02527e-05*x*x+-0.0566422*x+220.603  RMS:277.549

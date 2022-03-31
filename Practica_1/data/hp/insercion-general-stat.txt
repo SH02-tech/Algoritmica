@@ -1,6 +1,6 @@
-type:constant function:f(x)=17940.9 RMS:16887.9
-type:logarithmic function:f(x)=8007.67*log(x)+-58768.2  RMS:13185.1
-type:lineal function:f(x)=1.22914*x+-8854.29  RMS:4747.4
-type:sublogarithmic function:f(x)=0.0903148*x*log(x)+0.981257  RMS:5924.93
-type:quadratic function:f(x)=3.03917e-05*x*x+-0.0959405*x+466.144  RMS:349.815
-type:cubic function:f(x)=1.64655e-10*x*x*x+1.96232e-05*x*x+0.088927*x+-152.241  RMS:189.059
+type:constant function:f(x)=17328.2 RMS:15995.9
+type:logarithmic function:f(x)=7678.19*log(x)+-56224.6  RMS:12379.8
+type:lineal function:f(x)=1.17068*x+-8192.51  RMS:4182.43
+type:sublogarithmic function:f(x)=0.0867756*x*log(x)+0.982783  RMS:5297.95
+type:quadratic function:f(x)=2.67489e-05*x*x+0.00475246*x+1.03055  RMS:288.732
+type:cubic function:f(x)=-5.30458e-11*x*x*x+3.02527e-05*x*x+-0.0566422*x+220.603  RMS:277.549
