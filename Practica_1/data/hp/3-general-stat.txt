@@ -1,0 +1,6 @@
+type:constant function:f(x)=5713.64 RMS:6584.69
+type:logarithmic function:f(x)=3716.88*log(x)+-14897.4  RMS:5165.29
+type:lineal function:f(x)=27.3464*x+-4267.8  RMS:2683.6
+type:sublogarithmic function:f(x)=4.12517*x*log(x)+-3480.6  RMS:2393.01
+type:quadratic function:f(x)=0.0607639*x*x+-17.0112*x+983.716  RMS:461.132
+type:cubic function:f(x)=5.2753e-05*x*x*x+0.00299934*x*x+-0.361577*x+37.0519  RMS:129.905
