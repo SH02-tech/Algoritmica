@@ -1,0 +1,5 @@
+type:constant function:f(x)=21800 RMS:13205.1
+type:lineal function:f(x)=1500*x+50  RMS:4.0284e-15
+type:quadratic function:f(x)=2.11762e-12*x*x+1500*x+50  RMS:1.50201e-10
+type:cubic function:f(x)=-1.02408e-12*x*x*x+4.53403e-11*x*x+1500*x+50  RMS:5.59993e-10
+type:exponential function:f(x)=7598.32*exp(0.0637229*x)  RMS:3287.31

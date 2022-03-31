@@ -1,0 +1,1 @@
+type:lineal function:f(x)=1500*x+50  RMS:4.0284e-15
