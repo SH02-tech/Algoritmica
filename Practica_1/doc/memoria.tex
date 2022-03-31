@@ -1,5 +1,6 @@
 \documentclass{homework}
 
+\usepackage{longtable} % para tablas largas
 \usepackage{subfig}
 \usepackage{multicol}
 \usepackage{float}
@@ -167,56 +168,16 @@
         \item \textbf{BestFitter.sh}. Su labor es la de escoger siempre la regresión que mejor se ajusta (con menor varianza residual). Presenta el inconveniente de que no sabe discriminar los datos, únicamente compara residuos.
         \item \textbf{PointsPlotter.sh}. Produce un gráfico con los puntos de la tabla de datos obtenida.
         \item \textbf{GraphPlotter.sh}. Produce un gráfico con los puntos de la tabla de datos obtenida, así como la curva de regresión óptima. 
+        \item \textbf{MainGraph.sh}. Es el guión que articula todos los anteriores. Es el encargado de recibir el ejecutable de un programa y organizar todos los datos y gráficos en la jerarquía de archivos. 
     \end{enumerate}
 
     \section{Eficiencia teórica}
 
     Para el análisis de los siguientes algoritmos se ha empleado la notación $O(.)$. 
 
-    \subsection{Algoritmo de inserción}
-
-    El código de este algoritmo lo podemos encontrar a continuación.
-
-    \lstinputlisting[language=C++, firstline=66, lastline=79, caption=Implementación en C++ del algoritmo de inserción.]{../src/insercion.cpp}
-    
-    El análisis de eficiencia se ha de hacer sobre el número de elementos del vector $n$. 
-
-    Para el análisis asintótico, calculamos el número de operaciones elementales asociadas al código. 
-    Las tres primeras líneas tienen complejidad $O(1)$. Para el ciclo for, démonos cuenta de que itera sobre el número de
-    componentes del vector. Por su parte, dentro del for existe un while que realiza un conjunto de operaciones de orden
-    $O(1)$ tantas veces como se indica en el iterador. Por tanto, llamando $T(n)$ al números de operaciones asociadas
-    al algoritmo, tenemos que:
-
-    \begin{equation*}
-        T(n) = \sum_{i=0}^{n-1} \sum_{j=0}^{i-1} k = \sum_{i=0}^{n-1} ki = k \frac{n(n-1)}{2} 
-    \end{equation*}
-
-    Por tanto, deducimos que $T(n) \in O(n^2)$. 
-
-    \subsection{Algoritmo de selección}
-
-    \lstinputlisting[language=C++, firstline=66, lastline=82, caption=Implementación en C++ del algoritmo de selección.]{../src/seleccion.cpp}    
-
-    La estructura principal del código anterior consta de dos bucles for anidados. Las primeras sentencias de declaración antes del inicio del primer 
-    bucle for no repercuten en el análisis. Procedamos a analizar la estructura repetitiva: el primer for recorre el vector desde su inicio hasta
-    la penúltima componente del mismo incluída. El segundo for comienza en la posición dada por el índice del primero hasta la última componente del vector incluída.
-    Dentro del bucle interno tenemos una operación elemental correspondiente a la comparación realizada en el if, que es $O(1)$. Dentro del bucle externo excluyendo 
-    el código del bucle interno nos encontramos con dos sentencias de asignación que no se tendrán en cuenta para el análisis. De igual modo, fuera del bucle externo
-    al final del código nos encontramos con otras sentencias de asignación que también serán despreciadas. También tendremos en cuenta las operaciones elementales
-    aritméticos correspondientes a la gestión de los bucles, que son $O(1)$. En conclusion, acotando las expresiones $O(1)$ por k tenemos que: 
-
-    \begin{equation*}
-        \begin{split}
-            T(n) = \sum_{i=0}^{n-2} \sum_{j=i}^{n-1} k = \sum_{i=0}^{n-2} k(n-1-i+1) = \sum_{i=0}^{n-2} k(n-i) = kn \sum_{i=0}^{n-2} 1  - k \sum_{i=0}^{n-2} i \\
-            = kn(n-2+1) - k \frac{(n-2)(n-1)}{2} = kn^2 + kn - \frac{kn^2 - 3kn + 2k}{2}
-        \end{split}
-    \end{equation*}
-    
-    Deducimos, por tanto, que $T(n) \in O(n^2)$. 
-    
     \subsection{Algoritmo HeapSort}
     
-    \lstinputlisting[language=C++, firstline=59, lastline=71, caption=Implementación en C++ del algoritmo heapsort.]{../src/heapsort.cpp} 
+    \lstinputlisting[language=C++, firstline=56, lastline=68, caption=Implementación en C++ del algoritmo heapsort.]{../src/heapsort.cpp} 
 
     El heapsort es un algoritmo de ordenación por montículos que consta de dos bucles for independientes, que llaman a una función llamada reajustar.
     En la primera línea de código podemos encontrar una declaración de variable cuya eficiencia es $O(1)$ y luego los dos ciclos mencionados, que interan 
@@ -239,7 +200,7 @@
     \end{itemize}
 
     En conclusión vemos que como tenemos que aplicar la regla del máximo y ambos ciclos tienen de eficiencia $O(nlog(n))$ podemos afirmar que esa es la eficiencia
-    teórica del algoritmo, 
+    teórica del algoritmo. 
 
     \subsection{Algoritmo QuickSort}
     
@@ -313,6 +274,47 @@
     \end{equation}
 
     Por tanto $T(n) \in O(nlog_{2}(n))$ si n $\geq$ UMBRAL.
+
+    \subsection{Algoritmo de inserción}
+
+    El código de este algoritmo lo podemos encontrar a continuación.
+
+    \lstinputlisting[language=C++, firstline=66, lastline=79, caption=Implementación en C++ del algoritmo de inserción.]{../src/insercion.cpp}
+    
+    El análisis de eficiencia se ha de hacer sobre el número de elementos del vector $n$. 
+
+    Para el análisis asintótico, calculamos el número de operaciones elementales asociadas al código. 
+    Las tres primeras líneas tienen complejidad $O(1)$. Para el ciclo for, démonos cuenta de que itera sobre el número de
+    componentes del vector. Por su parte, dentro del for existe un while que realiza un conjunto de operaciones de orden
+    $O(1)$ tantas veces como se indica en el iterador. Por tanto, llamando $T(n)$ al números de operaciones asociadas
+    al algoritmo, tenemos que:
+
+    \begin{equation*}
+        T(n) = \sum_{i=0}^{n-1} \sum_{j=0}^{i-1} k = \sum_{i=0}^{n-1} ki = k \frac{n(n-1)}{2} 
+    \end{equation*}
+
+    Por tanto, deducimos que $T(n) \in O(n^2)$. 
+
+    \subsection{Algoritmo de selección}
+
+    \lstinputlisting[language=C++, firstline=66, lastline=82, caption=Implementación en C++ del algoritmo de selección.]{../src/seleccion.cpp}    
+
+    La estructura principal del código anterior consta de dos bucles for anidados. Las primeras sentencias de declaración antes del inicio del primer 
+    bucle for no repercuten en el análisis. Procedamos a analizar la estructura repetitiva: el primer for recorre el vector desde su inicio hasta
+    la penúltima componente del mismo incluída. El segundo for comienza en la posición dada por el índice del primero hasta la última componente del vector incluída.
+    Dentro del bucle interno tenemos una operación elemental correspondiente a la comparación realizada en el if, que es $O(1)$. Dentro del bucle externo excluyendo 
+    el código del bucle interno nos encontramos con dos sentencias de asignación que no se tendrán en cuenta para el análisis. De igual modo, fuera del bucle externo
+    al final del código nos encontramos con otras sentencias de asignación que también serán despreciadas. También tendremos en cuenta las operaciones elementales
+    aritméticos correspondientes a la gestión de los bucles, que son $O(1)$. En conclusion, acotando las expresiones $O(1)$ por k tenemos que: 
+
+    \begin{equation*}
+        \begin{split}
+            T(n) = \sum_{i=0}^{n-2} \sum_{j=i}^{n-1} k = \sum_{i=0}^{n-2} k(n-1-i+1) = \sum_{i=0}^{n-2} k(n-i) = kn \sum_{i=0}^{n-2} 1  - k \sum_{i=0}^{n-2} i \\
+            = kn(n-2+1) - k \frac{(n-2)(n-1)}{2} = kn^2 + kn - \frac{kn^2 - 3kn + 2k}{2}
+        \end{split}
+    \end{equation*}
+    
+    Deducimos, por tanto, que $T(n) \in O(n^2)$. 
     
     \subsection{Algoritmo de Floyd}
 
@@ -367,8 +369,12 @@
     equipos en los que hemos ejecutado el algoritmo. 
 
     \begin{table}[h]
+        \footnotesize
         \centering
             \begin{tabular}{|r|r|r|r|}
+                \hline
+                \text{$N_{componentes}$} & \text{$t_{ASUS}$} & \text{$t_{HP}$} & \text{$t_{LENOVO}$} \\
+                \hline
                 50 & 0.16 & 0.18 & 0.27 \\ 
                 4048 & 19.29 & 24.45 & 24.92 \\ 
                 8046 & 42.21 & 66.50 & 56.88 \\ 
@@ -394,18 +400,20 @@
                 88006 & 462.48 & 482.36 & 714.90 \\ 
                 92004 & 483.76 & 514.01 & 645.11 \\ 
                 96002 & 527.66 & 528.58 & 730.75 \\ 
+                \hline
             \end{tabular}
         \caption{Tiempos de ejecución (en $\mu$s) del algoritmo de QuickSort}
     \end{table}
 
-    En este caso podemos observar que para el ASUS los tiempos de ejecución son ligeramente 
-    mejores que el HP, aunque estos dos equipos guardan distancias con el LENOVO el cual 
-    presenta tiempos de ejecución mucho más lentos.
-
+    Así que como preveíamos, puesto que habíamos estudiado las características del hardware de cada ordenador, hemos visto que el ASUS al 
+    tener un i7 de 10ª generación ejecuta más rápido el algoritmo que el resto, mientras que el LENOVO es el computador que más tarda, 
+    lógicamente al tratarse de un i5, y el HP con un i7 de 9º generación, que se correspondería con el equipo de nivel intermedio, tiene unos tiempos
+    de ejecución levemente superiores al ASUS.  
+    
     Ahora vamos a mostrar las gráficas resultantes tras calcular el tiempo que tarda la ejecución de este algoritmo para diferentes
     tamaños, en este caso, para distintos tamaños del vector.
 
-    \begin{figure}
+    \begin{figure}[H]
         \centering
          \subfloat[ASUS]{
           \label{asus:quicksort-emp}
@@ -416,14 +424,12 @@
            \includegraphics[width=0.7\textwidth]{../data/hp/quicksort-points.pdf}}
 
          \subfloat[LENOVO]{
-          \label{lenovo:qicksort-emp}
+          \label{lenovo:quicksort-emp}
            \includegraphics[width=0.7\textwidth]{../data/lenovo/quicksort-points.pdf}}
         \caption{Representación gráfica de tiempos de ejecución del algoritmo de ordenación QuickSort.}
 
         \label{emp:quicksort}
     \end{figure}
-
-    
 
     \newpage
     
@@ -506,7 +512,7 @@
     En la siguiente tabla se encuentran los datos obtenidos en este algoritmo por cada uno de los
     equipos en los que hemos ejecutado el algoritmo. 
 
-    \begin{table}[h]
+    \begin{table}[H]
         \centering
         \begin{tabular}{|r|r|r|r|}
             \hline
@@ -545,29 +551,31 @@
     En concordancia con los resultados obtenidos en las anteriores tablas, el ordenador que ofrece peores
     tiempos es el LENOVO, siendo el de ASUS el que ofrece resultados con mayor rapidez. 
 
-    \begin{figure}[h]
+    \begin{figure}[H]
         \centering
         \includegraphics[width=0.4\textwidth]{img/graf-floyd.jpeg}
         \caption{Representacion gráfica de un grafo.}
     \end{figure}
 
-    % \begin{figure}
-    %     \centering
-    %      \subfloat[ASUS]{
-    %       \label{asus:floyd-emp}
-    %        \includegraphics[width=0.7\textwidth]{../data/asus/floyd-points.pdf}}
+    \begin{figure}[H]
+        \centering
+         \subfloat[ASUS]{
+          \label{asus:floyd-emp}
+           \includegraphics[width=0.7\textwidth]{../data/asus/floyd-points.pdf}}
 
-    %      \subfloat[HP]{
-    %       \label{hp:floyd-emp}
-    %        \includegraphics[width=0.7\textwidth]{../data/hp/floyd-points.pdf}}
+         \subfloat[HP]{
+          \label{hp:floyd-emp}
+           \includegraphics[width=0.7\textwidth]{../data/hp/floyd-points.pdf}}
 
-    %      \subfloat[LENOVO]{
-    %       \label{lenovo:floyd-emp}
-    %        \includegraphics[width=0.7\textwidth]{../data/lenovo/floyd-points.pdf}}
-    %     \caption{Representación gráfica de tiempos de ejecución del algoritmo Floyd.}
+         \subfloat[LENOVO]{
+          \label{lenovo:floyd-emp}
+           \includegraphics[width=0.7\textwidth]{../data/lenovo/floyd-points.pdf}}
+        \caption{Representación gráfica de tiempos de ejecución del algoritmo Floyd.}
 
-    %     \label{emp:floyd}
-    % \end{figure}
+        \label{emp:floyd}
+    \end{figure}
+
+    \newpage
     
     \subsection{Algoritmo Hanoi}
 
@@ -605,9 +613,8 @@
         \caption{Tiempos de ejecución (en $\mu$s) del algoritmo de Floyd}
     \end{table}
 
-    Así que como preveíamos, puesto que habíamos estudiado las características de cada ordenador, hemos visto que el ASUS al 
-    tener un i7 de 10ª generación ejecuta más rápido el algoritmo, mientras que el LENOVO es el computador que más tarda, 
-    lógicamente al tratarse de un i5.
+    Verificando los resultados obtenidos en los análisis anteriores, para el algoritmo de hanoi, ASUS ofrece unos mejores 
+    tiempos de ejecución, seguido de HP y en último lugar LENOVO, que genera tiempos de ejecución mayores. 
 
     \begin{figure}[h]
         \centering
@@ -618,7 +625,7 @@
     Ahora vamos a mostrar las gráficas resultantes tras calcular el tiempo que tarda la ejecución de este algoritmo para diferentes
     tamaños, en este caso, para distinto número de discos.
 
-    \begin{figure}
+    \begin{figure}[H]
         \centering
          \subfloat[ASUS]{
           \label{asus:hanoi-emp}
@@ -814,6 +821,161 @@
     A continuación se presentan los tiempos de ejecución de cada algoritmo en cada equipo en los que se ha realizado
     esta experiencia. 
 
+    \begin{table}[H]
+        \footnotesize
+        \centering
+        \begin{tabular}{|r|r|r|r|r|}
+            \hline
+            $N_{componentes}$ & $T_{\text{quick}}$ & $T_{\text{heap}}$ & $T_{\text{ins}}$ & $T_{\text{sel}}$ \\
+            \hline
+            50 & 0.17 & 0.23 & 0.20 & 0.00 \\ 
+            1550 & 6.61 & 9.05 & 75.77 & 0.00 \\ 
+            3050 & 14.03 & 18.94 & 256.80 & 405.64 \\ 
+            4550 & 22.15 & 29.91 & 568.78 & 887.38 \\ 
+            6050 & 30.74 & 41.86 & 1009.34 & 1743.89 \\ 
+            7550 & 39.04 & 48.98 & 1563.83 & 2516.84 \\ 
+            9050 & 46.95 & 59.41 & 2223.38 & 3478.01 \\ 
+            10550 & 56.34 & 73.60 & 3041.16 & 4687.76 \\ 
+            12050 & 71.14 & 111.73 & 3990.62 & 6069.77 \\ 
+            13550 & 89.81 & 134.07 & 5006.11 & 7622.48 \\ 
+            15050 & 88.45 & 91.58 & 6150.48 & 9379.73 \\ 
+            16550 & 98.56 & 100.37 & 7465.37 & 11353.25 \\ 
+            18050 & 107.69 & 110.64 & 8826.78 & 13419.11 \\ 
+            19550 & 117.73 & 120.14 & 10378.18 & 15720.16 \\ 
+            21050 & 127.28 & 130.39 & 11990.83 & 18222.62 \\ 
+            22550 & 117.67 & 229.32 & 13870.88 & 20890.26 \\ 
+            24050 & 115.74 & 175.66 & 15767.71 & 23723.39 \\ 
+            25550 & 129.62 & 182.04 & 17623.01 & 26674.83 \\ 
+            27050 & 130.34 & 171.59 & 19843.40 & 29887.24 \\ 
+            28550 & 137.97 & 182.18 & 22034.17 & 33262.06 \\ 
+            30050 & 147.05 & 193.19 & 24340.38 & 36738.72 \\ 
+            31550 & 191.97 & 203.78 & 27098.83 & 40416.56 \\ 
+            33050 & 191.03 & 214.28 & 29862.88 & 44399.06 \\ 
+            34550 & 192.52 & 226.52 & 32503.73 & 48514.63 \\ 
+            36050 & 197.37 & 234.89 & 35181.93 & 52767.88 \\ 
+            37550 & 210.15 & 246.49 & 38327.38 & 57179.00 \\ 
+            39050 & 219.80 & 256.88 & 41369.21 & 61972.05 \\ 
+            40550 & 231.73 & 268.05 & 44358.82 & 66553.92 \\ 
+            42050 & 238.25 & 278.93 & 48124.07 & 71651.73 \\ 
+            43550 & 262.80 & 290.42 & 51624.04 & 76278.35 \\ 
+            \hline
+        \end{tabular}
+        \caption{Tabla de comparación de tiempos de ejecución entre algoritmos de ordenación (Asus)}
+    \end{table}
+
+    \begin{table}[H]
+        \footnotesize
+        \centering
+        \begin{tabular}{|r|r|r|r|r|}
+            \hline
+            $N_{componentes}$ & $T_{\text{quick}}$ & $T_{\text{heap}}$ & $T_{\text{ins}}$ & $T_{\text{sel}}$ \\
+            \hline
+            50 & 0.20 & 0.22 & 0.18 & 0.26 \\ 
+            1550 & 5.24 & 7.20 & 65.22 & 93.16 \\ 
+            3050 & 12.84 & 15.26 & 321.24 & 365.10 \\ 
+            4550 & 24.10 & 26.14 & 647.40 & 940.48 \\ 
+            6050 & 46.02 & 48.90 & 1036.40 & 1488.90 \\ 
+            7550 & 64.02 & 71.06 & 1618.74 & 2126.38 \\ 
+            9050 & 126.04 & 110.92 & 2280.68 & 3021.74 \\ 
+            10550 & 164.94 & 153.54 & 3017.28 & 4092.94 \\ 
+            12050 & 193.14 & 177.70 & 4005.42 & 5308.02 \\ 
+            13550 & 222.10 & 204.18 & 5016.44 & 6881.72 \\ 
+            15050 & 247.66 & 228.52 & 6221.24 & 8541.68 \\ 
+            16550 & 271.48 & 251.66 & 7543.96 & 10907.70 \\ 
+            18050 & 297.54 & 277.96 & 8895.32 & 12371.38 \\ 
+            19550 & 313.38 & 304.58 & 10479.46 & 13904.10 \\ 
+            21050 & 325.40 & 331.72 & 12000.74 & 16005.40 \\ 
+            22550 & 268.34 & 355.20 & 13841.24 & 19573.20 \\ 
+            24050 & 243.04 & 533.96 & 15701.64 & 20729.80 \\ 
+            25550 & 301.44 & 256.20 & 17659.94 & 23292.68 \\ 
+            27050 & 375.30 & 190.04 & 19860.74 & 28970.88 \\ 
+            28550 & 464.68 & 201.76 & 22197.46 & 30344.76 \\ 
+            30050 & 483.46 & 212.80 & 24393.30 & 34703.62 \\ 
+            31550 & 518.08 & 229.00 & 27505.86 & 37670.52 \\ 
+            33050 & 521.66 & 352.70 & 30478.94 & 38029.22 \\ 
+            34550 & 549.56 & 404.38 & 33168.82 & 41404.42 \\ 
+            36050 & 469.90 & 405.24 & 35869.34 & 44965.98 \\ 
+            37550 & 490.40 & 294.02 & 39764.76 & 48548.56 \\ 
+            39050 & 492.92 & 306.16 & 42636.54 & 52687.52 \\ 
+            40550 & 531.98 & 320.70 & 46448.22 & 56478.82 \\ 
+            42050 & 532.06 & 383.94 & 50855.00 & 60501.86 \\ 
+            43550 & 558.84 & 331.54 & 54694.44 & 68268.24 \\ 
+            \hline
+        \end{tabular}
+        \caption{Tabla de comparación de tiempos de ejecución entre algoritmos de ordenación (HP)}
+    \end{table}
+
+    \begin{table}[H]
+        \footnotesize
+        \centering
+        \begin{tabular}{|r|r|r|r|r|}
+            \hline
+            $N_{componentes}$ & $T_{\text{quick}}$ & $T_{\text{heap}}$ & $T_{\text{ins}}$ & $T_{\text{sel}}$ \\
+            \hline
+            50 & 0.35 & 0.58 & 0.32 & 0.34 \\ 
+            1550 & 15.56 & 30.47 & 113.40 & 150.44 \\ 
+            3050 & 39.12 & 48.51 & 416.61 & 517.39 \\ 
+            4550 & 39.49 & 60.96 & 818.87 & 1151.71 \\ 
+            6050 & 61.13 & 67.12 & 1318.29 & 1969.91 \\ 
+            7550 & 64.00 & 76.26 & 2040.42 & 3044.82 \\ 
+            9050 & 67.17 & 105.57 & 2893.16 & 4373.70 \\ 
+            10550 & 77.66 & 118.94 & 3937.94 & 5785.53 \\ 
+            12050 & 90.32 & 138.07 & 5111.43 & 8933.87 \\ 
+            13550 & 101.90 & 163.47 & 6412.50 & 13236.58 \\ 
+            15050 & 119.67 & 176.82 & 7911.75 & 16256.42 \\ 
+            16550 & 134.65 & 180.48 & 9605.05 & 19545.66 \\ 
+            18050 & 145.62 & 209.31 & 11396.08 & 23262.00 \\ 
+            19550 & 150.02 & 221.17 & 13402.47 & 27114.96 \\ 
+            21050 & 163.49 & 231.88 & 15511.25 & 31358.34 \\ 
+            22550 & 175.83 & 259.55 & 17763.31 & 35875.34 \\ 
+            24050 & 187.89 & 266.38 & 20213.18 & 41767.30 \\ 
+            25550 & 205.24 & 283.95 & 22797.11 & 50257.00 \\ 
+            27050 & 214.19 & 312.24 & 25575.44 & 57776.30 \\ 
+            28550 & 228.24 & 322.75 & 28426.29 & 62347.18 \\ 
+            30050 & 245.48 & 342.44 & 31521.96 & 63689.96 \\ 
+            31550 & 254.54 & 368.07 & 34782.56 & 70027.92 \\ 
+            33050 & 269.09 & 388.03 & 38191.71 & 83165.06 \\ 
+            34550 & 281.52 & 405.24 & 41713.63 & 91810.12 \\ 
+            36050 & 299.20 & 428.18 & 45353.92 & 78691.24 \\ 
+            37550 & 326.10 & 446.28 & 49245.56 & 76481.60 \\ 
+            39050 & 329.71 & 456.01 & 53230.43 & 81182.66 \\ 
+            40550 & 336.20 & 481.33 & 57379.06 & 90248.08 \\ 
+            42050 & 346.37 & 504.41 & 61712.14 & 93852.48 \\ 
+            43550 & 358.76 & 518.26 & 66215.14 & 103615.64 \\ 
+            \hline
+        \end{tabular}
+        \caption{Tabla de comparación de tiempos de ejecución entre algoritmos de ordenación (Lenovo)}
+
+    \end{table}
+
+    A continuación se presentan todas y cada una de las gráficas asociadas a las tablas anteriores:
+
+    \begin{figure}[H]
+        \centering
+         \subfloat[ASUS]{
+          \label{asus:orden}
+           \includegraphics[width=0.7\textwidth]{../data/asus-orden-todos.pdf}}
+
+         \subfloat[HP]{
+          \label{hp:orden}
+           \includegraphics[width=0.7\textwidth]{../data/hp_orden-todos.pdf}}
+
+         \subfloat[LENOVO]{
+          \label{lenovo:orden}
+           \includegraphics[width=0.7\textwidth]{../data/lenovo-orden-todos.pdf}}
+        \caption{Comparación de los algoritmos de ordenación.}
+
+        \label{orden}
+    \end{figure}
+    
+    De las gráficas extraídas anteriores, podemos sacar las siguientes conclusiones:
+    
+    \begin{itemize}
+        \item Para grandes valores de componentes de vector, los algoritmos de HeapSort y QuickSort presentan un muy buen comportamiento.
+        \item Los algoritmos de inserción y de selección ofrecen peor rendimiento respecto a QuickSort y HeapSort (su orden de eficiencia es mayor).
+        \item Para tamaños pequeños, las diferencias entre los cuatro algoritmos son prácticamente despreciables, por lo que su uso debería optarse más por la facilidad de implementación de dichos algoritmos. 
+    \end{itemize}
+
     \section{Eficiencia híbrida}
     
     En esta sección trataremos los datos obtenidos de la sección anterior mediante técnicas estadísticas para
@@ -870,4 +1032,4 @@
     % \subsection{Algoritmo QuickSort}
     % \subsection{Algoritmo de Floyd}
     
-\end{document}
+\end{document} 
