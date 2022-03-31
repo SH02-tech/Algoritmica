@@ -1,1 +1,1 @@
-type:cubic function:f(x)=-1.53342e-10*x*x*x+4.17475e-05*x*x+-0.0751992*x+172.207  RMS:363.737
+type:sublogarithmic function:f(x)=0.000433497*x*log(x) RMS:21.3343
