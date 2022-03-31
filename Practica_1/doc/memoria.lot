@@ -1,0 +1,21 @@
+\babel@toc {spanish}{}
+\contentsline {table}{\numberline {1}{\ignorespaces Tiempos de ejecución (en $\mu $s) del algoritmo de QuickSort\relax }}{12}{table.caption.4}%
+\contentsline {table}{\numberline {2}{\ignorespaces Tiempos de ejecución (en $\mu $s) del algoritmo de inserción\relax }}{14}{table.caption.6}%
+\contentsline {table}{\numberline {3}{\ignorespaces Tiempos de ejecución (en $\mu $s) del algoritmo de Floyd\relax }}{16}{table.caption.9}%
+\contentsline {table}{\numberline {4}{\ignorespaces Tiempos de ejecución (en $\mu $s) del algoritmo de Hanoi\relax }}{18}{table.caption.12}%
+\contentsline {table}{\numberline {5}{\ignorespaces Tiempos de ejecución (en $\mu $s) para algoritmo Floyd (Asus)\relax }}{21}{table.caption.15}%
+\contentsline {table}{\numberline {6}{\ignorespaces Tiempos de ejecución (en $\mu $s) para algoritmo Floyd (HP)\relax }}{22}{table.caption.17}%
+\contentsline {table}{\numberline {7}{\ignorespaces Tiempos de ejecución (en $\mu $s) para algoritmo Floyd (Lenovo)\relax }}{23}{table.caption.19}%
+\contentsline {table}{\numberline {8}{\ignorespaces Tabla de comparación de tiempos de ejecución entre algoritmos de ordenación (Asus)\relax }}{25}{table.caption.21}%
+\contentsline {table}{\numberline {9}{\ignorespaces Tabla de comparación de tiempos de ejecución entre algoritmos de ordenación (HP)\relax }}{26}{table.caption.23}%
+\contentsline {table}{\numberline {10}{\ignorespaces Tabla de comparación de tiempos de ejecución entre algoritmos de ordenación (Lenovo)\relax }}{27}{table.caption.25}%
+\contentsline {table}{\numberline {11}{\ignorespaces Tiempos de ejecución, en $\mu $s, para mejor caso, caso promedio y peor caso (Asus) para Selección\relax }}{29}{table.caption.27}%
+\contentsline {table}{\numberline {12}{\ignorespaces Tiempos de ejecución, en $\mu $s, para mejor caso, caso promedio y peor caso (HP) para Selección\relax }}{30}{table.caption.28}%
+\contentsline {table}{\numberline {13}{\ignorespaces Tiempos de ejecución, en $\mu $s, para mejor caso, caso promedio y peor caso (Lenovo) para Selección\relax }}{30}{table.caption.29}%
+\contentsline {table}{\numberline {14}{\ignorespaces Tiempos de ejecución, en $\mu $s, para mejor caso, caso promedio y peor caso (Asus) para Inserción\relax }}{32}{table.caption.31}%
+\contentsline {table}{\numberline {15}{\ignorespaces Tiempos de ejecución, en $\mu $s, para mejor caso, caso promedio y peor caso (HP) para Inserción\relax }}{33}{table.caption.33}%
+\contentsline {table}{\numberline {16}{\ignorespaces Tiempos de ejecución, en $\mu $s, para mejor caso, caso promedio y peor caso (Lenovo) para Inserción\relax }}{34}{table.caption.35}%
+\contentsline {table}{\numberline {17}{\ignorespaces Funciones de ajuste del algoritmo QuickSort en diferentes equipos\relax }}{36}{table.caption.38}%
+\contentsline {table}{\numberline {18}{\ignorespaces Funciones de ajuste del algoritmo de Inserción en diferentes equipos\relax }}{36}{table.caption.40}%
+\contentsline {table}{\numberline {19}{\ignorespaces Funciones de ajuste del algoritmo de Floyd en diferentes equipos\relax }}{36}{table.caption.42}%
+\contentsline {table}{\numberline {20}{\ignorespaces Funciones de ajuste del algoritmo de Hanoi en diferentes equipos\relax }}{40}{table.caption.44}%

@@ -64,12 +64,21 @@
     \newpage
 
     \begin{abstract}
-		Esto es una prueba
+		En esta práctica hemos analizado teórica y empíricamente la eficiencia de los algoritmos de 
+        ordenación de Inserción, Selección,
+        QuickSort y HeapSort, así como los algoritmos de Floyd y Hanoi. Hemos creado un mecanismo para automatizar
+        la generación de datos experimentales de estos algoritmos, generando automáticamente tablas y datos estadísticos
+        relevantes para su análisis. También hemos comparando los diversos algoritmos de ordenación, concluyendo que
+        los más eficientes son HeapSort y QuickSort, siendo el de selección el peor entre ellos. También hemos
+        analizado ejecuciones con diversos niveles de optimización, concluyendo que la labor del compilador puede llegar
+        a disminuir, en gran medida, el tiempo de ejecución de los algoritmos. 
 	\end{abstract}
 	
     \newpage
 
 	\tableofcontents
+    \newpage
+    \listoftables
 	\newpage
 	\setcounter{page}{1}
 	
@@ -134,14 +143,14 @@
         
         \item \textbf{HP}
         \begin{itemize}
-            \item \textbf{Modelo}: HP Pavilion Gaming Laptop 15-dk0xxx
+            \item \textbf{Modelo}: Pavilion Gaming Laptop 15-dk0xxx
             \item \textbf{Procesador}: Intel(R) Core(TM) i7-9750H CPU @ 2.60GHz
             \item \textbf{Memoria RAM:} 32 GB DDR4
             \item \textbf{Sistema Operativo}: Ubuntu 20.04.4 LTS
         \end{itemize}
     \end{itemize}
     
-
+    \newpage
     \section{Metodología}
 
     Debido a las limitaciones técnicas de estos equipos, para el cálculo de la eficiencia empírica se ha 
@@ -155,7 +164,7 @@
 
     \begin{figure}[H]
         \centering
-        \includegraphics[width=0.9\textwidth]{img/esquema_graphkiller.pdf}
+        \includegraphics[width=0.87\textwidth]{img/esquema_graphkiller.pdf}
         \caption{Esquema del funcionamiento de GraphKiller}
         \label{graph-killer}
     \end{figure}
@@ -171,6 +180,15 @@
         \item \textbf{MainGraph.sh}. Es el guión que articula todos los anteriores. Es el encargado de recibir el ejecutable de un programa y organizar todos los datos y gráficos en la jerarquía de archivos. 
     \end{enumerate}
 
+    Además para poder ejecutar toda la información pedida para unos ciertos valores, los cuales varían para los de ordenación, Floyd y Hanoi, hemos decidido crear un script que directamente
+    ejecute el MainGraph, imponiendo que cada algoritmo se ejecute según los valores expuestos. 
+
+    De esta manera, ha sido fácil ponernos de acuerdo en ejecutar los mismos valores, porque únicamente había que ejecutar
+    los scripts que habíamos elaborado, eliminado el factor de error humano.  
+    
+    En conclusión este script sería como nuestra pólvora que al ejecutarlo nos daría las gráficas, tablas y mejor regresión de cada algoritmo.
+    
+    \newpage
     \section{Eficiencia teórica}
 
     Para el análisis de los siguientes algoritmos se ha empleado la notación $O(.)$. 
@@ -190,11 +208,11 @@
     \begin{itemize}
         \item \textbf{Primer ciclo}
         \begin{equation*}
-            T(n) = \sum_{i=0}^{n/2 + 1} log_2(i) = log_2(k) \in O(nlog(n))
+            T(n) = \sum_{i=1}^{n/2 + 1} \log_2(i) = \log_2((n/2 + 1)!) \leq (n/2+1) \cdot log(n/2+1) \in O(nlog_2(n))
         \end{equation*} 
 
         \item \textbf{Segundo ciclo}
-            $$\sum_{i=2}^{n} \log_2(i) = \log_2(2) + ... + \log_2(n) = \log_2(n!) \in O(n \log_2(n))$$
+            $$\sum_{i=1}^{n-1} \log_2(i) = \log_2(2) + ... + \log_2(n-1) = \log_2((n-1)!) \leq (n-1) \cdot log(n-1) \in O(n \log_2(n))$$
         
         
     \end{itemize}
@@ -209,22 +227,29 @@
     En este apartado, consideramos $n$ como el número de componentes del vector. 
 
     El código del algoritmo comienza en la función quicksort\_lims en la línea 6. Tomaremos inicial 
-    como ñaa posición de comienzo del vector ($inicial = 0$), y final como el siguiente al último elemento, 
-    que coincide con el número de componentes del vector ($final = n$).
+    como posición inicial del vector (inicial = $0$), y final como el siguiente al último elemento, 
+    que coincide con el número de componentes del vector (final = $n$).
+    
     Tenemos una estructura condicional que determina el comportamiento del algoritmo según si el tamaño del vector 
     supera o no un cierto umbral, por lo que el tiempo de ejecución será una función definida a trozos. Si es menor 
     que el umbral, ejecutamos la ordenación con el algoritmo de inserción previamente analizado, que es $O(n^2)$. De lo
     contrario, realizamos la ordenación según el propio algoritmo quicksort. Dicho algoritmo se basa en la técnica de Divide
-    y Vencerás, implementándose de forma recursiva. En primer lugar, se realiza una llamada a la función dividir dividir\_qs, 
+    y Vencerás, implementándose de forma recursiva. 
+    
+    En primer lugar, se realiza una llamada a la función dividir dividir\_qs, 
     cuya eficiencia procedemos a analizar. En las líneas 24-26 y 40-43 tenemos sentencias de asignación que serán despreciadas. 
     Siguiendo código de forma secuencial, en las líneas 27 y 30 tenemos dos bucles do-while, si consideramos el peor caso para 
     el primero (el pivote es mayor que el resto de elemento) tiene eficiencia $O(n)$, y el caso contrario al anterior sería el 
-    más desfavorable para el segundo (el pivote es menor que el resto de los elementos), luego tendríamos $O(n)$. Como el caso más 
+    más desfavorable para el segundo (el pivote es menor que el resto de los elementos), luego tendríamos $O(n)$. 
+    
+    Como el caso más 
     favorable para uno (eficiencia $O(1)$) es el más desfavorable para el otro, aplicando la regla del Máximo tenemos que la 
     eficiencia de la parte del código de los do-while sería $O(n)$.  A continuación, encontramos un bucle while que se ejecuta un 
     número indeterminado de veces en función de la condición, luego podemos acotar estas ejecuciones por una constante c. En las 
     líneas 34-36 tenemos sentencias de asignación que serán ignoradas, y a continuación dos bucles do-while con la misma funcionalidad
-    que los analizados anteriormente. Por tanto, deducimos que la eficiencia del bucle while es $O(n)$, y aplicando la regla del 
+    que los analizados anteriormente. 
+    
+    Por tanto, deducimos que la eficiencia del bucle while es $O(n)$, y aplicando la regla del 
     Máximo con el bloque de código de los bucles do-while obtenemos que la eficiencia de la función es $O(n)$. A continuación hacemos dos llamadas
     recursivas, una que procesará los datos desde el comienzo del mismo hasta la posición en la que hemos ubicado el pivote con la 
     función dividir\_qs, y la otra se encarga de procesar el resto del vector. Por tanto, el tiempo de ejecución sería:
@@ -331,6 +356,8 @@
 
     Deducimos fácilmente que $T(n) \in O(n^3)$. 
     
+    \vspace{2em}
+
     \subsection{Algoritmo Hanoi}
     
     \lstinputlisting[language=C++, firstline=30, lastline=38, caption=Implementación en C++ del algoritmo de resolución de las torres de Hanoi.]{../src/hanoi.cpp} 
@@ -345,6 +372,7 @@
     En consecuencia, deducimos que se trata de la ecuación que 
     modela la recurrencia, lo que nos permite concluir que la eficiencia teórica del algoritmo es $O(2^n)$.
 
+    \newpage
     \section{Eficiencia empírica}
 
     Para esta práctica hemos ejecutado en cada uno de los equipos un algoritmo de cada orden de eficiencia.
@@ -354,9 +382,22 @@
 
     \begin{itemize}
         \item La \textbf{primera columna} es el parámetro respecto al cual se busca la eficiencia del algoritmo.
-        \item Las siguientes columnas $t_{ASUS}$, $t_{HP}$ y $t_{LENOVO}$ indican, respectivamente, el tiempo, en $\mu$s, empleado para ejecutar el algoritmo para el 
-        tamaño considerado por el equipo Asus, HP y Lenovo.
+        \item La columna $t_{ASUS}$ indica el tiempo, en $\mu$s, empleado para ejecutar el algoritmo para el tamaño considerado por el equipo Asus.
+        \item La columna $t_{HP}$ indica el tiempo, en $\mu$s, empleado para ejecutar el algoritmo para el tamaño considerado por el equipo HP.
+        \item La columna $t_{LENOVO}$ indica el tiempo, en $\mu$s, empleado para ejecutar el algoritmo para el tamaño considerado por el equipo Lenovo.
     \end{itemize}
+    
+    En lo que sigue hemos adaptado el mismo orden en todas las tablas, con la finalidad de facilitar su lectura. Las columnas
+    han sido organizadas de forma alfabética, de forma que se pueda localizar de forma aún más rápida. Además,este orden coincide con la potencia de nuestros procesadores,
+    siendo el de más rápido el ASUS y el más lento el Lenovo.
+
+    Asimismo, hemos expuesto cada algoritmo en dos páginas, la primera que consta fundamentalmente de la tabla y
+    de algunas conclusiones y en la segunda se presentan las gráficas experimentales representando los puntos
+    obtenidos tras la ejecución de GraphKiller. 
+
+    Las gráficas se han obtenido mediante la herramienta Gnuplot. Para algunas de ellas también se ha empleado un script
+    para automatizar la generación de ellas, si bien es cierto que hay algunas que, por no ser tan rutinarias y requerir
+    de una única ejecución, se ha optado por realizarlo directamente en la terminal que se muestra para ejecutar gnuplot.
 
     \newpage
 
@@ -376,35 +417,35 @@
                 \text{$N_{componentes}$} & \text{$t_{ASUS}$} & \text{$t_{HP}$} & \text{$t_{LENOVO}$} \\
                 \hline
                 50 & 0.17 & 0.52 & 0.35 \\ 
-                1550 & 6.61 & 15.61 & 15.56 \\ 
-                3050 & 14.03 & 33.35 & 39.12 \\ 
-                4550 & 22.15 & 52.27 & 39.49 \\ 
-                6050 & 30.74 & 69.82 & 61.13 \\ 
-                7550 & 39.04 & 85.79 & 64.00 \\ 
-                9050 & 46.95 & 100.57 & 67.17 \\ 
-                10550 & 56.34 & 118.18 & 77.66 \\ 
-                12050 & 71.14 & 130.55 & 90.32 \\ 
-                13550 & 89.81 & 125.28 & 101.90 \\ 
-                15050 & 88.45 & 141.57 & 119.67 \\ 
-                16550 & 98.56 & 132.63 & 134.65 \\ 
-                18050 & 107.69 & 152.28 & 145.62 \\ 
-                19550 & 117.73 & 162.04 & 150.02 \\ 
-                21050 & 127.28 & 171.59 & 163.49 \\ 
-                22550 & 117.67 & 161.47 & 175.83 \\ 
-                24050 & 115.74 & 159.66 & 187.89 \\ 
-                25550 & 129.62 & 170.87 & 205.24 \\ 
-                27050 & 130.34 & 172.50 & 214.19 \\ 
-                28550 & 137.97 & 168.90 & 228.24 \\ 
-                30050 & 147.05 & 183.77 & 245.48 \\ 
-                31550 & 191.97 & 167.76 & 254.54 \\ 
-                33050 & 191.03 & 194.09 & 269.09 \\ 
-                34550 & 192.52 & 195.92 & 281.52 \\ 
-                36050 & 197.37 & 192.30 & 299.20 \\ 
-                37550 & 210.15 & 217.35 & 326.10 \\ 
-                39050 & 219.80 & 210.98 & 329.71 \\ 
-                40550 & 231.73 & 224.96 & 336.20 \\ 
-                42050 & 238.25 & 252.74 & 346.37 \\ 
-                43550 & 262.80 & 258.55 & 358.76 \\ 
+                1550 & 6.61 & 6.61 & 15.56 \\ 
+                3050 & 14.03 & 12.35 & 39.12 \\ 
+                4550 & 22.15 & 17.27 & 39.49 \\ 
+                6050 & 30.74 & 23.82 & 61.13 \\ 
+                7550 & 39.04 & 34.79 & 64.00 \\ 
+                9050 & 46.95 & 36.57 & 67.17 \\ 
+                10550 & 56.34 & 40.18 & 77.66 \\ 
+                12050 & 71.14 & 50.55 & 90.32 \\ 
+                13550 & 89.81 & 55.28 & 101.90 \\ 
+                15050 & 88.45 & 61.57 & 119.67 \\ 
+                16550 & 98.56 & 70.63 & 134.65 \\ 
+                18050 & 107.69 & 75.28 & 145.62 \\ 
+                19550 & 117.73 & 80.04 & 150.02 \\ 
+                21050 & 127.28 & 85.59 & 163.49 \\ 
+                22550 & 117.67 & 90.47 & 175.83 \\ 
+                24050 & 115.74 & 100.66 & 187.89 \\ 
+                25550 & 129.62 & 110.87 & 205.24 \\ 
+                27050 & 130.34 & 117.50 & 214.19 \\ 
+                28550 & 137.97 & 123.90 & 228.24 \\ 
+                30050 & 147.05 & 131.77 & 245.48 \\ 
+                31550 & 191.97 & 137.76 & 254.54 \\ 
+                33050 & 191.03 & 142.09 & 269.09 \\ 
+                34550 & 192.52 & 153.92 & 281.52 \\ 
+                36050 & 197.37 & 160.30 & 299.20 \\ 
+                37550 & 210.15 & 167.35 & 326.10 \\ 
+                39050 & 219.80 & 170.98 & 329.71 \\ 
+                40550 & 231.73 & 180.96 & 336.20 \\ 
+                42050 & 238.25 & 188.74 & 346.37 \\ 
+                43550 & 262.80 & 200.55 & 358.76 \\ 
                 \hline
             \end{tabular}
         \caption{Tiempos de ejecución (en $\mu$s) del algoritmo de QuickSort}
@@ -620,7 +661,7 @@
             26 & 6642.10 & 6844.50 & 9232.04 \\ 
             \hline
         \end{tabular}
-        \caption{Tiempos de ejecución (en $\mu$s) del algoritmo de Floyd}
+        \caption{Tiempos de ejecución (en $\mu$s) del algoritmo de Hanoi}
     \end{table}
 
     Verificando los resultados obtenidos en los análisis anteriores, para el algoritmo de hanoi, ASUS ofrece unos mejores 
@@ -653,9 +694,10 @@
         \label{emp:hanoi}
     \end{figure}
 
+    \newpage
     \section{Comparación de ejecuciones con diferentes niveles de optimización}
 
-    \subsection{Conceptos teóricas}
+    \subsection{Conceptos teóricos}
 
     A continuación, usaremos el algoritmo de Floyd para ilustrar uno de los objetivos mencionados de la práctica, 
     el cual consiste en analizar la eficiencia de un mismo algoritmo para optimizaciones del compilador diferentes.
@@ -808,6 +850,8 @@
         \caption{Gráfica de tiempos de ejecución (Lenovo)}
     \end{figure}
 
+    \vspace{3cm}
+
     \subsection{Observaciones}
 
     Observando las gráficas se puede apreciar que, para pequeños valores del número de nodos, las diferencias entre los
@@ -820,16 +864,14 @@
     para grandes valores la optimización sí que puede aumentar considerablemente los tiempos de ejecución. Se trata, por
     consiguiente, de un buen mecanismo de optimización del código. 
 
-
+    \newpage
     \section{Comparación de los algoritmos de ordenación}
 
     \subsection{Objetivos}
 
     En esta sección compararemos los algoritmos de ordenación presentados previamente. El objetivo será
-    sacar conclusiones relevantes relacionados con la adecuación de cada algoritmo a cada situación. 
-
-    A continuación se presentan los tiempos de ejecución de cada algoritmo en cada equipo en los que se ha realizado
-    esta experiencia. 
+    sacar conclusiones relevantes relacionados con la adecuación de cada algoritmo a cada situación. Los datos de ejecución
+    se presentan a continuación:
 
     \begin{table}[H]
         \footnotesize
@@ -873,6 +915,13 @@
         \caption{Tabla de comparación de tiempos de ejecución entre algoritmos de ordenación (Asus)}
     \end{table}
 
+    \begin{figure}[H]
+        \centering
+        \label{asus:orden}
+        \includegraphics[width=0.5\textwidth]{../data/asus-orden-todos.pdf}
+        \caption{Gráfico de comparación de algoritmos de ordenación (ASUS)}
+    \end{figure}
+
     \begin{table}[H]
         \footnotesize
         \centering
@@ -880,40 +929,47 @@
             \hline
             $N_{componentes}$ & $T_{\text{quick}}$ & $T_{\text{heap}}$ & $T_{\text{ins}}$ & $T_{\text{sel}}$ \\
             \hline
-            50 & 0.20 & 0.22 & 0.18 & 0.26 \\ 
-            1550 & 5.24 & 7.20 & 65.22 & 93.16 \\ 
-            3050 & 12.84 & 15.26 & 321.24 & 365.10 \\ 
-            4550 & 24.10 & 26.14 & 647.40 & 940.48 \\ 
-            6050 & 46.02 & 48.90 & 1036.40 & 1488.90 \\ 
-            7550 & 64.02 & 71.06 & 1618.74 & 2126.38 \\ 
-            9050 & 126.04 & 110.92 & 2280.68 & 3021.74 \\ 
-            10550 & 164.94 & 153.54 & 3017.28 & 4092.94 \\ 
-            12050 & 193.14 & 177.70 & 4005.42 & 5308.02 \\ 
-            13550 & 222.10 & 204.18 & 5016.44 & 6881.72 \\ 
-            15050 & 247.66 & 228.52 & 6221.24 & 8541.68 \\ 
-            16550 & 271.48 & 251.66 & 7543.96 & 10907.70 \\ 
-            18050 & 297.54 & 277.96 & 8895.32 & 12371.38 \\ 
-            19550 & 313.38 & 304.58 & 10479.46 & 13904.10 \\ 
-            21050 & 325.40 & 331.72 & 12000.74 & 16005.40 \\ 
-            22550 & 268.34 & 355.20 & 13841.24 & 19573.20 \\ 
-            24050 & 243.04 & 533.96 & 15701.64 & 20729.80 \\ 
-            25550 & 301.44 & 256.20 & 17659.94 & 23292.68 \\ 
-            27050 & 375.30 & 190.04 & 19860.74 & 28970.88 \\ 
-            28550 & 464.68 & 201.76 & 22197.46 & 30344.76 \\ 
-            30050 & 483.46 & 212.80 & 24393.30 & 34703.62 \\ 
-            31550 & 518.08 & 229.00 & 27505.86 & 37670.52 \\ 
-            33050 & 521.66 & 352.70 & 30478.94 & 38029.22 \\ 
-            34550 & 549.56 & 404.38 & 33168.82 & 41404.42 \\ 
-            36050 & 469.90 & 405.24 & 35869.34 & 44965.98 \\ 
-            37550 & 490.40 & 294.02 & 39764.76 & 48548.56 \\ 
-            39050 & 492.92 & 306.16 & 42636.54 & 52687.52 \\ 
-            40550 & 531.98 & 320.70 & 46448.22 & 56478.82 \\ 
-            42050 & 532.06 & 383.94 & 50855.00 & 60501.86 \\ 
-            43550 & 558.84 & 331.54 & 54694.44 & 68268.24 \\ 
+            50 & 0.52 & 0.22 & 0.18 & 0.26 \\ 
+            1550 & 6.61 & 7.20 & 65.22 & 93.16 \\ 
+            3050 & 12.35 & 15.26 & 321.24 & 365.10 \\ 
+            4550 & 17.27 & 26.14 & 647.40 & 940.48 \\ 
+            6050 & 23.82 & 48.90 & 1036.40 & 1488.90 \\ 
+            7550 & 34.79 & 71.06 & 1618.74 & 2126.38 \\ 
+            9050 & 36.57 & 110.92 & 2280.68 & 3021.74 \\ 
+            10550 & 40.18 & 153.54 & 3017.28 & 4092.94 \\ 
+            12050 & 50.55 & 177.70 & 4005.42 & 5308.02 \\ 
+            13550 & 55.28 & 204.18 & 5016.44 & 6881.72 \\ 
+            15050 & 61.57 & 228.52 & 6221.24 & 8541.68 \\ 
+            16550 & 70.63 & 251.66 & 7543.96 & 10907.70 \\ 
+            18050 & 75.28 & 277.96 & 8895.32 & 12371.38 \\ 
+            19550 & 80.04 & 304.58 & 10479.46 & 13904.10 \\ 
+            21050 & 85.59 & 331.72 & 12000.74 & 16005.40 \\ 
+            22550 & 90.47 & 355.20 & 13841.24 & 19573.20 \\ 
+            24050 & 100.66 & 533.96 & 15701.64 & 20729.80 \\ 
+            25550 & 110.87 & 256.20 & 17659.94 & 23292.68 \\ 
+            27050 & 117.50 & 190.04 & 19860.74 & 28970.88 \\ 
+            28550 & 123.90 & 201.76 & 22197.46 & 30344.76 \\ 
+            30050 & 131.77 & 212.80 & 24393.30 & 34703.62 \\ 
+            31550 & 137.76 & 229.00 & 27505.86 & 37670.52 \\ 
+            33050 & 142.09 & 352.70 & 30478.94 & 38029.22 \\ 
+            34550 & 153.92 & 404.38 & 33168.82 & 41404.42 \\ 
+            36050 & 160.30 & 405.24 & 35869.34 & 44965.98 \\ 
+            37550 & 167.35 & 294.02 & 39764.76 & 48548.56 \\ 
+            39050 & 170.98 & 306.16 & 42636.54 & 52687.52 \\ 
+            40550 & 180.96 & 320.70 & 46448.22 & 56478.82 \\ 
+            42050 & 188.74 & 383.94 & 50855.00 & 60501.86 \\ 
+            43550 & 200.55 & 331.54 & 54694.44 & 68268.24 \\ 
             \hline
         \end{tabular}
         \caption{Tabla de comparación de tiempos de ejecución entre algoritmos de ordenación (HP)}
     \end{table}
+
+    \begin{figure}[H]
+        \centering
+        \label{hp:orden}
+        \includegraphics[width=0.7\textwidth]{../data/hp_orden-todos.pdf}
+        \caption{Gráfico de comparación de algoritmos de ordenación (HP)}
+    \end{figure}
 
     \begin{table}[H]
         \footnotesize
@@ -958,25 +1014,16 @@
 
     \end{table}
 
-    A continuación se presentan todas y cada una de las gráficas asociadas a las tablas anteriores:
-
     \begin{figure}[H]
         \centering
-         \subfloat[ASUS]{
-          \label{asus:orden}
-           \includegraphics[width=0.7\textwidth]{../data/asus-orden-todos.pdf}}
-
-         \subfloat[HP]{
-          \label{hp:orden}
-           \includegraphics[width=0.7\textwidth]{../data/hp_orden-todos.pdf}}
-
-         \subfloat[LENOVO]{
-          \label{lenovo:orden}
-           \includegraphics[width=0.7\textwidth]{../data/lenovo-orden-todos.pdf}}
-        \caption{Comparación de los algoritmos de ordenación.}
-
-        \label{orden}
+        \label{lenovo:orden}
+           \includegraphics[width=0.7\textwidth]{../data/lenovo-orden-todos.pdf}
+        \caption{Gráfico de comparación de algoritmos de ordenación (Lenovo)}
     \end{figure}
+
+    \vspace{2cm}
+
+    \subsection{Conclusiones}
     
     De las gráficas extraídas anteriores, podemos sacar las siguientes conclusiones:
     
@@ -984,8 +1031,11 @@
         \item Para grandes valores de componentes de vector, los algoritmos de HeapSort y QuickSort presentan un muy buen comportamiento.
         \item Los algoritmos de inserción y de selección ofrecen peor rendimiento respecto a QuickSort y HeapSort (su orden de eficiencia es mayor).
         \item Para tamaños pequeños, las diferencias entre los cuatro algoritmos son prácticamente despreciables, por lo que su uso debería optarse más por la facilidad de implementación de dichos algoritmos. 
+        \item El mínimo valor $n_0$ a partir del cual el tiempo de ejecución de los algoritmos de Inserción y de Selección superan a los de QuickSort y HeapSort es tan pequeño que es despreciable. 
+              La mejor cota que tenemos, teniendo en cuenta los datos obtenidos, es que $n_0 \leq 5$. 
     \end{itemize}
 
+    \newpage
     \section{Eficiencia de mejor y peor caso en los algoritmos de Inserción y Selección}
 
     El número de operaciones elementales que se realizan en cada uno de los algoritmos que hemos analizado fluctúan 
@@ -1002,17 +1052,150 @@
     2 proceden del mejor y peor caso para Inserción y 2 proceden del análogo para Selección. El único cambio con respecto a los originales es que,
     en lugar de inicializar los vectores con valores aleatorios, se ha optado por inicializar los valores con un cierto orden.
 
-    \subsection{Resultados experimentales}
+    \subsection{Resultados para Selección}
 
     Realizando lo expuesto en la subsección anterior, obtenemos las siguientes tablas y gráficas:
 
     \begin{table}[H] 
         \footnotesize
-        \centering
-        \begin{tabular}{|r|r|r|r|}
+        \centering 
+        \begin{tabular}{|r|r|r|r|} 
                 \hline
                 $N_{\text{componentes}}$ & $T_{\text{mejor}}$ & $T_{\text{prom}}$ & $T_{\text{peor}}$ \\
+                \hline 
+                5 & 0.00 & 0.00 & 0.00 \\ 
+                1807 & 79.25 & 0.00 & 98.34 \\ 
+                3609 & 302.46 & 405.64 & 384.96 \\ 
+                5410 & 675.37 & 887.38 & 859.75 \\ 
+                7212 & 1200.41 & 1743.89 & 1557.07 \\ 
+                9014 & 1865.43 & 2516.84 & 2434.85 \\ 
+                10816 & 2680.60 & 3478.01 & 3537.88 \\ 
+                12618 & 3647.47 & 4687.76 & 4825.15 \\ 
+                14419 & 4768.91 & 6069.77 & 6297.90 \\ 
+                16221 & 6045.11 & 7622.48 & 8010.68 \\ 
+                18023 & 7531.93 & 9379.73 & 9880.52 \\ 
+                19825 & 9108.94 & 11353.25 & 11988.52 \\ 
+                21627 & 10741.06 & 13419.11 & 14093.90 \\ 
+                23428 & 12711.52 & 15720.16 & 16495.94 \\ 
+                25230 & 14687.18 & 18222.62 & 19253.56 \\ 
+                27032 & 16892.80 & 20890.26 & 21942.20 \\ 
+                28834 & 19175.36 & 23723.39 & 25006.22 \\ 
+                30636 & 21719.94 & 26674.83 & 28337.50 \\ 
+                32437 & 24472.16 & 29887.24 & 31665.06 \\ 
+                34239 & 27386.98 & 33262.06 & 35232.64 \\ 
+                36041 & 30492.62 & 36738.72 & 39015.58 \\ 
+                37843 & 33498.48 & 40416.56 & 43223.80 \\ 
+                39645 & 36693.26 & 44399.06 & 46602.86 \\ 
+                41446 & 40339.20 & 48514.63 & 52053.40 \\ 
+                43248 & 43518.48 & 52767.88 & 56047.84 \\ 
                 \hline
+        \end{tabular}
+        \caption{Tiempos de ejecución, en $\mu$s, para mejor caso, caso promedio y peor caso (Asus) para Selección}
+    \end{table}
+
+    \begin{table}[H]  
+        \footnotesize
+        \centering 
+        \begin{tabular}{|r|r|r|r|} 
+                \hline
+                $N_{\text{componentes}}$ & $T_{\text{mejor}}$ & $T_{\text{prom}}$ & $T_{\text{peor}}$ \\
+                \hline 
+                5 & 0.00 & 0.27 & 0.00 \\ 
+                1807 & 81.88 & 185.57 & 98.44 \\ 
+                3609 & 299.37 & 405.56 & 382.95 \\ 
+                5410 & 666.19 & 759.16 & 833.96 \\ 
+                7212 & 1180.31 & 1299.40 & 1560.20 \\ 
+                9014 & 1838.74 & 2023.15 & 2366.31 \\ 
+                10816 & 2633.29 & 2888.28 & 3409.86 \\ 
+                12618 & 3621.99 & 3895.39 & 4683.23 \\ 
+                14419 & 4697.33 & 5041.98 & 6225.67 \\ 
+                16221 & 5960.55 & 6419.54 & 7742.75 \\ 
+                18023 & 7381.49 & 7817.24 & 9606.92 \\ 
+                19825 & 8863.69 & 9484.57 & 11652.02 \\ 
+                21627 & 10595.90 & 11190.25 & 13908.20 \\ 
+                23428 & 12586.80 & 13528.89 & 16252.36 \\ 
+                25230 & 14547.82 & 15233.13 & 18808.90 \\ 
+                27032 & 16827.08 & 17896.47 & 21556.08 \\ 
+                28834 & 18727.16 & 20459.99 & 24526.54 \\ 
+                30636 & 21006.00 & 22972.99 & 27535.92 \\ 
+                32437 & 24335.62 & 25952.09 & 31420.60 \\ 
+                34239 & 26681.66 & 28747.80 & 34310.92 \\ 
+                36041 & 29371.66 & 32063.87 & 38313.74 \\ 
+                37843 & 32222.40 & 35024.40 & 42054.72 \\ 
+                39645 & 36061.04 & 38526.17 & 46150.84 \\ 
+                41446 & 38442.32 & 40342.34 & 50428.50 \\ 
+                43248 & 42317.56 & 43836.76 & 54598.72 \\ 
+                \hline
+        \end{tabular}
+        \caption{Tiempos de ejecución, en $\mu$s, para mejor caso, caso promedio y peor caso (HP) para Selección}
+    \end{table}
+    
+    \begin{table}[H] 
+        \footnotesize
+        \centering 
+        \begin{tabular}{|r|r|r|r|} 
+                \hline
+                $N_{\text{componentes}}$ & $T_{\text{mejor}}$ & $T_{\text{prom}}$ & $T_{\text{peor}}$ \\
+                \hline 
+                5 & 0.01 & 0.34 & 0.01 \\ 
+                1807 & 103.81 & 150.44 & 171.49 \\ 
+                3609 & 400.53 & 517.39 & 614.91 \\ 
+                5410 & 901.48 & 1151.71 & 1285.29 \\ 
+                7212 & 1585.44 & 1969.91 & 2257.48 \\ 
+                9014 & 2439.11 & 3044.82 & 3508.66 \\ 
+                10816 & 3507.38 & 4373.70 & 5469.91 \\ 
+                12618 & 6351.07 & 5785.53 & 6511.67 \\ 
+                14419 & 9539.37 & 8933.87 & 8316.04 \\ 
+                16221 & 12871.88 & 13236.58 & 10245.76 \\ 
+                18023 & 16066.20 & 16256.42 & 14119.60 \\ 
+                19825 & 16408.68 & 19545.66 & 17634.96 \\ 
+                21627 & 15898.44 & 23262.00 & 19388.48 \\ 
+                23428 & 17792.22 & 27114.96 & 22325.86 \\ 
+                25230 & 22375.98 & 31358.34 & 24608.56 \\ 
+                27032 & 27522.92 & 35875.34 & 29260.34 \\ 
+                28834 & 28345.80 & 41767.30 & 36356.38 \\ 
+                30636 & 34513.84 & 50257.00 & 42236.38 \\ 
+                32437 & 38301.70 & 57776.30 & 40649.10 \\ 
+                34239 & 39776.68 & 62347.18 & 43645.96 \\ 
+                36041 & 40343.58 & 63689.96 & 48861.26 \\ 
+                37843 & 49479.62 & 70027.92 & 53424.64 \\ 
+                39645 & 50629.40 & 83165.06 & 59130.00 \\ 
+                41446 & 56755.30 & 91810.12 & 67432.92 \\ 
+                43248 & 61439.84 & 78691.24 & 79293.06 \\ 
+                \hline
+        \end{tabular}
+        \caption{Tiempos de ejecución, en $\mu$s, para mejor caso, caso promedio y peor caso (Lenovo) para Selección}
+    \end{table}
+
+    \begin{figure}[H]
+        \centering
+         \subfloat[ASUS]{
+          \label{asus:seleccion-mp}
+           \includegraphics[width=0.63\textwidth]{../data/asus-seleccion-mp.pdf}}
+
+         \subfloat[HP]{
+          \label{hp:seleccion-mp}
+           \includegraphics[width=0.63\textwidth]{../data/hp-seleccion-mp.pdf}}
+
+         \subfloat[LENOVO]{
+          \label{lenovo:seleccion-mp}
+           \includegraphics[width=0.63\textwidth]{../data/lenovo-seleccion-mp.pdf}}
+        \caption{Gráficas de regresión de los algoritmos de Selección para caso peor, mejor y promedio.}
+
+        \label{mp:seleccion}
+    \end{figure}
+
+    \subsection{Resultados para Inserción}
+    
+    En esta parte presentamos también los datos experimentales para el algoritmo de selección.
+
+    \begin{table}[H] 
+        \footnotesize
+        \centering 
+        \begin{tabular}{|r|r|r|r|} 
+                \hline
+                $N_{\text{componentes}}$ & $T_{\text{mejor}}$ & $T_{\text{prom}}$ & $T_{\text{peor}}$ \\
+                \hline 
                 5 & 0.04 & 0.20 & 0.06 \\ 
                 1807 & 0.28 & 75.77 & 225.06 \\ 
                 3609 & 0.48 & 256.80 & 791.98 \\ 
@@ -1043,16 +1226,174 @@
         \caption{Tiempos de ejecución, en $\mu$s, para mejor caso, caso promedio y peor caso (Asus) para Inserción}
     \end{table}
 
-    \section{Eficiencia híbrida}
+    En la siguiente gráfica se puede observar bien los datos obtenidos en la tabla anterior:
+
+    \begin{figure}[H]
+        \centering
+        \label{asus:insercion-mp}
+        \includegraphics[width=0.67\textwidth]{../data/asus-insercion-mp.pdf}
+        \caption{Gráfico de mejor caso, caso promedio y peor caso del algoitmo de Inserción (ASUS)}
+    \end{figure}
+
+    \begin{table}[H] 
+        \footnotesize
+        \centering 
+        \begin{tabular}{|r|r|r|r|} 
+                \hline
+                $N_{\text{componentes}}$ & $T_{\text{mejor}}$ & $T_{\text{prom}}$ & $T_{\text{peor}}$ \\
+                \hline  
+                5 & 0.08 & 0.18 & 0.10 \\ 
+                1807 & 0.26 & 165.44 & 183.66 \\ 
+                3609 & 0.42 & 378.04 & 760.00 \\ 
+                5410 & 0.80 & 586.46 & 1701.78 \\ 
+                7212 & 1.54 & 1038.65 & 3031.90 \\ 
+                9014 & 1.92 & 1571.11 & 4605.94 \\ 
+                10816 & 2.54 & 2257.82 & 6818.84 \\ 
+                12618 & 4.02 & 3038.05 & 9111.40 \\ 
+                14419 & 5.08 & 3987.64 & 11713.16 \\ 
+                16221 & 5.72 & 5034.40 & 14577.46 \\ 
+                18023 & 6.26 & 6111.62 & 17373.86 \\ 
+                19825 & 6.90 & 7329.81 & 20950.86 \\ 
+                21627 & 8.96 & 8700.77 & 24953.08 \\ 
+                23428 & 9.72 & 10203.49 & 29744.30 \\ 
+                25230 & 10.06 & 11768.61 & 34166.00 \\ 
+                27032 & 10.16 & 13507.03 & 38739.54 \\ 
+                28834 & 9.90 & 15368.75 & 43993.08 \\ 
+                30636 & 11.04 & 17377.42 & 49710.12 \\ 
+                32437 & 12.44 & 19877.53 & 55729.26 \\ 
+                34239 & 13.04 & 22049.19 & 62191.36 \\ 
+                36041 & 13.48 & 24031.41 & 70366.98 \\ 
+                37843 & 14.12 & 26888.22 & 77407.66 \\ 
+                39645 & 14.70 & 29816.95 & 83067.28 \\ 
+                41446 & 15.42 & 32544.47 & 92339.86 \\ 
+                43248 & 15.78 & 34468.33 & 100877.78 \\ 
+                \hline
+        \end{tabular}
+        \caption{Tiempos de ejecución, en $\mu$s, para mejor caso, caso promedio y peor caso (HP) para Inserción}
+    \end{table}
+
+    \begin{figure}[H]
+        \centering
+        \label{hp:insercion-mp}
+        \includegraphics[width=0.67\textwidth]{../data/hp-insercion-mp.pdf}
+        \caption{Gráfico de mejor caso, caso promedio y peor caso del algoitmo de Inserción (HP)}
+    \end{figure}
+
+    \begin{table}[H] 
+        \footnotesize
+        \centering 
+        \begin{tabular}{|r|r|r|r|} 
+                \hline
+                $N_{\text{componentes}}$ & $T_{\text{mejor}}$ & $T_{\text{prom}}$ & $T_{\text{peor}}$ \\
+                \hline  
+                5 & 0.10 & 0.32 & 0.10 \\ 
+                1807 & 0.36 & 113.40 & 303.50 \\ 
+                3609 & 0.56 & 416.61 & 1108.16 \\ 
+                5410 & 0.98 & 818.87 & 2334.58 \\ 
+                7212 & 1.54 & 1318.29 & 3649.72 \\ 
+                9014 & 1.76 & 2040.42 & 6012.42 \\ 
+                10816 & 2.08 & 2893.16 & 8292.62 \\ 
+                12618 & 2.52 & 3937.94 & 11154.14 \\ 
+                14419 & 2.56 & 5111.43 & 14570.74 \\ 
+                16221 & 2.84 & 6412.50 & 18535.08 \\ 
+                18023 & 3.20 & 7911.75 & 22866.82 \\ 
+                19825 & 4.60 & 9605.05 & 27608.30 \\ 
+                21627 & 4.14 & 11396.08 & 32934.78 \\ 
+                23428 & 4.04 & 13402.47 & 38583.14 \\ 
+                25230 & 4.58 & 15511.25 & 45127.84 \\ 
+                27032 & 4.66 & 17763.31 & 54124.70 \\ 
+                28834 & 5.40 & 20213.18 & 63231.04 \\ 
+                30636 & 5.76 & 22797.11 & 68667.92 \\ 
+                32437 & 5.76 & 25575.44 & 74045.08 \\ 
+                34239 & 6.14 & 28426.29 & 82508.38 \\ 
+                36041 & 6.16 & 31521.96 & 98212.32 \\ 
+                37843 & 6.48 & 34782.56 & 103327.70 \\ 
+                39645 & 6.80 & 38191.71 & 110208.00 \\ 
+                41446 & 8.20 & 41713.63 & 120605.40 \\ 
+                43248 & 7.56 & 45353.92 & 130914.20 \\ 
+                \hline
+        \end{tabular}
+        \caption{Tiempos de ejecución, en $\mu$s, para mejor caso, caso promedio y peor caso (Lenovo) para Inserción}
+    \end{table}
+
+    \begin{figure}[H]
+        \centering
+        \label{lenovo:insercion-mp}
+           \includegraphics[width=0.67\textwidth]{../data/lenovo-insercion-mp.pdf}
+        \caption{Gráfico de mejor caso, caso promedio y peor caso del algoitmo de Inserción (Lenovo)}
+    \end{figure}
+
+    \subsection{Análisis}
+
+    Como podemos observar, como cabía esperar el caso promedio se sitúa entre el mejor y el peor caso de ejecución
+    de los algoritmos. Vemos que tanto el mejor y el peor caso tienen el mismo orden de eficiencia que el caso promedio
+    por lo que para el análisis teórico anterior podríamos haber incluso empleado la notación $\theta (n)$ (si bien no
+    se ha incluido para evitar hacer esta memoria demasiado larga). 
+    
+    También es un hecho destacable que, en el caso del algoritmo de Inserción, el mejor caso presenta un muy buen
+    comportamiento en el mejor caso, pero para el peor caso se ralentiza considerablemente, puesto que presenta
+    un tiempo de ejecución muy superior al algoritmo de Selección. En el caso promedio ambos presentan un comportamiento
+    muy parecido, por lo podemos extraer las siguientes conclusiones:
+    
+    \begin{itemize}
+        \item Para situaciones en los que es más probable que se presenten los datos ordenados en orden creciente, tenemos que el algoritmo óptimo es Inserción.
+        \item Para situaciones en los que es más probable encontrar datos desordenados, ambos algoritmos se comportan de forma similar. 
+        \item Cuando se ejecute el algoritmo Inserción, es más conveniente comprobar previamente que la estructura de datos no esté ordenado en forma decreciente.
+    \end{itemize}
+    
+    En cualquier caso, para pequeños valores de los componentes de los vectores la diferencia en rendimiento es prácticamente despreciable, por
+    lo que ambos algoritmos son igual de válidos para estas situaciones y debería prevalecer más otros factores ajenos a su eficiencia.
+
+    \newpage
+    \section{Eficiencia híbrida} 
     
     En esta sección trataremos los datos obtenidos de la sección anterior mediante técnicas estadísticas para
     comprobar la consistencia de los datos experimentales con los calculados teóricamente. 
 
+    \subsection{Algoritmo QuickSort}
+
+    Las gráficas con las curvas de regresión son las que se obtienen en las imágenes \ref{hib:quicksort}.
+
+    \begin{figure}
+        \centering
+         \subfloat[ASUS]{
+          \label{asus:quicksort-hib}
+           \includegraphics[width=0.7\textwidth]{../data/asus/quicksort-graph.pdf}}
+
+         \subfloat[HP]{
+          \label{hp:quicksort-hib}
+           \includegraphics[width=0.7\textwidth]{../data/hp/quicksort-graph.pdf}}
+
+         \subfloat[LENOVO]{  
+          \label{lenovo:quicksort-hib}
+           \includegraphics[width=0.7\textwidth]{../data/lenovo/quicksort-graph.pdf}}
+        \caption{Gráficas de regresión de los algoritmos de QuickSort.}
+
+        \label{hib:quicksort}
+    \end{figure}
+
+    De acuerdo con lo calculado previamente, veamos si la regresión superlineal es un buen ajuste. Mediante técnicas estadísticas
+    obtenemos los siguientes valores de regresión en cada uno de los equipos:
+
+    \begin{table}[H]
+        \centering
+        \begin{tabular}{|c|c|c|}
+            \hline
+            Equipo & Función de regresión & Coeficiente de determinación \\
+            \hline
+            Asus & $5.10 \cdot 10^{-4} x \log(x) + 5.112$ & $0.9798$ \\
+            HP & $3.66 \cdot 10^{-4} x \log(x) + 50$ & $0.9957$ \\
+            Lenovo & $7.72 \cdot 10^{-4} x \log(x) + 5.423$ & $0.9969$ \\
+            \hline
+        \end{tabular}
+        \caption{Funciones de ajuste del algoritmo QuickSort en diferentes equipos}
+    \end{table}
+
     \subsection{Algoritmo de inserción}
 
-    Las gráficas con las curvas de regresión son las siguientes:
+    Las gráficas con las curvas de regresión son las que se obtienen en las imágenes \ref{hib:insercion}.
 
-    \begin{figure}[H]
+    \begin{figure}
         \centering
          \subfloat[ASUS]{
           \label{asus:insercion-hib}
@@ -1078,58 +1419,37 @@
             \hline
             Equipo & Función de regresión & Coeficiente de determinación \\
             \hline
-            Asus & $2.7192 10^{-5} x^2 - 0.00212952 x + 22.2497$ & $1.0000$ \\
-            HP & $2.69268 10^{-5} x^2 - 0.0250169 x + 353.105$ &  $1.0000$ \\
-            Lenovo & $3.48955 10^{-5} x^{2} - 0.000620098 x + 48.0855$ & $1.0000$ \\
+            Asus & $2.7192 \cdot 10^{-5} x^2 - 0.00212952 x + 22.2497$ & $1.0000$ \\
+            HP & $2.69268 \cdot 10^{-5} x^2 - 0.0250169 x + 353.105$ &  $1.0000$ \\
+            Lenovo & $3.48955 \cdot 10^{-5} x^{2} - 0.000620098 x + 48.0855$ & $1.0000$ \\
             \hline
         \end{tabular}
         \caption{Funciones de ajuste del algoritmo de Inserción en diferentes equipos}
-    \end{table}
+    \end{table} 
 
     Por tanto, como en los tres casos el coeficiente de determinación es 1, el ajuste para el algoritmo de Inserción 
     usando una función cuadrática es perfecto.
 
-    \subsection{Algoritmo QuickSort}
-
-    De acuerdo con lo calculado previamente, veamos si la regresión superlineal es un buen ajuste. Mediante técnicas estadísticas
-    obtenemos los siguientes valores de regresión en cada uno de los equipos:
-
-    \begin{table}[H]
-        \centering
-        \begin{tabular}{|c|c|c|}
-            \hline
-            Equipo & Función de regresión & Coeficiente de determinación \\
-            \hline
-            Asus & $5,21 10^{-4} x \log(x) + 5.112$ & $0.9798$ \\
-            HP & $3,65 10^{-4} x \log(x) + 50$ & $0.7599$ \\
-            Lenovo & $7.72 10^{-4} x \log(x) + 5.423$ & $0.9969$ \\
-            \hline
-        \end{tabular}
-        \caption{Funciones de ajuste del algoritmo QuickSort en diferentes equipos}
-    \end{table}
-    
-    Las gráficas de regresión, así como los puntos experimentales obtenidos se pueden apreciar en las siguientes gráficas:
-
     \subsection{Algoritmo Floyd}
 
-    Las gráficas con las curvas de regresión son las siguientes:
+    Las gráficas con las curvas de regresión son las que se obtienen en las imágenes \ref{hib:floyd}.
 
-    \begin{figure}[H]
+    \begin{figure}
         \centering
          \subfloat[ASUS]{
-          \label{asus:insercion-hib}
+          \label{asus:floyd-hib}
            \includegraphics[width=0.7\textwidth]{../data/asus/floyd-graph.pdf}}
 
          \subfloat[HP]{
-          \label{hp:insercion-hib}
+          \label{hp:floyd-hib}
            \includegraphics[width=0.7\textwidth]{../data/hp/floyd-graph.pdf}}
 
-         \subfloat[LENOVO]{
-          \label{lenovo:insercion-hib}
+         \subfloat[LENOVO]{  
+          \label{lenovo:floyd-hib}
            \includegraphics[width=0.7\textwidth]{../data/lenovo/floyd-graph.pdf}}
         \caption{Gráficas de regresión de los algoritmos de Floyd.}
 
-        \label{hib:insercion}
+        \label{hib:floyd}
     \end{figure}
 
     Para cada una de ellas se han obtenido los siguientes datos:
@@ -1140,9 +1460,9 @@
             \hline
             Equipo & Función de regresión & Coeficiente de determinación \\
             \hline
-            Asus & $5.57676 10^{-5} x^3 + 0.00138722 x^2 - 0.315202 x + 34.0467$ & $1.0000$ \\
-            HP & $5.96848 10^{-5} x^3 - 0.00353189 x^2 + 1.17214 x - 20.9986$ & $0.9997$ \\
-            Lenovo & $6.96669 10^{-5} x^3 + 0.00112974 x^2 - 0.00362409 x + 0.857106$ & $1.0000$ \\
+            Asus & $5.57676 \cdot 10^{-5} x^3 + 0.00138722 x^2-0.315202 x + 34.0467$ & $1.0000$ \\
+            HP & $5.96848 \cdot 10^{-5} x^3 - 0.00353189 x^2 + 1.17214 x - 20.9986$ & $0.9997$ \\
+            Lenovo & $6.96669 \cdot 10^{-5} x^3 + 0.00112974 x^2 - 0.00362409 x + 0.857106$ & $1.0000$ \\
             \hline
         \end{tabular}
         \caption{Funciones de ajuste del algoritmo de Floyd en diferentes equipos}
@@ -1151,8 +1471,96 @@
     Por tanto, como en los tres casos el coeficiente de determinación es 1, el ajuste para el algoritmo Floyd 
     usando una función cúbica es perfecto.
 
+    \subsection{Algoritmo Hanoi}
+
+    Las gráficas con las curvas de regresión son las que se obtienen en las imágenes \ref{hib:hanoi}.
+
+    \begin{figure}
+        \centering
+         \subfloat[ASUS]{
+          \label{asus:hanoi-hib}
+           \includegraphics[width=0.7\textwidth]{../data/asus/hanoi-graph.pdf}}
+
+         \subfloat[HP]{
+          \label{hp:hanoi-hib}
+           \includegraphics[width=0.7\textwidth]{../data/hp/hanoi-graph.pdf}}
+
+         \subfloat[LENOVO]{  
+          \label{lenovo:hanoi-hib}
+           \includegraphics[width=0.7\textwidth]{../data/lenovo/hanoi-graph.pdf}}
+        \caption{Gráficas de regresión de los algoritmos de Floyd.}
+
+        \label{hib:hanoi}
+    \end{figure}
+
+    Para cada una de ellas se han obtenido los siguientes datos:
+
+    \begin{table}[H]
+        \centering
+        \begin{tabular}{|c|c|c|}
+            \hline
+            Equipo & Función de regresión & Coeficiente de determinación \\
+            \hline
+            Asus & $0.00231633 \cdot e^{0.618424 x}$ & $0.9892$ \\
+            HP & $0.0158 \cdot e^{0.503814 x}$ & $0.9921$ \\
+            Lenovo & $0.0153331 \cdot e^{0.516756 x}$ & $0.9765$ \\
+            \hline
+        \end{tabular}
+        \caption{Funciones de ajuste del algoritmo de Hanoi en diferentes equipos}
+    \end{table}
+
+    Por tanto, como en los tres casos el coeficiente de determinación muestra una gran cercanía al 1, el ajuste para el algoritmo Hanoi 
+    usando una función exponencial es bastante razonable, lo que confirma nuestros cálculos previos que nos indican que su eficiencia es 
+    exponencial.
+
+    \newpage
+    
     \section{Conclusión}
 
-    En esta práctica hemos puesto a prueba 
+    La Algorítmica trata el estudio profundo y exhaustivo de los algoritmos, que constituyen la pieza clave para   
+    la resolución de problemas de diferente naturaleza que pueden modelarse de manera computacional. De ahí la importancia 
+    de su análisis, que consiste en dado un problema del cual disponemos de varios algoritmos para su resolución,
+    encontrar el mejor algoritmo que resuelve ese problema. La elección del mejor algoritmo depende del criterio que 
+    consideremos, de los cuales podemos destacar la adaptibilidad del algoritmo a los computadores, su simplicidad, el costo 
+    económico de su confección, y la duración del tiempo consumido para llevar a cabo el algoritmo. 
     
+    El último criterio mencionado es el que se ha desarrollado en esta práctica, la cual ha consistido en analizar la eficiencia
+    de seis algoritmos, cuatro de ellos modelan el mismo problema, la ordenación de vectores de datos numéricos, uno resuelve el problema
+    de las torres de Hanoi y el otro resuelve el problema de encontrar caminos mínimos en grafos, conocido como algoritmo de Floyd. 
+    
+    Nuestro trabajo ha consistido en determinar la eficiencia teórica de cada uno de los algoritmos propuestos, y la eficiencia empírica calculando
+    el tiempo de ejecución para diferentes tamaños de problema. Así, hemos tratado de de dar respuesta a los distintos objetivos planteados al inicio
+    de esta memoria:
+
+    Uno de ellos consistía en verificar si los análisis empíricos verifican o no los resultados teóricos esperados. Una vez obtenidos los datos 
+    referentes al tiempo de ejecución segun el tamaño del problema, hemos tratado de ajustar dichos datos experimentales con funciones de regresión de 
+    distinto tipo (constante, sublineal, logaritmico, lineal, supralineal, cuadrático y cúbico), y calculado los coeficientes de determinación correspondientes
+    a dicho ajuste. De este modo, hemos podido comprobar que la función de regresión que mejor se ajusta en cada caso coincide con el tipo de función
+    obtenida con el análisis teórico asintótico big O, de tal forma que para algoritmos como Inserción o Floyd el ajuste es perfecto (el coeficiente de 
+    determinación es uno). Esta tarea la hemos llevado a cabo en diferentes equipos (Asus, HP y Lenovo), y hemos podido comprobar que los tiempos de 
+    ejecución de cada algoritmo mejoran cuando las prestaciones hardware de los equipos son de mayor calidad, poniendo de manifiesto la importancia de conocer
+    el hardware de los equipos para poder determinar la viabilidad en cuanto a la ejecución de los algoritmos en los diferentes equipos. 
+
+    También, para dar respuesta al problema de la elección de un algoritmo, hemos usado el problema de la ordenación, para el cual teniamos cuatro 
+    opciones disponibles. Hemos concluido el tiempo de ejecución es menor para algoritmos con mejores ordenes de eficiencia, por lo que conviene su 
+    uso para grandes tamaños de problemas, también hemos observado que para tamaños pequeños el rendimiento es casi el mismo, lo cual ejemplifica la
+    necesidad de conocer el contexto de ejecución de cada uno de los algoritmos para lograr una mejor adaptabilidad a las opciones que tengamos disponibles.
+    
+    Por último, hemos de destacar el estudio realizado para distintas optimizaciones del compilador g++. Los algoritmos son independientes de las distintas
+    implementaciones que podamos hacer de ellos en distintos lenguajes de programación, pero hemos de comprender que en la práctica entender el comportamiento
+    de las herramientas que usamos es fundamental para poder llegar a resultados sólidos y congruentes. Es por ello por lo que realizamos este estudio, empleando 
+    el algoritmo de Floyd para ello, y hemos concluido que las distintas optimizaciones con las que podamos compilar un mismo programa influyen considerablemente en el tiempo de ejecución en todos los 
+    equipos empleados para tamaños de problema elevados, siendo la diferencia especialmente notable entre los casos en los que no usamos optimización y entre los que sí lo hacemos.
+    
+    En definitiva, esta práctica nos ha servido para entender el papel fundamental de la Algoritmica en la búsqueda de la mejor opción para resolver un problema
+    computacional, y nos sirve de base para entender el contexto y motivar los conceptos que aprenderemos en esta asignatura.
+
+    \newpage
+    \begin{thebibliography}{0}
+        \bibitem{Verdegay2017} Verdegay Galdeano. (2017). Lecciones de Algorítmica / José Luis Verdegay. Técnica Avicam.
+        \bibitem{Cormen2017} Cormen. (2017). Introduction to algorithms / Thomas H. Cormen... [et al.] (3rd ed.). PHI Learning.
+        \bibitem{Garrido2018} Garrido Carrillo. (2018). Estructuras de datos avanzadas: con soluciones en C++ / A. Garrido. Universidad de Granada.        
+    \end{thebibliography}
+    
+
 \end{document} 
