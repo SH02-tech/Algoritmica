@@ -1,1 +1,1 @@
-type:sublogarithmic function:f(x)=0.000365845*x*log(x)+115.279  RMS:67.6075
+type:sublogarithmic function:f(x)=0.000433497*x*log(x)+51.0771  RMS:3.3343
