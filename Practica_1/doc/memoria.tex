@@ -850,15 +850,14 @@
         \caption{Gráfica de tiempos de ejecución (Lenovo)}
     \end{figure}
 
-    \vspace{3cm}
+    \vspace{3cm} 
 
     \subsection{Observaciones}
 
     Observando las gráficas se puede apreciar que, para pequeños valores del número de nodos, las diferencias entre los
     tiempos de ejecución para diferentes niveles de optimización son prácticamente despreciables. Sin embargo, a medida
     que va aumentando la complejidad del grafo, los tiempos de ejecución para diferentes niveles de optimización se hacen
-    más significativos, siendo que para el valor $n=725$, el algoritmo optimizado es prácticamente el cuádruple de rápido que
-    el algoritmo sin optimizar. 
+    más significativos, siendo que para $n \geq 300$, se empieza a hacer palpable dicha mejoría. 
 
     Por tanto, concluimos que, para ejecuciones de tamaños pequeños, las diferencias son apenas apreciables, mientras que
     para grandes valores la optimización sí que puede aumentar considerablemente los tiempos de ejecución. Se trata, por
@@ -1336,7 +1335,7 @@
     muy parecido, por lo podemos extraer las siguientes conclusiones:
     
     \begin{itemize}
-        \item Para situaciones en los que es más probable que se presenten los datos ordenados en orden creciente, tenemos que el algoritmo óptimo es Inserción.
+        \item Para situaciones en los que es más probable que se presenten los datos ordenados en orden creciente, tenemos que el algoritmo óptimo es Inserción (pues en el mejor caso presenta un comportamiento lineal). 
         \item Para situaciones en los que es más probable encontrar datos desordenados, ambos algoritmos se comportan de forma similar. 
         \item Cuando se ejecute el algoritmo Inserción, es más conveniente comprobar previamente que la estructura de datos no esté ordenado en forma decreciente.
     \end{itemize}
@@ -1349,6 +1348,25 @@
     
     En esta sección trataremos los datos obtenidos de la sección anterior mediante técnicas estadísticas para
     comprobar la consistencia de los datos experimentales con los calculados teóricamente. 
+
+    \subsection{Comparación entre diferentes tipos de ajustes}
+
+    Para esta sección, hemos hecho uso del GraphKiller, el cual ha ejecutado automáticamente todas las posibles regresiones
+    que se pueden presentar en esta práctica y se ha seleccionado de, entre ellas, la regresión que mejor se ajusta a los datos
+    experimentales. Un ejemplo de ello lo podemos ver en los siguientes ficheros, generador por cada ordenador para el algoritmo de Floyd 
+    (las regresiones que no aparecen son debido a que generar error en la ejecución de Gnuplot, por lo que GraphKiller opta por no
+    incluirlo en este fichero):
+
+    \lstinputlisting[caption=Fichero de salida generado por GraphKiller en ASUS]{../data/asus/floyd-general-stat.txt}
+    \lstinputlisting[caption=Fichero de salida generado por GraphKiller en HP]{../data/hp/floyd-general-stat.txt}
+    \lstinputlisting[caption=Fichero de salida generado por GraphKiller en Lenovo]{../data/lenovo/floyd-general-stat.txt}
+
+    El dato que más nos puede interesar es RMS, que proporciona una medida del nivel de ajuste conseguido por la curva de regresión,
+    de forma que cuanto menor sea su valor mejor es el ajuste conseguido. 
+
+    De esta manera, hemos comprobado para cada uno de los algoritmos presentes en esta práctica cada una de las regresiones, 
+    y hemos seleccionado seleccionado el mejor ajuste en cada uno de ellos (que coinciden con el predicho teóricamente, como veremos
+    más adelante). Por simplicidad, hemos optado por no incluir todos los parámetros de regresión obtenidos. 
 
     \subsection{Algoritmo QuickSort}
 
@@ -1411,7 +1429,7 @@
         \label{hib:insercion}
     \end{figure}
 
-    Para cada una de ellas se han obtenido los siguientes datos:
+    Para cada una de ellas se han obtenido los datos de la tabla \ref{insercion:tab}. 
 
     \begin{table}[H]
         \centering
@@ -1425,6 +1443,7 @@
             \hline
         \end{tabular}
         \caption{Funciones de ajuste del algoritmo de Inserción en diferentes equipos}
+        \label{insercion:tab}
     \end{table} 
 
     Por tanto, como en los tres casos el coeficiente de determinación es 1, el ajuste para el algoritmo de Inserción 
@@ -1545,6 +1564,8 @@
     opciones disponibles. Hemos concluido el tiempo de ejecución es menor para algoritmos con mejores ordenes de eficiencia, por lo que conviene su 
     uso para grandes tamaños de problemas, también hemos observado que para tamaños pequeños el rendimiento es casi el mismo, lo cual ejemplifica la
     necesidad de conocer el contexto de ejecución de cada uno de los algoritmos para lograr una mejor adaptabilidad a las opciones que tengamos disponibles.
+    También hemos analizado el caso más favorable y desfavorable del conjunto de datos para los algoritmos de Inserción y Selección, el tiempo de ejecución se 
+    reduce considerablemente en vectores ordenados ascendentemente, y aumenta en vectores ordenados descendentemente, aumentando dicho contraste en Inserción. 
     
     Por último, hemos de destacar el estudio realizado para distintas optimizaciones del compilador g++. Los algoritmos son independientes de las distintas
     implementaciones que podamos hacer de ellos en distintos lenguajes de programación, pero hemos de comprender que en la práctica entender el comportamiento

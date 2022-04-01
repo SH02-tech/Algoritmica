@@ -42,7 +42,7 @@
 \title{Práctica 1. Análisis de Eficiencia de Algoritmos}
 \subtitle{Algorítmica}
 %\logo{\includegraphics[scale=0.05]{logo-ugr.jpeg}}
-\institute{Universidad de Granada}
+\institute{Equipo Rojo}
 %\date{}
 %\subject{}
 %\setbeamercovered{transparent}
@@ -61,6 +61,10 @@
 		\frametitle{Índice de contenidos}
 		\tableofcontents
 	\end{frame}
+
+
+
+
 
 	\section{Introducción}
 
@@ -110,7 +114,7 @@
     \end{frame}
 
     \begin{frame}
-        \frametitle{GraphKiller}    
+        \frametitle{Metodología}    
         \begin{figure}[H]
 			\centering
 			\includegraphics[width=0.67\textwidth]{img/esquema_graphkiller.pdf}
@@ -119,12 +123,13 @@
 		\end{figure}
     \end{frame}
 
-    \section{Eficiencia teórica}
 
-    \begin{frame}[fragile]
-        \frametitle{Algoritmo HeapSort}
-   
-        
+
+
+    \section{Análisis de Eficiencia General}
+
+    \begin{frame}
+        \frametitle{Eficiencia teórica}
         
         % \begin{itemize}
         %     \item \textbf{HeapSort}: $O(nlog(n))$
@@ -136,45 +141,283 @@
         %     \item  \textbf{Heaport}:
         % \end{itemize}
 
-        \begin{columns}
-			% Column 1
-			\begin{column}{0.5\textwidth}
-				\begin{exampleblock}{Ejemplo de código}
-                    \lstinputlisting[language=C++, firstline=56, lastline=68]{../src/heapsort.cpp} 
-                \end{exampleblock}
-			\end{column}
-			% Column 2    
-			\begin{column}{0.5\textwidth}
+        % \begin{columns}
+		% 	% Column 1
+		% 	\begin{column}{0.5\textwidth}
+		% 		\begin{exampleblock}{Ejemplo de código}
+        %             \lstinputlisting[language=C++, firstline=56, lastline=68]{../src/heapsort.cpp} 
+        %         \end{exampleblock}
+		% 	\end{column}
+		% 	% Column 2    
+		% 	\begin{column}{0.5\textwidth}
 
-				\begin{exampleblock}{Ejemplo de código}
-                    \lstinputlisting[language=C++, firstline=56, lastline=68]{../src/heapsort.cpp} 
-                \end{exampleblock}
+		% 		\begin{exampleblock}{Ejemplo de código}
+        %             \lstinputlisting[language=C++, firstline=56, lastline=68]{../src/heapsort.cpp} 
+        %         \end{exampleblock}
 
 				
 
-			\end{column}
-			\end{columns}
+		% 	\end{column}
+		% 	\end{columns}
+
+        \begin{columns}
+            \begin{column}{0.4\textwidth}
+                \begin{block}{Algoritmo HeapSort}
+                    $$T(n) \in \mathcal{O}(n\cdot\log(n))$$
+                \end{block}
+            \end{column}
+
+            \begin{column}{0.4\textwidth}
+                \begin{alertblock}{Algoritmo QuickSort}
+                    $$T(n) \in \mathcal{O}(n\cdot\log(n))$$
+                \end{alertblock}
+            \end{column}
+        \end{columns}
+
+        \begin{columns}
+            \begin{column}{0.4\textwidth}
+                \begin{alertblock}{Algoritmo de Inserción}
+                    $$T(n) \in \mathcal{O}(n^2)$$
+                \end{alertblock}
+            \end{column}
+            
+            \begin{column}{0.4\textwidth}
+                \begin{block}{Algoritmo de Selección}
+                    $$T(n) \in \mathcal{O}(n^2)$$
+                \end{block}
+            \end{column}
+        \end{columns}
+        
+        \begin{columns}
+            \begin{column}{0.4\textwidth}
+                \begin{alertblock}{Algoritmo de Floyd}
+                    $$T(n) \in \mathcal{O}(n^3)$$
+                \end{alertblock}
+            \end{column}
+
+            \begin{column}{0.4\textwidth}
+                \begin{alertblock}{Algoritmo de Hanoi}
+                    $$T(n) \in \mathcal{O}(2^n)$$
+                \end{alertblock}
+            \end{column}
+        \end{columns}
+        
+        \vspace{1cm}
+        Más \textbf{detalles} en la memoria de la práctica. 
+    \end{frame}
+
+    \begin{frame}
+        \frametitle{Eficiencia empírica: Caso $T(n) \in \mathcal{O}(n\cdot\log(n))$}
+
+        \begin{figure}
+            \includegraphics[width=0.7\textwidth]{../data/hp/quicksort-points.pdf}
+            \caption{Gráfica de tiempos de ejecución (en $\mu$s) puntos del algoritmo QuickSort (HP)}
+        \end{figure}
+    \end{frame}
+
+    \begin{frame}
+        \frametitle{Eficiencia empírica: Caso $T(n) \in \mathcal{O}(n^2)$}
+
+        \begin{figure}
+            \includegraphics[width=0.7\textwidth]{../data/lenovo/insercion-points.pdf}
+            \caption{Gráfica de tiempos de ejecución (en $\mu$s) puntos del algoritmo de Inserción (Lenovo)}
+        \end{figure}
+    \end{frame}
+
+    \begin{frame}
+        \frametitle{Eficiencia empírica: Caso $T(n) \in \mathcal{O}(n^3)$}
+
+        \begin{columns}
+            \begin{column}{0.5\textwidth}
+                \begin{figure}
+                    \includegraphics[width=0.85\textwidth]{../data/asus/floyd-points.pdf}
+                    \caption{Gráfica de tiempos de ejecución (en $\mu$s) puntos del algoritmo de Floyd (ASUS)}
+                \end{figure}
+            \end{column}
+            \begin{column}{0.5\textwidth}
+                \begin{figure}
+                    \includegraphics[width=0.85\textwidth]{../data/lenovo/floyd-points.pdf}
+                    \caption{Gráfica de tiempos de ejecución (en $\mu$s) puntos del algoritmo de Floyd (Lenovo)}
+                \end{figure}
+            \end{column}
+        \end{columns}
+
+        
+    \end{frame}
+
+    \begin{frame}
+        \frametitle{Eficiencia empírica: Caso $T(n) \in \mathcal{O}(2^n)$}
+
+        \begin{figure}
+            \includegraphics[width=0.87\textwidth]{../data/lenovo/hanoi-points.pdf}
+            \caption{Gráfica de tiempos de ejecución (en $\mu$s) puntos del algoritmo de Hanoi (Lenovo)}
+        \end{figure}
+        
+    \end{frame}
+
+    \begin{frame}
+        \frametitle{Eficiencia híbrida: Algoritmo QuickSort}
+
+        \begin{columns}
+            \begin{column}{0.7\textwidth}
+                \begin{figure}
+                    \includegraphics[width=0.65\textwidth]{../data/hp/quicksort-graph.pdf}
+                    \caption{Gráfica de tiempos de ejecución (en $\mu$s) puntos del algoritmo de Inserción (HP) con función de ajuste}
+                \end{figure}
+            \end{column}
+
+            \begin{column}{0.3\textwidth}
+                \begin{block}{Función de ajuste}
+                    $f(x) = 3.66 \cdot 10^{-4} x \log(x) + 50$
+                \end{block}
+
+                \begin{block}{Coeficiente de determinación}
+                    $R^2 = 0.9957$
+                \end{block}
+            \end{column}
+        \end{columns}
+    \end{frame}
+
+    \begin{frame}
+        \frametitle{Eficiencia híbrida: Algoritmo Inserción}
+
+        \begin{columns}
+            \begin{column}{0.7\textwidth}
+                \begin{figure}
+                    \includegraphics[width=0.65\textwidth]{../data/lenovo/insercion-graph.pdf}
+                    \caption{Gráfica de tiempos de ejecución (en $\mu$s) puntos del algoritmo de Inserción (Lenovo) con función de ajuste}
+                \end{figure}
+            \end{column}
+
+            \begin{column}{0.3\textwidth}
+                \begin{block}{Función de ajuste}
+                    $f(x) =3.48955 \cdot 10^{-5} x^{2} - 0.000620098 x + 48.0855$
+                \end{block}
+
+                \begin{block}{Coeficiente de determinación}
+                    $R^2 = 0.99999$
+                \end{block}
+            \end{column}
+        \end{columns}
+    \end{frame}
+
+    \begin{frame}
+        \frametitle{Eficiencia híbrida: Algoritmo Floyd}
+
+        \begin{columns}
+            \begin{column}{0.7\textwidth}
+                \begin{figure}
+                    \includegraphics[width=0.65\textwidth]{../data/asus/floyd-graph.pdf}
+                    \caption{Gráfica de tiempos de ejecución (en $\mu$s) puntos del algoritmo de Floyd (Asus) con función de ajuste}
+                \end{figure}
+            \end{column}
+
+            \begin{column}{0.3\textwidth}
+                \begin{block}{Función de ajuste}
+                    $f(x) = 5.57676 \cdot 10^{-5} x^3 + 0.00138722 x^2-0.315202 x + 34.0467$
+                \end{block}
+
+                \begin{block}{Coeficiente de determinación}
+                    $R^2 = 1.0000$
+                \end{block}
+            \end{column}
+        \end{columns}
+    \end{frame}
+
+    \begin{frame}
+        \frametitle{Eficiencia híbrida: Algoritmo Hanoi}
+
+        \begin{columns}
+            \begin{column}{0.7\textwidth}
+                \begin{figure}
+                    \includegraphics[width=0.65\textwidth]{../data/lenovo/hanoi-graph.pdf}
+                    \caption{Gráfica de tiempos de ejecución (en $\mu$s) puntos del algoritmo de Hanoi (Lenovo) con función de ajuste}
+                \end{figure}
+            \end{column}
+
+            \begin{column}{0.3\textwidth}
+                \begin{block}{Función de ajuste}
+                    $f(x) = 0.0158 \cdot e^{0.503814 x}$
+                \end{block}
+
+                \begin{block}{Coeficiente de determinación}
+                    $R^2 = 0.9921$
+                \end{block}
+            \end{column}
+        \end{columns}
+    \end{frame}
+
+    \section{Análisis de Casos Particulares}
+
+    \begin{frame}
+        \frametitle{Niveles de Optimización}
+
+        \begin{columns}
+            \begin{column}{0.7\textwidth} 
+                \begin{figure}
+                    \includegraphics[width=0.65\textwidth]{../data/hp_opt.pdf}
+                    \caption{Gráfica de tiempos de ejecución (HP) en diferentes niveles de optimización}
+                \end{figure}
+            \end{column}
+
+            \begin{column}{0.3\textwidth}
+                \begin{itemize}
+                    \item \textcolor{purple}{Morado}: O0
+                    \item \textcolor{green}{Verde}: O1
+                    \item \textcolor{yellow}{Amarillo}: O2
+                    \item \textcolor{blue}{Azul}: O3 
+                \end{itemize}
+            \end{column}
+        \end{columns}
+        
+    \end{frame}
+
+    \begin{frame}
+        \frametitle{Comparación de algoritmos de ordenación}
+
+        \begin{figure}
+            \includegraphics[width=0.8\textwidth]{../data/asus-orden-todos.pdf}
+            \caption{Gráfica de tiempos de ejecución (ASUS) para diferentes algoritmos de ordenación}
+        \end{figure}
+    \end{frame}
+
+    \begin{frame}
+        \frametitle{Mejor y peor caso para Inserción}
+
+        \begin{figure}
+            \includegraphics[width=0.7\textwidth]{../data/hp-insercion-mp.pdf}
+            \caption{Gráfica de tiempos de ejecución (HP) para Inserción}
+        \end{figure}
+    \end{frame}
+
+    \begin{frame}
+        \frametitle{Mejor y Peor Caso para Selección}
+        \begin{figure}
+            \includegraphics[width=0.7\textwidth]{../data/asus-seleccion-mp.pdf}
+            \caption{Gráfica de tiempos de ejecución (ASUS) para Selección}
+        \end{figure}
     \end{frame}
 
     \section{Conclusiones}
 
-    % \begin{frame}
-    %     \frametitle{Conclusiones}
-    %     Los aspectos tratados más relevantes son:
-    %     \begin{itemize}
-    %         \item \textby{Comprobar que los análisis empíricos verifican o no los resultados teóricos esperados}. Calculado los coeficientes de 
-    %         determinación comprobamos que la función de regresión que mejor se ajusta en cada caso coincide con el tipo de función
-    %         \item a
-            
-    %     \end{itemize}
-        
-    % \end{frame}
-
-    \section{Eficiencia empírica}
-
     \begin{frame}
-        \frametitle{Algoritmo de Inserción}
+        \frametitle{Conclusiones}
 
+        Los aspectos tratados más relevantes son:
+
+        \begin{itemize}
+            \item \textbf{Comprobar que los análisis empíricos verifican los resultados teóricos esperados}.
+            Calculado los coeficientes de determinación comprobamos que la función de regresión que mejor se 
+            ajusta en cada caso coincide con el tipo de función dado por el análisis teórico.
+            \item \textbf{Comparar los resultados experimentales en equipos distintos}. Hemos ilustrado que los 
+            tiempos de ejecución de un mismo algortimo se reducen con un mejor hardware.
+            \item \textbf{Cómo elegir un algoritmo de ordenación}. Para grandes tamaños de problema conviene escoger
+            los de mejor orden de eficiencia mientras que para tamaños inferiores es indiferente.
+            \item \textbf{Análisis del peor y mejor caso en Selección e Inserción}. El tiempo de ejecución se reduce considerablemente
+            en vectores ordenados ascendentemente, y aumenta en vectores ordenados descendentemente, sobre todo en Inserción. 
+            \item \textbf{Comparar los tiempos de ejecución para optimizaciones distintas}. Para tamaños pequeños
+            las diferencias no son apreciables, en cambio para valores mayores estas se acentúan.
+        \end{itemize}
         
     \end{frame}
 
