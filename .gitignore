@@ -4,6 +4,10 @@
 *.log
 *.synctex.gz
 *.toc
+*.lot
+*.nav
+*.snm
+*.vrb
 */bin/*
 Pract*/BestFitter.sh
 Pract*/PointsPlotter.sh
