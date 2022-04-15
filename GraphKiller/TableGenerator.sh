@@ -15,7 +15,7 @@ do
 
         for (( j=0; j<$repeats;j++ ))
         do
-          s=`./$1 $ini`
+          s=`./$1 $ini | tail -n 1`
           sum=$(echo $sum + $s | bc)
         done
 
