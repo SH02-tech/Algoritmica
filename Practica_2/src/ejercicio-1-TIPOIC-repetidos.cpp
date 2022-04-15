@@ -31,22 +31,23 @@ using namespace std::chrono;
 // todos los enteros entre -(n-1) y (n-1) en un vector auxiliar; después obtiene una permutación aleatoria de ese
 // vector, se queda con los n primeros elementos, y los ordena de forma creciente
 
-/*
+/**
  * @brief Genera un número uniformemente distribuido en el intervalo [0,1) a partir de uno de los generadores
  * disponibles en C.
  * @return número uniformemente distribuido en el intervalo [0,1)
- * */
+ * 
+ */
 double Uniforme() {
     int t = rand();
     double f = ((double)RAND_MAX+1.0);
     return (double)t/f;
 }
 
-/*
+/**
  * @brief Calcula un vector de enteros aleatorios distintos ordenados de forma creciente.
  * @param n numero de elementos del vector
  * @return el vector de enteros calculado.
- * */
+ */
 vector<int> VectorGenerator(int n) {
     int m=2*n-1;
 
@@ -148,10 +149,8 @@ int main(int argc, char **argv) {
 	clock_t tdespues;  // Valor del reloj después de la ejecución
 
 	tantes = clock();
-	int pos = PosTipoIC(vect, 0, vect.size()-1);
+	PosTipoIC(vect, 0, vect.size()-1);
 	tdespues = clock();
-
-	// cout << "\nPos: " << pos << endl;
 
 	cout << ((double)(tdespues-tantes))/(CLOCKS_PER_SEC*1E-3)<< endl; // Tiempo en milisegundos. 
 
