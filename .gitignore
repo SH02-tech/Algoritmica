@@ -9,6 +9,7 @@
 *.snm
 *.vrb
 */bin/*
+*/.vscode
 Pract*/BestFitter.sh
 Pract*/PointsPlotter.sh
 Pract*/GraphPlotter.sh
