@@ -86,7 +86,7 @@
 	%	Headings
 	%------------------------------------------------
 	
-	\includegraphics[scale=0.15]{logo-ugr.jpeg}
+	\includegraphics[scale=0.15]{./img/logo-ugr.jpeg}
 	
 	\vspace*{1cm}
 	
