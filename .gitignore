@@ -10,8 +10,8 @@
 *.vrb
 */bin/*
 */.vscode
-Pract*/**/doc/*memoria.pdf
-Pract*/**/doc/*presentacion.pdf
+**/*memoria.pdf
+**/*presentacion.pdf
 Pract*/BestFitter.sh
 Pract*/PointsPlotter.sh
 Pract*/GraphPlotter.sh
