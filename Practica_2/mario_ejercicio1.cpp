@@ -110,7 +110,7 @@ int linealSearch(vector<int> v, int ini, int fin) {
  */
 int dcSearch(vector<int> v, int ini, int fin) {
 
-    static const int UMBRAL = 10;   // Hay que calcular el optimo
+    static const int UMBRAL = 1;   // Hay que calcular el optimo
 
     if( (fin - ini + 1) <= UMBRAL) {
         return linealSearch(v, ini, fin);
@@ -151,6 +151,45 @@ int dcSearch(vector<int> v, int ini, int fin) {
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+// Main para probar los métodos
+
+//int main(int argc, char * argv[]) {
+//
+//    if (argc !=2) {
+//        cerr << "Formato: " << argv[0] << " <num_elem> " << endl;
+//        return -1;
+//    }
+//
+//    int n = atoi(argv[1]);
+//
+//    // Creamos el vector ordenado ascendentemente
+//
+//    vector<int> myvector(vectorGenerator(n));
+//
+//    // Procedemos a realizar la busqueda con los dos métodos
+//
+//    int index_ls = linealSearch(myvector,0,myvector.size()-1);
+//    int index_dc = dcSearch(myvector,0,myvector.size()-1);
+//
+//    // Salida con los resultados
+//
+//    cout << "Vector (posición,valor): " << endl;
+//    for (int i=0; i < myvector.size(); i++)
+//        cout << " (" << i << "," << myvector[i] << ")";
+//    cout << endl;
+//
+//    cout << "Búsqueda lineal: " << endl;
+//    (index_ls == -1) ? cout << "Ningún i con v[i]==i" << endl : cout << "Indice i con v[i]==i es: " << index_ls << endl;
+//    cout << "Búsqueda Divide y Vencerás: " << endl;
+//    (index_dc == -1) ? cout << "Ningún i con v[i]==i" << endl : cout << "Indice i con v[i]==i es: " << index_dc << endl;
+//
+//    return 0;
+//}
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// Main para obtener datos de la eficiencia
+
 int main(int argc, char * argv[]) {
 
     if (argc !=2) {
@@ -164,22 +203,23 @@ int main(int argc, char * argv[]) {
 
     vector<int> myvector(vectorGenerator(n));
 
-    // Procedemos a realizar la busqueda con los dos métodos
+    // Obtenemos el tiempo de ejecucion para la busqueda lineal
 
-    int index_ls = linealSearch(myvector,0,myvector.size()-1);
-    int index_dc = dcSearch(myvector,0,myvector.size()-1);
+    clock_t tantes_bl, tdespues_bl, tantes_dc, tdespues_dc;
 
-    // Salida con los resultados
+    tantes_bl = clock();
+    linealSearch(myvector,0,myvector.size()-1);
+    tdespues_bl = clock();
 
-    cout << "Vector (posición,valor): " << endl;
-    for (int i=0; i < myvector.size(); i++)
-        cout << " (" << i << "," << myvector[i] << ")";
-    cout << endl;
+    tantes_dc = clock();
+    dcSearch(myvector,0,myvector.size()-1);
+    tdespues_dc = clock();
 
-    cout << "Búsqueda lineal: " << endl;
-    (index_ls == -1) ? cout << "Ningún i con v[i]==i" << endl : cout << "Indice i con v[i]==i es: " << index_ls << endl;
-    cout << "Búsqueda Divide y Vencerás: " << endl;
-    (index_dc == -1) ? cout << "Ningún i con v[i]==i" << endl : cout << "Indice i con v[i]==i es: " << index_dc << endl;
+    // Salida de datos
+
+    cout << n << ";"
+         << (double)(tdespues_bl-tantes_bl)/(CLOCKS_PER_SEC*10E-3) << ";"
+         << (double)(tdespues_dc-tantes_dc)/(CLOCKS_PER_SEC*10E-3) << endl;
 
     return 0;
 }
