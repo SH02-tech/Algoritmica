@@ -1,3 +1,5 @@
+\usepackage{listings}
+
 \subsection{Apartado A}
 
 \textb{Problema}: Dado un vector ordenado (de forma no decreciente) de $n$ números enteros $v$, todos 
@@ -22,7 +24,41 @@ $v[i]=i+k$, tendríamos que $v[j]=i+k+m$, pero $i=j-m$, entonces $v[j]=j-m+k+m=j
 cual es una clara contradicción, ya que habiamos supuesto que $v[j]=j$. Por tanto, no 
 existe ningún $j$ tal que $v[j]=j$.
 
+\textbf{Proposición 1.2.} Sea i con $0 < i < n$ fijo, tal que $v[i]=i-k$ con 
+$k \in \mathbb N$, entonces $v[j]!=j$,  $\forall j$ con $0 \leqslant j < i$. 
 
+\textit{Demostración}: Razonemos por contradicción. Supongamos que para $j < i$ se 
+cumple que $v[j]=j$, entonces \exists $m \in \mathbb N$ tal que $j=i-m$. Como el 
+vector está ordenado en orden no decreciente sin repetidos, como mínimo un elemento
+difiere en una unidad del elemento siguiente. Podemos considerar esto último sin 
+lugar a ambiguedad para todo elemento del vector, luego $v[j]=v[i]-m$. Como por hipótesis
+$v[i]=i-k$, tendríamos que $v[j]=i-k-m$, pero $i=j+m$, entonces $v[j]=j+m-k-m=j-k$, lo
+cual es una clara contradicción, ya que habiamos supuesto que $v[j]=j$. Por tanto, no 
+existe ningún $j$ tal que $v[j]=j$.
+
+A continuación, mostraremos los dos algoritmos usados, en psudocódigo e implementados en 
+lenguaje c++: 
+
+\subsubsection{Algoritmo basado en la búsqueda lineal}
+
+\begin{lstlisting}
+    BUSQUEDA_LINEAL(v[1...n-1], ini, fin)
+        indice = ini
+        si el tamaño del vector es mayor que 0
+            para i = ini hasta fin o hasta que encontremos la posición
+                si v[i] es igual a i (encontramos la posición)
+                    indice = i
+
+        devolver indice
+\end{lstlisting}
+
+%\lstinputlisting[language=C++, firstline=88, lastline=181, caption=Implementación en C++ del algoritmo basado en la búsqueda lineal.]{../src/<nombre_programa>.cpp} 
+
+\subsubsection{Algoritmo basado en la técnica Divide y Vencerás}
+
+\begin{lstlisting}
+    
+\end{lstlisting}
 
 
 
