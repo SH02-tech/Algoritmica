@@ -1,5 +1,5 @@
 /**
- * @file ejercicio-1-TIPOIC-repetidos.cpp
+ * @file ejercicio-1-comp-fija-repetidos.cpp
  * @author Shao Jie Hu Chen
  * @author Jesús Samuel García Carballo
  * @author Mario Megías Mateo

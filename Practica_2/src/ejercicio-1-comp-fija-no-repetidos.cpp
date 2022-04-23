@@ -1,5 +1,5 @@
 /**
- * @file mario_ejercicio1.cpp
+ * @file ejercicio-1-comp-fija-no-repetidos.cpp
  * @author Mario Megías Mateo
  * @author Shao Jie Hu Chen
  * @author Jesús Samuel García Carballo
