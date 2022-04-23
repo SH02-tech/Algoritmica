@@ -1,64 +1,84 @@
-\usepackage{listings}
-
-\subsection{Apartado A}
-
-\textb{Problema}: Dado un vector ordenado (de forma no decreciente) de $n$ números enteros $v$, todos 
-distintos, el objetivo es determinar si existe un índice i tal que $v[i] = i$ y 
-encontrarlo en ese caso. 
-
-Para resolver el problema hemos utilizado dos algoritmos, uno básico basado en 
+El \textbf{problema} que se nos plantea es, dado un vector ordenado (de forma no decreciente) de $n$ números enteros $v$, todos 
+distintos, determinar si existe un índice i tal que $v[i] = i$ y 
+encontrarlo en ese caso. Para resolver el problema hemos utilizado dos algoritmos, uno básico basado en 
 la búsqueda lineal, y otro basado en la técnica de Divide y Vencerás. 
 
-El último algoritmo se ha desarrollado a partir de un análisis detallado del 
-problema, a partir del cual hemos conseguido demostrar las siguientes proposiciones:
+\subsection{Vector con valores no repetidos}
 
-\textbf{Proposición 1.1.} Sea i con $0 \leqslant i < n$ fijo, tal que $v[i]=i+k$ con 
-$k \in \mathbb N$, entonces $v[j]!=j$, $\forall j$ con $i < j < n$. 
+En primer lugar, abordamos el problema para vectores con valores no repetidos. Para esta parte
+caben destacar los lemas \ref{lem:1} y \ref{lem:2}. 
 
-\textit{Demostración}: Razonemos por contradicción. Supongamos que para $j > i$ se 
-cumple que $v[j]=j$, entonces \exists $m \in \mathbb N$ tal que $j=i+m$. Como el 
-vector está ordenado en orden no decreciente sin repetidos, como mínimo un elemento
-difiere en una unidad del elemento siguiente. Podemos considerar esto último sin 
-lugar a ambiguedad para todo elemento del vector, luego $v[j]=v[i]+m$. Como por hipótesis
-$v[i]=i+k$, tendríamos que $v[j]=i+k+m$, pero $i=j-m$, entonces $v[j]=j-m+k+m=j+k$, lo
-cual es una clara contradicción, ya que habiamos supuesto que $v[j]=j$. Por tanto, no 
-existe ningún $j$ tal que $v[j]=j$.
+% El último algoritmo se ha desarrollado a partir de un análisis detallado del 
+% problema, a partir del cual hemos conseguido demostrar las siguientes proposiciones:
 
-\textbf{Proposición 1.2.} Sea i con $0 < i < n$ fijo, tal que $v[i]=i-k$ con 
-$k \in \mathbb N$, entonces $v[j]!=j$,  $\forall j$ con $0 \leqslant j < i$. 
+\begin{lemma}
+    \label{lem:1}
+    Sea i con $0 \leqslant i < n$ fijo, tal que $v[i]=i+k$, con $k \in \mathbb N$. 
+    Entonces $v[j] \neq j$, $\forall j \in \mathbb N$ con $i < j < n$. 
+\end{lemma}
 
-\textit{Demostración}: Razonemos por contradicción. Supongamos que para $j < i$ se 
-cumple que $v[j]=j$, entonces \exists $m \in \mathbb N$ tal que $j=i-m$. Como el 
-vector está ordenado en orden no decreciente sin repetidos, como mínimo un elemento
-difiere en una unidad del elemento siguiente. Podemos considerar esto último sin 
-lugar a ambiguedad para todo elemento del vector, luego $v[j]=v[i]-m$. Como por hipótesis
-$v[i]=i-k$, tendríamos que $v[j]=i-k-m$, pero $i=j+m$, entonces $v[j]=j+m-k-m=j-k$, lo
-cual es una clara contradicción, ya que habiamos supuesto que $v[j]=j$. Por tanto, no 
-existe ningún $j$ tal que $v[j]=j$.
+\begin{proof}
+    Razonemos por contradicción. Supongamos que para $j > i$ se 
+    cumple que $v[j]=j$, entonces $\exists m \in \mathbb N$ tal que $j=i+m$. Como el 
+    vector está ordenado en orden no decreciente sin repetidos, como mínimo un elemento
+    difiere en una unidad del elemento siguiente. Podemos considerar esto último sin 
+    lugar a ambiguedad para todo elemento del vector, luego $v[j]=v[i]+m$. Como por hipótesis
+    $v[i]=i+k$, tendríamos que $v[j]=i+k+m$, pero $i=j-m$, entonces $v[j]=j-m+k+m=j+k$, lo
+    cual es una clara contradicción, ya que habiamos supuesto que $v[j]=j$. Por tanto, no 
+    existe ningún $j$ tal que $v[j]=j$.
+\end{proof}
 
-A continuación, mostraremos los dos algoritmos usados, en psudocódigo e implementados en 
-lenguaje c++: 
+\begin{lemma}
+    \label{lem:2}
+    Sea i con $0 < i < n$ fijo, tal que $v[i]=i-k$ con 
+    $k \in \mathbb N$, entonces $v[j] \neq j$,  $\forall j$ con $0 \leqslant j < i$. 
+\end{lemma}
 
-\subsubsection{Algoritmo basado en la búsqueda lineal}
+\begin{proof}
+    Razonemos por contradicción. Supongamos que para $j < i$ se 
+    cumple que $v[j]=j$, entonces $\exists m \in \mathbb N$ tal que $j=i-m$. Como el 
+    vector está ordenado en orden no decreciente sin repetidos, como mínimo un elemento
+    difiere en una unidad del elemento siguiente. Podemos considerar esto último sin 
+    lugar a ambiguedad para todo elemento del vector, luego $v[j]=v[i]-m$. Como por hipótesis
+    $v[i]=i-k$, tendríamos que $v[j]=i-k-m$, pero $i=j+m$, entonces $v[j]=j+m-k-m=j-k$, lo
+    cual es una clara contradicción, ya que habiamos supuesto que $v[j]=j$. Por tanto, no 
+    existe ningún $j$ tal que $v[j]=j$.
+\end{proof}
+
+\subsection{Caso obvio}
+
+En este caso el algoritmo de búsqueda del índice se basa en la búsqueda lineal. 
+\subsubsection{Pseudocódigo}
 
 \begin{lstlisting}
-    BUSQUEDA_LINEAL(v[1...n-1], ini, fin)
-        indice = ini
-        si el tamaño del vector es mayor que 0
-            para i = ini hasta fin o hasta que encontremos la posición
-                si v[i] es igual a i (encontramos la posición)
-                    indice = i
-
-        devolver indice
+BUSQUEDA_LINEAL(v[1...n-1], ini, fin)
+    indice = ini
+    si el tamaño del vector es mayor que 0
+        para i = ini hasta fin o hasta que encontremos la posición
+            si v[i] es igual a i (encontramos la posición)
+                indice = i
+    devolver indice
 \end{lstlisting}
+
+\subsubsection{Implementación}
+\subsubsection{Análisis de Eficiencia}
 
 %\lstinputlisting[language=C++, firstline=88, lastline=181, caption=Implementación en C++ del algoritmo basado en la búsqueda lineal.]{../src/<nombre_programa>.cpp} 
 
-\subsubsection{Algoritmo basado en la técnica Divide y Vencerás}
+\subsection{Caso Divide y Vencerás}
+
+En esta parte, como consecuencia de los lemas \ref{lem:1} y \ref{lem:2}, el algoritmo presentado es similar 
+al algoritmo de búsqueda binaria (un caso muy particular de Divide y Vencerás, 
+llamado \textbf{simplificación} \cite{Verdegay2017}).
+
+\subsubsection{Pseudocódigo}
+\subsubsection{Implementación}
+\subsubsection{Análisis de Eficiencia}
+En este caso, para tomar las medidas experimentales, se ha tenido que tomar para cada $n$ una \textbf{media de 1.000.000
+de valores}. Esto se debe a que el nº de operaciones del algoritmo fluctúa mucho y puede terminar mucho antes o después en función
+de los valores de entrada. \textbf{Para determinar este valor}, hemos probado con diferentes número de entradas, 
+viendo que para este valor las salidas del tiempo de ejecución son más o menos \textbf{estables}. 
 
 \begin{lstlisting}
     
 \end{lstlisting}
-
-
-
