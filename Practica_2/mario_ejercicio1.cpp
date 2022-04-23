@@ -1,10 +1,13 @@
 /**
- * File: mario_ejercicio1.cpp
+ * @file mario_ejercicio1.cpp
+ * @author Mario Megías Mateo
+ * @author Shao Jie Hu Chen
+ * @author Jesús Samuel García Carballo
  *
  * ALGORITMICA, PRACTICA 2.
- * Ejercicio 1. Resolución.
+ * Ejercicio 1 sin repetición. Resolución.
  *
- * */
+ */
 
 #include <iostream>
 #include <ctime>
@@ -13,6 +16,8 @@
 #include <cassert>
 #include <algorithm>
 #include <vector>
+#include <chrono>
+
 using namespace std;
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -21,23 +26,23 @@ using namespace std;
 // todos los enteros entre -(n-1) y (n-1) en un vector auxiliar; después obtiene una permutación aleatoria de ese
 // vector, se queda con los n primeros elementos, y los ordena de forma creciente
 
-/*
+/**
  * @brief Genera un número uniformemente distribuido en el intervalo [0,1) a partir de uno de los generadores
  * disponibles en C.
  * @return número uniformemente distribuido en el intervalo [0,1)
- * */
-double uniforme() {
-    int t = rand();
-    double f = ((double)RAND_MAX+1.0);
+ */
+static double uniforme() {
+    static int t = rand();
+    static double f = ((double)RAND_MAX+1.0);
     return (double)t/f;
 }
 
-/*
+/**
  * @brief Calcula un vector de enteros aleatorios distintos ordenados de forma creciente.
  * @param n numero de elementos del vector
- * @return el vector de enteros calculado.
- * */
-vector<int> vectorGenerator(int n)
+ * @return el vector de enteros calculado. 
+ */
+static vector<int> vectorGenerator(int n)
 {
     int m=2*n-1;
 
@@ -84,8 +89,8 @@ vector<int> vectorGenerator(int n)
  * @param fin posicion final a partir de la cual dejar de buscar (incluida en v)
  * @pre 0 <= ini <= fin < n
  * @return si se encuentra, devuelve el indice, sino devuelve -1
- * */
-int linealSearch(vector<int> v, int ini, int fin) {
+ */
+static int linealSearch(const vector<int> &v, int ini, int fin) {
     int i = ini, tam = fin - ini + 1, index = -1;
     bool found = false;
     if(tam > 0) {
@@ -94,12 +99,13 @@ int linealSearch(vector<int> v, int ini, int fin) {
                 index = i;
                 found = true;
             }
-            i++;
+            ++i;
         }
     }
     return index;
 }
 
+#define UMBRAL 5 // Hay que calcular el optimo
 /**
  * @brief Búsqueda basada en la técnica Divide y Vencerás del índice i que cumple v[i]==i
  * @param v vector ordenado ascendentemente sin repetidos a partir del cual realizar la bsqueda
@@ -108,10 +114,7 @@ int linealSearch(vector<int> v, int ini, int fin) {
  * @pre 0 <= ini <= fin < n
  * @return si se encuentra devuelve el indice, sino devuelve -1
  */
-int dcSearch(vector<int> v, int ini, int fin) {
-
-    static const int UMBRAL = 1;   // Hay que calcular el optimo
-
+static int dcSearch(const vector<int> &v, int ini, int fin) {
     if( (fin - ini + 1) <= UMBRAL) {
         return linealSearch(v, ini, fin);
     } else {
@@ -125,29 +128,6 @@ int dcSearch(vector<int> v, int ini, int fin) {
         }
     }
 }
-
-/**
- * @brief Búsqueda basada en la técnica Divide y Vencerás del índice i que cumple v[i]==i con vector con repeticiones
- * @param v vector ordenado ascendentemente con repetidos a partir del cual realizar la bsqueda
- * @param ini posicion de inicio a partir de la cual realizar la busqueda
- * @param fin posicion final a partir de la cual dejar de buscar (incluida en v)
- * @pre 0 <= ini <= fin < n
- * @return si se encuentra devuelve el indice, sino devuelve -1
- */
-//int dcSearchWithRepets(vector<int> v, int ini, int fin) {
-//
-//    if ( (fin - ini + 1) > 0) {
-//        int k = (ini + fin + 1)/2;
-//        if(v[k] == k) {
-//            return k;
-//        } else if (v[k] > k) {
-//            return dcSearch(v,ini,k-1);
-//        } else {
-//            return dcSearch(v,k+1,fin);
-//        }
-//    }
-//
-//}
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -190,7 +170,10 @@ int dcSearch(vector<int> v, int ini, int fin) {
 
 // Main para obtener datos de la eficiencia
 
+#define REPETITIONS 50
+#define SIZE_VECTOR 20000
 int main(int argc, char * argv[]) {
+    
 
     if (argc !=2) {
         cerr << "Formato: " << argv[0] << " <num_elem> " << endl;
@@ -199,27 +182,24 @@ int main(int argc, char * argv[]) {
 
     int n = atoi(argv[1]);
 
-    // Creamos el vector ordenado ascendentemente
+    static int acumulador = 0;
+    static chrono::_V2::steady_clock::time_point tantes;    // Valor del reloj antes de la ejecución
+    static chrono::_V2::steady_clock::time_point tdespues;  // Valor del reloj antes de la ejecución
+    static vector<vector<int>> vectors(SIZE_VECTOR);
+	
+    for (int i=0; i<REPETITIONS; ++i) {
+        for (int j=0; j<SIZE_VECTOR; ++j)
+            vectors[j] = vectorGenerator(n);
 
-    vector<int> myvector(vectorGenerator(n));
+        tantes = chrono::steady_clock::now();    // Valor del reloj antes de la ejecución
+        for (int j=0; j<SIZE_VECTOR; ++j)
+            dcSearch(vectors[j], 0, n-1);
+        tdespues = chrono::steady_clock::now();    // Valor del reloj antes de la ejecución
 
-    // Obtenemos el tiempo de ejecucion para la busqueda lineal
+        acumulador += chrono::duration_cast<chrono::nanoseconds>(tdespues - tantes).count();
+    }
 
-    clock_t tantes_bl, tdespues_bl, tantes_dc, tdespues_dc;
-
-    tantes_bl = clock();
-    linealSearch(myvector,0,myvector.size()-1);
-    tdespues_bl = clock();
-
-    tantes_dc = clock();
-    dcSearch(myvector,0,myvector.size()-1);
-    tdespues_dc = clock();
-
-    // Salida de datos
-
-    cout << n << ";"
-         << (double)(tdespues_bl-tantes_bl)/(CLOCKS_PER_SEC*10E-3) << ";"
-         << (double)(tdespues_dc-tantes_dc)/(CLOCKS_PER_SEC*10E-3) << endl;
+	cout << acumulador*1.0/(REPETITIONS*SIZE_VECTOR) << endl; // Tiempo en nanosegundos. 
 
     return 0;
 }
