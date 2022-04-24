@@ -50,7 +50,7 @@
 \definecolor{backcolour}{rgb}{0.95,0.95,0.95}
 
 \lstdefinestyle{mystyle}{
-	backgroundcolor=\color{backcolour},   
+	% backgroundcolor=\color{backcolour},   
 	commentstyle=\color{codegreen},
 	keywordstyle=\color{blue},
 	numberstyle=\tiny\color{codegray},
