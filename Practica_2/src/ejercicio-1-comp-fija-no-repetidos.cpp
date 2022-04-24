@@ -170,8 +170,13 @@ static int dcSearch(const vector<int> &v, int ini, int fin) {
 
 // Main para obtener datos de la eficiencia
 
+#ifndef REPETITIONS
 #define REPETITIONS 50
+#endif
+#ifndef SIZE_VECTOR
 #define SIZE_VECTOR 20000
+#endif
+
 int main(int argc, char * argv[]) {
     
 

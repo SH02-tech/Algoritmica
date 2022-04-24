@@ -145,6 +145,16 @@ int main(int argc, char **argv) {
 	// for (auto it = vect.begin(); it != vect.end(); ++it)
 	// 	cout << *it << " ";
 
+	#ifdef PRECISION
+	static chrono::_V2::steady_clock::time_point tantes;    // Valor del reloj antes de la ejecución
+    static chrono::_V2::steady_clock::time_point tdespues;  // Valor del reloj antes de la ejecución
+
+	tantes = chrono::steady_clock::now();    // Valor del reloj antes de la ejecución
+	PosTipoIC(vect, 0, vect.size()-1);
+	tdespues = chrono::steady_clock::now();    // Valor del reloj antes de la ejecución
+
+	cout << chrono::duration_cast<chrono::nanoseconds>(tdespues - tantes).count() << endl; // Tiempo en milisegundos. 
+	#else
 	clock_t tantes;    // Valor del reloj antes de la ejecución
 	clock_t tdespues;  // Valor del reloj después de la ejecución
 
@@ -153,6 +163,6 @@ int main(int argc, char **argv) {
 	tdespues = clock();
 
 	cout << ((double)(tdespues-tantes))/(CLOCKS_PER_SEC*1E-3)<< endl; // Tiempo en milisegundos. 
-
+	#endif
 	return 0;
 }
