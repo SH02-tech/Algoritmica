@@ -1,5 +1,5 @@
 El \textbf{problema} que se nos plantea es, dado un vector ordenado (de forma no decreciente) de $n$ números enteros $v$, todos 
-distintos, determinar si existe un índice i tal que $v[i] = i$ y 
+distintos, determinar si existe un índice $i$ tal que $v[i] = i$ y 
 encontrarlo en ese caso. Para resolver el problema hemos utilizado dos algoritmos, uno básico basado en 
 la búsqueda lineal, y otro basado en la técnica de Divide y Vencerás. 
 
@@ -21,8 +21,8 @@ caben destacar los lemas \ref{lem:1} y \ref{lem:2}.
     Razonemos por contradicción. Supongamos que para $j > i$ se 
     cumple que $v[j]=j$, entonces $\exists m \in \mathbb N$ tal que $j=i+m$. Como el 
     vector está ordenado en orden no decreciente sin repetidos, como mínimo un elemento
-    difiere en una unidad del elemento siguiente. Podemos considerar esto último sin 
-    lugar a ambiguedad para todo elemento del vector, luego $v[j]=v[i]+m$. Como por hipótesis
+    difiere en una unidad del elemento siguiente. Supongamos sin lugar a ambiguedad que
+    se da la situación anterior para todo elemento en el vector, luego $v[j]=v[i]+m$. Como por hipótesis
     $v[i]=i+k$, tendríamos que $v[j]=i+k+m$, pero $i=j-m$, entonces $v[j]=j-m+k+m=j+k$, lo
     cual es una clara contradicción, ya que habiamos supuesto que $v[j]=j$. Por tanto, no 
     existe ningún $j$ tal que $v[j]=j$.
@@ -59,7 +59,20 @@ BUSQUEDA_LINEAL(v[1...n-1], ini, fin)
     devolver indice
 \end{lstlisting}
 
-%\lstinputlisting[language=C++, firstline=88, lastline=181, caption=Implementación en C++ del algoritmo basado en la búsqueda lineal.]{../src/<nombre_programa>.cpp} 
+\lstinputlisting[language=C++, firstline=93, lastline=106, caption=Implementación en C++ del algoritmo basado en la búsqueda lineal.]{../src/ejercicio-1-comp-fija-no-repetidos.cpp} 
+
+\paragraph{Eficiencia teórica}
+
+En las líneas 94-95 tenemos sentencias de asignación que son $O(1)$, luego podemos acotarlas por una constante $c$. 
+En las líneas 97-103 nos encontramos con un bucle while, que en el peor de los casos (no se encuentra la posición buscada) 
+recorre todas las componentes del vector, en cuyo cuerpo encontramos sentencias $O(1)$, y las acotamos por una contante $t$.
+Entonces llamando $n$ a la longitud del vector donde realizamos la búsqueda (el tamaño del problema) tendríamos: 
+
+\begin{equation*}
+    \sum_{i=0}^{n-1} t + c = t \sum_{i=0}^{n-1} 1 + c = tn + c
+\end{equation*}
+
+Luego la eficiencia de la BUSQUEDA_LINEAL es $O(n)$.
 
 \subsubsection{Caso Divide y Vencerás}
 
@@ -73,5 +86,76 @@ de los valores de entrada. \textbf{Para determinar este valor}, hemos probado co
 viendo que para este valor las salidas del tiempo de ejecución son más o menos \textbf{estables}. 
 
 \begin{lstlisting}
-    
+BUSQUEDA_DV(v[1...n-1], ini, fin)
+inicio
+si (fin - ini + 1) <= UMBRAL 
+    Devolver BUSQUEDA_LINEAL(v[1...n-1], ini, fin)
+en caso contrario
+    k = (ini + fin + 1)/2
+    si v[k] == k
+        Devolver k
+        de lo contrario, si v[k]>k
+            Devolver BUSQUEDA_DV(V[1...n-1], ini, k-1)
+            de lo contrario
+                Devolver  BUSQUEDA_DV(V[1...n-1], k+1, fin)
+fin
 \end{lstlisting}
+
+\lstinputlisting[language=C++, firstline=117, lastline=130, caption=Implementación en C++ del algoritmo basado en la búsqueda lineal.]{../src/ejercicio-1-comp-fija-no-repetidos.cpp} 
+
+\paragraph{Eficiencia teórica}
+
+Tenemos una estructura condicional. Si el tamaño del problema (número de componentes del vector donde 
+vamos a buscar) es menor o igual que el UMBRAL escogido, entonces ejecutamos la BUSQUEDA_LINEAL, que es $O(n)$. 
+En caso contrario, calculamos $k$, proceso que es $O(1)$ y se acota por una contante $c$. A continuación,
+comprobamos si hemos encontrado el elemento o no. Como estamos realizando un análisis asintótico, supondremos
+el peor de los casos, en el que no encontramos el elemento, por tanto, como se ha mencionado anteriormente,
+se efectúa una simplificación realizándose una llamada recursiva para la mitad del vector correspondiente.
+En conclusión, el análisis quedaría (supondremos que $n$ es potencia de 2, ya que podemos realizar una acotación 
+superior de $n$ por la potencia de dos más cercana al estudiar la eficiencia $Big O$): 
+
+\begin{equation}
+    T(n) = \left\{ \begin{array}{lr} T(n/2) + c & \text{si } n > \text{UMBRAL}\\ n & \text{si } n \leqslant \text{UMBRAL} \end{array} \right.
+\end{equation}
+
+Vamos a resolver la recurrencia:
+
+\begin{equation*}
+    \begin{array}{lr}  T(n) =  T(n/2) + c & \text{si } n > \text{UMBRAL} \end{array}
+\end{equation*}
+
+Realizamos el cambio de variable $n = 2^{m}$ en la ecuación (2) obtenemos:
+
+\begin{equation*}
+    T(2^{m}) =  T(2^{m-1}) + c 
+\end{equation*}
+
+Renombramos la expresión anterior como $T(2^{m}) = t_{m}$ obtenemos:
+
+\begin{equation*}
+    t_{m} - t_{m-1} = c 
+\end{equation*}
+
+Obtenemos la siguiente ecuación de recurrencia de la ecuación anterior:
+
+\begin{equation}
+    (x-1)^{2} = 0
+\end{equation}
+
+Luego la solución general de la recurrencia es:
+
+\begin{equation}
+    t_{m} = c_{1} + c_{2}m
+\end{equation}
+
+Deshacemos el cambio de variable:
+
+\begin{equation}
+    T(n) = c_{1} + c_{2}log_{2}(n)
+\end{equation}
+
+Por tanto $T(n) \in O(log_{2}(n))$ si $n >$ UMBRAL.
+
+% CONCLUSIONES:
+% - El método DyV proporciona un algoritmo más eficiente que el básico
+% - Esto se ilustra en los resulados obtenidos empiricamente
