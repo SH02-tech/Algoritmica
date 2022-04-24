@@ -8,6 +8,6 @@ en caso contrario
         Devolver k
         de lo contrario, si v[k]>k
             Devolver BUSQUEDA_DV(V[1...n-1], ini, k-1)
-            de lo contrario
-                Devolver  BUSQUEDA_DV(V[1...n-1], k+1, fin)
+        de lo contrario
+            Devolver  BUSQUEDA_DV(V[1...n-1], k+1, fin)
 fin
