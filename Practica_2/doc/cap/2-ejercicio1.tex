@@ -72,7 +72,7 @@ Entonces llamando $n$ a la longitud del vector donde realizamos la búsqueda (el
     \sum_{i=0}^{n-1} t + c = t \sum_{i=0}^{n-1} 1 + c = tn + c
 \end{equation*}
 
-Luego la eficiencia de la BUSQUEDA_LINEAL es $O(n)$.
+Luego la eficiencia de la BUSQUEDA\_LINEAL es $O(n)$.
 
 \subsubsection{Caso Divide y Vencerás}
 
@@ -106,7 +106,7 @@ fin
 \paragraph{Eficiencia teórica}
 
 Tenemos una estructura condicional. Si el tamaño del problema (número de componentes del vector donde 
-vamos a buscar) es menor o igual que el UMBRAL escogido, entonces ejecutamos la BUSQUEDA_LINEAL, que es $O(n)$. 
+vamos a buscar) es menor o igual que el UMBRAL escogido, entonces ejecutamos la BUSQUEDA\_LINEAL, que es $O(n)$. 
 En caso contrario, calculamos $k$, proceso que es $O(1)$ y se acota por una contante $c$. A continuación,
 comprobamos si hemos encontrado el elemento o no. Como estamos realizando un análisis asintótico, supondremos
 el peor de los casos, en el que no encontramos el elemento, por tanto, como se ha mencionado anteriormente,
