@@ -6,7 +6,8 @@ la búsqueda lineal, y otro basado en la técnica de Divide y Vencerás.
 \subsection{Vector con valores no repetidos}
 
 En primer lugar, abordamos el problema para vectores con valores no repetidos. Para esta parte
-caben destacar los lemas \ref{lem:1} y \ref{lem:2}. 
+caben destacar los lemas \ref{lem:1} y \ref{lem:2}. En esta subsección, $v$ será un vector ordenado con
+valores no repetidos con componentes enteras. 
 
 % El último algoritmo se ha desarrollado a partir de un análisis detallado del 
 % problema, a partir del cual hemos conseguido demostrar las siguientes proposiciones:
@@ -19,98 +20,83 @@ caben destacar los lemas \ref{lem:1} y \ref{lem:2}.
 
 \begin{proof}
     Razonemos por contradicción. Supongamos que para $j > i$ se 
-    cumple que $v[j]=j$, entonces $\exists m \in \mathbb N$ tal que $j=i+m$. Como el 
+    cumple que $v[j]=j$, esto es, $\exists m \in \mathbb N$ tal que $j=i+m$. Como el 
     vector está ordenado en orden no decreciente sin repetidos, como mínimo un elemento
-    difiere en una unidad del elemento siguiente. Supongamos sin lugar a ambiguedad que
-    se da la situación anterior para todo elemento en el vector, luego $v[j]=v[i]+m$. Como por hipótesis
-    $v[i]=i+k$, tendríamos que $v[j]=i+k+m$, pero $i=j-m$, entonces $v[j]=j-m+k+m=j+k$, lo
-    cual es una clara contradicción, ya que habiamos supuesto que $v[j]=j$. Por tanto, no 
-    existe ningún $j$ tal que $v[j]=j$.
+    difiere en una unidad del elemento siguiente. En consecuencia,  $v[j] \geq v[i]+m$. 
+    Como por hipótesis $v[i]=i+k$, tendríamos que $v[j] \geq i+k+m$, pero $i=j-m$, entonces 
+    $v[j] \geq j-m+k+m=j+k > j$, lo que es contradictorio pues habíamos supuesto que $v[j]=j$. Por tanto, no 
+    existe ningún $j > i$ tal que $v[j]=j$.
 \end{proof}
 
 \begin{lemma}
     \label{lem:2}
     Sea i con $0 < i < n$ fijo, tal que $v[i]=i-k$ con 
-    $k \in \mathbb N$, entonces $v[j] \neq j$,  $\forall j$ con $0 \leqslant j < i$. 
+    $k \in \mathbb N$. Entonces $v[j] \neq j$,  $\forall j$ con $0 \leqslant j < i$. 
 \end{lemma}
 
 \begin{proof}
     Razonemos por contradicción. Supongamos que para $j < i$ se 
     cumple que $v[j]=j$, entonces $\exists m \in \mathbb N$ tal que $j=i-m$. Como el 
     vector está ordenado en orden no decreciente sin repetidos, como mínimo un elemento
-    difiere en una unidad del elemento siguiente. Podemos considerar esto último sin 
-    lugar a ambiguedad para todo elemento del vector, luego $v[j]=v[i]-m$. Como por hipótesis
-    $v[i]=i-k$, tendríamos que $v[j]=i-k-m$, pero $i=j+m$, entonces $v[j]=j+m-k-m=j-k$, lo
-    cual es una clara contradicción, ya que habiamos supuesto que $v[j]=j$. Por tanto, no 
-    existe ningún $j$ tal que $v[j]=j$.
+    difiere en una unidad del elemento siguiente. En consecuencia,  $v[j] \leq v[i]-m$. 
+    Como por hipótesis $v[i]=i-k$, tendríamos que $v[j] \leq i-k-m$, pero $i=j+m$, entonces 
+    $v[j] \leq j+m-k-m=j-k < j$, lo que es contradictorio pues habíamos supuesto que $v[j]=j$. Por tanto, no 
+    existe ningún $j<i$ tal que $v[j]=j$.
 \end{proof}
 
 \subsubsection{Caso obvio}
 
 En este caso el algoritmo de búsqueda del índice se basa en la búsqueda lineal. 
 
-\begin{lstlisting}
-BUSQUEDA_LINEAL(v[1...n-1], ini, fin)
-    indice = ini
-    si el tamaño del vector es mayor que 0
-        para i = ini hasta fin o hasta que encontremos la posición
-            si v[i] es igual a i (encontramos la posición)
-                indice = i
-    devolver indice
-\end{lstlisting}
+\subsubsubsection{Pseudocódigo}
 
-\lstinputlisting[language=C++, firstline=93, lastline=106, caption=Implementación en C++ del algoritmo basado en la búsqueda lineal.]{../src/ejercicio-1-comp-fija-no-repetidos.cpp} 
+\lstinputlisting[caption=Pseudocódigo asociado al caso obvio., label={alg:1a-obvio}]{listing/ejer1a-pseudo-obvio.txt}
 
-\paragraph{Eficiencia teórica}
+\subsubsubsection{Implementación}
 
-En las líneas 94-95 tenemos sentencias de asignación que son $O(1)$, luego podemos acotarlas por una constante $c$. 
-En las líneas 97-103 nos encontramos con un bucle while, que en el peor de los casos (no se encuentra la posición buscada) 
-recorre todas las componentes del vector, en cuyo cuerpo encontramos sentencias $O(1)$, y las acotamos por una contante $t$.
+\lstinputlisting[language=C++, firstline=93, lastline=106, caption=Implementación en C++ 
+del algoritmo basado en la búsqueda lineal., label={cod:1a-obvio}]{../src/ejercicio-1-comp-fija-no-repetidos.cpp} 
+
+\subsubsubsection{Análisis de Eficiencia}
+
+Las dos primeras líneas son sentencias de asignación $O(1)$, luego podemos acotarlas por una constante $c$. 
+Posteriormente, nos encontramos con un bucle while, que en el peor de los casos (no se encuentra la posición buscada) 
+recorre todas las componentes del vector, en cuyo cuerpo encontramos sentencias $O(1)$, y las acotamos por una constante $t$.
 Entonces llamando $n$ a la longitud del vector donde realizamos la búsqueda (el tamaño del problema) tendríamos: 
 
-\begin{equation*}
-    \sum_{i=0}^{n-1} t + c = t \sum_{i=0}^{n-1} 1 + c = tn + c
-\end{equation*}
-
-Luego la eficiencia de la BUSQUEDA\_LINEAL es $O(n)$.
+\begin{equation}
+    T(n) = \sum_{i=0}^{n-1} t + c = t \sum_{i=0}^{n-1} 1 + c = tn + c \implies \boxed{T(n) \in O(n)}
+\end{equation}
 
 \subsubsection{Caso Divide y Vencerás}
 
-En esta parte, como consecuencia de los lemas \ref{lem:1} y \ref{lem:2}, el algoritmo presentado es similar 
-al algoritmo de búsqueda binaria (un caso muy particular de Divide y Vencerás, 
-llamado \textbf{simplificación} \cite{Verdegay2017}).
+En esta parte, como consecuencia de los lemas \ref{lem:1} y \ref{lem:2}, podemos emplear un 
+algoritmo similar al de búsqueda binaria (un caso muy particular de Divide y Vencerás: la
+\textbf{simplificación} \cite{Verdegay2017}). Un ejemplo de \textbf{pseudocódigo} se puede encontrar en \ref{alg:1a-dyv} y
+una \textbf{implementación} en \ref{cod:1a-dyv}.
 
-En este caso, para tomar las medidas experimentales, se ha tenido que tomar para cada $n$ una \textbf{media de 1.000.000
-de valores}. Esto se debe a que el nº de operaciones del algoritmo fluctúa mucho y puede terminar mucho antes o después en función
-de los valores de entrada. \textbf{Para determinar este valor}, hemos probado con diferentes número de entradas, 
-viendo que para este valor las salidas del tiempo de ejecución son más o menos \textbf{estables}. 
+\subsubsubsection{Pseudocódigo}
 
-\begin{lstlisting}
-BUSQUEDA_DV(v[1...n-1], ini, fin)
-inicio
-si (fin - ini + 1) <= UMBRAL 
-    Devolver BUSQUEDA_LINEAL(v[1...n-1], ini, fin)
-en caso contrario
-    k = (ini + fin + 1)/2
-    si v[k] == k
-        Devolver k
-        de lo contrario, si v[k]>k
-            Devolver BUSQUEDA_DV(V[1...n-1], ini, k-1)
-            de lo contrario
-                Devolver  BUSQUEDA_DV(V[1...n-1], k+1, fin)
-fin
-\end{lstlisting}
+\lstinputlisting[caption=Pseudocódigo asociado al caso Divide y Vencerás., label={alg:1a-dyv}]{listing/ejer1a-pseudo-dyv.txt}
 
-\lstinputlisting[language=C++, firstline=117, lastline=130, caption=Implementación en C++ del algoritmo basado en la búsqueda lineal.]{../src/ejercicio-1-comp-fija-no-repetidos.cpp} 
+\subsubsubsection{Implementación}
 
-\paragraph{Eficiencia teórica}
+\lstinputlisting[language=C++, firstline=117, lastline=130, 
+caption=Implementación en C++ del algoritmo basado en Divide y Vencerás., label={cod:1a-dyv}]
+{../src/ejercicio-1-comp-fija-no-repetidos.cpp} 
+
+\subsubsubsection{Determinación del umbral}
+
+\subsubsubsection{Análisis de Eficiencia}
 
 Tenemos una estructura condicional. Si el tamaño del problema (número de componentes del vector donde 
 vamos a buscar) es menor o igual que el UMBRAL escogido, entonces ejecutamos la BUSQUEDA\_LINEAL, que es $O(n)$. 
-En caso contrario, calculamos $k$, proceso que es $O(1)$ y se acota por una contante $c$. A continuación,
-comprobamos si hemos encontrado el elemento o no. Como estamos realizando un análisis asintótico, supondremos
+En caso contrario, calculamos $k$, proceso que es $O(1)$ y se acota por una contante $c$. 
+
+A continuación, comprobamos si hemos encontrado el elemento o no. Como estamos realizando un análisis asintótico, supondremos
 el peor de los casos, en el que no encontramos el elemento, por tanto, como se ha mencionado anteriormente,
 se efectúa una simplificación realizándose una llamada recursiva para la mitad del vector correspondiente.
+
 En conclusión, el análisis quedaría (supondremos que $n$ es potencia de 2, ya que podemos realizar una acotación 
 superior de $n$ por la potencia de dos más cercana al estudiar la eficiencia $Big O$): 
 
@@ -120,41 +106,37 @@ superior de $n$ por la potencia de dos más cercana al estudiar la eficiencia $B
 
 Vamos a resolver la recurrencia:
 
-\begin{equation*}
+\begin{equation}
     \begin{array}{lr}  T(n) =  T(n/2) + c & \text{si } n > \text{UMBRAL} \end{array}
-\end{equation*}
+    \label{eq:ejer1:efi-dyv}
+\end{equation}
 
-Realizamos el cambio de variable $n = 2^{m}$ en la ecuación (2) obtenemos:
+Realizamos el cambio de variable $n = 2^{m}$ en la ecuación \ref{eq:ejer1:efi-dyv} obtenemos:
 
 \begin{equation*}
     T(2^{m}) =  T(2^{m-1}) + c 
 \end{equation*}
 
-Renombramos la expresión anterior como $T(2^{m}) = t_{m}$ obtenemos:
+Renombramos la expresión anterior como $T(2^{m}) = t_{m}$, de donde obtenemos: $t_{m} - t_{m-1} = c$, con
+ecuación característica asociada a la homogénea $(x-1)^{2} = 0$. Por tanto las soluciones son de la forma: 
 
 \begin{equation*}
-    t_{m} - t_{m-1} = c 
-\end{equation*}
-
-Obtenemos la siguiente ecuación de recurrencia de la ecuación anterior:
-
-\begin{equation}
-    (x-1)^{2} = 0
-\end{equation}
-
-Luego la solución general de la recurrencia es:
-
-\begin{equation}
     t_{m} = c_{1} + c_{2}m
-\end{equation}
+\end{equation*}
 
 Deshacemos el cambio de variable:
 
 \begin{equation}
-    T(n) = c_{1} + c_{2}log_{2}(n)
+    T(n) = c_{1} + c_{2} \log_2(n) \implies \boxed{T(n) \in O(\log_2(n))}
 \end{equation}
 
-Por tanto $T(n) \in O(log_{2}(n))$ si $n >$ UMBRAL.
+En este caso, para tomar las medidas experimentales, hemos tomado para cada $n$ una \textbf{media de 1.000.000
+de vectores diferentes}. Esto se debe a que el número de operaciones del algoritmo fluctúa mucho y puede terminar 
+mucho antes o después en función
+de los valores de entrada. \textbf{Para determinar este valor}, hemos probado con diferentes número de entradas, 
+viendo que para este valor las salidas del tiempo de ejecución son más o menos \textbf{estables}. 
+
+\subsubsection{Comparativa}
 
 % CONCLUSIONES:
 % - El método DyV proporciona un algoritmo más eficiente que el básico

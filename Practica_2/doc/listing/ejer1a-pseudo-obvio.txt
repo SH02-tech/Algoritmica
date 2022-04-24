@@ -1,0 +1,7 @@
+BUSQUEDA_LINEAL(v[1...n-1], ini, fin)
+    indice = ini
+    si el tamaño del vector es mayor que 0
+        para i = ini hasta fin o hasta que encontremos la posición
+            si v[i] es igual a i (encontramos la posición)
+                indice = i
+    devolver indice
