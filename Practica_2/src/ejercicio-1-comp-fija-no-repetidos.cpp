@@ -105,7 +105,9 @@ static int linealSearch(const vector<int> &v, int ini, int fin) {
     return index;
 }
 
+#ifndef UMBRAL
 #define UMBRAL 5 // Hay que calcular el optimo
+#endif
 /**
  * @brief Búsqueda basada en la técnica Divide y Vencerás del índice i que cumple v[i]==i
  * @param v vector ordenado ascendentemente sin repetidos a partir del cual realizar la bsqueda
