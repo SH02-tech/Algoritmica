@@ -5,38 +5,25 @@
 # Parameters: Not necessary
 # Return: Nothing
 ######################################################################
-SRC_PATH="src/"
-OUTPUT="exe"
 
-declare -a programs
-programs=('ejercicio1.cpp')
-#programs=('ejercicio1.cpp','ejercicio2.cpp')
-
-# Arrays of data:
-#	1. min
-#	2. max
-#	3. number of jumps
-#	4. number of repeats
-
-declare -a Data
-OrdenData=(1 11 10 1)
-
-# Copy the scripts from ../GraphKiller, so we have them in the current directory of GraphP1.sh
+# Copy the scripts from ../GraphKiller, so we have them in the current directory of GraphP2.sh
 cp ../GraphKiller/*.sh .
 
-for ((i=0; i<${#programs[@]}; ++i))
-do	
-	src_file=${programs[i]}
-	output=${src_file%%.cpp}
+g++ -O3 src/ejercicio-1-comp-fija-no-repetidos.cpp -o ejercicio-1-comp-fija-no-repetidos
+./MainGraph.sh --xlabel "Número de componentes del vector" --ylabel "Tiempo (en nanosegundos)" --min-x 1 --max-x 1001 --num-points 20  --repetitions-per-point 1 ejercicio-1-comp-fija-no-repetidos
+rm ejercicio-1-comp-fija-no-repetidos
 
-	g++ -O3 "$SRC_PATH"/${programs[i]} -o $output
+g++ -O3 src/ejercicio-1-comp-fija-repetidos.cpp -o ejercicio-1-comp-fija-repetidos
+./MainGraph.sh --xlabel "Número de componentes del vector" --ylabel "Tiempo (en milisegundos)" --min-x 1 --max-x 1001 --num-points 20  --repetitions-per-point 20 ejercicio-1-comp-fija-repetidos
+rm ejercicio-1-comp-fija-repetidos
 
-	./MainGraph.sh  --xlabel "Número de componentes del vector" --ylabel "Tiempo (en microsegundos)" \
-			--min-x ${OrdenData[0]} --max-x ${OrdenData[1]} \
-			--num-points ${OrdenData[2]} --repetitions-per-point ${OrdenData[3]} \
-			$output
-	rm $output
-done
+g++ -O3 src/ejercicio-2-mezcla.cpp -o ejercicio-2-mezcla
+./MainGraph.sh --xlabel "Número de componentes del vector" --ylabel "Tiempo (en milisegundos)" --min-x 1 --max-x 1001 --num-points 20  --repetitions-per-point 20 ejercicio-2-mezcla
+rm ejercicio-2-mezcla
+
+#g++ -O3 src/seleccion-peor.cpp -o seleccion-peor
+#./MainGraph.sh --xlabel "Número de componentes del vector" --ylabel "Tiempo (en nanosegundos)" --min-x #1 --max-x 45050 --num-points 25  --repetitions-per-point 1 seleccion-peor
+#rm seleccion-peor
 
 # Delete the scripts imported from ../GraphKiller.
 rm {BestFitter,GraphPlotter,PointsPlotter,MainGraph,Regressions,TableGenerator}.sh
