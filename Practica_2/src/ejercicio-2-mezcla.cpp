@@ -88,8 +88,8 @@ vector<vector<int>> Generator(int n, int k) {
  */
 vector<int> Unifica(const vector<int> &vector1, const vector<int> &vector2) {
 	vector<int> acumulador;
-	auto it_vector1 = vector1.begin(); 
-	auto it_vector2 = vector2.begin();
+	vector<int>::const_iterator it_vector1 = vector1.begin(); 
+	vector<int>::const_iterator it_vector2 = vector2.begin();
 
 	while (it_vector1 != vector1.end() && it_vector2 != vector2.end()) {
 		if (*it_vector1 < *it_vector2) {
@@ -117,7 +117,7 @@ vector<int> Unifica(const vector<int> &vector1, const vector<int> &vector2) {
  */
 vector<int> Agrupa(const vector<vector<int>> &lista_vectores) {
 	vector<int> acumulador;
-	auto it = lista_vectores.begin();
+	vector<vector<int>>::const_iterator it = lista_vectores.begin();
 	acumulador = *it;
 	++it;
 
