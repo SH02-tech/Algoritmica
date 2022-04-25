@@ -46,7 +46,8 @@ valores no repetidos con componentes enteras.
 
 \subsubsection{Caso obvio}
 
-En este caso el algoritmo de búsqueda del índice se basa en la búsqueda lineal. 
+En este caso el algoritmo de búsqueda del índice se basa en la búsqueda lineal. Un ejemplo de \textbf{pseudocódigo} 
+se puede encontrar en \ref{alg:1a-obvio} y una \textbf{implementación} en \ref{cod:1a-obvio}.
 
 \subsubsubsection{Pseudocódigo}
 
@@ -81,11 +82,25 @@ una \textbf{implementación} en \ref{cod:1a-dyv}.
 
 \subsubsubsection{Implementación}
 
-\lstinputlisting[language=C++, firstline=117, lastline=130, 
+\lstinputlisting[language=C++, firstline=117, lastline=131, 
 caption=Implementación en C++ del algoritmo basado en Divide y Vencerás., label={cod:1a-dyv}]
 {../src/ejercicio-1-comp-fija-no-repetidos.cpp} 
 
 \subsubsubsection{Determinación del umbral}
+
+Un algoritmo Divide y Vencerás debe evitar proceder de forma recursiva cuando el tamaño de los subcasos no lo justifique, ya que
+de lo contrario su rendimiento se degrada considerablemente. Esta es la razón por la cual debemos elegir un umbral, es decir, 
+un tamaño del problema determinado tal que para un número de datos menor o igual que este, el algoritmo recursivo realize una 
+llamada al algoritmo básico para resolver el problema. 
+
+En nuestro caso, para encontrar dicho umbral, hemos de determinar el número de datos óptimo tales que para valores menores que este, 
+el algoritmo básico presente mejores tiempos de ejecución que el algoritmo Divide y Vencerás. El cálculo del umbral depende en gran 
+medida de las constantes ocultas, luego es dificil hacer un cáculo fiel a nivel teórico, por lo que se opta por adoptar un punto de 
+vista teórico/empírico, mediante el cual, a partir de las implementaciones ejecutadas en un equipo concreto, \textbf{obtenemos las 
+funciones de ajuste de ambos algoritmos con sus correspondientes parámetros}, y una vez obtenidas, \textbf{calculamos el umbral de 
+forma teórica igualando ambas funciones, despejando el tamaño del problema}: 
+
+%% Aquí vendría el desarrollo para los datos obtenidos
 
 \subsubsubsection{Análisis de Eficiencia}
 
@@ -111,7 +126,7 @@ Vamos a resolver la recurrencia:
     \label{eq:ejer1:efi-dyv}
 \end{equation}
 
-Realizamos el cambio de variable $n = 2^{m}$ en la ecuación \ref{eq:ejer1:efi-dyv} obtenemos:
+Realizamos el cambio de variable $n = 2^{m}$ en la ecuación \ref{eq:ejer1:efi-dyv} y obtenemos:
 
 \begin{equation*}
     T(2^{m}) =  T(2^{m-1}) + c 
@@ -133,11 +148,13 @@ Deshacemos el cambio de variable:
 En este caso, para tomar las medidas experimentales, hemos tomado para cada $n$ una \textbf{media de 1.000.000
 de vectores diferentes}. Esto se debe a que el número de operaciones del algoritmo fluctúa mucho y puede terminar 
 mucho antes o después en función
-de los valores de entrada. \textbf{Para determinar este valor}, hemos probado con diferentes número de entradas, 
+de los valores de entrada. \textbf{Para determinar este valor}, hemos probado con diferente número de entradas, 
 viendo que para este valor las salidas del tiempo de ejecución son más o menos \textbf{estables}. 
 
 \subsubsection{Comparativa}
 
-% CONCLUSIONES:
-% - El método DyV proporciona un algoritmo más eficiente que el básico
-% - Esto se ilustra en los resulados obtenidos empiricamente
+El algoritmo que hace uso de la técnica Divide y Vencerás tiene un orden de eficiencia logarítmico, mientras
+que la eficiencia del algoritmo básico es lineal, luego \textbf{se mejora notablemente la eficiencia usando la técnica de 
+Divide y Vencerás} para solventar el problema. 
+
+Este hecho se ilustra a partir de las gráficas correspondientes a los resultados empíricos obtenidos.   %+comment
