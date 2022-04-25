@@ -90,19 +90,19 @@ static vector<int> vectorGenerator(int n)
  * @pre 0 <= ini <= fin < n
  * @return si se encuentra, devuelve el indice, sino devuelve -1
  */
-static int linealSearch(const vector<int> &v, int ini, int fin) {
-    int i = ini, tam = fin - ini + 1, index = -1;
-    bool found = false;
+static int busquedaBasica(const vector<int> &v, int ini, int fin) {
+    int i = ini, tam = fin - ini + 1, indice = -1;
+    bool encontrado = false;
     if(tam > 0) {
-        while(i <= fin && !found) {
+        while(i <= fin && !encontrado) {
             if(v[i] == i) {
-                index = i;
-                found = true;
+                indice = i;
+                encontrado = true;
             }
             ++i;
         }
     }
-    return index;
+    return indice;
 }
 
 #ifndef UMBRAL
@@ -116,17 +116,17 @@ static int linealSearch(const vector<int> &v, int ini, int fin) {
  * @pre 0 <= ini <= fin < n
  * @return si se encuentra devuelve el indice, sino devuelve -1
  */
-static int dcSearch(const vector<int> &v, int ini, int fin) {
+static int busquedaDV(const vector<int> &v, int ini, int fin) {
     if( (fin - ini + 1) <= UMBRAL) {
-        return linealSearch(v, ini, fin);
+        return busquedaBasica(v, ini, fin);
     } else {
         int k = (ini + fin + 1)/2;
         if(v[k] == k) {
             return k;
         } else if (v[k] > k) {
-            return dcSearch(v,ini,k-1);
+            return busquedaDV(v,ini,k-1);
         } else {
-            return dcSearch(v,k+1,fin);
+            return busquedaDV(v,k+1,fin);
         }
     }
 }
@@ -200,7 +200,7 @@ int main(int argc, char * argv[]) {
 
         tantes = chrono::steady_clock::now();    // Valor del reloj antes de la ejecución
         for (int j=0; j<SIZE_VECTOR; ++j)
-            dcSearch(vectors[j], 0, n-1);
+            busquedaDV(vectors[j], 0, n-1);
         tdespues = chrono::steady_clock::now();    // Valor del reloj antes de la ejecución
 
         acumulador += chrono::duration_cast<chrono::nanoseconds>(tdespues - tantes).count();

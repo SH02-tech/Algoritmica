@@ -93,7 +93,7 @@ vector<int> VectorGenerator(int n) {
  * @param final Posición final.
  * @return int Posición cuyo valor es igual a ella. -1 si hay error. 
  */
-static int PosTipoICTrivial(const vector<int> &v, int inicial, int final) {
+static int BusquedaLineal(const vector<int> &v, int inicial, int final) {
 	int pos = NULL_POS;
 
 	for (int i=inicial; i<=final && pos == NULL_POS; ++i)
@@ -111,20 +111,20 @@ static int PosTipoICTrivial(const vector<int> &v, int inicial, int final) {
  * @param final Posición final.
  * @return int Posición cuyo valor es igual a ella. -1 si hay error. 
  */
-static int PosTipoIC(const vector<int> &v, int inicial, int final) {
+static int VectorPuntoFijo(const vector<int> &v, int inicial, int final) {
 	int pos = NULL_POS;
 	
 	if ((final - inicial +1) <= UMBRAL) {
-		pos = PosTipoICTrivial(v, inicial, final);
+		pos = BusquedaLineal(v, inicial, final);
 	} else {
 		int media = (inicial+final)/2;
 		int aux;
 		
-		aux = PosTipoIC(v, inicial, media);
+		aux = VectorPuntoFijo(v, inicial, media);
 		if (aux != NULL_POS) {
 			pos = aux;
 		} else {
-			aux = PosTipoIC(v, media+1, final);
+			aux = VectorPuntoFijo(v, media+1, final);
 			if (aux != NULL_POS)
 				pos = aux;
 		}
@@ -159,7 +159,7 @@ int main(int argc, char **argv) {
 	clock_t tdespues;  // Valor del reloj después de la ejecución
 
 	tantes = clock();
-	PosTipoIC(vect, 0, vect.size()-1);
+	VectorPuntoFijo(vect, 0, vect.size()-1);
 	tdespues = clock();
 
 	cout << ((double)(tdespues-tantes))/(CLOCKS_PER_SEC*1E-3)<< endl; // Tiempo en milisegundos. 
