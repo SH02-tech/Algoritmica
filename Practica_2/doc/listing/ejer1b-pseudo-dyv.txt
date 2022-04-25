@@ -1,0 +1,15 @@
+BUSQUEDA_DV(v[1...n-1], ini, fin)
+inicio
+si (fin - ini + 1) <= UMBRAL 
+    Devolver BUSQUEDA_LINEAL(v[1...n-1], ini, fin)
+en caso contrario
+    k = (ini + fin + 1)/2
+    si v[k] == k
+        Devolver k
+        de lo contrario, si v[k]>k
+            posicion = BUSQUEDA_DV(V[1...n-1], ini, k-1)
+            si posicion > 0
+                Devolver posicion
+            de lo contrario
+                Devolver  BUSQUEDA_DV(V[1...n-1], k+1, fin)
+fin
