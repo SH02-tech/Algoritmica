@@ -44,7 +44,7 @@ valores no repetidos con componentes enteras.
     existe ningún $j<i$ tal que $v[j]=j$.
 \end{proof}
 
-\subsubsection{Caso obvio}
+\subsubsection{Caso obvio} \label{sec:1a-obvio}
 
 En este caso el algoritmo de búsqueda del índice se basa en la búsqueda lineal. 
 
@@ -68,7 +68,7 @@ Entonces llamando $n$ a la longitud del vector donde realizamos la búsqueda (el
     T(n) = \sum_{i=0}^{n-1} t + c = t \sum_{i=0}^{n-1} 1 + c = tn + c \implies \boxed{T(n) \in O(n)}
 \end{equation}
 
-\subsubsection{Caso Divide y Vencerás}
+\subsubsection{Caso Divide y Vencerás} \label{sec:1a-dyv}
 
 En esta parte, como consecuencia de los lemas \ref{lem:1} y \ref{lem:2}, podemos emplear un 
 algoritmo similar al de búsqueda binaria (un caso muy particular de Divide y Vencerás: la
@@ -102,6 +102,7 @@ superior de $n$ por la potencia de dos más cercana al estudiar la eficiencia $B
 
 \begin{equation}
     T(n) = \left\{ \begin{array}{lr} T(n/2) + c & \text{si } n > \text{UMBRAL}\\ n & \text{si } n \leqslant \text{UMBRAL} \end{array} \right.
+    \label{eq:1a-efi-dyv-rec}
 \end{equation}
 
 Vamos a resolver la recurrencia:
@@ -118,7 +119,7 @@ Realizamos el cambio de variable $n = 2^{m}$ en la ecuación \ref{eq:ejer1:efi-d
 \end{equation*}
 
 Renombramos la expresión anterior como $T(2^{m}) = t_{m}$, de donde obtenemos: $t_{m} - t_{m-1} = c$, con
-ecuación característica asociada a la homogénea $(x-1)^{2} = 0$. Por tanto las soluciones son de la forma: 
+ecuación asociada $(x-1)^{2} = 0$. Por tanto las soluciones son de la forma: 
 
 \begin{equation*}
     t_{m} = c_{1} + c_{2}m
@@ -128,6 +129,7 @@ Deshacemos el cambio de variable:
 
 \begin{equation}
     T(n) = c_{1} + c_{2} \log_2(n) \implies \boxed{T(n) \in O(\log_2(n))}
+    \label{eq:1a-eficiencia-lineal}
 \end{equation}
 
 En este caso, para tomar las medidas experimentales, hemos tomado para cada $n$ una \textbf{media de 1.000.000
@@ -141,3 +143,90 @@ viendo que para este valor las salidas del tiempo de ejecución son más o menos
 % CONCLUSIONES:
 % - El método DyV proporciona un algoritmo más eficiente que el básico
 % - Esto se ilustra en los resulados obtenidos empiricamente
+
+\subsection{Vector con valores repetidos}
+
+Analizamos ahora el caso para vectores que pueden tomar valores repetidos. Veremos que, mientras que el algoritmo
+\ref{alg:1a-obvio} sigue siendo válido, el algoritmo \ref{alg:1a-dyv} deja de serlo. 
+
+\subsubsection{Caso obvio}
+
+El algoritmo \ref{alg:1a-obvio} sigue preservando su validez, puesto que el hecho de que los elementos estén o no
+repetidos no influye en la ejecución de este algoritmo. Tanto el pseudocódigo y el análisis de eficiencia es totalmente
+análogo al apartado \ref{sec:1a-obvio}. 
+
+\subsubsubsection{Pseudocódigo}
+
+Es el mismo que el pseudocódigo \ref{alg:1a-obvio}. 
+
+\subsubsubsection{Implementación}
+
+La implementación sería el mismo que en \ref{cod:1a-obvio}. Otra implementación de este podría encontrarse en \ref{cod:1b-obvio}. 
+
+\lstinputlisting[language=C++, firstline=88, lastline=104, 
+caption=Implementación alternativa en C++ del algoritmo basado en Búsqueda Lineal., label={cod:1b-obvio}]
+{../src/ejercicio-1-comp-fija-repetidos.cpp} 
+
+\subsubsubsection{Análisis de Eficiencia}
+
+El análisis de eficiencia \textbf{teórica} es análogo al realizado en \ref{sec:1a-obvio}, obteniéndose 
+que el orden de eficiencia es lineal (\ref{eq:1a-eficiencia-lineal}). El análisis de eficiencia híbrido
+de la implementación \ref{cod:1b-obvio} puede encontrar en la tabla ??. 
+
+% TODO: Incluir gráficas con este análisis de eficiencia. 
+
+\subsubsection{Caso Divide y Vencerás}
+
+Para vectores ordenados con elementos repetidos, el algoritmo \ref{alg:1a-dyv} falla en algunas ocasiones. En este caso, 
+el algoritmo \ref{alg:1a-dyv} 
+\textbf{no siempre es válido}. Un ejemplo ilustrativo de ello se
+puede observar en la figura \ref{fig:fallo-1a}, donde el algoritmo dictamina que no existe ningún
+elemento que verifica la condición $v[i] = i$, cuando $v[0] = 0$. 
+
+\begin{figure}
+    \centering
+    \includegraphics{img/esquema_fallo1a.pdf}
+    \caption{Ejemplo de vector con elementos repetidos para el que falla el algoritmo \ref{alg:1a-dyv}.}
+    \label{fig:fallo-1a}
+\end{figure}
+
+Para solventar este problema, se ha de modificar el algoritmo \ref{alg:1a-dyv}, de manera que, cuando en una de las mitades
+no encuentra un elemento que verifica la condición, también busque en la otra.
+
+\subsubsubsection{Pseudocódigo}
+
+\lstinputlisting[caption=Pseudocódigo asociado al caso Divide y Vencerás., label={alg:1b-dyv}]{listing/ejer1b-pseudo-dyv.txt}
+
+\subsubsubsection{Implementación}
+
+\lstinputlisting[language=C++, firstline=106, lastline=134, 
+caption=Implementación en C++ del algoritmo basado en Divide y Vencerás., label={cod:1b-dyv}]
+{../src/ejercicio-1-comp-fija-repetidos.cpp} 
+
+\subsubsubsection{Determinación del umbral}
+
+\subsubsubsection{Análisis de Eficiencia}
+
+El análisis de eficiencia \textbf{teórico} es análogo al realizado en \ref{sec:1a-dyv}, \textbf{con la salvedad} de que, en el
+peor caso, se ha de explorar también la otra mitad del vector, por lo que la expresión \ref{eq:1a-efi-dyv-rec}
+se transformaría en \ref{eq:1b-efi-dyv-rec} (con $c \in \mathbb N$ una constante). 
+
+\begin{equation}
+    T(n) = \left\{ \begin{array}{lr} 2 T(n/2) + c & \text{si } n > \text{UMBRAL}\\ n & \text{si } n \leqslant \text{UMBRAL} \end{array} \right.
+    \label{eq:1b-efi-dyv-rec}
+\end{equation}
+
+Para resolver \ref{eq:1b-efi-dyv-rec}, para $n > \text{UMBRAL}$
+consideramos el cambio
+de variable $n = 2^k$, por lo que la expresión queda $T(2^k) = 2T(2^{k-1}) + c$. Haciendo
+un nuevo cambio de variable $t_m = T(2^m)$, tenemos que:
+$t_m = 2 t_{m-1} + c$. Tenemos que la ecuación característica
+asociada a la homogénea es $x-2 = 0$ y una solución particular 
+es $\{c_o\}$, con $c_o \in \mathbb R$ constante. Por tanto, $t_m = T(2^m) = c_0 + c_1 2^m$,
+con $c_0, c_1 \in \mathbb R$, de donde deducimos que 
+
+\begin{equation}
+    T(n) = c_0 + c_1 n \Rightarrow \boxed{T(n) \in O(n)}
+\end{equation}
+
+Para la eficiencia \textbf{híbrida}...
