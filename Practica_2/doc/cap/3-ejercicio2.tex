@@ -21,3 +21,48 @@ un vector global ordenado.
 
 \subsubsection{Pseudocódigo}
 
+\lstinputlisting[caption=Pseudocódigo asociado a la mezcla 
+ordenada de vectores ordenados en el caso obvio., 
+label={alg:2a-obvio}]{listing/ejer2a-pseudo-obvio.txt}
+
+\subsubsection{Implementación}
+
+\lstinputlisting[firstline=81, lastline=130, language=C++,
+caption=Implementación del algoritmo \ref{alg:2a-obvio}.]{../src/ejercicio-2-mezcla.cpp}
+
+\subsubsection{Análisis de Eficiencia}
+
+En primer lugar, analizamos la \textbf{eficiencia teórica}. En este caso,
+el tamaño del problema depende tanto del número de componentes
+de los vectores $n$ como del número de vectores $k$ que hemos
+considerado. 
+
+Analizando el algoritmo auxiliar UNIFICA de \ref{alg:2a-obvio}, tenemos que el 
+número de operaciones que se realiza es independiente
+del número de vectores $k$ a considerar, por lo que queda
+acotada por una constante. Por su parte, el número de componentes de los
+vectores sí influye en el número de operaciones, pues en el ciclo while se recorre completamente
+el uno de los vectores y parcialmente la otra, siendo las restantes componentes recorridas
+a continuación, por lo que se realizan $cn$ operaciones elementales,
+con $c \in \mathbb N$ constante. 
+
+Notemos que el número de operaciones que
+se realizan es independiente de los valores de los vectores,
+por lo que el mejor caso y el peor caso tienen el mismo orden
+de eficiencia. Por tanto, tenemos que su eficiencia es $\theta(n)$. 
+
+Para el algoritmo AGRUPA de \ref{alg:2a-obvio}, que es el que nos interesa,
+tenemos que cada iteración del bucle realiza $an + b$, con $a,b \in \mathbb N$ constantes,
+operaciones adicionales respecto al anterior,
+realizándose un total de $k$ iteraciones. Por tanto, llamando $T(n)$ al número de
+operaciones elementales realizadas por el algoritmo, obtenemos la 
+expresión \ref{eq:2a-eficiencia}. 
+
+\begin{equation} \label{eq:2a-eficiencia}
+    \begin{split}
+        T(n) & = (an + b) + 2(an + b) + 3(an + b) + \cdots + k(an + b) \\
+             & = (an + b)\sum_{j=1}^k j = (an + b) \frac{k(k+1)}{2} \Rightarrow \boxed{T(n) \in O(nk^2)}
+    \end{split}
+\end{equation}
+
+Para la \textbf{eficiencia híbrida}...

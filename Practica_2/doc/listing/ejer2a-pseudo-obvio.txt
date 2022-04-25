@@ -1,0 +1,30 @@
+UNIFICA(vector1, vector2)
+    acumulador = []
+    elemento1 = vector1.inicial
+    elemento2 = vector2.inicial
+
+    MIENTRAS vector1 NO recorrido y vector2 NO recorrido
+        SI elemento1 < elemento2
+            acumulador <- elemento1
+            elemento1 <- vector1.siguiente
+        EN OTRO CASO
+            acumulador <- elemento2
+            elemento2 <- vector2.siguiente
+        FIN
+    FIN
+
+    acumulador <- vector1.siguientes
+    acumulador <- vector2.siguientes
+
+    RETORNAR acumulador
+FIN
+
+AGRUPA(vectores)
+    acumulador = []
+
+    FOR vector en vectores
+        acumulador = COMBINA(acumulador, vector)
+    FIN
+
+    RETONAR acumulador
+FIN
