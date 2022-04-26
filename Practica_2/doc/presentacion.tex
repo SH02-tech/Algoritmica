@@ -66,10 +66,101 @@
 
     \section{Introducción}
 
+    \begin{frame}
+        \frametitle{Objetivos y motivación}
+
+        \begin{itemize}
+            \item \textbf{Implementar} algoritmo de tipo Divide y Vencerás.
+            \item \textbf{Saber reconocer} el alcance y las limitaciones de algoritmos 
+            de tipo Divide y Vencerás en ejemplos particulares.
+        \end{itemize}
+
+    \end{frame}
+
+    \begin{frame}
+        \frametitle{Metodología}
+
+        \begin{figure}[h]
+            \centering
+            \includegraphics[scale=0.65]{img/esquema_graphkiller.pdf}
+            \caption{Esquema de funcionamiento del \textbf{Analizador} \cite{Rojo2022}. Elaboración propia.}
+            \label{fig:analizador}
+        \end{figure}
+    \end{frame}
+
+    \begin{frame}
+        \frametitle{Equipo empleado}
+
+        \begin{block}{Especificaciones técnicas del equipo}
+            \begin{itemize}
+                \item \textbf{Procesador}: Intel(R) Core(TM) i7-9750H CPU @ 2.60GHz
+                \item \textbf{Memoria RAM:} 32 GB DDR4
+                \item \textbf{Sistema Operativo}: Ubuntu 20.04.4 LTS
+            \end{itemize}
+        \end{block}
+    \end{frame}
+
 
     % Ejercicio 1
 
     \section{}
+
+
+    \section{Ejercicio 1b}
+
+    \begin{frame}
+        \frametitle{Descripción}
+        \begin{block}{Problema}
+            Dado un vector de n componentes ordenado de menor a mayor (con \textbf{valores repetidos}), 
+            encontrar $i$ tal que $v[i] = i$. 
+        \end{block}
+
+        \begin{alertblock}{Fallo del algoritmo anterior}
+            El algoritmo propuesto para el caso con valores no repetidos \textbf{no es válido}.
+        \end{alertblock}
+    \end{frame}
+
+    \begin{frame}
+        \frametitle{Ejemplo de funcionamiento erróneo}
+        \begin{figure}
+            \centering
+            \includegraphics[scale=0.81]{img/esquema_fallo1a.pdf}
+            \caption{Vector con elementos repetidos para el que falla 
+            el algoritmo anterior. Elaboración propia.}
+            \label{fig:fallo-1a}
+        \end{figure}
+    \end{frame}
+
+    \begin{frame}
+        \frametitle{Modificación del algoritmo}
+
+        \lstinputlisting[caption=Pseudocódigo asociado al caso Divide y Vencerás., label={alg:1b-dyv}]{listing/ejer1b-pseudo-dyv.txt}
+    \end{frame}
+
+    \begin{frame}
+        \begin{exampleblock}{Implementación en C++}
+            \lstinputlisting[language=C++, firstline=114, lastline=134, label={cod:1b-dyv}]
+            {../src/ejercicio-1-comp-fija-repetidos.cpp} 
+        \end{exampleblock}
+    \end{frame}
+
+    \begin{frame}
+        \frametitle{Análisis de Eficiencia}
+
+        \begin{block}{Ecuación en diferencias asociada}
+            \begin{equation}
+                T(n) = \left\{ \begin{array}{lr} 2 T(n/2) + c & \text{si } n > \text{UMBRAL}\\ n & \text{si } n \leqslant \text{UMBRAL} \end{array} \right.
+                \label{eq:1b-efi-dyv-rec}
+            \end{equation}
+
+            Por tanto:
+
+            \begin{equation*}
+                \boxed{T(n) \in O(n)}
+            \end{equation*}
+        \end{block}
+        
+    \end{frame}
 
     % Ejercicio 2
 
