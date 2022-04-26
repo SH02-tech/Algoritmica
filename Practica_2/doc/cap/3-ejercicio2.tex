@@ -51,6 +51,41 @@ se realizan es independiente de los valores de los vectores,
 por lo que el mejor caso y el peor caso tienen el mismo orden
 de eficiencia. Por tanto, tenemos que su eficiencia es $\theta(n)$. 
 
+% \begin{wraptable}{b}{0.3\linewidth}
+\begin{table}
+    \footnotesize
+    \centering
+    \begin{tabular}{|r|r|}
+        \hline
+        $N$ & $T$ $(\mu s)$ \\
+        \hline
+        1 & 0.0031 \\ 
+        51 & 0.0100 \\ 
+        101 & 0.0106 \\ 
+        151 & 0.0135 \\ 
+        201 & 0.0150 \\ 
+        251 & 0.0209 \\ 
+        301 & 0.0245 \\ 
+        351 & 0.0268 \\ 
+        401 & 0.0283 \\ 
+        451 & 0.0337 \\ 
+        501 & 0.0359 \\ 
+        551 & 0.0445 \\ 
+        601 & 0.0498 \\ 
+        651 & 0.0475 \\ 
+        701 & 0.0537 \\ 
+        751 & 0.0536 \\ 
+        801 & 0.0592 \\ 
+        851 & 0.0659 \\ 
+        901 & 0.0681 \\ 
+        951 & 0.0683 \\ 
+        \hline
+    \end{tabular}
+    \caption{Tiempos de ejecución para el algoritmo \ref{alg:2a-obvio}.}
+    \label{tab:2a-obvio-n}
+% \end{wraptable}
+\end{table}
+
 Para el algoritmo AGRUPA de \ref{alg:2a-obvio}, que es el que nos interesa,
 tenemos que cada iteración del bucle realiza $an + b$, con $a,b \in \mathbb N$ constantes,
 operaciones adicionales respecto al anterior,
@@ -65,4 +100,23 @@ expresión \ref{eq:2a-eficiencia}.
     \end{split}
 \end{equation}
 
-Para la \textbf{eficiencia híbrida}...
+Para la \textbf{eficiencia híbrida}, se han tomado dos series de datos pues la eficiencia depende de 2 parámetros.
+De esta manera, manteniendo $k$ constante se ha obtenido la tabla \ref{tab:2a-obvio-n}. 
+Para $n$ constante, obtenemos la tabla ??. 
+
+En la gráfica \ref{fig:2a-obvio-graph} hemos representado los puntos experimentales, así como la función
+de ajuste lineal asociada, con \textbf{función de ajuste} $f$ y \textbf{coeficiente de regresión}
+$R^2$ especificada en \ref{eq:2a-ajuste}. 
+
+\begin{equation}
+    \boxed{f(x) = 7.0629 x + 0.0030, R^2 = 0.9890}
+    \label{eq:2a-ajuste}
+\end{equation}
+
+\begin{figure}
+    \centering
+    \includegraphics[scale=0.76]{img/ejercicio-2-obvio-graph.pdf}
+    \caption{Gráfica de tiempos de ejecución para el caso obvio, 
+    con f(x) y coeficiente de regresión especificada por \ref{eq:2a-ajuste}.}
+    \label{fig:2a-obvio-graph}
+\end{figure}

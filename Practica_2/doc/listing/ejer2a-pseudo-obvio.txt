@@ -26,5 +26,5 @@ AGRUPA(vectores)
         acumulador = COMBINA(acumulador, vector)
     FIN
 
-    RETONAR acumulador
+    RETORNAR acumulador
 FIN
