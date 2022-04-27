@@ -97,10 +97,10 @@ llamada al algoritmo básico para resolver el problema.
 
 En nuestro caso, para encontrar dicho umbral, hemos de determinar el número de datos óptimo tales que para valores menores que este, 
 el algoritmo básico presente mejores tiempos de ejecución que el algoritmo Divide y Vencerás. El cálculo del umbral depende en gran 
-medida de las constantes ocultas, luego es dificil hacer un cáculo fiel a nivel teórico, por lo que se opta por adoptar un punto de 
+medida de las constantes ocultas, luego es dificil hacer un cálculo fiel a nivel teórico, por lo que se opta por adoptar un punto de 
 vista teórico/empírico, mediante el cual, a partir de las implementaciones ejecutadas en un equipo concreto, \textbf{obtenemos las 
 funciones de ajuste de ambos algoritmos con sus correspondientes parámetros}, y una vez obtenidas, \textbf{calculamos el umbral de 
-forma teórica igualando ambas funciones, despejando el tamaño del problema}: 
+forma teórica igualando ambas funciones, despejando el tamaño del problema}. 
 
 %% Aquí vendría el desarrollo para los datos obtenidos
 
@@ -157,6 +157,11 @@ algoritmo fluctúa mucho y puede terminar mucho antes o después en función
 de los valores de entrada. \textbf{Para determinar este valor}, hemos probado con diferente número de entradas, 
 viendo que para este valor las salidas del tiempo de ejecución son más o menos \textbf{estables}. 
 
+Debido a que la eficiencia del algoritmo es logarítmica (tal y como hemos calculado en \ref{eq:1a-eficiencia-lineal}),
+hemos podido calcular hasta $n = 10.000.000$. Para valores muy grandes se han empleado menor número de repeticiones
+debido a que para valores muy grandes las fluctuaciones que se daban para casos pequeños son despreciables. 
+Motiva también tomar esta medida la extrema ineficiencia del generador de vectores aleatorios. 
+
 %%  Falta el análisis empírico
 
 \subsubsection{Comparativa}
@@ -204,7 +209,7 @@ y \textbf{coeficiente de regresión} especificadas por \ref{eq:1b-obvio-regresio
 gráfica de los datos obtenidos, así como de la función de regresión, se puede encontrar en \ref{fig:1b-obvio-graph}. 
 
 \begin{equation}
-    \boxed{f(x) = 3,4926 \cdot 10 ^{-6} x + 0,9999, R^2 = 0.9997}
+    \boxed{f(x) = 5,8191 \cdot 10 ^{-6} x + 0,9999, R^2 = 0,9997}
     \label{eq:1b-obvio-regresion}
 \end{equation}
 
@@ -213,7 +218,7 @@ gráfica de los datos obtenidos, así como de la función de regresión, se pued
 	\centering
 	\begin{tabular}{|r|r|}
         \hline
-        $N$ & $T (\mu s)$ \\
+        $N$ & $T (ms)$ \\
         \hline
 		1 & 0.0010 \\ 
 		250000 & 0.8898 \\ 
@@ -263,13 +268,12 @@ gráfica de los datos obtenidos, así como de la función de regresión, se pued
 \end{table}
 
 \begin{figure}
-    \centering
-    \includegraphics[scale=0.76]{img/e1b-dyv}
-    \caption{Gráfica de tiempos de ejecución para el caso Divide y Vencerás, 
-    con f(x) y coeficiente de regresión especificada por \ref{eq:1b-dyv-eficiencia}.}
-    \label{fig:1b-obvio-graph}
+	\centering
+	\includegraphics[scale=0.76]{img/e1b-obvio}
+	\caption{Gráfica de tiempos de ejecución para el caso obvio, 
+		con f(x) y coeficiente de regresión especificada por \ref{eq:1b-obvio-regresion}.}
+	\label{fig:1b-obvio-graph}
 \end{figure}
-
 
 \subsubsection{Caso Divide y Vencerás}
 
@@ -342,7 +346,8 @@ con $c_0, c_1 \in \mathbb R$, de donde deducimos que
 El análisis de eficiencia \textbf{empírico e híbrido}
 de la implementación \ref{cod:1b-obvio} puede encontrarse en la tabla \ref{tab:1b-dyv}. La 
 \textbf{función de ajuste} y el \textbf{coeficiente de regresión} vienen dados 
-por \ref{eq:1b-dyv-eficiencia}.
+por \ref{eq:1b-dyv-eficiencia}. Una representación gráfica de estos datos se ha realizado en
+\ref{fig:1b-dyv-graph}. 
 
 \begin{equation}
     \boxed{f(x) = 4,6553 \cdot 10^{-6} x + 0.8657, R^2 = 0,9834}
@@ -354,7 +359,7 @@ por \ref{eq:1b-dyv-eficiencia}.
 	\centering
 	\begin{tabular}{|r|r|}
         \hline
-        $N$ & $T(\mu s)$ \\
+        $N$ & $T(ms)$ \\
         \hline
 		1 & 0.0017 \\ 
 		250000 & 1.2638 \\ 
@@ -443,7 +448,7 @@ implementar el caso obvio en lugar de emplear esta técnica.
 	\centering
 	\begin{tabular}{|r|r|r|}
         \hline
-        $N$ & $T_1 (\mu s)$ & $T_2 (\mu s)$ \\
+        $N$ & $T_1 (ms)$ & $T_2 (ms)$ \\
         \hline
 		1 & 0.0010 & 0.0017 \\ 
 		250000 & 0.8898 & 1.2638 \\ 
@@ -488,7 +493,7 @@ implementar el caso obvio en lugar de emplear esta técnica.
         \hline 
 	\end{tabular}
 
-    \caption{Comparación de tiempos de ejecución entre \ref{cod:1b-obvio} 
+    \caption{Comparación de tiempos de ejecución entre los algoritmos \ref{cod:1b-obvio} 
     (con tiempo asociado $T_1$) y \ref{cod:1b-dyv} (con tiempo de
     ejecución asociado $T_2$).}
     \label{tab:1b-comp}
