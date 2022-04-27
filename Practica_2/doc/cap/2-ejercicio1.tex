@@ -65,17 +65,9 @@ Posteriormente, nos encontramos con un bucle while, que en el peor de los casos 
 recorre todas las componentes del vector, en cuyo cuerpo encontramos sentencias $O(1)$, y las acotamos por una constante $t$.
 Entonces llamando $n$ a la longitud del vector donde realizamos la búsqueda (el tamaño del problema) tendríamos: 
 
-%% Analis
-
 \begin{equation}
     T(n) = \sum_{i=0}^{n-1} t + c = t \sum_{i=0}^{n-1} 1 + c = tn + c \implies \boxed{T(n) \in O(n)}
 \end{equation}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-% Analisis empirico. Relatar el por qué se han escogido esos valores  !!
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsubsection{Caso Divide y Vencerás} \label{sec:1a-dyv}
 
@@ -97,9 +89,7 @@ caption=Implementación en C++ del algoritmo basado en Divide y Vencerás., labe
 \subsubsubsection{Determinación del umbral}
 
 Un algoritmo Divide y Vencerás debe evitar proceder de forma recursiva cuando el tamaño de los subcasos no lo justifique, ya que
-de lo contrario su rendimiento se degrada considerablemente. Esta es la razón por la cual debemos elegir un umbral, es decir, 
-un tamaño del problema determinado tal que para un número de datos menor o igual que este, el algoritmo recursivo realize una 
-llamada al algoritmo básico para resolver el problema. 
+de lo contrario su rendimiento se degrada considerablemente. 
 
 Para encontrar dicho umbral, hemos de determinar el número de datos óptimo tales que para valores menores que este, el algoritmo básico 
 presente mejores tiempos de ejecución que el algoritmo Divide y Vencerás. El cálculo del umbral depende en gran medida de las constantes ocultas, 
@@ -162,21 +152,61 @@ algoritmo fluctúa mucho y puede terminar mucho antes o después en función
 de los valores de entrada. \textbf{Para determinar este valor}, hemos probado con diferente número de entradas, 
 viendo que para este valor las salidas del tiempo de ejecución son más o menos \textbf{estables}. 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Para los análisis de eficiencia \textbf{empírico e híbrido}, se han obtenido las \textbf{funciones de ajuste}
+y \textbf{coeficiente de regresión} especificadas por \ref{eq:1a-dyv-regresion}. Una representación
+gráfica de los datos obtenidos, así como de la función de regresión, se puede encontrar en \ref{fig:1a-dyv-graph}.
 
-%%  Análisis empírico
+\begin{equation}
+    \boxed{f(x) = 9.12713 \cdot \log_{2}{x} - 13.1908 , R^2 = }
+    \label{eq:1a-dyv-regresion}
+\end{equation}
 
+\begin{table}
+	\footnotesize
+	\centering
+	\begin{tabular}{|r|r|}
+		\hline
+		$N$ & $T (ms)$ \\
+		\hline
+		1 & 0.4659 \\ 
+		51 & 8.9903 \\ 
+		101 & 16.0023 \\ 
+		151 & 24.6148 \\ 
+		201 & 28.2958 \\ 
+		251 & 32.4715 \\ 
+		301 & 37.6090 \\ 
+		351 & 40.3095 \\ 
+		401 & 39.1602 \\ 
+		451 & 45.4901 \\ 
+		501 & 46.9329 \\ 
+		551 & 46.8213 \\ 
+		601 & 47.5944 \\ 
+		651 & 50.1281 \\ 
+		701 & 49.8905 \\ 
+		751 & 50.8145 \\ 
+		801 & 47.7563 \\ 
+		851 & 51.0535 \\ 
+		901 & 54.4668 \\ 
+		951 & 55.4261 \\ 
+		\hline
+	\end{tabular}
 
+    \caption{Tiempos de ejecución para el algoritmo \ref{alg:1a-dyv}, implementación \ref{cod:1a-dyv}.}
+    \label{tab:1a-dyv}
+\end{table}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
+\begin{figure}
+	\centering
+	\includegraphics[scale=0.76]{img/e1a-dyv}
+	\caption{Gráfica de tiempos de ejecución para el caso Divide y Vencerás, 
+		con f(x) y coeficiente de regresión especificada por \ref{eq:1a-dyv-regresion}.}
+	\label{fig:1a-dyv-graph}
+\end{figure}
 
 Debido a que la eficiencia del algoritmo es logarítmica (tal y como hemos calculado en \ref{eq:1a-eficiencia-lineal}),
 hemos podido calcular hasta $n = 10.000.000$. Para valores muy grandes se han empleado menor número de repeticiones
 debido a que para valores muy grandes las fluctuaciones que se daban para casos pequeños son despreciables. 
 Motiva también tomar esta medida la extrema ineficiencia del generador de vectores aleatorios. 
-
-%%  Falta el análisis empírico
 
 \subsubsection{Comparativa}
 
@@ -184,11 +214,8 @@ El algoritmo que hace uso de la técnica Divide y Vencerás tiene un orden de ef
 que la eficiencia del algoritmo básico es lineal, luego \textbf{se mejora notablemente la eficiencia usando la técnica de 
 Divide y Vencerás} para solventar el problema. 
 
-Este hecho se ilustra a partir de las gráficas correspondientes a los resultados empíricos obtenidos.   %+comment
-
-% CONCLUSIONES:
-% - El método DyV proporciona un algoritmo más eficiente que el básico
-% - Esto se ilustra en los resulados obtenidos empiricamente
+Este hecho se ilustra a partir de las gráficas correspondientes a los resultados empíricos obtenidos, veáse 
+\ref{tab:1a-dyv} y \ref{fig:1a-dyv-graph}.
 
 \subsection{Vector con valores repetidos}
 
