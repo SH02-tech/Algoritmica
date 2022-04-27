@@ -65,6 +65,8 @@ Posteriormente, nos encontramos con un bucle while, que en el peor de los casos 
 recorre todas las componentes del vector, en cuyo cuerpo encontramos sentencias $O(1)$, y las acotamos por una constante $t$.
 Entonces llamando $n$ a la longitud del vector donde realizamos la búsqueda (el tamaño del problema) tendríamos: 
 
+%% Falta Análisis empírico
+
 \begin{equation}
     T(n) = \sum_{i=0}^{n-1} t + c = t \sum_{i=0}^{n-1} 1 + c = tn + c \implies \boxed{T(n) \in O(n)}
 \end{equation}
@@ -103,6 +105,8 @@ forma teórica igualando ambas funciones, despejando el tamaño del problema}:
 %% Aquí vendría el desarrollo para los datos obtenidos
 
 \subsubsubsection{Análisis de Eficiencia}
+
+% TODO: Poner la eficiencia obvio aparte
 
 Tenemos una estructura condicional. Si el tamaño del problema (número de componentes del vector donde 
 vamos a buscar) es menor o igual que el UMBRAL escogido, entonces ejecutamos la BUSQUEDA\_LINEAL, que es $O(n)$. 
@@ -152,6 +156,8 @@ de vectores diferentes}. Esto se debe a que el número de operaciones del algori
 mucho antes o después en función
 de los valores de entrada. \textbf{Para determinar este valor}, hemos probado con diferente número de entradas, 
 viendo que para este valor las salidas del tiempo de ejecución son más o menos \textbf{estables}. 
+
+%%  Falta el análisis empírico
 
 \subsubsection{Comparativa}
 
@@ -227,6 +233,19 @@ caption=Implementación en C++ del algoritmo basado en Divide y Vencerás., labe
 
 \subsubsubsection{Determinación del umbral}
 
+En este caso, a partir de los datos experimentales obtenidos en las tablas ?? y ??, y cuya representación
+gráfica queda reflejado en ??, el tiempo de ejecución del algoritmo empleado Divide y Vencerás
+es siempre mayor o igual que el tiempo empleado por el algoritmo obvio. Las \textbf{razones} de esta situación están
+explicadas en \ref{sec:1b-comp}. Por tanto, tenemos que el \textbf{umbral} queda especificado en \ref{eq:1b-umbral}. 
+
+\begin{equation}
+    \boxed{UMBRAL \rightarrow +\infty}
+    \label{eq:1b-umbral}
+\end{equation}
+
+
+Las repercusiones de este resultado quedan nuevamente discutidas en \ref{sec:1b-comp}.
+
 \subsubsubsection{Análisis de Eficiencia}
 
 El análisis de eficiencia \textbf{teórico} es análogo al realizado en \ref{sec:1a-dyv}, \textbf{con la salvedad} de que, en el
@@ -252,3 +271,30 @@ con $c_0, c_1 \in \mathbb R$, de donde deducimos que
 \end{equation}
 
 Para la eficiencia \textbf{híbrida}...
+
+\subsubsection{Comparativa} \label{sec:1b-comp}
+
+Al contrario que en el caso de vectores no repetidos, comparando 
+las tablas ?? y ?? y está representado en la gráfica ??, los \textbf{tiempos 
+de ejecución son peores} en el caso Divide y
+Vencerás que en el caso obvio. El origen de esto se debe a las siguientes
+razones:
+
+\begin{itemize}
+    \item \textbf{Mismo orden de eficiencia}. Al contrario que en el caso con valores 
+    no repetidos, el orden de eficiencia
+    es la misma tanto en el caso obvio como en el caso trivial, tal y como se puede
+    observar en la expresión \ref{eq:2a-eficiencia}, por lo que este resultado es plausible. 
+    \item \textbf{Sobrecarga de la pila}. En los vectores generados, la distribución 
+    general es la aparición del índice
+    buscado en los elementos finales del vector, lo que obliga tanto al caso obvio como al caso
+    Divide y Vencerás a analizar casi todo el vector, presentando éste último el 
+    inconveniente de, en cada iteración, \textbf{introducir información de contexto
+    en la pila} por cada llamada recursiva, lo que penaliza el rendimiento global del
+    algoritmo. 
+\end{itemize}
+
+Como consecuencia de esta situación, tenemos que el algoritmo \ref{alg:1a-obvio} es siempre mejor o igual 
+que el algoritmo \ref{alg:1b-dyv}, por lo que la técnica Divide y Vencerás \textbf{no logra superar en 
+rendimiento} al caso obvio en ningún caso. Por tanto, en cualquier situación será más recomendable
+implementar el caso obvio en lugar de emplear esta técnica. 
