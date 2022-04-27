@@ -7,7 +7,7 @@ otra empleando un algoritmo Divide y Vencerás.
 
 En este caso una alternativa es ir iterando sobre cada vector, añadiendo los elementos
 del vector de forma ordenada sobre un acumulador. Ello queda ilustrado en la figura
-\ref{fig:2a-obvio}, donde primer se unen los vectores que están en rojo y morado para,
+\ref{fig:2a-obvio}, donde primero se unen los vectores que están en rojo y morado para,
 a continuación, unir ese resultado con el vector en verde, dando como resultado
 un vector global ordenado. 
 
@@ -51,6 +51,7 @@ se realizan es independiente de los valores de los vectores,
 por lo que el mejor caso y el peor caso tienen el mismo orden
 de eficiencia. Por tanto, tenemos que su eficiencia es $\theta(n)$. 
 
+% Mal
 % \begin{wraptable}{b}{0.3\linewidth}
 \begin{table}
     \footnotesize
@@ -104,19 +105,20 @@ Para la \textbf{eficiencia híbrida}, se han tomado dos series de datos pues la 
 De esta manera, manteniendo $k$ constante se ha obtenido la tabla \ref{tab:2a-obvio-n}. 
 Para $n$ constante, obtenemos la tabla ??. 
 
-% En la gráfica \ref{fig:2a-obvio-graph} hemos representado los puntos experimentales, así como la función
-% de ajuste lineal asociada, con \textbf{función de ajuste} $f$ y \textbf{coeficiente de regresión}
-% $R^2$ especificada en \ref{eq:2a-ajuste}. 
+En la gráfica \ref{fig:2a-obvio-graph} hemos representado los puntos experimentales con k constante, 
+así como la función
+de ajuste lineal asociada, con \textbf{función de ajuste} $f$ y \textbf{coeficiente de regresión}
+$R^2$ especificada en \ref{eq:2a-ajuste}. 
 
-% \begin{equation}
-%     \boxed{f(x) = 7.0629 x + 0.0030, R^2 = 0.9890}
-%     \label{eq:2a-ajuste}
-% \end{equation}
+\begin{equation}
+    \boxed{f(n) = 6,0739 \cdot 10 ^{-4}  n + 0,9924, R^2 = 0,9978}
+    \label{eq:2a-ajuste}
+\end{equation}
 
-% \begin{figure}
-%     \centering
-%     \includegraphics[scale=0.76]{img/ejercicio-2-obvio-graph.pdf}
-%     \caption{Gráfica de tiempos de ejecución para el caso obvio, 
-%     con f(x) y coeficiente de regresión especificada por \ref{eq:2a-ajuste}.}
-%     \label{fig:2a-obvio-graph}
-% \end{figure}
+\begin{figure}
+    \centering
+    \includegraphics[scale=0.76]{img/e2a-graph.pdf}
+    \caption{Gráfica de tiempos de ejecución para el caso obvio, 
+    con f(x) y coeficiente de regresión especificada por \ref{eq:2a-ajuste}.}
+    \label{fig:2a-obvio-graph}
+\end{figure}
