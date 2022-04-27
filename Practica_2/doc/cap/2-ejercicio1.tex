@@ -151,9 +151,9 @@ Deshacemos el cambio de variable:
     \label{eq:1a-eficiencia-lineal}
 \end{equation}
 
-En este caso, para tomar las medidas experimentales, hemos tomado para cada $n$ una \textbf{media de 1.000.000
-de vectores diferentes}. Esto se debe a que el número de operaciones del algoritmo fluctúa mucho y puede terminar 
-mucho antes o después en función
+En este caso, para tomar las medidas experimentales, hemos tomado para valores pequeños de $n$ una 
+\textbf{media de 1.000.000 de vectores diferentes}. Esto se debe a que el número de operaciones del 
+algoritmo fluctúa mucho y puede terminar mucho antes o después en función
 de los valores de entrada. \textbf{Para determinar este valor}, hemos probado con diferente número de entradas, 
 viendo que para este valor las salidas del tiempo de ejecución son más o menos \textbf{estables}. 
 
@@ -197,10 +197,79 @@ caption=Implementación alternativa en C++ del algoritmo basado en Búsqueda Lin
 \subsubsubsection{Análisis de Eficiencia}
 
 El análisis de eficiencia \textbf{teórica} es análogo al realizado en \ref{sec:1a-obvio}, obteniéndose 
-que el orden de eficiencia es lineal (\ref{eq:1a-eficiencia-lineal}). El análisis de eficiencia híbrido
-de la implementación \ref{cod:1b-obvio} puede encontrar en la tabla ??. 
+que el orden de eficiencia es lineal (\ref{eq:1a-eficiencia-lineal}). 
 
-% TODO: Incluir gráficas con este análisis de eficiencia. 
+Para los análisis de eficiencia \textbf{empírico e híbrido}, se han obtenido las \textbf{funciones de ajuste}
+y \textbf{coeficiente de regresión} especificadas por \ref{eq:1b-obvio-regresion}. Una representación
+gráfica de los datos obtenidos, así como de la función de regresión, se puede encontrar en \ref{fig:1b-obvio-graph}. 
+
+\begin{equation}
+    \boxed{f(x) = 3,4926 \cdot 10 ^{-6} x + 0,9999, R^2 = 0.9997}
+    \label{eq:1b-obvio-regresion}
+\end{equation}
+
+\begin{table}
+	\footnotesize
+	\centering
+	\begin{tabular}{|r|r|}
+        \hline
+        $N$ & $T (\mu s)$ \\
+        \hline
+		1 & 0.0010 \\ 
+		250000 & 0.8898 \\ 
+		500000 & 1.8048 \\ 
+		750000 & 2.7217 \\ 
+		1000000 & 3.5974 \\ 
+		1250000 & 4.4986 \\ 
+		1500000 & 5.4154 \\ 
+		1750000 & 6.3388 \\ 
+		2000000 & 7.2286 \\ 
+		2250000 & 8.1424 \\ 
+		2500000 & 9.0827 \\ 
+		2750000 & 9.9505 \\ 
+		3000000 & 10.8597 \\ 
+		3250000 & 11.8371 \\ 
+		3500000 & 12.6701 \\ 
+		3750000 & 13.6984 \\ 
+		4000000 & 14.4887 \\ 
+		4250000 & 15.4146 \\ 
+		4500000 & 16.3083 \\ 
+		4750000 & 17.2963 \\ 
+		5000000 & 18.1089 \\ 
+		5250000 & 19.1464 \\ 
+		5500000 & 19.9771 \\ 
+		5750000 & 20.8285 \\ 
+		6000000 & 21.9765 \\ 
+		6250000 & 22.8171 \\ 
+		6500000 & 23.5401 \\ 
+		6750000 & 24.6010 \\ 
+		7000000 & 25.5379 \\ 
+		7250000 & 26.5348 \\ 
+		7500000 & 27.5240 \\ 
+		7750000 & 28.0797 \\ 
+		8000000 & 29.1724 \\ 
+		8250000 & 29.8814 \\ 
+		8500000 & 30.9434 \\ 
+		8750000 & 31.8024 \\ 
+		9000000 & 32.5969 \\ 
+		9250000 & 33.6025 \\ 
+		9500000 & 34.5628 \\ 
+		9750000 & 36.4363 \\ 
+        \hline
+	\end{tabular}
+
+    \caption{Tiempos de ejecución para el algoritmo \ref{alg:1a-obvio}, implementación \ref{cod:1b-obvio}.}
+    \label{tab:1b-obvio}
+\end{table}
+
+\begin{figure}
+    \centering
+    \includegraphics[scale=0.76]{img/e1b-dyv}
+    \caption{Gráfica de tiempos de ejecución para el caso Divide y Vencerás, 
+    con f(x) y coeficiente de regresión especificada por \ref{eq:1b-dyv-eficiencia}.}
+    \label{fig:1b-obvio-graph}
+\end{figure}
+
 
 \subsubsection{Caso Divide y Vencerás}
 
@@ -270,12 +339,82 @@ con $c_0, c_1 \in \mathbb R$, de donde deducimos que
     T(n) = c_0 + c_1 n \Rightarrow \boxed{T(n) \in O(n)}
 \end{equation}
 
-Para la eficiencia \textbf{híbrida}...
+El análisis de eficiencia \textbf{empírico e híbrido}
+de la implementación \ref{cod:1b-obvio} puede encontrarse en la tabla \ref{tab:1b-dyv}. La 
+\textbf{función de ajuste} y el \textbf{coeficiente de regresión} vienen dados 
+por \ref{eq:1b-dyv-eficiencia}.
+
+\begin{equation}
+    \boxed{f(x) = 4,6553 \cdot 10^{-6} x + 0.8657, R^2 = 0,9834}
+    \label{eq:1b-dyv-eficiencia}
+\end{equation}
+
+\begin{table}
+	\footnotesize
+	\centering
+	\begin{tabular}{|r|r|}
+        \hline
+        $N$ & $T(\mu s)$ \\
+        \hline
+		1 & 0.0017 \\ 
+		250000 & 1.2638 \\ 
+		500000 & 2.5020 \\ 
+		750000 & 3.8801 \\ 
+		1000000 & 4.7835 \\ 
+		1250000 & 5.6027 \\ 
+		1500000 & 7.8714 \\ 
+		1750000 & 9.1403 \\ 
+		2000000 & 9.6127 \\ 
+		2250000 & 10.3977 \\ 
+		2500000 & 10.8430 \\ 
+		2750000 & 12.5853 \\ 
+		3000000 & 15.4864 \\ 
+		3250000 & 17.7592 \\ 
+		3500000 & 18.3230 \\ 
+		3750000 & 18.6021 \\ 
+		4000000 & 19.0520 \\ 
+		4250000 & 19.8521 \\ 
+		4500000 & 20.6940 \\ 
+		4750000 & 20.9706 \\ 
+		5000000 & 21.6910 \\ 
+		5250000 & 22.3115 \\ 
+		5500000 & 25.4420 \\ 
+		5750000 & 27.9453 \\ 
+		6000000 & 30.8848 \\ 
+		6250000 & 33.7447 \\ 
+		6500000 & 34.7666 \\ 
+		6750000 & 35.5849 \\ 
+		7000000 & 35.9877 \\ 
+		7250000 & 37.1252 \\ 
+		7500000 & 37.9441 \\ 
+		7750000 & 38.4063 \\ 
+		8000000 & 38.9629 \\ 
+		8250000 & 39.6185 \\ 
+		8500000 & 40.0429 \\ 
+		8750000 & 41.1611 \\ 
+		9000000 & 41.9953 \\ 
+		9250000 & 42.0843 \\ 
+		9500000 & 42.5158 \\ 
+		9750000 & 42.8710 \\ 
+        \hline
+	\end{tabular}
+    \caption{Tiempos de ejecución para el algoritmo \ref{alg:1b-dyv}.}
+    \label{tab:1b-dyv}
+\end{table}
+
+\begin{figure}
+    \centering
+    \includegraphics[scale=0.76]{img/e1b-dyv}
+    \caption{Gráfica de tiempos de ejecución para el caso Divide y Vencerás, 
+    con f(x) y coeficiente de regresión especificada por \ref{eq:1b-dyv-eficiencia}.}
+    \label{fig:1b-dyv-graph}
+\end{figure}
 
 \subsubsection{Comparativa} \label{sec:1b-comp}
 
-Al contrario que en el caso de vectores no repetidos, comparando 
-las tablas ?? y ?? y está representado en la gráfica ??, los \textbf{tiempos 
+Al contrario que en el caso de vectores no repetidos, visualizando la tabla
+con comparación \ref{tab:1b-comp} y está representado en la gráfica \ref{fig:1b-comp}, 
+los \textbf{tiempos 
 de ejecución son peores} en el caso Divide y
 Vencerás que en el caso obvio. El origen de esto se debe a las siguientes
 razones:
@@ -298,3 +437,66 @@ Como consecuencia de esta situación, tenemos que el algoritmo \ref{alg:1a-obvio
 que el algoritmo \ref{alg:1b-dyv}, por lo que la técnica Divide y Vencerás \textbf{no logra superar en 
 rendimiento} al caso obvio en ningún caso. Por tanto, en cualquier situación será más recomendable
 implementar el caso obvio en lugar de emplear esta técnica. 
+
+\begin{table}
+	\footnotesize
+	\centering
+	\begin{tabular}{|r|r|r|}
+        \hline
+        $N$ & $T_1 (\mu s)$ & $T_2 (\mu s)$ \\
+        \hline
+		1 & 0.0010 & 0.0017 \\ 
+		250000 & 0.8898 & 1.2638 \\ 
+		500000 & 1.8048 & 2.5020 \\ 
+		750000 & 2.7217 & 3.8801 \\ 
+		1000000 & 3.5974 & 4.7835 \\ 
+		1250000 & 4.4986 & 5.6027 \\ 
+		1500000 & 5.4154 & 7.8714 \\ 
+		1750000 & 6.3388 & 9.1403 \\ 
+		2000000 & 7.2286 & 9.6127 \\ 
+		2250000 & 8.1424 & 10.3977 \\ 
+		2500000 & 9.0827 & 10.8430 \\ 
+		2750000 & 9.9505 & 12.5853 \\ 
+		3000000 & 10.8597 & 15.4864 \\ 
+		3250000 & 11.8371 & 17.7592 \\ 
+		3500000 & 12.6701 & 18.3230 \\ 
+		3750000 & 13.6984 & 18.6021 \\ 
+		4000000 & 14.4887 & 19.0520 \\ 
+		4250000 & 15.4146 & 19.8521 \\ 
+		4500000 & 16.3083 & 20.6940 \\ 
+		4750000 & 17.2963 & 20.9706 \\ 
+		5000000 & 18.1089 & 21.6910 \\ 
+		5250000 & 19.1464 & 22.3115 \\ 
+		5500000 & 19.9771 & 25.4420 \\ 
+		5750000 & 20.8285 & 27.9453 \\ 
+		6000000 & 21.9765 & 30.8848 \\ 
+		6250000 & 22.8171 & 33.7447 \\ 
+		6500000 & 23.5401 & 34.7666 \\ 
+		6750000 & 24.6010 & 35.5849 \\ 
+		7000000 & 25.5379 & 35.9877 \\ 
+		7250000 & 26.5348 & 37.1252 \\ 
+		7500000 & 27.5240 & 37.9441 \\ 
+		7750000 & 28.0797 & 38.4063 \\ 
+		8000000 & 29.1724 & 38.9629 \\ 
+		8250000 & 29.8814 & 39.6185 \\ 
+		8500000 & 30.9434 & 40.0429 \\ 
+		8750000 & 31.8024 & 41.1611 \\ 
+		9000000 & 32.5969 & 41.9953 \\ 
+		9250000 & 33.6025 & 42.0843 \\ 
+		9500000 & 34.5628 & 42.5158 \\ 
+		9750000 & 36.4363 & 42.8710 \\
+        \hline 
+	\end{tabular}
+
+    \caption{Comparación de tiempos de ejecución entre \ref{cod:1b-obvio} 
+    (con tiempo asociado $T_1$) y \ref{cod:1b-dyv} (con tiempo de
+    ejecución asociado $T_2$).}
+    \label{tab:1b-comp}
+\end{table}
+
+\begin{figure}
+    \centering
+    \includegraphics[scale=0.76]{img/e1b-comp.pdf}
+    \caption{Gráfica de comparación tiempos de ejecución para Divide y Vencerás y caso obvio.}
+    \label{fig:1b-comp}
+\end{figure}
