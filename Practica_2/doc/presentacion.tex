@@ -69,8 +69,79 @@
 
     % Ejercicio 1
 
-    \section{}
+    \section{ejercicio1}
 
+    \begin{frame}
+        \frametitle{Lemas clave.}
+            \begin{lemma}
+                \label{lem:1}
+                Sea i con $0 \leqslant i < n$ fijo, tal que $v[i]=i+k$, con $k \in \mathbb N$. 
+                Entonces $v[j] \neq j$, $\forall j \in \mathbb N$ con $i < j < n$. 
+            \end{lemma}
+            \begin{lemma}
+                \label{lem:2}
+                Sea i con $0 < i < n$ fijo, tal que $v[i]=i-k$ con 
+                $k \in \mathbb N$. Entonces $v[j] \neq j$,  $\forall j$ con $0 \leqslant j < i$. 
+            \end{lemma}
+    \end{frame}
+
+	 \begin{frame}
+		\frametitle{Caso obvio. Pseudocódigo.}
+		\lstinputlisting[caption=Pseudocódigo asociado al caso obvio., label={alg:1a-obvio}]{listing/ejer1a-pseudo-obvio.txt}
+	\end{frame}
+
+	 \begin{frame}
+		\frametitle{Caso obvio. Implementación.}
+		\lstinputlisting[language=C++, firstline=93, lastline=106, caption=Implementación en C++ 
+		del algoritmo basado en la búsqueda lineal., label={cod:1a-obvio}]{../src/ejercicio-1-comp-fija-no-repetidos.cpp} 
+	\end{frame}
+
+	\begin{frame}
+		\frametitle{Análisis de eficiencia caso obvio.}
+		 
+		 \begin{block}{Eficiencia Teórica}
+		 	$$T(n) \in \mathcal{O}(n)$$
+		 \end{block}
+	 
+	\end{frame}
+
+	\begin{frame}
+		\frametitle{Análisis de eficiencia caso obvio.}
+	\end{frame}
+
+	\begin{frame}
+		\frametitle{Caso Divide y Vencerás. Pseudocódigo.}
+		\lstinputlisting[caption=Pseudocódigo asociado al caso Divide y Vencerás., label={alg:1a-dyv}]{listing/ejer1a-pseudo-dyv.txt}
+	\end{frame}
+
+	\begin{frame}
+		\frametitle{Caso Divide y Vencerás. Implementación.}
+		\lstinputlisting[language=C++, firstline=119, lastline=131, 
+		caption=Implementación en C++ del algoritmo basado en Divide y Vencerás., label={cod:1a-dyv}]
+		{../src/ejercicio-1-comp-fija-no-repetidos.cpp} 
+	\end{frame}
+
+	\begin{frame}
+		\frametitle{Caso Divide y Vencerás. Determinación del umbral.}
+		% Aquí viene la imagen
+	\end{frame}
+
+	\begin{frame}
+	\frametitle{Caso Divide y Vencerás. Análisis de eficiencia.}
+			\begin{equation}
+				T(n) = \left\{ \begin{array}{lr} T(n/2) + c & \text{si } n > \text{UMBRAL}\\ n & \text{si } n \leqslant \text{UMBRAL} \end{array} \right.
+				\label{eq:1a-efi-dyv-rec}
+			\end{equation}
+			\begin{equation}
+			T(n) = c_{1} + c_{2} \log_2(n) \implies \boxed{T(n) \in O(\log_2(n))}
+			\label{eq:1a-eficiencia-lineal}
+			\end{equation}
+	\end{frame}
+
+	
+
+
+	
     % Ejercicio 2
 
     % Conclusiones

@@ -65,6 +65,8 @@ Posteriormente, nos encontramos con un bucle while, que en el peor de los casos 
 recorre todas las componentes del vector, en cuyo cuerpo encontramos sentencias $O(1)$, y las acotamos por una constante $t$.
 Entonces llamando $n$ a la longitud del vector donde realizamos la búsqueda (el tamaño del problema) tendríamos: 
 
+%% Falta Análisis empírico
+
 \begin{equation}
     T(n) = \sum_{i=0}^{n-1} t + c = t \sum_{i=0}^{n-1} 1 + c = tn + c \implies \boxed{T(n) \in O(n)}
 \end{equation}
@@ -152,6 +154,8 @@ de vectores diferentes}. Esto se debe a que el número de operaciones del algori
 mucho antes o después en función
 de los valores de entrada. \textbf{Para determinar este valor}, hemos probado con diferente número de entradas, 
 viendo que para este valor las salidas del tiempo de ejecución son más o menos \textbf{estables}. 
+
+%%  Falta el análisis empírico
 
 \subsubsection{Comparativa}
 
