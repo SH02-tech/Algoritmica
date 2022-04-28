@@ -215,7 +215,7 @@ el problema en subproblemas, resolviendo cada uno de ellos para obtener la soluc
 \subsubsection{Pseudocódigo}
 
 \lstinputlisting[caption=Pseudocódigo asociado a la mezcla 
-ordenada de vectores ordenados en el caso obvio., 
+ordenada de vectores ordenados en el caso divide y vencerás., 
 label={alg:2b-dyv}]{listing/ejer2b-pseudo-dyv.txt}
 
 \subsubsection{Implementación}
@@ -223,5 +223,29 @@ label={alg:2b-dyv}]{listing/ejer2b-pseudo-dyv.txt}
 \lstinputlisting[firstline=120, lastline=149, language=C++,
 caption=Implementación del algoritmo divide y vencerás.]{../src/ejercicio-2-mezcla-dyv.cpp}
 
-\subsubsection{Análisis teórico}
+\subsubsection{Análisis de eficiencia}
 
+
+En este caso debemos de tener en cuenta dos variables, tanto la k que determina el número de vectores, como la n que se trata del número de elementos de cada vector.
+Por ello para la eficiencia híbrida y empírica hemos analizado el comportamiento del algoritmo cuando solamente varía el número de vectores, así como cuando solo varía el número de 
+elementos de cada vector. 
+Todo ello lo hemos representado en dos gráficas, una para cada caso, y en cada una de ellas hemos graficado el número de componentes de cada vector en relación a su tiempo de ejecución del algoritmo de mezcla
+divide y vencerás y hemos hallado su función de regresión, que es aquella que mejor se ajusta a los datos.
+
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.76]{img/e2-dyv-n.pdf}
+    \caption{Gráfica de tiempos de ejecución para el caso divide y vencerás, 
+    con f(x) y coeficiente de regresión especificada por \ref{eq:2a-ajuste}.}
+    \label{fig:2a-obvio-n-graph}
+\end{figure}
+
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.76]{img/e2-dyv-k.pdf}
+    \caption{Gráfica de tiempos de ejecución para el caso divide y vencerás, 
+    con f(x) y coeficiente de regresión especificada por \ref{eq:2a-ajuste}.}
+    \label{fig:2a-obvio-n-graph}
+\end{figure}
