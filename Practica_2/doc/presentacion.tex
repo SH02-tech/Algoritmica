@@ -107,71 +107,71 @@
     \section{ejercicio1}
 
     \begin{frame}
-        \frametitle{Lemas clave.}
-            \begin{lemma}
+        \frametitle{Lemas claves}
+            \begin{block}{Lema de la cota superior}
                 \label{lem:1}
                 Sea i con $0 \leqslant i < n$ fijo, tal que $v[i]=i+k$, con $k \in \mathbb N$. 
                 Entonces $v[j] \neq j$, $\forall j \in \mathbb N$ con $i < j < n$. 
-            \end{lemma}
-            \begin{lemma}
+            \end{block}
+            \begin{block}{Lema de la cota inferior}
                 \label{lem:2}
                 Sea i con $0 < i < n$ fijo, tal que $v[i]=i-k$ con 
                 $k \in \mathbb N$. Entonces $v[j] \neq j$,  $\forall j$ con $0 \leqslant j < i$. 
-            \end{lemma}
+            \end{block}
     \end{frame}
 
-	 \begin{frame}
-		\frametitle{Caso obvio. Pseudocódigo.}
-		\lstinputlisting[caption=Pseudocódigo asociado al caso obvio., label={alg:1a-obvio}]{listing/ejer1a-pseudo-obvio.txt}
-	\end{frame}
+	%  \begin{frame}
+	% 	\frametitle{Caso obvio. Pseudocódigo.}
+	% 	\lstinputlisting[caption=Pseudocódigo asociado al caso obvio., label={alg:1a-obvio}]{listing/ejer1a-pseudo-obvio.txt}
+	% \end{frame}
 
-	 \begin{frame}
-		\frametitle{Caso obvio. Implementación.}
-		\lstinputlisting[language=C++, firstline=93, lastline=106, caption=Implementación en C++ 
-		del algoritmo basado en la búsqueda lineal., label={cod:1a-obvio}]{../src/ejercicio-1-comp-fija-no-repetidos.cpp} 
-	\end{frame}
+	%  \begin{frame}
+	% 	\frametitle{Caso obvio. Implementación.}
+	% 	\lstinputlisting[language=C++, firstline=93, lastline=106, caption=Implementación en C++ 
+	% 	del algoritmo basado en la búsqueda lineal., label={cod:1a-obvio}]{../src/ejercicio-1-comp-fija-no-repetidos.cpp} 
+	% \end{frame}
 
-	\begin{frame}
-		\frametitle{Análisis de eficiencia caso obvio.}
+	% \begin{frame}
+	% 	\frametitle{Análisis de eficiencia caso obvio.}
 		 
-		 \begin{block}{Eficiencia Teórica}
-		 	$$T(n) \in \mathcal{O}(n)$$
-		 \end{block}
+	% 	 \begin{block}{Eficiencia Teórica}
+	% 	 	$$T(n) \in \mathcal{O}(n)$$
+	% 	 \end{block}
 	 
-	\end{frame}
+	% \end{frame}
 
-	\begin{frame}
-		\frametitle{Análisis de eficiencia caso obvio.}
-	\end{frame}
+	% \begin{frame}
+	% 	\frametitle{Análisis de eficiencia caso obvio.}
+	% \end{frame}
 
-	\begin{frame}
-		\frametitle{Caso Divide y Vencerás. Pseudocódigo.}
-		\lstinputlisting[caption=Pseudocódigo asociado al caso Divide y Vencerás., label={alg:1a-dyv}]{listing/ejer1a-pseudo-dyv.txt}
-	\end{frame}
+	% \begin{frame}
+	% 	\frametitle{Caso Divide y Vencerás. Pseudocódigo.}
+	% 	\lstinputlisting[caption=Pseudocódigo asociado al caso Divide y Vencerás., label={alg:1a-dyv}]{listing/ejer1a-pseudo-dyv.txt}
+	% \end{frame}
 
-	\begin{frame}
-		\frametitle{Caso Divide y Vencerás. Implementación.}
-		\lstinputlisting[language=C++, firstline=119, lastline=131, 
-		caption=Implementación en C++ del algoritmo basado en Divide y Vencerás., label={cod:1a-dyv}]
-		{../src/ejercicio-1-comp-fija-no-repetidos.cpp} 
-	\end{frame}
+	% \begin{frame}
+	% 	\frametitle{Caso Divide y Vencerás. Implementación.}
+	% 	\lstinputlisting[language=C++, firstline=119, lastline=131, 
+	% 	caption=Implementación en C++ del algoritmo basado en Divide y Vencerás., label={cod:1a-dyv}]
+	% 	{../src/ejercicio-1-comp-fija-no-repetidos.cpp} 
+	% \end{frame}
 
-	\begin{frame}
-		\frametitle{Caso Divide y Vencerás. Determinación del umbral.}
-		% Aquí viene la imagen
-	\end{frame}
+	% \begin{frame}
+	% 	\frametitle{Caso Divide y Vencerás. Determinación del umbral.}
+	% 	% Aquí viene la imagen
+	% \end{frame}
 
-	\begin{frame}
-	\frametitle{Caso Divide y Vencerás. Análisis de eficiencia.}
-			\begin{equation}
-				T(n) = \left\{ \begin{array}{lr} T(n/2) + c & \text{si } n > \text{UMBRAL}\\ n & \text{si } n \leqslant \text{UMBRAL} \end{array} \right.
-				\label{eq:1a-efi-dyv-rec}
-			\end{equation}
-			\begin{equation}
-			T(n) = c_{1} + c_{2} \log_2(n) \implies \boxed{T(n) \in O(\log_2(n))}
-			\label{eq:1a-eficiencia-lineal}
-			\end{equation}
-	\end{frame}
+	% \begin{frame}
+	% \frametitle{Caso Divide y Vencerás. Análisis de eficiencia.}
+	% 		\begin{equation}
+	% 			T(n) = \left\{ \begin{array}{lr} T(n/2) + c & \text{si } n > \text{UMBRAL}\\ n & \text{si } n \leqslant \text{UMBRAL} \end{array} \right.
+	% 			\label{eq:1a-efi-dyv-rec}
+	% 		\end{equation}
+	% 		\begin{equation}
+	% 		T(n) = c_{1} + c_{2} \log_2(n) \implies \boxed{T(n) \in O(\log_2(n))}
+	% 		\label{eq:1a-eficiencia-lineal}
+	% 		\end{equation}
+	% \end{frame}
 
     \section{Ejercicio 1b}
 
@@ -212,21 +212,158 @@
     \end{frame}
 
     \begin{frame}
-        \frametitle{Análisis de Eficiencia}
+        \frametitle{Análisis de Eficiencia Teórica}
 
         \begin{block}{Ecuación en diferencias asociada}
             \begin{equation}
                 T(n) = \left\{ \begin{array}{lr} 2 T(n/2) + c & \text{si } n > \text{UMBRAL}\\ n & \text{si } n \leqslant \text{UMBRAL} \end{array} \right.
                 \label{eq:1b-efi-dyv-rec}
             \end{equation}
+        \end{block}
 
-            Por tanto:
+        Por tanto:
 
+        \begin{alertblock}{Orden de eficiencia del algoritmo}
             \begin{equation*}
                 \boxed{T(n) \in O(n)}
             \end{equation*}
-        \end{block}
+        \end{alertblock}
         
+    \end{frame}
+
+    \begin{frame}
+        \frametitle{Resultados empíricos}
+
+        \begin{columns}
+            \begin{column}{0.2\textwidth}
+                \begin{table}
+                    \tiny
+                    \centering
+                    \begin{tabular}{|r|r|}
+                        \hline
+                        $N$ & $T(ms)$ \\
+                        \hline
+                        1 & 0.0017 \\ 
+                        250000 & 1.2638 \\ 
+                        500000 & 2.5020 \\ 
+                        750000 & 3.8801 \\ 
+                        1000000 & 4.7835 \\ 
+                        1250000 & 5.6027 \\ 
+                        1500000 & 7.8714 \\ 
+                        1750000 & 9.1403 \\ 
+                        2000000 & 9.6127 \\ 
+                        2250000 & 10.3977 \\ 
+                        2500000 & 10.8430 \\ 
+                        2750000 & 12.5853 \\ 
+                        3000000 & 15.4864 \\ 
+                        3250000 & 17.7592 \\ 
+                        3500000 & 18.3230 \\ 
+                        3750000 & 18.6021 \\ 
+                        4000000 & 19.0520 \\ 
+                        4250000 & 19.8521 \\ 
+                        4500000 & 20.6940 \\ 
+                        4750000 & 20.9706 \\ 
+                        \hline
+                    \end{tabular}
+                \end{table}
+            \end{column}
+
+            \begin{column}{0.2\textwidth}
+                \begin{table}
+                    \tiny
+                    \centering
+                    \begin{tabular}{|r|r|}
+                        \hline
+                        $N$ & $T(ms)$ \\
+                        \hline
+
+                        5000000 & 21.6910 \\ 
+                        5250000 & 22.3115 \\ 
+                        5500000 & 25.4420 \\ 
+                        5750000 & 27.9453 \\ 
+                        6000000 & 30.8848 \\ 
+                        6250000 & 33.7447 \\ 
+                        6500000 & 34.7666 \\ 
+                        6750000 & 35.5849 \\ 
+                        7000000 & 35.9877 \\ 
+                        7250000 & 37.1252 \\ 
+                        7500000 & 37.9441 \\ 
+                        7750000 & 38.4063 \\ 
+                        8000000 & 38.9629 \\ 
+                        8250000 & 39.6185 \\ 
+                        8500000 & 40.0429 \\ 
+                        8750000 & 41.1611 \\ 
+                        9000000 & 41.9953 \\ 
+                        9250000 & 42.0843 \\ 
+                        9500000 & 42.5158 \\ 
+                        9750000 & 42.8710 \\ 
+
+                        \hline
+                    \end{tabular}
+                \end{table}
+            \end{column}
+
+            % \begin{column}{0.6\textwidth}
+            %     \begin{figure}
+            %         \centering
+            %         \includegraphics[scale=0.5]{img/e1b-dyv}
+            %         % \caption{Gráfica de tiempos de ejecución para el caso Divide y Vencerás, 
+            %         % con f(x) y coeficiente de regresión especificada por \ref{eq:1b-dyv-eficiencia}.}
+            %         % \label{fig:1b-dyv-graph}
+            %     \end{figure}
+
+            %     \footnotesize
+
+            %     \begin{equation*}
+            %         \boxed{f(x) = 4,6553 \cdot 10^{-6} x + 0.8657, R^2 = 0,9834}
+            %         \label{eq:1b-dyv-eficiencia}
+            %     \end{equation*}
+            % \end{column}
+        \end{columns}
+    \end{frame}
+
+    \begin{frame}
+        \frametitle{Eficiencia híbrida}
+        \begin{figure}
+            \centering
+            \includegraphics[scale=0.8]{img/e1b-dyv}
+            % \caption{Gráfica de tiempos de ejecución para el caso Divide y Vencerás, 
+            % con f(x) y coeficiente de regresión especificada por \ref{eq:1b-dyv-eficiencia}.}
+            % \label{fig:1b-dyv-graph}
+        \end{figure}
+
+        \begin{equation*}
+            \boxed{f(x) = 4,6553 \cdot 10^{-6} x + 0.8657, R^2 = 0,9834}
+            \label{eq:1b-dyv-eficiencia}
+        \end{equation*}
+    \end{frame}
+
+    \begin{frame}
+        \frametitle{Comparación con el caso obvio}
+
+        \begin{figure}
+            \centering
+            \includegraphics[scale=0.66]{img/e1b-comp.pdf}
+            % \caption{Gráfica de comparación tiempos de ejecución para Divide y Vencerás y caso obvio.}
+            \label{fig:1b-comp}
+        \end{figure}
+
+        \begin{alertblock}{¡Atención!}
+            Los tiempos de ejecución del algoritmo tipo Divide y Vencerás son \textbf{peores que el obvio}. 
+        \end{alertblock}
+    \end{frame}
+
+    \begin{frame}
+        \frametitle{Posible explicación: Sobrecarga de la pila}
+        \begin{itemize}
+            \item En los vectores generados, la distribución 
+            general es la aparición del índice
+            buscado en los elementos finales del vector.
+            \item Ambos casos analizan casi todo el vector.
+            \item El algoritmo Divide y Vencerás \textbf{introduce información de contexto
+            en la pila} por cada llamada recursiva, lo que penaliza el rendimiento global del
+            algoritmo. 
+        \end{itemize}
     \end{frame}
 
     % Ejercicio 2
