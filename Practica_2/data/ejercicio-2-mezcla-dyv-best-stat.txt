@@ -1,0 +1,1 @@
+type:lineal function:f(x)=0.000199152*x+0.999999  RMS:13.377
