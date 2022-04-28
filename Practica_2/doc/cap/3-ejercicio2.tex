@@ -60,31 +60,87 @@ de eficiencia. Por tanto, tenemos que su eficiencia es $\theta(n)$.
         \hline
         $N$ & $T$ $(ms)$ \\
         \hline
-        1 & 0.0031 \\ 
-        51 & 0.0100 \\ 
-        101 & 0.0106 \\ 
-        151 & 0.0135 \\ 
-        201 & 0.0150 \\ 
-        251 & 0.0209 \\ 
-        301 & 0.0245 \\ 
-        351 & 0.0268 \\ 
-        401 & 0.0283 \\ 
-        451 & 0.0337 \\ 
-        501 & 0.0359 \\ 
-        551 & 0.0445 \\ 
-        601 & 0.0498 \\ 
-        651 & 0.0475 \\ 
-        701 & 0.0537 \\ 
-        751 & 0.0536 \\ 
-        801 & 0.0592 \\ 
-        851 & 0.0659 \\ 
-        901 & 0.0681 \\ 
-        951 & 0.0683 \\ 
+        1 & 0.0078 \\ 
+        250000 & 130.4093 \\ 
+        500000 & 261.6686 \\ 
+        750000 & 413.3990 \\ 
+        1000000 & 556.9989 \\ 
+        1250000 & 692.7300 \\ 
+        1500000 & 794.0190 \\ 
+        1750000 & 967.6856 \\ 
+        2000000 & 1100.9873 \\ 
+        2250000 & 1266.8203 \\ 
+        2500000 & 1428.2397 \\ 
+        2750000 & 1645.1067 \\ 
+        3000000 & 1820.3993 \\ 
+        3250000 & 1995.0870 \\ 
+        3500000 & 2157.7890 \\ 
+        3750000 & 2289.4873 \\ 
+        4000000 & 2491.1633 \\ 
+        4250000 & 2622.4633 \\ 
+        4500000 & 2779.7903 \\ 
+        4750000 & 2860.5737 \\ 
+        5000000 & 2895.9427 \\ 
+        5250000 & 2934.2293 \\ 
+        5500000 & 3303.9437 \\ 
+        5750000 & 3662.6510 \\ 
+        6000000 & 3754.8477 \\ 
+        6250000 & 3805.5320 \\ 
+        6500000 & 3942.2447 \\ 
+        6750000 & 4127.4360 \\ 
+        7000000 & 4362.7013 \\ 
+        7250000 & 4500.4323 \\ 
+        7500000 & 4570.1547 \\ 
+        7750000 & 4744.1413 \\ 
+        8000000 & 4881.4617 \\ 
+        8250000 & 5026.1930 \\ 
+        8500000 & 5358.3157 \\ 
+        8750000 & 5411.3997 \\ 
+        9000000 & 5605.6160 \\ 
+        9250000 & 5954.4473 \\ 
+        9500000 & 6019.2997 \\ 
+        9750000 & 6161.2730 \\ 
         \hline
     \end{tabular}
-    \caption{Tiempos de ejecución para el algoritmo \ref{alg:2a-obvio}.}
+    \caption{Tiempos de ejecución para el algoritmo \ref{alg:2a-obvio},
+    	con k constante.}
     \label{tab:2a-obvio-n}
 % \end{wraptable}
+\end{table}
+
+\begin{table}
+	\footnotesize
+	\centering
+	\begin{tabular}{|r|r|}
+		\hline
+		$N$ & $T$ $(ms)$ \\
+		\hline
+		1 & 0.0014 \\ 
+		250 & 9.2893 \\ 
+		763 & 81.2408 \\ 
+		1276 & 229.0587 \\ 
+		1789 & 456.9272 \\ 
+		2303 & 763.3462 \\ 
+		2816 & 1124.6013 \\ 
+		3329 & 1592.2963 \\ 
+		3842 & 2146.4227 \\ 
+		4355 & 2768.3670 \\ 
+		4868 & 3443.9970 \\ 
+		5382 & 4242.7217 \\ 
+		5895 & 5090.0903 \\ 
+		6408 & 5977.8030 \\ 
+		6921 & 6940.1510 \\ 
+		7434 & 8091.5580 \\ 
+		7947 & 9220.7350 \\ 
+		8461 & 10382.8967 \\ 
+		8974 & 11587.4233 \\ 
+		9487 & 12911.8067 \\ 
+		10000 & 14408.3200 \\ 
+		\hline
+	\end{tabular}
+	\caption{Tiempos de ejecución para el algoritmo 
+		\ref{alg:2a-obvio}, con n constante.}
+	\label{tab:2a-obvio-k}
 \end{table}
 
 Para el algoritmo AGRUPA de \ref{alg:2a-obvio}, que es el que nos interesa,
@@ -108,11 +164,16 @@ Para $n$ constante, obtenemos la tabla ??.
 En la gráfica \ref{fig:2a-obvio-graph} hemos representado los puntos experimentales con k constante, 
 así como la función
 de ajuste lineal asociada, con \textbf{función de ajuste} $f$ y \textbf{coeficiente de regresión}
-$R^2$ especificada en \ref{eq:2a-ajuste}. 
+$R^2$ especificada en \ref{eq:2a-ajuste-n}. 
 
 \begin{equation}
     \boxed{f(n) = 6,0739 \cdot 10 ^{-4}  n + 0,9924, R^2 = 0,9978}
-    \label{eq:2a-ajuste}
+    \label{eq:2a-ajuste-n}
+\end{equation}
+
+\begin{equation}
+\boxed{f(k) = 1,4158 \cdot 10^{-4} \cdot k^2 + 0,0294 k + 0,0219, R^2 = 0,9989}
+\label{eq:2a-ajuste-k}
 \end{equation}
 
 \begin{figure}
@@ -120,5 +181,13 @@ $R^2$ especificada en \ref{eq:2a-ajuste}.
     \includegraphics[scale=0.76]{img/e2a-graph.pdf}
     \caption{Gráfica de tiempos de ejecución para el caso obvio, 
     con f(x) y coeficiente de regresión especificada por \ref{eq:2a-ajuste}.}
-    \label{fig:2a-obvio-graph}
+    \label{fig:2a-obvio-n-graph}
+\end{figure}
+
+\begin{figure}
+	\centering
+	\includegraphics[scale=0.76]{img/e2-obvio-k.pdf}
+	\caption{Gráfica de tiempos de ejecución para el caso obvio con n constante, 
+		con f(x) y coeficiente de regresión especificada por \ref{eq:2a-ajuste-k}.}
+	\label{fig:2a-obvio-k-graph}
 \end{figure}

@@ -82,7 +82,7 @@ una \textbf{implementación} en \ref{cod:1a-dyv}.
 
 \subsubsubsection{Implementación}
 
-\lstinputlisting[language=C++, firstline=111, lastline=131, 
+\lstinputlisting[language=C++, firstline=111, lastline=132, 
 caption=Implementación en C++ del algoritmo basado en Divide y Vencerás., label={cod:1a-dyv}]
 {../src/ejercicio-1-comp-fija-no-repetidos.cpp} 
 
@@ -104,8 +104,13 @@ parámetros}, y una vez obtenidas, \textbf{calculamos el umbral de forma teóric
 % TODO: Poner la eficiencia obvio aparte
 
 Tenemos una estructura condicional. Si el tamaño del problema (número de componentes del vector donde 
-vamos a buscar) es menor o igual que el UMBRAL escogido, entonces ejecutamos la BUSQUEDA\_LINEAL, que es $O(n)$. 
+vamos a buscar) es menor o igual que el UMBRAL escogido, entonces ejecutamos la BUSQUEDA\_LINEAL, cuyo orden de eficiencia es \ref{eq:1a-obvio-eficiencia}. 
 En caso contrario, calculamos $k$, proceso que es $O(1)$ y se acota por una contante $c$. 
+
+\begin{equation}
+	\boxed{T(n) \in O (n)} \text{ (caso obvio)}
+	\label{eq:1a-obvio-eficiencia}
+\end{equation}
 
 A continuación, comprobamos si hemos encontrado el elemento o no. Como estamos realizando un análisis asintótico, supondremos
 el peor de los casos, en el que no encontramos el elemento, por tanto, como se ha mencionado anteriormente,
@@ -143,6 +148,7 @@ Deshacemos el cambio de variable:
 
 \begin{equation}
     T(n) = c_{1} + c_{2} \log_2(n) \implies \boxed{T(n) \in O(\log_2(n))}
+    \text{ (caso Divide y Vencerás)}
     \label{eq:1a-eficiencia-lineal}
 \end{equation}
 
@@ -236,18 +242,24 @@ Es el mismo que el pseudocódigo \ref{alg:1a-obvio}.
 
 La implementación sería el mismo que en \ref{cod:1a-obvio}. Otra implementación de este podría encontrarse en \ref{cod:1b-obvio}. 
 
-\lstinputlisting[language=C++, firstline=88, lastline=104, 
+\lstinputlisting[language=C++, firstline=92, lastline=120, 
 caption=Implementación alternativa en C++ del algoritmo basado en Búsqueda Lineal., label={cod:1b-obvio}]
 {../src/ejercicio-1-comp-fija-repetidos.cpp} 
 
 \subsubsubsection{Análisis de Eficiencia}
 
 El análisis de eficiencia \textbf{teórica} es análogo al realizado en \ref{sec:1a-obvio}, obteniéndose 
-que el orden de eficiencia es lineal (\ref{eq:1a-eficiencia-lineal}). 
+que el orden de eficiencia es lineal (\ref{eq:1a-obvio-eficiencia}). 
 
 Para los análisis de eficiencia \textbf{empírico e híbrido}, se han obtenido las \textbf{funciones de ajuste}
 y \textbf{coeficiente de regresión} especificadas por \ref{eq:1b-obvio-regresion}. Una representación
 gráfica de los datos obtenidos, así como de la función de regresión, se puede encontrar en \ref{fig:1b-obvio-graph}. 
+
+En términos experimentales, hemos realizado la experiencia hasta $n=10.000.000$, puesto que para tamaños superiores
+el tiempo de ejecución del algoritmo sería demasiado elevado para realizar la experiencia. Por ejemplo, para un valor
+$n=10^9$, se estima que el tiempo de ejecución sea \textbf{3 horas} (que difiere del tiempo de ejecución del algoritmo,
+$T(10^9) = 5,8$ s, pues la penalización de la generación de vectores aleatorio es muy significativa). 
+Para valores pequeños hemos realizado $n=1$ para comparar la cantidad de recursos que se emplea con un valor mónico. 
 
 \begin{equation}
     \boxed{f(x) = 5,8191 \cdot 10 ^{-6} x + 0,9999, R^2 = 0,9997}
@@ -341,7 +353,7 @@ no encuentra un elemento que verifica la condición, también busque en la otra.
 
 \subsubsubsection{Implementación}
 
-\lstinputlisting[language=C++, firstline=106, lastline=134, 
+\lstinputlisting[language=C++, firstline=100, lastline=120, 
 caption=Implementación en C++ del algoritmo basado en Divide y Vencerás., label={cod:1b-dyv}]
 {../src/ejercicio-1-comp-fija-repetidos.cpp} 
 
@@ -394,6 +406,14 @@ por \ref{eq:1b-dyv-eficiencia}. Una representación gráfica de estos datos se h
     \boxed{f(x) = 4,6553 \cdot 10^{-6} x + 0.8657, R^2 = 0,9834}
     \label{eq:1b-dyv-eficiencia}
 \end{equation}
+
+Para tomar las medidas experimentales, como el orden de eficiencia calculado 
+(\ref{eq:1b-dyv-eficiencia}) es lineal, hemos tomado las medidas hasta 
+un valor razonable $n=10.000.000$. En este caso, las limitaciones de tiempo
+no han sido tan pronunciadas como en el caso de vectores no repetidos,
+puesto que el generador de números aleatorios es más eficiente que el caso
+anterior, por lo que hemos podido llevar hasta un valor bastante elevado 
+incluso para un orden de eficiencia peor. 
 
 \begin{table}
 	\footnotesize

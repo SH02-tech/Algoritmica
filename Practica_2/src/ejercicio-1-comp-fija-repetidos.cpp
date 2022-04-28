@@ -49,39 +49,25 @@ double Uniforme() {
  * @return el vector de enteros calculado.
  */
 vector<int> VectorGenerator(int n) {
-    int m=2*n-1;
 
-    int * T = new int[n];
-    assert(T);
-    int * aux = new int[m];
-    assert(aux);
+	vector<int> myvector(n);
 
-    srand(time(0));
-    //genero todos los enteros entre -(n-1) y n-1
-    for (int j=0; j<m; j++) aux[j]=j-(n-1);
+	srand(time(NULL));
 
-    //algoritmo de random shuffling the Knuth (permutación aleatoria)
-    for (int j=m-1; j>0; j--) {
-        double u=Uniforme();
-        int k=(int)(j*u);
-        int tmp=aux[j];
-        aux[j]=aux[k];
-        aux[k]=tmp;
-    }
-    //me quedo con los n primeros del vector
-    for (int j=0; j<n; j++) T[j]=aux[j];
-    //for (int j=0; j<n; j++) cout << T[j] << " ";
+	for (int i=0; i<n; ++i) {
+		int random = rand() % n;
 
-    //Y ahora ordeno el vector T
-    vector<int> myvector (T, T+n);
-    vector<int>::iterator it;
+		if (rand() % 2 < 1)
+			random *= -1;
+		
+		myvector[i] = random;
+	}
 
     sort(myvector.begin(),myvector.end());
 
-    //for (it=myvector.begin(); it!=myvector.end(); ++it)
-    //cout << " " << *it;
+    // for (auto it=myvector.begin(); it!=myvector.end(); ++it)
+    // 	cout << " " << *it;
 
-    delete [] aux;
     return myvector;
 }
 
@@ -111,7 +97,7 @@ static int BusquedaLineal(const vector<int> &v, int inicial, int final) {
  * @param final Posición final.
  * @return int Posición cuyo valor es igual a ella. -1 si hay error. 
  */
-static int VectorPuntoFijo(const vector<int> &v, int inicial, int final) {
+static int VectorIndiceCoincidente(const vector<int> &v, int inicial, int final) {
 	int pos = NULL_POS;
 	
 	if ((final - inicial +1) <= UMBRAL) {
@@ -120,11 +106,11 @@ static int VectorPuntoFijo(const vector<int> &v, int inicial, int final) {
 		int media = (inicial+final)/2;
 		int aux;
 		
-		aux = VectorPuntoFijo(v, inicial, media);
+		aux = VectorIndiceCoincidente(v, inicial, media);
 		if (aux != NULL_POS) {
 			pos = aux;
 		} else {
-			aux = VectorPuntoFijo(v, media+1, final);
+			aux = VectorIndiceCoincidente(v, media+1, final);
 			if (aux != NULL_POS)
 				pos = aux;
 		}
@@ -159,7 +145,7 @@ int main(int argc, char **argv) {
 	clock_t tdespues;  // Valor del reloj después de la ejecución
 
 	tantes = clock();
-	VectorPuntoFijo(vect, 0, vect.size()-1);
+	VectorIndiceCoincidente(vect, 0, vect.size()-1);
 	tdespues = clock();
 
 	cout << ((double)(tdespues-tantes))/(CLOCKS_PER_SEC*1E-3)<< endl; // Tiempo en milisegundos. 
