@@ -1,5 +1,4 @@
 #include <iostream>
-using namespace std;
 #include <ctime>
 #include <cstdlib>
 #include <climits>
@@ -7,6 +6,7 @@ using namespace std;
 #include <algorithm>
 #include <vector>
 #include <chrono>
+using namespace std;
 
 #define NULL_POS -1
 
@@ -160,7 +160,7 @@ int main(int argc, char * argv[])
 {
 
     if (argc !=2) {
-        cerr << "Formato: " << argv[0] << " <num_vectores> <tamaño_vector>" << endl;
+        cerr << "Formato: " << argv[0] << " num vectores tamanio vector" << endl;
         return -1;
     }
 

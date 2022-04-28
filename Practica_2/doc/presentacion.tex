@@ -37,6 +37,24 @@
 	xleftmargin=8pt
 }
 
+\lstset{literate=
+	{á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1
+	{Á}{{\'A}}1 {É}{{\'E}}1 {Í}{{\'I}}1 {Ó}{{\'O}}1 {Ú}{{\'U}}1
+	{à}{{\`a}}1 {è}{{\`e}}1 {ì}{{\`i}}1 {ò}{{\`o}}1 {ù}{{\`u}}1
+	{À}{{\`A}}1 {È}{{\'E}}1 {Ì}{{\`I}}1 {Ò}{{\`O}}1 {Ù}{{\`U}}1
+	{ä}{{\"a}}1 {ë}{{\"e}}1 {ï}{{\"i}}1 {ö}{{\"o}}1 {ü}{{\"u}}1
+	{Ä}{{\"A}}1 {Ë}{{\"E}}1 {Ï}{{\"I}}1 {Ö}{{\"O}}1 {Ü}{{\"U}}1
+	{â}{{\^a}}1 {ê}{{\^e}}1 {î}{{\^i}}1 {ô}{{\^o}}1 {û}{{\^u}}1
+	{Â}{{\^A}}1 {Ê}{{\^E}}1 {Î}{{\^I}}1 {Ô}{{\^O}}1 {Û}{{\^U}}1
+	{ã}{{\~a}}1 {ẽ}{{\~e}}1 {ĩ}{{\~i}}1 {õ}{{\~o}}1 {ũ}{{\~u}}1
+	{Ã}{{\~A}}1 {Ẽ}{{\~E}}1 {Ĩ}{{\~I}}1 {Õ}{{\~O}}1 {Ũ}{{\~U}}1
+	{œ}{{\oe}}1 {Œ}{{\OE}}1 {æ}{{\ae}}1 {Æ}{{\AE}}1 {ß}{{\ss}}1
+	{ű}{{\H{u}}}1 {Ű}{{\H{U}}}1 {ő}{{\H{o}}}1 {Ő}{{\H{O}}}1
+	{ç}{{\c c}}1 {Ç}{{\c C}}1 {ø}{{\o}}1 {å}{{\r a}}1 {Å}{{\r A}}1
+	{€}{{\euro}}1 {£}{{\pounds}}1 {«}{{\guillemotleft}}1
+	{»}{{\guillemotright}}1 {ñ}{{\~n}}1 {Ñ}{{\~N}}1 {¿}{{?`}}1 {¡}{{!`}}1 
+}
+
 \lstset{style=mystyle, basicstyle=\scriptsize}
 
 \author{Shao Jie Hu Chen \and Mario Megías Mateo \and Jesús Samuel García Carballo}
@@ -104,7 +122,7 @@
 
     % Ejercicio 1
 
-    \section{Ejercicio-1}
+    \section{Ejercicio 1: Vectores no repetidos}
 
     \begin{frame}
         \frametitle{Lemas claves}
@@ -120,10 +138,10 @@
             \end{block}
     \end{frame}
 
-	%  \begin{frame}
-	% 	\frametitle{Caso obvio. Pseudocódigo.}
-	% 	\lstinputlisting[caption=Pseudocódigo asociado al caso obvio., label={alg:1a-obvio}]{listing/ejer1a-pseudo-obvio.txt}
-	% \end{frame}
+	 \begin{frame}
+		\frametitle{Caso obvio. Pseudocódigo.}
+		\lstinputlisting[caption=Pseudocódigo asociado al caso obvio., label={alg:1a-obvio}]{listing/ejer1a-pseudo-obvio.txt}
+	\end{frame}
 
 	 \begin{frame}
 		\frametitle{Caso obvio. Implementación en C++.}
@@ -131,49 +149,49 @@
 		del algoritmo basado en la búsqueda lineal., label={cod:1a-obvio}]{../src/ejercicio-1-comp-fija-no-repetidos.cpp} 
 	\end{frame}
 
-	% \begin{frame}
-	% 	\frametitle{Análisis de eficiencia caso obvio.}
+	\begin{frame}
+		\frametitle{Análisis de eficiencia caso obvio.}
 		 
-	% 	 \begin{block}{Eficiencia Teórica}
-	% 	 	$$T(n) \in \mathcal{O}(n)$$
-	% 	 \end{block}
+		 \begin{block}{Eficiencia Teórica}
+		 	$$T(n) \in \mathcal{O}(n)$$
+		 \end{block}
 	 
-	% \end{frame}
+	\end{frame}
 
-	% \begin{frame}
-	% 	\frametitle{Análisis de eficiencia caso obvio.}
-	% \end{frame}
+	\begin{frame}
+		\frametitle{Análisis de eficiencia caso obvio.}
+	\end{frame}
 
-	% \begin{frame}
-	% 	\frametitle{Caso Divide y Vencerás. Pseudocódigo.}
-	% 	\lstinputlisting[caption=Pseudocódigo asociado al caso Divide y Vencerás., label={alg:1a-dyv}]{listing/ejer1a-pseudo-dyv.txt}
-	% \end{frame}
+	\begin{frame}
+		\frametitle{Caso Divide y Vencerás. Pseudocódigo.}
+		\lstinputlisting[caption=Pseudocódigo asociado al caso Divide y Vencerás., label={alg:1a-dyv}]{listing/ejer1a-pseudo-dyv.txt}
+	\end{frame}
 
-	% \begin{frame}
-	% 	\frametitle{Caso Divide y Vencerás. Implementación.}
-	% 	\lstinputlisting[language=C++, firstline=119, lastline=131, 
-	% 	caption=Implementación en C++ del algoritmo basado en Divide y Vencerás., label={cod:1a-dyv}]
-	% 	{../src/ejercicio-1-comp-fija-no-repetidos.cpp} 
-	% \end{frame}
+	\begin{frame}
+		\frametitle{Caso Divide y Vencerás. Implementación.}
+		\lstinputlisting[language=C++, firstline=119, lastline=131, 
+		caption=Implementación en C++ del algoritmo basado en Divide y Vencerás., label={cod:1a-dyv}]
+		{../src/ejercicio-1-comp-fija-no-repetidos.cpp} 
+	\end{frame}
 
-	% \begin{frame}
-	% 	\frametitle{Caso Divide y Vencerás. Determinación del umbral.}
-	% 	% Aquí viene la imagen
-	% \end{frame}
+	\begin{frame}
+		\frametitle{Caso Divide y Vencerás. Determinación del umbral.}
+		% Aquí viene la imagen
+	\end{frame}
 
-	% \begin{frame}
-	% \frametitle{Caso Divide y Vencerás. Análisis de eficiencia.}
-	% 		\begin{equation}
-	% 			T(n) = \left\{ \begin{array}{lr} T(n/2) + c & \text{si } n > \text{UMBRAL}\\ n & \text{si } n \leqslant \text{UMBRAL} \end{array} \right.
-	% 			\label{eq:1a-efi-dyv-rec}
-	% 		\end{equation}
-	% 		\begin{equation}
-	% 		T(n) = c_{1} + c_{2} \log_2(n) \implies \boxed{T(n) \in O(\log_2(n))}
-	% 		\label{eq:1a-eficiencia-lineal}
-	% 		\end{equation}
-	% \end{frame}
+	\begin{frame}
+	\frametitle{Caso Divide y Vencerás. Análisis de eficiencia.}
+			\begin{equation}
+				T(n) = \left\{ \begin{array}{lr} T(n/2) + c & \text{si } n > \text{UMBRAL}\\ n & \text{si } n \leqslant \text{UMBRAL} \end{array} \right.
+				\label{eq:1a-efi-dyv-rec}
+			\end{equation}
+			\begin{equation}
+			T(n) = c_{1} + c_{2} \log_2(n) \implies \boxed{T(n) \in O(\log_2(n))}
+			\label{eq:1a-eficiencia-lineal}
+			\end{equation}
+	\end{frame}
 
-    \subsection{Caso divide y vencerás}
+    \section{Ejercicio 1: Vectores repetidos}
 
     \begin{frame}
         \frametitle{Descripción}
@@ -303,74 +321,72 @@
                 \end{table}
             \end{column}
 
-            % \begin{column}{0.6\textwidth}
-            %     \begin{figure}
-            %         \centering
-            %         \includegraphics[scale=0.5]{img/e1b-dyv}
-            %         % \caption{Gráfica de tiempos de ejecución para el caso Divide y Vencerás, 
-            %         % con f(x) y coeficiente de regresión especificada por \ref{eq:1b-dyv-eficiencia}.}
-            %         % \label{fig:1b-dyv-graph}
-            %     \end{figure}
+            \begin{column}{0.6\textwidth}
+                \begin{figure}
+                    \centering
+                    \includegraphics[scale=0.5]{img/e1b-dyv}
+                    % \caption{Gráfica de tiempos de ejecución para el caso Divide y Vencerás, 
+                    % con f(x) y coeficiente de regresión especificada por \ref{eq:1b-dyv-eficiencia}.}
+                    % \label{fig:1b-dyv-graph}
+                \end{figure}
 
-            %     \footnotesize
+                \footnotesize
 
-            %     \begin{equation*}
-            %         \boxed{f(x) = 4,6553 \cdot 10^{-6} x + 0.8657, R^2 = 0,9834}
-            %         \label{eq:1b-dyv-eficiencia}
-            %     \end{equation*}
-            % \end{column}
+                \begin{equation*}
+                    \boxed{f(x) = 4,6553 \cdot 10^{-6} x + 0.8657, R^2 = 0,9834}
+                    \label{eq:1b-dyv-eficiencia}
+                \end{equation*}
+            \end{column}
         \end{columns}
     \end{frame}
 
-    \begin{frame}
-        \frametitle{Eficiencia híbrida}
-        \begin{figure}
-            \centering
-            \includegraphics[scale=0.8]{img/e1b-dyv}
-            % \caption{Gráfica de tiempos de ejecución para el caso Divide y Vencerás, 
-            % con f(x) y coeficiente de regresión especificada por \ref{eq:1b-dyv-eficiencia}.}
-            % \label{fig:1b-dyv-graph}
-        \end{figure}
+    % \begin{frame}
+    %     \frametitle{Eficiencia híbrida}
+    %     \begin{figure}
+    %         \centering
+    %         \includegraphics[scale=0.8]{img/e1b-dyv}
+    %         % \caption{Gráfica de tiempos de ejecución para el caso Divide y Vencerás, 
+    %         % con f(x) y coeficiente de regresión especificada por \ref{eq:1b-dyv-eficiencia}.}
+    %         % \label{fig:1b-dyv-graph}
+    %     \end{figure}
 
-        \begin{equation*}
-            \boxed{f(x) = 4,6553 \cdot 10^{-6} x + 0.8657, R^2 = 0,9834}
-            \label{eq:1b-dyv-eficiencia}
-        \end{equation*}
-    \end{frame}
+    %     \begin{equation*}
+    %         \boxed{f(x) = 4,6553 \cdot 10^{-6} x + 0.8657, R^2 = 0,9834}
+    %         \label{eq:1b-dyv-eficiencia}
+    %     \end{equation*}
+    % \end{frame}
 
-    \begin{frame}
-        \frametitle{Comparación con el caso obvio}
+    % \begin{frame}
+    %     \frametitle{Comparación con el caso obvio}
 
-        \begin{figure}
-            \centering
-            \includegraphics[scale=0.66]{img/e1b-comp.pdf}
-            % \caption{Gráfica de comparación tiempos de ejecución para Divide y Vencerás y caso obvio.}
-            \label{fig:1b-comp}
-        \end{figure}
+    %     \begin{figure}
+    %         \centering
+    %         \includegraphics[scale=0.66]{img/e1b-comp.pdf}
+    %         % \caption{Gráfica de comparación tiempos de ejecución para Divide y Vencerás y caso obvio.}
+    %         \label{fig:1b-comp}
+    %     \end{figure}
 
-        \begin{alertblock}{¡Atención!}
-            Los tiempos de ejecución del algoritmo tipo Divide y Vencerás son \textbf{peores que el obvio}. 
-        \end{alertblock}
-    \end{frame}
+    %     \begin{alertblock}{¡Atención!}
+    %         Los tiempos de ejecución del algoritmo tipo Divide y Vencerás son \textbf{peores que el obvio}. 
+    %     \end{alertblock}
+    % \end{frame}
 
-    \begin{frame}
-        \frametitle{Posible explicación: Sobrecarga de la pila}
-        \begin{itemize}
-            \item En los vectores generados, la distribución 
-            general es la aparición del índice
-            buscado en los elementos finales del vector.
-            \item Ambos casos analizan casi todo el vector.
-            \item El algoritmo Divide y Vencerás \textbf{introduce información de contexto
-            en la pila} por cada llamada recursiva, lo que penaliza el rendimiento global del
-            algoritmo. 
-        \end{itemize}
-    \end{frame}
+    % \begin{frame}
+    %     \frametitle{Posible explicación: Sobrecarga de la pila}
+    %     \begin{itemize}
+    %         \item En los vectores generados, la distribución 
+    %         general es la aparición del índice
+    %         buscado en los elementos finales del vector.
+    %         \item Ambos casos analizan casi todo el vector.
+    %         \item El algoritmo Divide y Vencerás \textbf{introduce información de contexto
+    %         en la pila} por cada llamada recursiva, lo que penaliza el rendimiento global del
+    %         algoritmo. 
+    %     \end{itemize}
+    % \end{frame}
 
     % Ejercicio 2
 
-    \section{Ejercicio-2}
-
-
+    \section{Ejercicio 2: Unificación de vectores}
 
 
     \subsection{Caso obvio}
@@ -387,7 +403,7 @@
 		 
 		 \begin{block}{Eficiencia Teórica}
 		 	$$T(n) \in \mathcal{O}(nk^{2})$$
-		 \end{block}
+	    \end{block}
 	 
 	\end{frame}
 
