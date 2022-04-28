@@ -127,7 +127,7 @@
     \begin{frame}
         \frametitle{Descripción del problema y Lemas Claves}
 
-            \begin{block}{Despcripción}
+            \begin{block}{Descripción}
                 Dado un vector de n componentes ordenado de menor a mayor (con \textbf{valores no repetidos}), 
                 encontrar $i$ tal que $v[i] = i$. 
             \end{block}
@@ -157,15 +157,24 @@
 
 	\begin{frame}
 		\frametitle{Análisis de eficiencia caso obvio.}
-		 
 		 \begin{block}{Eficiencia Teórica}
 		 	$$T(n) \in \mathcal{O}(n)$$
 		 \end{block}
-	 
 	\end{frame}
-
+		
 	\begin{frame}
 		\frametitle{Análisis de eficiencia caso obvio.}
+		\begin{figure}
+			\begin{equation}
+			\boxed{f(x) = 3.37683 \cdot 10^{-6} + 0.999999, R^2 = 0.9997}
+			\label{eq:1a-obv-regresion}
+			\end{equation}
+			\centering
+			\includegraphics[scale=0.68]{img/e1a-obv}
+			\caption{Gráfica de tiempos de ejecución para el caso obvio, 
+				con f(x) y coeficiente de regresión especificada por \ref{eq:1a-obv-regresion}.}
+			\label{fig:1a-obv-graph}
+		\end{figure}
 	\end{frame}
 
 	\begin{frame}
@@ -187,14 +196,26 @@
 
 	\begin{frame}
 	\frametitle{Caso Divide y Vencerás. Análisis de eficiencia.}
+		\begin{block}{Eficiencia Teórica}
 			\begin{equation}
-				T(n) = \left\{ \begin{array}{lr} T(n/2) + c & \text{si } n > \text{UMBRAL}\\ n & \text{si } n \leqslant \text{UMBRAL} \end{array} \right.
-				\label{eq:1a-efi-dyv-rec}
+			T(n) = \left\{ \begin{array}{lr} T(n/2) + c & \text{si } n > \text{UMBRAL}\\ n & \text{si } n \leqslant \text{UMBRAL} \end{array} \right.
+			\label{eq:1a-efi-dyv-rec}
 			\end{equation}
 			\begin{equation}
 			T(n) = c_{1} + c_{2} \log_2(n) \implies \boxed{T(n) \in O(\log_2(n))}
 			\label{eq:1a-eficiencia-lineal}
 			\end{equation}
+		\end{block}
+	\end{frame}
+
+	\begin{frame}
+		\frametitle{Caso Divide y Vencerás. Análisis de eficiencia.}
+		\begin{block}{Eficiencia Empirica}
+			\begin{equation}
+			\boxed{f(x) = 0.1323 \cdot \log_{2}{x} + 0.0012, R^2 = 0.9988}
+			\label{eq:1a-dyv-regresion}
+			\end{equation}
+		\end{block}
 	\end{frame}
 
     \section{E1: Vectores repetidos}
