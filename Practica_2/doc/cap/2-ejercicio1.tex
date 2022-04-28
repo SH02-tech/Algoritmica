@@ -9,9 +9,6 @@ En primer lugar, abordamos el problema para vectores con valores no repetidos. P
 caben destacar los lemas \ref{lem:1} y \ref{lem:2}. En esta subsección, $v$ será un vector ordenado con
 valores no repetidos con componentes enteras. 
 
-% El último algoritmo se ha desarrollado a partir de un análisis detallado del 
-% problema, a partir del cual hemos conseguido demostrar las siguientes proposiciones:
-
 \begin{lemma}
     \label{lem:1}
     Sea i con $0 \leqslant i < n$ fijo, tal que $v[i]=i+k$, con $k \in \mathbb N$. 
@@ -97,69 +94,28 @@ luego es dificil hacer un cáculo fiel a nivel teórico, por lo que se opta por 
 implementaciones ejecutadas en un equipo concreto, \textbf{obtenemos las funciones de ajuste de ambos algoritmos con sus correspondientes 
 parámetros}, y una vez obtenidas, \textbf{calculamos el umbral de forma teórica igualando ambas funciones, despejando el tamaño del problema}: 
 
-%% Aquí vendría el desarrollo para los datos obtenidos
-
 \begin{table}
 	\footnotesize
 	\centering
 	\begin{tabular}{|r|r|}
 		\hline
-		$N$ & $T_{DyV}(ms)$ & $T_{lin}(ms)$ \\
+		$N$ & $T_{DyV}(ms)$ \\
 		\hline
-		1 & 99.4000 \\ 
-		250000 & 439.4000 \\ 
-		500000 & 372.5000 \\ 
-		750000 & 454.6000 \\ 
-		1000000 & 412.7000 \\ 
-		1250000 & 480.3000 \\ 
-		1500000 & 469.0000 \\ 
-		1750000 & 466.1000 \\ 
-		2000000 & 666.1000 \\ 
-		2250000 & 577.8000 \\ 
-		2500000 & 757.4000 \\ 
-		2750000 & 680.0000 \\ 
-		3000000 & 773.0000 \\ 
-		3250000 & 767.3000 \\ 
-		3500000 & 839.1000 \\ 
-		3750000 & 894.9000 \\ 
-		4000000 & 932.0000 \\ 
-		4250000 & 913.3000 \\ 
-		4500000 & 932.2000 \\ 
-		4750000 & 926.8000 \\ 
-		5000000 & 1036.9000 \\ 
-		5250000 & 1015.2000 \\ 
-		5500000 & 992.6000 \\ 
-		5750000 & 959.9000 \\ 
-		6000000 & 939.3000 \\ 
-		6250000 & 957.6000 \\ 
-		6500000 & 989.6000 \\ 
-		6750000 & 1031.3000 \\ 
-		7000000 & 1139.3000 \\ 
-		7250000 & 1516.0000 \\ 
-		7500000 & 1010.0000 \\ 
-		7750000 & 931.7000 \\ 
-		8000000 & 1028.0000 \\ 
-		8250000 & 1001.1000 \\ 
-		8500000 & 1085.4000 \\ 
-		8750000 & 1048.7000 \\ 
-		9000000 & 1496.1000 \\ 
-		9250000 & 1043.8000 \\ 
-		9500000 & 1067.4000 \\ 
-		9750000 & 1012.6000 \\ 
 	\end{tabular}
+
+	\caption{Comparación de los tiempos de ejecución para los algoritmos con implementaciones \ref{cod:1a-dyv} y \ref{cod:1a-obvio}}
+	\label{tab:1a-com}
 \end{table}
 
-Por tanto, llamaremos al umbral $u$, ha de cumplirse: 
+Por tanto, llamando al umbral $u$, ha de cumplirse: 
 
 \begin{equation}
-3.44948e-6*x+0.987649 = 75.7534*log(x)-266.05
+9.12713 \cdot log_{2}{(u)} + 1.2032 = 3.44948 \cdot 10^{-6} u + 0.987649
+\implies \boxed{u = }
 \label{eq:}
 \end{equation}
 
-
 \subsubsubsection{Análisis de Eficiencia}
-
-% TODO: Poner la eficiencia obvio aparte
 
 Tenemos una estructura condicional. Si el tamaño del problema (número de componentes del vector donde 
 vamos a buscar) es menor o igual que el UMBRAL escogido, entonces ejecutamos la BUSQUEDA\_LINEAL, cuyo orden de eficiencia es \ref{eq:1a-obvio-eficiencia}. 
@@ -221,7 +177,7 @@ y \textbf{coeficiente de regresión} especificadas por \ref{eq:1a-dyv-regresion}
 gráfica de los datos obtenidos, así como de la función de regresión, se puede encontrar en \ref{fig:1a-dyv-graph}.
 
 \begin{equation}
-    \boxed{f(x) = 9.12713 \cdot \log_{2}{x} - 13.1908 , R^2 = }
+    \boxed{f(x) = 9.12713 \cdot \log_{2}{x} + 1.2032, R^2 = }
     \label{eq:1a-dyv-regresion}
 \end{equation}
 
@@ -231,27 +187,6 @@ gráfica de los datos obtenidos, así como de la función de regresión, se pued
 	\begin{tabular}{|r|r|}
 		\hline
 		$N$ & $T (ms)$ \\
-		\hline
-		1 & 0.4659 \\ 
-		51 & 8.9903 \\ 
-		101 & 16.0023 \\ 
-		151 & 24.6148 \\ 
-		201 & 28.2958 \\ 
-		251 & 32.4715 \\ 
-		301 & 37.6090 \\ 
-		351 & 40.3095 \\ 
-		401 & 39.1602 \\ 
-		451 & 45.4901 \\ 
-		501 & 46.9329 \\ 
-		551 & 46.8213 \\ 
-		601 & 47.5944 \\ 
-		651 & 50.1281 \\ 
-		701 & 49.8905 \\ 
-		751 & 50.8145 \\ 
-		801 & 47.7563 \\ 
-		851 & 51.0535 \\ 
-		901 & 54.4668 \\ 
-		951 & 55.4261 \\ 
 		\hline
 	\end{tabular}
 
