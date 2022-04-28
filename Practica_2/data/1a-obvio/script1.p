@@ -1,10 +1,10 @@
-set title "Caso Divide y Vencerás"
+set title "Caso obvio"
 set xlabel "Nº de componentes"
 set ylabel "Tiempo (ms)"
 set xrange [1:10000000]
-set yrange [0:3]
+set yrange [0:40]
 set grid
-f(x) = 0.1323*log(x) + 0.0012
+f(x) = 3.37683e-06*x+0.999999
 set terminal pdf
-set output "output.pdf"
+set output "e1a-dyv.pdf"
 plot 'ejercicio-1-comp-fija-no-repetidos-lineal-tab.dat', f(x)
