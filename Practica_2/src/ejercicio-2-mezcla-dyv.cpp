@@ -10,6 +10,10 @@ using namespace std;
 
 #define NULL_POS -1
 
+#ifndef UMBRAL
+#define UMBRAL 0
+#endif
+
 //generador de ejemplor para el problema de mezcla de k vectores ordenados. Para obtener k vectores ordenados de forma creciente cada uno con n elementos, genera un vector de tama�o k*n con todos los enteros entre 0 y kn-1 ordenados. Se lanzan entonces k iteraciones de un algoritmo de muestreo aleatorio de tama�o n para obtener los k vectores. Est�n ordeados porque el algoritmo de muestreo mantiene el orden
 
 double uniforme() //Genera un n�mero uniformemente distribuido en el
@@ -92,31 +96,56 @@ vector<int> Unifica(const vector<int> &vector1, const vector<int> &vector2) {
 	return acumulador;
 }
 
+/**
+ * @brief Algoritmo tipo Divide y Vencerás para la unión de dos vectores, de forma que el resultado está ordenado. 
+ * 
+ * @param lista_vectores Lista de vectores ordenados. 
+ * @pre Cada vector de la lista ha de estar ordenado. 
+ * @return vector<int> Resultado ordenado de la unión de los vectores. 
+ */
+vector<int> Agrupa(const vector<vector<int>> &lista_vectores) {
+	vector<int> acumulador;
+	vector<vector<int>>::const_iterator it = lista_vectores.begin();
+	acumulador = *it;
+	++it;
+
+	while (it != lista_vectores.end()) {
+		acumulador = Unifica(acumulador, *it);
+		++it;
+	}
+
+	return acumulador;
+}
+
 vector<int> mergedyv(const vector<vector<int>> & coleccion){
 
     int k = coleccion.size();
-    vector<vector<int>> aux_coleccion;
+    vector<vector<int>> aux_collect;
+    int n=coleccion.at(0).size();
 
-    // Poner condición de umbral
+    if(k*n <= UMBRAL){
+        return Agrupa(coleccion);
+    }
+    else{
+        if (k == 1) {
+            return coleccion[0];
 
-    if (k == 1) {
-        return coleccion[0];
+        } else if (k > 1) {
 
-    } else if (k > 1) {
-
-        if (k % 2 == 0){  
-            for (size_t i = 0; i < k/2; i+=2)
-                aux_coleccion.push_back(Unifica(coleccion[i],coleccion[i+1]));
-
-            return mergedyv(aux_coleccion);
-        } else {
-            for (size_t i = 0; i < (k-1)/2; i+=2)
-                aux_coleccion.push_back(Unifica(coleccion[i],coleccion[i+1]));
-    
-            aux_coleccion.push_back(*(coleccion.end()-1));
-            return mergedyv(aux_coleccion);
-        }
-    } 
+            if (k % 2 == 0){  
+                for (size_t i = 0; i < k/2; i+=2){
+                aux_collect.push_back(Unifica(coleccion[i],coleccion[i+1]));
+                }
+                return mergedyv(aux_collect);
+            } else {
+                for (size_t i = 0; i < (k-1)/2; i+=2){
+                aux_collect.push_back(Unifica(coleccion[i],coleccion[i+1]));
+                }
+                aux_collect.push_back(*(coleccion.end()-1));
+                return mergedyv(aux_collect);
+            }
+        } 
+    }
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////
@@ -156,10 +185,14 @@ int main(int argc, char * argv[])
     // cout<<endl;
         
     static int acumulador = 0;
-    static chrono::_V2::steady_clock::time_point tantes;    // Valor del reloj antes de la ejecución
-    static chrono::_V2::steady_clock::time_point tdespues;  // Valor del reloj antes de la ejecución
+	clock_t tantes;    // Valor del reloj antes de la ejecución
+	clock_t tdespues;  // Valor del reloj después de la ejecución
 
+    tantes=clock();
     r = mergedyv(v);
+    tdespues=clock();
+
+    cout << ((double)(tdespues-tantes))/(CLOCKS_PER_SEC*1E-3)<< endl; // Tiempo en milisegundos. 
 
     // vector<int>::iterator itu;
     // for(itu=r.begin();itu!=r.end();++itu){

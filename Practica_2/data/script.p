@@ -1,11 +1,12 @@
-set title "Caso obvio vs Caso Divide y Vencerás"
+set title "Caso obvio vs Caso Divide y Vencerás (k constante)"
 set xlabel "Nº de componentes"
 set ylabel "Tiempo (ms)"
-set xrange [1:10000000]
-set yrange [0:65]
+set xrange [0:2]
+set yrange [0:0.5]
 set grid
-f(x) = 3.49261e-06*x+0.999999
-g(x) = 4.6553e-6*x+0.85
+set logscale x
+f(x) = 0.000199152*x+0.999999
+g(x) = 3.85058e-05*x*log(x)+1
 set terminal pdf
 set output "output.pdf"
-plot '1b-obvio/ejercicio-1-comp-fija-repetidos-lineal-tab.dat', f(x), '1b-dyv/ejercicio-1-comp-fija-repetidos-tab.dat', g(x)
+plot '2-dyv/ejercicio-2-mezcla-dyv-tab.dat', f(x), '2-obvio/ejercicio-2-mezcla-n-tab.dat', g(x)
