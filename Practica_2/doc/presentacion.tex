@@ -104,7 +104,7 @@
 
     % Ejercicio 1
 
-    \section{ejercicio1}
+    \section{Ejercicio-1}
 
     \begin{frame}
         \frametitle{Lemas claves}
@@ -173,7 +173,7 @@
 	% 		\end{equation}
 	% \end{frame}
 
-    \section{Ejercicio 1b}
+    \subsection{Caso divide y vencerás}
 
     \begin{frame}
         \frametitle{Descripción}
@@ -368,6 +368,13 @@
 
     % Ejercicio 2
 
+    \section{Ejercicio-2}
+
+
+
+
+    \subsection{Caso obvio}
+
 	\begin{frame}
 		\frametitle{Caso Obvio. Implementación en C++.}
 		\lstinputlisting[language=C++, firstline=118, lastline=130, 
@@ -397,7 +404,7 @@
         \frametitle{Eficiencia empírica: Caso n fijo.}
 
         \begin{figure}
-            \includegraphics[width=0.7\textwidth]{../data/ejercicio-2-mezcla-k-graph.pdf}
+            \includegraphics[width=0.7\textwidth]{../data/2-obvio/ejercicio-2-mezcla-k-graph.pdf}
             \caption{Gráfica de tiempos de ejecución (en $\mu$s) respecto al número de vectores para el caso obvio.}
         \end{figure}
     \end{frame}
@@ -408,6 +415,8 @@
 		caption=Implementación en C++ del algoritmo divide y vencerás., label={cod:1a-dyv}]
 		{../src/ejercicio-2-mezcla-dyv.cpp} 
 	\end{frame}
+
+    \subsection{Caso divide y vencerás}
 
     \begin{frame}
 		\frametitle{Análisis de eficiencia caso divide y vencerás.}
@@ -422,7 +431,7 @@
         \frametitle{Eficiencia empírica: Caso k fijo.}
 
         \begin{figure}
-            \includegraphics[width=0.7\textwidth]{../data/ejercicio-2-mezcla-dyv-graph.pdf}
+            \includegraphics[width=0.7\textwidth]{../data/2-dyv/ejercicio-2-mezcla-dyv-graph.pdf}
             \caption{Gráfica de tiempos de ejecución (en $\mu$s) con respecto a los elementos del vector para el caso divide y vencerás.}
         \end{figure}
     \end{frame}
@@ -431,11 +440,22 @@
         \frametitle{Eficiencia empírica: Caso n fijo.}
 
         \begin{figure}
-            \includegraphics[width=0.7\textwidth]{../data/ejercicio-2-mezcla-dyv-k-graph.pdf}
+            \includegraphics[width=0.7\textwidth]{../data/2-dyv/ejercicio-2-mezcla-dyv-k-graph.pdf}
             \caption{Gráfica de tiempos de ejecución (en $\mu$s) respecto al número de vectores para el caso divide y vencerás.}
         \end{figure}
     \end{frame}
 
+    \begin{frame}
+        \frametitle{Comparación con el caso obvio}
+
+        \begin{figure}
+            \centering
+            \includegraphics[scale=0.66]{img/e1b-comp.pdf}
+            % \caption{Gráfica de comparación tiempos de ejecución para Divide y Vencerás y caso obvio.}
+            \label{fig:1b-comp}
+        \end{figure}
+
+    \end{frame}
 
     % Conclusiones
 
