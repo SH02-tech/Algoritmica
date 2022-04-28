@@ -6,5 +6,5 @@ set yrange [0:40]
 set grid
 f(x) = 3.37683e-06*x+0.999999
 set terminal pdf
-set output "e1a-dyv.pdf"
+set output "e1a-obv.pdf"
 plot 'ejercicio-1-comp-fija-no-repetidos-lineal-tab.dat', f(x)
