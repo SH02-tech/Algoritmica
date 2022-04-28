@@ -122,20 +122,26 @@
 
     % Ejercicio 1
 
-    \section{Ejercicio 1: Vectores no repetidos}
+    \section{E1: Vectores no repetidos}
 
     \begin{frame}
-        \frametitle{Lemas claves}
-            \begin{block}{Lema de la cota superior}
+        \frametitle{Descripción del problema y Lemas Claves}
+
+            \begin{block}{Despcripción}
+                Dado un vector de n componentes ordenado de menor a mayor (con \textbf{valores no repetidos}), 
+                encontrar $i$ tal que $v[i] = i$. 
+            \end{block}
+
+            \begin{alertblock}{Lema de la cota superior}
                 \label{lem:1}
                 Sea i con $0 \leqslant i < n$ fijo, tal que $v[i]=i+k$, con $k \in \mathbb N$. 
                 Entonces $v[j] \neq j$, $\forall j \in \mathbb N$ con $i < j < n$. 
-            \end{block}
-            \begin{block}{Lema de la cota inferior}
+            \end{alertblock}
+            \begin{alertblock}{Lema de la cota inferior}
                 \label{lem:2}
                 Sea i con $0 < i < n$ fijo, tal que $v[i]=i-k$ con 
                 $k \in \mathbb N$. Entonces $v[j] \neq j$,  $\forall j$ con $0 \leqslant j < i$. 
-            \end{block}
+            \end{alertblock}
     \end{frame}
 
 	 \begin{frame}
@@ -191,7 +197,7 @@
 			\end{equation}
 	\end{frame}
 
-    \section{Ejercicio 1: Vectores repetidos}
+    \section{E1: Vectores repetidos}
 
     \begin{frame}
         \frametitle{Descripción}
@@ -200,8 +206,12 @@
             encontrar $i$ tal que $v[i] = i$. 
         \end{block}
 
+        \begin{block}{Mismo algoritmo básico}
+            El algoritmo básico sigue funcionado para esta situación.
+        \end{block}
+
         \begin{alertblock}{Fallo del algoritmo anterior}
-            El algoritmo propuesto para el caso con valores no repetidos \textbf{no es válido}.
+            El algoritmo Divide y Vencerás propuesto para el caso con valores no repetidos \textbf{no es válido}.
         \end{alertblock}
     \end{frame}
 
@@ -224,13 +234,24 @@
 
     \begin{frame}
         \begin{exampleblock}{Implementación en C++}
-            \lstinputlisting[language=C++, firstline=114, lastline=134, label={cod:1b-dyv}]
+            \lstinputlisting[language=C++, firstline=100, lastline=120, label={cod:1b-dyv}]
             {../src/ejercicio-1-comp-fija-repetidos.cpp} 
         \end{exampleblock}
     \end{frame}
 
     \begin{frame}
-        \frametitle{Análisis de Eficiencia Teórica}
+        \frametitle{Nueva implementación de la Búsqueda Lineal}
+
+        \begin{exampleblock}{Implementación en C++}
+            \lstinputlisting[language=C++, firstline=82, lastline=90]
+{../src/ejercicio-1-comp-fija-repetidos.cpp} 
+        \end{exampleblock}
+
+        Tiene la misma eficiencia teórica que la calculada previamente $T(n) \in O(n)$. 
+    \end{frame}
+
+    \begin{frame}
+        \frametitle{Análisis de Eficiencia Teórica para el Caso Divide y Vencerás}
 
         \begin{block}{Ecuación en diferencias asociada}
             \begin{equation}
@@ -338,6 +359,30 @@
                 \end{equation*}
             \end{column}
         \end{columns}
+
+        \begin{itemize}
+            \item Como el orden es lineal, hemos podido alcanzar hasta $n = 10^7$. 
+            \item Para valores mayores, tendríamos que el algoritmo (contando el tiempo del generador), 
+            tardaría \textbf{3 horas}. 
+        \end{itemize}
+    \end{frame}
+
+    \begin{frame}
+        \frametitle{Comparación con el caso obvio}
+
+        \begin{figure}
+            \centering
+            \includegraphics[scale=0.66]{img/e1b-comp.pdf}
+            % \caption{Gráfica de comparación tiempos de ejecución para Divide y Vencerás y caso obvio.}
+            \label{fig:1b-comp}
+        \end{figure}
+
+        \begin{alertblock}{Valor del umbral}
+            \begin{equation}
+                UMBRAL \rightarrow \infty
+            \end{equation}
+        \end{alertblock}
+
     \end{frame}
 
     % \begin{frame}
@@ -386,17 +431,54 @@
 
     % Ejercicio 2
 
-    \section{Ejercicio 2: Unificación de vectores}
-
+    \section{E2: Unificación de vectores}
 
     \subsection{Caso obvio}
 
+    \begin{frame}
+        \frametitle{Descripción}
+
+        Dados k vectores de n componentes ordenador de menor a mayor, unir todos los vectores en un único vector de forma
+        que el vector resultante también esté ordenado de menor a mayor.
+    \end{frame}
+
+    \begin{frame}
+        \frametitle{Caso obvio}
+
+        \includegraphics[scale=0.66]{img/orden_2a.pdf}
+    \end{frame}
+
+    \begin{frame}
+        \frametitle{Pseudocódigo asociado}
+
+        \lstinputlisting[firstline=22]{listing/ejer2a-pseudo-obvio.txt}        
+
+    \end{frame}
+
+    \begin{frame}
+        \frametitle{Función auxiliar}
+
+        \lstinputlisting[firstline=1, lastline=20]{listing/ejer2a-pseudo-obvio.txt}        
+
+    \end{frame}
+
 	\begin{frame}
 		\frametitle{Caso Obvio. Implementación en C++.}
-		\lstinputlisting[language=C++, firstline=118, lastline=130, 
-		caption=Implementación en C++ del algoritmo obvio., label={cod:1a-dyv}]
-		{../src/ejercicio-2-mezcla.cpp} 
+
+        \begin{exampleblock}{Función principal}
+            \lstinputlisting[language=C++, firstline=118, lastline=130]
+            {../src/ejercicio-2-mezcla.cpp} 
+        \end{exampleblock}
 	\end{frame}
+
+    \begin{frame}
+
+        \begin{exampleblock}{Función auxiliar}
+            \lstinputlisting[language=C++, firstline=89, lastline=109]
+            {../src/ejercicio-2-mezcla.cpp} 
+        \end{exampleblock}
+	\end{frame}
+
 
     \begin{frame}
 		\frametitle{Análisis de eficiencia caso obvio.}
@@ -411,8 +493,10 @@
         \frametitle{Eficiencia empírica: Caso k fijo.}
 
         \begin{figure}
-            \includegraphics[width=0.7\textwidth]{../data/2-obvio/ejercicio-2-mezcla-n-graph.pdf}
-            \caption{Gráfica de tiempos de ejecución (en $\mu$s) con respecto a los elementos del vector para el caso obvio.}
+            \centering
+            \includegraphics[scale=0.76]{img/e2a-graph.pdf}
+            \caption{Gráfica de tiempos de ejecución para el caso obvio.}
+            \label{fig:2a-obvio-n-graph}
         \end{figure}
     \end{frame}
 
@@ -420,14 +504,16 @@
         \frametitle{Eficiencia empírica: Caso n fijo.}
 
         \begin{figure}
-            \includegraphics[width=0.7\textwidth]{../data/2-obvio/ejercicio-2-mezcla-k-graph.pdf}
-            \caption{Gráfica de tiempos de ejecución (en $\mu$s) respecto al número de vectores para el caso obvio.}
+            \centering
+            \includegraphics[scale=0.76]{img/e2-obvio-k.pdf}
+            \caption{Gráfica de tiempos de ejecución para el caso obvio con n constante.}
+            \label{fig:2a-obvio-k-graph}
         \end{figure}
     \end{frame}
 
     \begin{frame}
 		\frametitle{Caso Divide y Vencerás. Implementación en C++.}
-		\lstinputlisting[language=C++, firstline=120, lastline=149, 
+		\lstinputlisting[language=C++, firstline=95, lastline=120, 
 		caption=Implementación en C++ del algoritmo divide y vencerás., label={cod:1a-dyv}]
 		{../src/ejercicio-2-mezcla-dyv.cpp} 
 	\end{frame}
@@ -461,19 +547,17 @@
         \end{figure}
     \end{frame}
 
-    \begin{frame}
-        \frametitle{Comparación con el caso obvio}
-
-        \begin{figure}
-            \centering
-            \includegraphics[scale=0.66]{img/e1b-comp.pdf}
-            % \caption{Gráfica de comparación tiempos de ejecución para Divide y Vencerás y caso obvio.}
-            \label{fig:1b-comp}
-        \end{figure}
-
-    \end{frame}
-
     % Conclusiones
+
+    \section{Conclusión}
+
+    \begin{frame}
+        \begin{itemize}
+            \item Importancia del umbral óptimo.
+            \item Limitación del orden de eficiencia en los algoritmos.
+            \item La técnica Divide y Vencerás no siempre proporciona un mejor rendimiento que un algoritmo clásico. 
+        \end{itemize}
+    \end{frame}
 
     % Bibliografía
 
