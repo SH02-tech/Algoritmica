@@ -159,12 +159,16 @@ expresión \ref{eq:2a-eficiencia}.
 
 Para la \textbf{eficiencia híbrida}, se han tomado dos series de datos pues la eficiencia depende de 2 parámetros.
 De esta manera, manteniendo $k$ constante se ha obtenido la tabla \ref{tab:2a-obvio-n}. 
-Para $n$ constante, obtenemos la tabla ??. 
+Para $n$ constante, obtenemos la tabla
+ \ref{tab:2a-obvio-k}. 
 
-En la gráfica \ref{fig:2a-obvio-graph} hemos representado los puntos experimentales con k constante, 
+En la gráfica \ref{fig:2a-obvio-n-graph} hemos representado los puntos experimentales con k constante, 
 así como la función
 de ajuste lineal asociada, con \textbf{función de ajuste} $f$ y \textbf{coeficiente de regresión}
 $R^2$ especificada en \ref{eq:2a-ajuste-n}. 
+
+Para el análisis con n constante, la \textbf{función de ajuste} y el 
+\textbf{coeficiente de regresión} vienen especificados por \ref{eq:2a-ajuste-k}.
 
 \begin{equation}
     \boxed{f(n) = 6,0739 \cdot 10 ^{-4}  n + 0,9924, R^2 = 0,9978}
@@ -172,9 +176,18 @@ $R^2$ especificada en \ref{eq:2a-ajuste-n}.
 \end{equation}
 
 \begin{equation}
-\boxed{f(k) = 1,4158 \cdot 10^{-4} \cdot k^2 + 0,0294 k + 0,0219, R^2 = 0,9989}
+\boxed{f(k) = 1,4158 \cdot 10^{-4} \cdot k^2 + 0,0294 k + 0,0219, R^2 = 0,9997}
 \label{eq:2a-ajuste-k}
 \end{equation}
+
+Nótese que para el caso k constante hemos tomado valores superiores, puesto
+que las limitaciones en tiempos que se daba para n constante (cuadrático, 
+tal y como se indica en \ref{eq:2a-ajuste-k}) impiden tomar valores
+tan superiores en \textbf{tiempos razonables}. 
+
+Atendiendo a las ecuaciones \ref{eq:2a-ajuste-n} y \ref{eq:2a-ajuste-k}, 
+podemos observar que las curvas de regresión se ajustan bien a los
+datos experimentales, explicando casi toda la variabilidad generada. 
 
 \begin{figure}
     \centering
