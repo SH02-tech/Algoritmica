@@ -401,7 +401,7 @@ Es el mismo que el pseudocódigo \ref{alg:1a-obvio}.
 
 La implementación sería el mismo que en \ref{cod:1a-obvio}. Otra implementación de este podría encontrarse en \ref{cod:1b-obvio}. 
 
-\lstinputlisting[language=C++, firstline=92, lastline=120, 
+\lstinputlisting[language=C++, firstline=82, lastline=90, 
 caption=Implementación alternativa en C++ del algoritmo basado en Búsqueda Lineal., label={cod:1b-obvio}]
 {../src/ejercicio-1-comp-fija-repetidos.cpp} 
 
@@ -523,25 +523,6 @@ gráfica queda reflejado en \ref{fig:1b-comp}, el tiempo de ejecución del algor
 es siempre mayor o igual que el tiempo empleado por el algoritmo obvio. Las \textbf{razones} de esta situación están
 explicadas en \ref{sec:1b-comp}. Por tanto, tenemos que el \textbf{umbral} queda especificado en \ref{eq:1b-umbral}. 
 
-Para la determinación analítica, consideramos las funciones de ajuste \ref{eq:1b-obvio-regresion} y \ref{eq:1b-dyv-eficiencia}. Por tanto,
-queremos encontrar $(x,y) \in \mathbb R ^2$, con $x,y>0$ tal que se 
-verifique el sistema de ecuaciones:
-
-\begin{eqnarray}
-	 y = 3,4926 \cdot 10 ^{-6} x + 0,9999 \\
-	 y = 4,6553 \cdot 10^{-6} x + 0.8657
-\end{eqnarray} 
-
-\begin{equation}
-    \boxed{UMBRAL \rightarrow +\infty}
-    \label{eq:1b-umbral}
-\end{equation}
-
-Aplicando el método de Cramer, es fácil ver que la solución no tiene valores
-positivos. Por tanto, con convenio, establecemos \ref{eq:1b-umbral}.
-
-Las repercusiones de este resultado quedan nuevamente discutidas en \ref{sec:1b-comp}.
-
 \begin{table}
 					
 	\centering
@@ -597,6 +578,25 @@ Las repercusiones de este resultado quedan nuevamente discutidas en \ref{sec:1b-
     ejecución asociado $T_2$).}
     \label{tab:1b-comp}
 \end{table}
+
+Para la determinación analítica, consideramos las funciones de ajuste \ref{eq:1b-obvio-regresion} y \ref{eq:1b-dyv-eficiencia}. Por tanto,
+queremos encontrar $(x,y) \in \mathbb R ^2$, con $x,y>0$ tal que se 
+verifique el sistema de ecuaciones:
+
+\begin{eqnarray}
+	 y = 3,4926 \cdot 10 ^{-6} x + 0,9999 \\
+	 y = 4,6553 \cdot 10^{-6} x + 0.8657
+\end{eqnarray} 
+
+\begin{equation}
+    \boxed{UMBRAL \rightarrow +\infty}
+    \label{eq:1b-umbral}
+\end{equation}
+
+Aplicando el método de Cramer, es fácil ver que la solución no tiene valores
+positivos. Por tanto, por convenio, establecemos \ref{eq:1b-umbral}.
+
+Las repercusiones de este resultado quedan nuevamente discutidas en \ref{sec:1b-comp}.
 
 \begin{figure}
     \centering
