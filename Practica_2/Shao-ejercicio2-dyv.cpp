@@ -62,6 +62,7 @@ int main(int argc, char **argv) {
 	lista_vectores.push_back(v1);
 	lista_vectores.push_back(v2);
 	lista_vectores.push_back(v3);
+
 	vector<int> acumulador = Agrupa(lista_vectores); 
 
 	for (int i=0; i<acumulador.size(); ++i)

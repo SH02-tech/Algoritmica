@@ -23,7 +23,7 @@ AGRUPA(vectores)
     acumulador = []
 
     FOR vector en vectores
-        acumulador = COMBINA(acumulador, vector)
+        acumulador = UNIFICA(acumulador, vector)
     FIN
 
     RETORNAR acumulador

@@ -12,7 +12,7 @@ label_y=$7
 pdf=$8
 
 gnuplot -persist <<-EOFMarker
-	set grid
+    set grid
     set title "$title"
     set xlabel "$label_x"
     set xrange [$min_x:$max_x]
