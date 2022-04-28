@@ -1,5 +1,4 @@
 #include <iostream>
-using namespace std;
 #include <ctime>
 #include <cstdlib>
 #include <climits>
@@ -7,6 +6,7 @@ using namespace std;
 #include <algorithm>
 #include <vector>
 #include <chrono>
+using namespace std;
 
 #define NULL_POS -1
 
