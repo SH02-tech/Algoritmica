@@ -6,6 +6,7 @@ using namespace std;
 #include <cassert>
 #include <algorithm>
 #include <vector>
+#include <chrono>
 
 #define NULL_POS -1
 
@@ -96,62 +97,75 @@ vector<int> mergedyv(const vector<vector<int>> & coleccion){
     int k = coleccion.size();
     vector<vector<int>> aux_coleccion;
 
-    if (k>1)
-    {
+    // Poner condición de umbral
+
+    if (k == 1) {
+        return coleccion[0];
+
+    } else if (k > 1) {
+
         if (k % 2 == 0){  
             for (size_t i = 0; i < k/2; i+=2)
-            {
                 aux_coleccion.push_back(Unifica(coleccion[i],coleccion[i+1]));
-            }
+
             return mergedyv(aux_coleccion);
-        } 
-        else {
+        } else {
             for (size_t i = 0; i < (k-1)/2; i+=2)
-            {
                 aux_coleccion.push_back(Unifica(coleccion[i],coleccion[i+1]));
-            }
+    
             aux_coleccion.push_back(*(coleccion.end()-1));
             return mergedyv(aux_coleccion);
         }
-    } else {
-        return coleccion[0];
-    }
+    } 
 }
+
+////////////////////////////////////////////////////////////////////////////////////////
+
+// Main para obtener datos de la eficiencia
+
+#ifndef REPETITIONS
+#define REPETITIONS 50
+#endif
 
 int main(int argc, char * argv[])
 {
 
-    int n=atoi(argv[1]);
-    int k=atoi(argv[2]);
+    if (argc !=2) {
+        cerr << "Formato: " << argv[0] << " <num_vectores> <tamaño_vector>" << endl;
+        return -1;
+    }
 
+    int k=atoi(argv[1]);
+    int n=atoi(argv[2]);
+   
     vector<vector<int>> v;
-    vector<int> v_uniq,r;
+    vector<int> v_uniq, r;
 
-    v=vectorsGenerator(n,k);
+    v = vectorsGenerator(n,k);
     
-    vector<vector<int>>::iterator it;
-    vector<int>::iterator itv;
-
-    for(it=v.begin();it!=v.end();++it){
-        for(itv=(*it).begin();itv!=(*it).end();++itv){
-            cout<<(*itv)<<" ";
-            v_uniq.push_back(*itv);
-        }
-        cout<<endl;
-    }
-    
-    cout<<endl;
-    cout<<endl;
+    // vector<vector<int>>::iterator it;
+    // vector<int>::iterator itv;
+    // for(it=v.begin();it!=v.end();++it){
+    //     for(itv=(*it).begin();itv!=(*it).end();++itv){
+    //         cout<<(*itv)<<" ";
+    //         v_uniq.push_back(*itv);
+    //     }
+    //     cout<<endl;
+    // }
+    // cout<<endl;
+    // cout<<endl;
         
-    r=mergedyv(v);
+    static int acumulador = 0;
+    static chrono::_V2::steady_clock::time_point tantes;    // Valor del reloj antes de la ejecución
+    static chrono::_V2::steady_clock::time_point tdespues;  // Valor del reloj antes de la ejecución
 
-    vector<int>::iterator itu;
+    r = mergedyv(v);
 
-    for(itu=r.begin();itu!=r.end();++itu){
-        cout<<(*itu)<<" ";
-    }
-
-    cout << endl;
+    // vector<int>::iterator itu;
+    // for(itu=r.begin();itu!=r.end();++itu){
+    //     cout<<(*itu)<<" ";
+    // }
+    // cout << endl;
 
     return 0;
 }

@@ -1,1 +1,1 @@
-type:cubic function:f(x)=1.2427e-07*x*x*x+-0.000254582*x*x+0.187435*x+0.186464  RMS:1.42062
+type:logarithmic function:f(x)=75.7534*log(x)+-266.05  RMS:221.95
