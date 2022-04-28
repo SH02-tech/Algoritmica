@@ -1,0 +1,1 @@
+type:sublogarithmic function:f(x)=2.21457e-07*x*log(x)+1  RMS:0.323556
