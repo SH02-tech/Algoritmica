@@ -7,4 +7,4 @@ set grid
 f(x) = 0.1323*log(x) + 0.0012
 set terminal pdf
 set output "output.pdf"
-plot 'ejercicio-1-comp-fija-no-repetidos-lineal-tab.dat', f(x)
+plot 'ejercicio-1-comp-fija-no-repetidos-tab.dat', f(x)
