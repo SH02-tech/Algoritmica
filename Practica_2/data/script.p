@@ -2,7 +2,7 @@ set title "ejercicio-2-mezcla-dyv-k"
 set xlabel "Nº de vectores"
 set ylabel "Tiempo (ms)"
 set xrange [-1:10000]
-set yrange [-5:25]
+set yrange [0:25]
 set logscale y
 set grid
 f(x) = 1.62668*log(x)-7.48572
