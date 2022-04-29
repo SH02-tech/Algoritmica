@@ -151,8 +151,10 @@
 
 	 \begin{frame}
 		\frametitle{Caso obvio. Implementación en C++.}
-		\lstinputlisting[language=C++, firstline=93, lastline=106, caption=Implementación en C++ 
-		del algoritmo basado en la búsqueda lineal., label={cod:1a-obvio}]{../src/ejercicio-1-comp-fija-no-repetidos.cpp} 
+		\begin{exampleblock}{Implementación en C++}
+			\lstinputlisting[language=C++, firstline=93, lastline=106, caption=Implementación en C++ 
+			del algoritmo basado en la búsqueda lineal., label={cod:1a-obvio}]{../src/ejercicio-1-comp-fija-no-repetidos.cpp} 
+		\end{exampleblock}	
 	\end{frame}
 
 	\begin{frame}
@@ -165,14 +167,16 @@
 	\begin{frame}
 		\frametitle{Análisis de eficiencia caso obvio.}
 		\begin{figure}
-			\begin{equation}
-			\boxed{f(x) = 3.37683 \cdot 10^{-6} + 0.999999, R^2 = 0.9997}
-			\label{eq:1a-obv-regresion}
-			\end{equation}
+			\begin{block}{Análisis Empírica}
+				\begin{equation}
+				\boxed{f(x) = 3.37683 \cdot 10^{-6} + 0.999999, R^2 = 0.9997}
+				\label{eq:1a-obv-regresion}
+				\end{equation}
+			\end{block}
+			
 			\centering
 			\includegraphics[scale=0.68]{img/e1a-obv}
-			\caption{Gráfica de tiempos de ejecución para el caso obvio, 
-				con f(x) y coeficiente de regresión especificada por \ref{eq:1a-obv-regresion}.}
+			\caption{Gráfica de tiempos de ejecución para el caso obvio}
 			\label{fig:1a-obv-graph}
 		\end{figure}
 	\end{frame}
@@ -184,14 +188,22 @@
 
 	\begin{frame}
 		\frametitle{Caso Divide y Vencerás. Implementación.}
-		\lstinputlisting[language=C++, firstline=119, lastline=131, 
-		caption=Implementación en C++ del algoritmo basado en Divide y Vencerás., label={cod:1a-dyv}]
-		{../src/ejercicio-1-comp-fija-no-repetidos.cpp} 
+		\begin{exampleblock}{Implementación e C++}
+			\lstinputlisting[language=C++, firstline=119, lastline=131, 
+			caption=Implementación en C++ del algoritmo basado en Divide y Vencerás., label={cod:1a-dyv}]
+			{../src/ejercicio-1-comp-fija-no-repetidos.cpp} 
+		\end{exampleblock}
 	\end{frame}
 
 	\begin{frame}
 		\frametitle{Caso Divide y Vencerás. Determinación del umbral.}
-		% Aquí viene la imagen
+		\begin{figure}
+			\centering
+			\includegraphics[scale=0.76]{img/e1a-umbral.pdf}
+			\caption{Gráfica de tiempos de ejecución para el caso obvio y Divide y Vencerás, para apreciar el umbral
+				óptimo.}
+			\label{fig:1a-com-graph}
+		\end{figure}
 	\end{frame}
 
 	\begin{frame}
@@ -210,13 +222,29 @@
 
 	\begin{frame}
 		\frametitle{Caso Divide y Vencerás. Análisis de eficiencia.}
-		\begin{block}{Eficiencia Empirica}
+		\begin{block}{Eficiencia Empírica}
 			\begin{equation}
-			\boxed{f(x) = 0.1323 \cdot \log_{2}{x} + 0.0012, R^2 = 0.9988}
+			\boxed{f(x) = 0,5832 \log(x) + 0,021, R^2 = 0,9988}
 			\label{eq:1a-dyv-regresion}
 			\end{equation}
 		\end{block}
+		\begin{figure}
+			\centering
+			\includegraphics[scale=0.76]{img/e1a-dyv}
+			\caption{Gráfica de tiempos de ejecución para el caso Divide y Vencerás, 
+				con f(x) y coeficiente de regresión especificada por \ref{eq:1a-dyv-regresion}.}
+			\label{fig:1a-dyv-graph}
+		\end{figure}
 	\end{frame}
+
+	\begin{frame}
+		\frametitle{Comparativa}
+		\begin{block}{Comparativa de los algoritmos anteriores}
+			El algoritmo que hace uso de la técnica Divide y Vencerás tiene un orden de eficiencia logarítmico, mientras que la eficiencia del algoritmo básico es lineal, luego \textbf{se mejora notablemente la eficiencia usando la técnica de Divide y Vencerás} para solventar el problema. 
+		\end{block}
+	\end{frame}
+
+
 
     \section{E1: Vectores repetidos}
 
