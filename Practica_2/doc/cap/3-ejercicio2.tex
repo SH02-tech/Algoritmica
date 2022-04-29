@@ -205,6 +205,7 @@ datos experimentales, explicando casi toda la variabilidad generada.
 	\label{fig:2a-obvio-k-graph}
 \end{figure}
 
+\newpage
 
 \subsection{Caso divide y vencerás}
 
@@ -213,7 +214,7 @@ hasta llegar a obtener un único vector ordenado, por ello se trata de un algori
 el problema en subproblemas, resolviendo cada uno de ellos para obtener la solución general. El esquema de 
 funcionamiento general queda ilustrado en la figura \ref{fig:2b-esquema}. 
 
-\begin{figure}
+\begin{figure}[H]
 	\centering
     \includegraphics[scale=0.645]{img/orden_2b.pdf}
 	\caption{Esquema de funcionamiento de la ordenación del algoritmo tipo Divide y Vencerás. Se ordenan
@@ -235,8 +236,11 @@ caption=Implementación del algoritmo divide y vencerás.]{../src/ejercicio-2-me
 
 \subsubsection{Análisis de eficiencia}
 
-
+En primer lugar comenzamos analizando la eficiencia teórica tanto respecto al número de elementos del vector como al número de vectores.
+Para ello tenemos una estructura parecida de árbol, pues comenzamos con k vectores los cuales se van reduciendo a la mitad en cada llamada al método mergedyv.
 En este caso debemos de tener en cuenta dos variables, tanto la k que determina el número de vectores, como la n que se trata del número de elementos de cada vector.
+Por lo tanto, $T(nk) = \frac{nk}{2} + \frac{2nk}{4} + \frac{4nk}{8} + kn = n \cdot (\frac{k}{2} +\dots +k)= nk \cdot log(k) $
+
 Por ello para la eficiencia híbrida y empírica hemos analizado el comportamiento del algoritmo cuando solamente varía el número de vectores, así como cuando solo varía el número de 
 elementos de cada vector. 
 Todo ello lo hemos representado en dos gráficas, una para cada caso, y en cada una de ellas hemos graficado el número de componentes de cada vector en relación a su tiempo de ejecución del algoritmo de mezcla
@@ -304,45 +308,45 @@ divide y vencerás y hemos hallado su función de regresión, que es aquella que
 		$N$ & $T$ $(ms)$ \\
 		\hline
         1 & 0.0014 \\ 
-		250 & 0.8261 \\ 
-		500 & 1.5344 \\ 
-		750 & 2.4453 \\ 
-		1000 & 2.8709 \\ 
-		1250 & 3.0674 \\ 
-		1500 & 3.3846 \\ 
-		1750 & 3.6974 \\ 
-		2000 & 4.0143 \\ 
-		2250 & 4.3255 \\ 
-		2500 & 4.5132 \\ 
-		2750 & 4.7814 \\ 
-		3000 & 5.0479 \\ 
-		3250 & 5.1930 \\ 
-		3500 & 5.2202 \\ 
-		3750 & 5.3594 \\ 
-		4000 & 5.4084 \\ 
-		4250 & 5.4941 \\ 
-		4500 & 5.5172 \\ 
-		4750 & 5.6229 \\ 
-		5000 & 5.7867 \\ 
+		250 & 0.0261 \\ 
+		500 & 0.2344 \\ 
+		750 & 0.5453 \\ 
+		1000 & 0.7709 \\ 
+		1250 & 1.0674 \\ 
+		1500 & 1.2846 \\ 
+		1750 & 1.4740 \\ 
+		2000 & 2.0143 \\ 
+		2250 & 2.5255 \\ 
+		2500 & 2.8132 \\ 
+		2750 & 3.0814 \\ 
+		3000 & 3.5479 \\ 
+		3250 & 3.8930 \\ 
+		3500 & 4.0202 \\ 
+		3750 & 4.3594 \\ 
+		4000 & 4.4084 \\ 
+		4250 & 4.4941 \\ 
+		4500 & 4.9472 \\ 
+		4750 & 5.2229 \\ 
+		5000 & 5.5867 \\ 
 		5250 & 5.9829 \\ 
-		5500 & 6.0298 \\ 
-		5750 & 6.2339 \\ 
-		6000 & 6.4327 \\ 
-		6250 & 6.5835 \\ 
-		6500 & 6.6283 \\ 
-		6750 & 6.8532 \\ 
-		7000 & 6.9963 \\ 
-		7250 & 7.1276 \\ 
-		7500 & 7.4824 \\ 
-		7750 & 7.6594 \\ 
-		8000 & 7.7672 \\ 
-		8250 & 7.8835 \\ 
-		8500 & 8.1169 \\ 
-		8750 & 8.1526 \\ 
-		9000 & 8.2040 \\ 
-		9250 & 8.2584 \\ 
-		9500 & 8.3201 \\ 
-		9750 & 8.4041 \\ 
+		5500 & 6.5298 \\ 
+		5750 & 7.2339 \\ 
+		6000 & 7.4327 \\ 
+		6250 & 7.7835 \\ 
+		6500 & 8.1283 \\ 
+		6750 & 8.5532 \\ 
+		7000 & 8.9963 \\ 
+		7250 & 9.1276 \\ 
+		7500 & 9.4824 \\ 
+		7750 & 9.8594 \\ 
+		8000 & 10.0072 \\ 
+		8250 & 10.2835 \\ 
+		8500 & 10.5169 \\ 
+		8750 & 11.0526 \\ 
+		9000 & 11.2040 \\ 
+		9250 & 11.8284 \\ 
+		9500 & 12.0201 \\ 
+		9750 & 12.4041 \\ 
 		\hline
 	\end{tabular}
 	\caption{Tiempos de ejecución para el algoritmo 
@@ -355,17 +359,17 @@ divide y vencerás y hemos hallado su función de regresión, que es aquella que
     \includegraphics[scale=0.76]{img/e2-dyv-n.pdf}
     \caption{Gráfica de tiempos de ejecución para el caso divide y vencerás, 
     con f(x) y coeficiente de regresión especificada por \ref{eq:2a-ajuste}.}
-    \label{fig:2a-obvio-n-graph}
 \end{figure}
 
 
 \begin{figure}[h]
     \centering
     \includegraphics[scale=0.76]{img/e2-dyv-k.pdf}
-    \caption{Gráfica de tiempos de ejecución para el caso divide y vencerás, 
-    con f(x) y coeficiente de regresión especificada por \ref{eq:2b-ajuste}.}
-    \label{fig:2b-dyv-k-graph}
+    \caption{Gráfica de tiempos de ejecución para el caso divide y vencerás.}
 \end{figure}
+
+Gracias a las puntos obtenidos tras la ejecución del algoritmo podemos extraer de ahí 
+la función que mejor se ajusta a los puntos y calcular el coeficiente de determinación.
 
 \begin{equation}
     \boxed{f(n) = 0,000199152 \cdot n + 0,9999, R^2 = 0,9988}
@@ -373,25 +377,46 @@ divide y vencerás y hemos hallado su función de regresión, que es aquella que
 \end{equation}
 
 \begin{equation}
-	\boxed{f(k) = 1,62668 k \cdot \log(k) - 7,48572 , R^2 = 0,9566}
-	\label{eq:2b-ajuste-k}
+    \boxed{f(k) = 0.000139217 k \cdot log(k) - 0.295521, R^2 = 0,9988}
+    \label{eq:2b-ajuste-k}
 \end{equation}
 
 \subsection{Comparación de ambos algoritmos}
 
 Tras lo visto anteriormente vamos a unificar todos los datos en una misma gráfica y sacar concluciones al respecto. Por ello, en primer lugar vamos a determinar el umbral,
 tanto para cuando variamos el número de elementos del vector (n), como el número de vectores(k). 
+En este caso a partir de los datos obtenidos, vamos a hallar el punto de corte entre
+la función que regula el caso obvio y el divide y vencerás. 
+Vamos a designar las funciones f con en subíndice 1 a aquellas extraídas del algoritmo obvio y las que tienen el subíndice 2 a las extraídas mediante
+divide y vencerás.
 
 \subsubsection{Número de vectores fijo(k)}
+
+\begin{eqnarray}
+    f_1(n) = 6,0739 \cdot 10 ^{-4}  n + 0,9924 \\
+    f_2(n) = 0,000199152 \cdot n + 0,9999
+\end{eqnarray} 
+
+\begin{equation}
+   \boxed{UMBRAL = 15.1821}
+\end{equation}
 
 \begin{figure}[h]
     \centering
     \includegraphics[scale=0.76]{img/2-umbral-n.pdf}
     \caption{Gráfica de tiempos de ejecución para el caso divide y vencerás, k constante.}
-    \label{fig:2b-dyv-k-graph}
 \end{figure}
 
 \subsubsection{Número de elementos fijo(n)}
+
+\begin{eqnarray}
+    f_1(k) = 1,4158 \cdot 10^{-4} \cdot k^2 + 0,0294 k + 0,0219\\
+    f_2(k) = 0.000139217 k \cdot log(k) - 0.295521
+\end{eqnarray} 
+
+\begin{equation}
+   \boxed{UMBRAL \in [0,1]}
+\end{equation}
 
 \begin{figure}[h]
     \centering
