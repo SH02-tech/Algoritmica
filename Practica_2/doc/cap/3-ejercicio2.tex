@@ -211,10 +211,15 @@ datos experimentales, explicando casi toda la variabilidad generada.
 En este caso nuestra idea principal ha sido aprovechar la función unifica e ir ordenando vectores de dos e dos,
 hasta llegar a obtener un único vector ordenado, por ello se trata de un algoritmo divide y vencerás, ya que va dividiendo 
 el problema en subproblemas, resolviendo cada uno de ellos para obtener la solución general. El esquema de 
-funcionamiento general queda ilustrado en la figura 
+funcionamiento general queda ilustrado en la figura \ref{fig:2b-esquema}. 
 
 \begin{figure}
-    % \includegraphics{img/}
+	\centering
+    \includegraphics[scale=0.645]{img/orden_2b.pdf}
+	\caption{Esquema de funcionamiento de la ordenación del algoritmo tipo Divide y Vencerás. Se ordenan
+	los vectores en pareja, de manera que después se unen los resultados de éstos y, así, sucesivamente
+	hasta obtener un único vector ordenado.}
+	\label{fig:2b-esquema}
 \end{figure}
 
 \subsubsection{Pseudocódigo}
@@ -368,8 +373,8 @@ divide y vencerás y hemos hallado su función de regresión, que es aquella que
 \end{equation}
 
 \begin{equation}
-\boxed{f(k) = 1,62668 \cdot log(k) - 7,48572 , R^2 = 0,9566}
-\label{eq:2a-ajuste-k}
+	\boxed{f(k) = 1,62668 k \cdot \log(k) - 7,48572 , R^2 = 0,9566}
+	\label{eq:2b-ajuste-k}
 \end{equation}
 
 \subsection{Comparación de ambos algoritmos}
@@ -391,6 +396,5 @@ tanto para cuando variamos el número de elementos del vector (n), como el núme
 \begin{figure}[h]
     \centering
     \includegraphics[scale=0.76]{img/2-umbral-k.pdf}
-    \caption{Gráfica de tiempos de ejecución para el caso divide y vencerás, n constante.
-    con f(x) y coeficiente de regresión especificada por \ref{eq:2a-ajuste}.}
+    \caption{Gráfica de tiempos de ejecución para el caso divide y vencerás, n constante.}
 \end{figure}
