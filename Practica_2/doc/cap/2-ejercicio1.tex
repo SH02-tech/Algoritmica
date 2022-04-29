@@ -127,7 +127,7 @@ En cuanto al análisis empírico, obtenemos:
 	\label{tab:1a-obvio}
 \end{table}
 
-\begin{figure}
+\begin{figure}[h]
 	\centering
 	\includegraphics[scale=0.76]{img/e1a-obv}
 	\caption{Gráfica de tiempos de ejecución para el caso obvio, 
@@ -221,7 +221,7 @@ parámetros}, y una vez obtenidas, \textbf{calculamos el umbral de forma teóric
 	\label{tab:1a-com}
 \end{table}
 
-\begin{figure}
+\begin{figure}[h]
 	\centering
 	\includegraphics[scale=0.76]{img/e1a-umbral.pdf}
 	\caption{Gráfica de tiempos de ejecución para el caso obvio y Divide y Vencerás, para apreciar el umbral
@@ -358,7 +358,7 @@ gráfica de los datos obtenidos, así como de la función de regresión, se pued
     \label{tab:1a-dyv}
 \end{table}
 
-\begin{figure}
+\begin{figure}[h]
 	\centering
 	\includegraphics[scale=0.76]{img/e1a-dyv}
 	\caption{Gráfica de tiempos de ejecución para el caso Divide y Vencerás, 
@@ -384,7 +384,7 @@ Este hecho se ilustra a partir de las gráficas correspondientes a los resultado
 de ambas series a nanosegundos, de manera que puedan ser equiparables en la misma gráfica, tal y como se da en 
 la gráfica \ref{fig:1a-comp-datos}. 
 
-\begin{figure}
+\begin{figure}[h]
 	\centering
 	\includegraphics[scale=0.87]{img/e1a-comp.pdf}
 	\caption{Comparación gráfica de las ejecuciones del caso obvio y del caso Divide y Vencerás.}
@@ -488,7 +488,7 @@ Para valores pequeños hemos realizado $n=1$ para comparar la cantidad de recurs
     \label{tab:1b-obvio}
 \end{table}
 
-\begin{figure}
+\begin{figure}[h]
 	\centering
 	\includegraphics[scale=0.76]{img/e1b-obvio}
 	\caption{Gráfica de tiempos de ejecución para el caso obvio, 
@@ -504,7 +504,7 @@ el algoritmo \ref{alg:1a-dyv}
 puede observar en la figura \ref{fig:fallo-1a}, donde el algoritmo dictamina que no existe ningún
 elemento que verifica la condición $v[i] = i$, cuando $v[0] = 0$. 
 
-\begin{figure}[b]
+\begin{figure}[h]
     \centering
     \includegraphics{img/esquema_fallo1a.pdf}
     \caption{Vector con elementos repetidos para el que falla 
@@ -607,7 +607,7 @@ positivos. Por tanto, por convenio, establecemos \ref{eq:1b-umbral}.
 
 Las repercusiones de este resultado quedan nuevamente discutidas en \ref{sec:1b-comp}.
 
-\begin{figure}
+\begin{figure}[h]
     \centering
     \includegraphics[scale=0.76]{img/e1b-comp.pdf}
     \caption{Gráfica de comparación tiempos de ejecución para Divide y Vencerás y caso obvio.}
@@ -710,7 +710,7 @@ incluso para un orden de eficiencia peor.
     \label{tab:1b-dyv}
 \end{table}
 
-\begin{figure}
+\begin{figure}[h]
     \centering
     \includegraphics[scale=0.76]{img/e1b-dyv}
     \caption{Gráfica de tiempos de ejecución para el caso Divide y Vencerás, 
