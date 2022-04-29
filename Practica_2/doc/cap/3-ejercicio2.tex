@@ -211,8 +211,8 @@ datos experimentales, explicando casi toda la variabilidad generada.
 
 En este caso nuestra idea principal ha sido aprovechar la función unifica e ir ordenando vectores de dos e dos,
 hasta llegar a obtener un único vector ordenado, por ello se trata de un algoritmo divide y vencerás, ya que va dividiendo 
-el problema en subproblemas, resolviendo cada uno de ellos para obtener la solución general. El esquema de 
-funcionamiento general queda ilustrado en la figura 
+el problema en subproblemas, resolviendo cada uno de ellos para obtener la solución general. 
+El esquema de funcionamiento general queda ilustrado en la figura 
 
 \begin{figure}
     % \includegraphics{img/}
@@ -234,10 +234,12 @@ caption=Implementación del algoritmo divide y vencerás.]{../src/ejercicio-2-me
 En primer lugar comenzamos analizando la eficiencia teórica tanto respecto al número de elementos del vector como al número de vectores.
 Para ello tenemos una estructura parecida de árbol, pues comenzamos con k vectores los cuales se van reduciendo a la mitad en cada llamada al método mergedyv.
 En este caso debemos de tener en cuenta dos variables, tanto la k que determina el número de vectores, como la n que se trata del número de elementos de cada vector.
-Por lo tanto, $T(nk) = \frac{nk}{2} + \frac{2nk}{4} + \frac{4nk}{8} + kn = n \cdot (\frac{k}{2} +\dots +k)= nk \cdot log(k) $
+Por lo tanto, $T(nk) = \frac{nk}{2} + \frac{2nk}{4} + \frac{4nk}{8} + \dots + kn = n \cdot (\frac{k}{2} +\dots +k)= nk \cdot log(k) $
 
 Por ello para la eficiencia híbrida y empírica hemos analizado el comportamiento del algoritmo cuando solamente varía el número de vectores, así como cuando solo varía el número de 
 elementos de cada vector. 
+Como se trata de un algoritmo con eficiencia teórica sublogarítmica, vamos a elegir unos 10.000 datos, número considerable para que pueda salir un análisis correcto, pues si nos quedamos más cortos
+podrían salirnos otros tipos de funciones de regresión que no sean las óptimas.
 Todo ello lo hemos representado en dos gráficas, una para cada caso, y en cada una de ellas hemos graficado el número de componentes de cada vector en relación a su tiempo de ejecución del algoritmo de mezcla
 divide y vencerás y hemos hallado su función de regresión, que es aquella que mejor se ajusta a los datos.
 
