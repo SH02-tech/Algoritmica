@@ -169,7 +169,7 @@
 		\begin{figure}
 			\begin{block}{Análisis Empírica}
 				\begin{equation}
-				\boxed{f(x) = 3.37683 \cdot 10^{-6} + 0.999999, R^2 = 0.9997}
+				\boxed{f(x) = 3.37683 \cdot 10^{-6} \cdot x + 0.999999, R^2 = 0.9997}
 				\label{eq:1a-obv-regresion}
 				\end{equation}
 			\end{block}
@@ -204,6 +204,8 @@
 				óptimo.}
 			\label{fig:1a-com-graph}
 		\end{figure}
+
+        \textbf{Intervalo umbral: } $[4,5]$. 
 	\end{frame}
 
 	\begin{frame}
@@ -224,7 +226,7 @@
 		\frametitle{Caso Divide y Vencerás. Análisis de eficiencia.}
 		\begin{block}{Eficiencia Empírica}
 			\begin{equation}
-			\boxed{f(x) = 0,5832 \log(x) + 0,021, R^2 = 0,9988}
+			\boxed{f(x) = 8,8252 \log(x) + 1,1132, R^2 = 0,9828}
 			\label{eq:1a-dyv-regresion}
 			\end{equation}
 		\end{block}
@@ -239,9 +241,17 @@
 
 	\begin{frame}
 		\frametitle{Comparativa}
-		\begin{block}{Comparativa de los algoritmos anteriores}
-			El algoritmo que hace uso de la técnica Divide y Vencerás tiene un orden de eficiencia logarítmico, mientras que la eficiencia del algoritmo básico es lineal, luego \textbf{se mejora notablemente la eficiencia usando la técnica de Divide y Vencerás} para solventar el problema. 
-		\end{block}
+		
+        \begin{figure}
+            \centering
+            \includegraphics[scale=0.67]{img/e1a-comp.pdf}
+            \label{fig:1a-comp-datos}
+        \end{figure}
+
+        \begin{alertblock}{Diferencia de orden de eficiencia}
+            Debido a su orden de eficiencia, el caso obvio consume mucho más tiempo en realizar las ejecuciones
+            que el caso Divide y Vencerás.
+        \end{alertblock}
 	\end{frame}
 
 
@@ -538,6 +548,7 @@
 	 
 	\end{frame}
 
+
     \begin{frame}
         \frametitle{Eficiencia empírica: Caso k fijo.}
 
@@ -567,11 +578,25 @@
         \end{itemize}
     \end{frame}
 
+    \subsection{Caso Divide y vencerás}
+
+
+    \begin{frame}
+        \frametitle{Caso Divide y vencerás.}
+
+        \includegraphics[scale=0.66]{img/orden_2b.pdf}
+    \end{frame}
+
+    \begin{frame}
+        \frametitle{Pseudocódigo asociado}
+        \lstinputlisting[firstline=1]{listing/ejer2b-pseudo-dyv.txt}        
+    \end{frame}
+
     \begin{frame}
 		\frametitle{Caso Divide y Vencerás. Implementación en C++.}
 		\lstinputlisting[language=C++, firstline=120, lastline=149, 
-		caption=Implementación en C++ del algoritmo divide y vencerás.]
-		{../src/2-dyv/ejercicio-2-mezcla-dyv.cpp} 
+		caption=Implementación en C++ del algoritmo divide y vencerás., label={cod:1a-dyv}]
+		{../src/ejercicio-2-mezcla-dyv.cpp} 
 	\end{frame}
 
     \subsection{Caso divide y vencerás}
@@ -579,18 +604,15 @@
     \begin{frame}
 		\frametitle{Análisis de eficiencia caso divide y vencerás.}
 		 \begin{block}{Eficiencia Teórica}
-		 	$$T(n) \in \mathcal{O}(nklog(k)})$$
+		 	$$T(n) \in \mathcal{O}(nk \cdot log(k))$$
 		 \end{block}
 	 
 	\end{frame}
 
-
     \begin{frame}
         \frametitle{Eficiencia empírica: Caso k fijo.}
-
         \begin{figure}
-            \includegraphics[width=0.7\textwidth]{../data/2-dyv/ejercicio-2-mezcla-dyv-graph.pdf}
-            \caption{Gráfica de tiempos de ejecución (en $\mu$s) con respecto a los elementos del vector para el caso divide y vencerás.}
+            \includegraphics[width=0.9\textwidth]{img/e2-dyv-n.pdf}
         \end{figure}
     \end{frame}
 
@@ -598,16 +620,50 @@
         \frametitle{Eficiencia empírica: Caso n fijo.}
 
         \begin{figure}
-            \includegraphics[width=0.7\textwidth]{../data/2-dyv/ejercicio-2-mezcla-dyv-k-graph.pdf}
-            \caption{Gráfica de tiempos de ejecución (en $\mu$s) respecto al número de vectores para el caso divide y vencerás.}
+            \includegraphics[width=0.9\textwidth]{img/e2-dyv-k.pdf}
         \end{figure}
     \end{frame}
 
+    \begin{frame}
+        \frametitle{Eficiencia híbrida}
+
+        \begin{block}{Caso k fijo}
+            $$f(n) = 0,000199152 \cdot n + 0,9999, R^2 = 0,9988$$
+        \end{block}
+
+        \begin{block}{Caso n fijo}
+            $$f(k) = 1,62668 \cdot log(k) - 7,48572 , R^2 = 0,9566$$
+        \end{block}
+
+    \end{frame}
+
+    \begin{frame}
+        \frametitle{Comparación con el caso obvio. Caso k fijo}
+        \begin{figure}
+            \centering
+            \includegraphics[scale=0.66]{img/2-umbral-k.pdf}
+            % \caption{Gráfica de comparación tiempos de ejecución para Divide y Vencerás y caso obvio, con k fijo.}
+            \label{fig:1b-comp}
+        \end{figure}
+
+    \end{frame}
+
+    \begin{frame}
+        \frametitle{Comparación con el caso obvio. Caso n fijo}
+        \begin{figure}
+            \centering
+            \includegraphics[scale=0.66]{img/2-umbral-n.pdf}
+            % \caption{Gráfica de comparación tiempos de ejecución para Divide y Vencerás y caso obvio, con n fijo.}
+            \label{fig:1b-comp}
+        \end{figure}
+    \end{frame}
+    
     % Conclusiones
 
     \section{Conclusión}
 
     \begin{frame}
+        \frametitle{Conclusión}
         \begin{itemize}
             \item Importancia del umbral óptimo.
             \item Limitación del orden de eficiencia en los algoritmos.
