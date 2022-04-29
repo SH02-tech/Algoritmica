@@ -236,10 +236,19 @@ caption=Implementación del algoritmo divide y vencerás.]{../src/ejercicio-2-me
 
 \subsubsection{Análisis de eficiencia}
 
-En primer lugar comenzamos analizando la eficiencia teórica tanto respecto al número de elementos del vector como al número de vectores.
-Para ello tenemos una estructura parecida de árbol, pues comenzamos con k vectores los cuales se van reduciendo a la mitad en cada llamada al método mergedyv.
-En este caso debemos de tener en cuenta dos variables, tanto la k que determina el número de vectores, como la n que se trata del número de elementos de cada vector.
-Por lo tanto, $T(nk) = \frac{nk}{2} + \frac{2nk}{4} + \frac{4nk}{8} + kn = n \cdot (\frac{k}{2} +\dots +k)= nk \cdot log(k) $
+Para el análisis de eficiencia teórico, hemos de tener en consideración la eficiencia de Unifica que, como hemos visto
+previamente, es $\theta (n)$. En este caso conviene tener en mente la figura \ref{fig:2b-esquema}, donde podemos
+observar una similitud entre árbol y el número de operaciones realizadas. 
+
+Tenemos que, en cada unificación de 2 vectores (nodo), se realizan n, 2n, ..., kn operaciones elementales, salvo un factor de
+proporcionalidad y de base. Esto se debe a que la longitud de los vectores se va duplicando en cada iteración. 
+Además, en cada generación se reduce a la mitad el número de vectores, por lo que el número de operaciones elementales
+obedece a la expresión \ref{eq:2b-eficiencia}. 
+
+\begin{equation}
+	\label{eq:2b-eficiencia}
+	T(n,k) \leq nk + 2n\frac{k}{2} + 4n\frac{k}{4} + \cdots + kn\frac{k}{k} = kn \log k \Rightarrow \boxed{T(n,k) \in O(nk \log k)} 
+\end{equation}
 
 Por ello para la eficiencia híbrida y empírica hemos analizado el comportamiento del algoritmo cuando solamente varía el número de vectores, así como cuando solo varía el número de 
 elementos de cada vector. 
@@ -357,8 +366,7 @@ divide y vencerás y hemos hallado su función de regresión, que es aquella que
 \begin{figure}[h]
     \centering
     \includegraphics[scale=0.76]{img/e2-dyv-n.pdf}
-    \caption{Gráfica de tiempos de ejecución para el caso divide y vencerás, 
-    con f(x) y coeficiente de regresión especificada por \ref{eq:2a-ajuste}.}
+    \caption{Gráfica de tiempos de ejecución para el caso divide y vencerás}
 \end{figure}
 
 
