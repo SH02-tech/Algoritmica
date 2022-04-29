@@ -230,8 +230,11 @@ caption=Implementación del algoritmo divide y vencerás.]{../src/ejercicio-2-me
 
 \subsubsection{Análisis de eficiencia}
 
-
+En primer lugar comenzamos analizando la eficiencia teórica tanto respecto al número de elementos del vector como al número de vectores.
+Para ello tenemos una estructura parecida de árbol, pues comenzamos con k vectores los cuales se van reduciendo a la mitad en cada llamada al método mergedyv.
 En este caso debemos de tener en cuenta dos variables, tanto la k que determina el número de vectores, como la n que se trata del número de elementos de cada vector.
+Por lo tanto, $T(nk) = \frac{nk}{2} + \frac{2nk}{4} + \frac{4nk}{8} + kn = n \cdot (\frac{k}{2} +\dots +k)= nk \cdot log(k) $
+
 Por ello para la eficiencia híbrida y empírica hemos analizado el comportamiento del algoritmo cuando solamente varía el número de vectores, así como cuando solo varía el número de 
 elementos de cada vector. 
 Todo ello lo hemos representado en dos gráficas, una para cada caso, y en cada una de ellas hemos graficado el número de componentes de cada vector en relación a su tiempo de ejecución del algoritmo de mezcla
@@ -350,17 +353,18 @@ divide y vencerás y hemos hallado su función de regresión, que es aquella que
     \includegraphics[scale=0.76]{img/e2-dyv-n.pdf}
     \caption{Gráfica de tiempos de ejecución para el caso divide y vencerás, 
     con f(x) y coeficiente de regresión especificada por \ref{eq:2a-ajuste}.}
-    \label{fig:2a-obvio-n-graph}
+
 \end{figure}
 
 
 \begin{figure}[h]
     \centering
     \includegraphics[scale=0.76]{img/e2-dyv-k.pdf}
-    \caption{Gráfica de tiempos de ejecución para el caso divide y vencerás, 
-    con f(x) y coeficiente de regresión especificada por \ref{eq:2b-ajuste}.}
-    \label{fig:2b-dyv-k-graph}
+    \caption{Gráfica de tiempos de ejecución para el caso divide y vencerás.}
 \end{figure}
+
+Gracias a las puntos obtenidos tras la ejecución del algoritmo podemos extraer de ahí 
+la función que mejor se ajusta a los puntos y calcular el coeficiente de determinación.
 
 \begin{equation}
     \boxed{f(n) = 0,000199152 \cdot n + 0,9999, R^2 = 0,9988}
@@ -368,31 +372,49 @@ divide y vencerás y hemos hallado su función de regresión, que es aquella que
 \end{equation}
 
 \begin{equation}
-\boxed{f(k) = 1,62668 \cdot log(k) - 7,48572 , R^2 = 0,9566}
-\label{eq:2a-ajuste-k}
+    \boxed{f(k) = 1,62668 \cdot log(k) - 7,48572, R^2 = 0,9566}
+    \label{eq:2b-ajuste-k}
 \end{equation}
 
 \subsection{Comparación de ambos algoritmos}
 
 Tras lo visto anteriormente vamos a unificar todos los datos en una misma gráfica y sacar concluciones al respecto. Por ello, en primer lugar vamos a determinar el umbral,
 tanto para cuando variamos el número de elementos del vector (n), como el número de vectores(k). 
+En este caso a partir de los datos obtenidos, vamos a hallar el punto de corte entre
+la función que regula el caso obvio y el divide y vencerás. 
+Vamos a designar las funciones f con en subíndice 1 a aquellas extraídas del algoritmo obvio y las que tienen el subíndice 2 a las extraídas mediante
+divide y vencerás.
 
 \subsubsection{Número de vectores fijo(k)}
+
+\begin{eqnarray}
+    f_1(n) = 6,0739 \cdot 10 ^{-4}  n + 0,9924 \\
+    f_2(n) = 0,000199152 \cdot n + 0,9999
+\end{eqnarray} 
+
+\begin{equation}
+   \boxed{UMBRAL = 15.1821}
+\end{equation}
 
 \begin{figure}[h]
     \centering
     \includegraphics[scale=0.76]{img/2-umbral-n.pdf}
     \caption{Gráfica de tiempos de ejecución para el caso divide y vencerás, k constante.}
-    \label{fig:2b-dyv-k-graph}
 \end{figure}
 
 \subsubsection{Número de elementos fijo(n)}
+
+\begin{eqnarray}
+    f_1(k) = 1,4158 \cdot 10^{-4} \cdot k^2 + 0,0294 k + 0,0219\\
+    f_2(k) = 1,62668 \cdot log(k) - 7,48572
+\end{eqnarray} 
+
+\begin{equation}
+   \boxed{UMBRAL = 15.18211911265361 }
+\end{equation}
 
 \begin{figure}[h]
     \centering
     \includegraphics[scale=0.76]{img/2-umbral-k.pdf}
     \caption{Gráfica de tiempos de ejecución para el caso divide y vencerás, n constante.}
-    \label{fig:2b-dyv-k-graph}
-    con f(x) y coeficiente de regresión especificada por \ref{eq:2a-ajuste}.}
-    \label{fig:2a-obvio-n-graph}
 \end{figure}
