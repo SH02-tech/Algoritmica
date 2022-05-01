@@ -1,1 +1,0 @@
-type:quadratic function:f(x)=-1.28864e-07*x*x+0.000962117*x+0.000420711  RMS:0.0130568

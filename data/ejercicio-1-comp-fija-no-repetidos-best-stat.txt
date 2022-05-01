@@ -1,1 +1,0 @@
-type:logarithmic function:f(x)=75.7534*log(x)+-266.05  RMS:221.95

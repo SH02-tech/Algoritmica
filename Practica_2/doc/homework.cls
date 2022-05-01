@@ -1,6 +1,6 @@
 \NeedsTeXFormat{LaTeX2e}[1994/06/01]
 \ProvidesClass{homework}[2021 Shao Jie Hu Chen]
-\LoadClass[11pt, a4paper]{article}
+\LoadClass[10pt, a4paper]{article}
 
 \RequirePackage[spanish]{babel}
 \RequirePackage[utf8]{inputenc} % comment when using lualatex
