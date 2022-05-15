@@ -6,6 +6,23 @@
 \usepackage{caption}
 \usepackage{wrapfig,lipsum,booktabs}
 
+\usepackage{algorithm2e}
+\RestyleAlgo{ruled}
+\SetKwComment{Comment}{/* }{ */}
+
+\makeatletter
+\renewcommand{\algorithmcfname}{Algoritmo}
+\makeatother
+
+\SetKwFor{While}{mientras }{}{fin}
+\SetKwFor{For}{para cada }{}{fin}
+%\SetKwFor{If}{si}{}{en otro caso}
+%\SetKwFor{eIf}{si}{}{en otro caso}
+\SetKwFor{For}{para cada:}{}{}
+%\SetKwFor{KwData}{Dato:}{}{}
+%\SetKwFor{Data}{Dato:}{}{}
+\SetKwFor{Results}{resultado}{}{}
+
 \titleclass{\subsubsubsection}{straight}[\subsection]
 
 \newcounter{subsubsubsection}[subsubsection]
@@ -44,6 +61,7 @@
 
 % \renewcommand{\lstlistingname}{Código}
 \captionsetup[table]{name=Tabla}
+
 
 \title{Práctica 3: Algoritmos Voraces}
 \author{Shao Jie Hu Chen \\ Mario Megías Mateo \\ Jesús Samuel García Carballo}

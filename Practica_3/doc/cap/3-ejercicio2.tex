@@ -1,0 +1,74 @@
+En esta sección abordaremos el problema del viajante de comercio. Dado que
+se trata de un algoritmo de clase NP, es prácticamente inviable encontrar 
+un algoritmo que encuentre la solución óptima en un tiempo razonable.
+
+Por tanto, para abordar este problema se emplearán 3 heurísticas diferentes que,
+si bien no siempre encuentran la solución óptima, determinan soluciones 
+aceptables en tiempos razonables. Para cada una de
+estas heurísticas se comparará su rendimiento en un conjunto de prueba,
+midiendo los tiempos de ejecución.
+
+\subsection{Descripción de las heurísticas}
+
+En esta sección se realizará una descripción de cada heurística que hemos 
+empleado, incluyendo tanto algoritmos, implementación como casos de ejemplo.
+Dos heurísticas han sido proporcionados por los profesores: el \textit{vecino
+más cercano} e \textit{inserción}, mientras que la tercera es de
+elaboración propia.
+
+\subsubsection{Vecino más cercano}
+
+La filosofía que gobierna esta heurística es bastante sencilla. La idea 
+radica en ir insertando ciudades en el conjunto de solución $S$, de manera
+que para decidir la ciudad $c_{i+1}$ que se insertará se escoge aquella que
+dista la menor distancia de la ciudad $c_i$ (para $c_0$ se escoge
+un nodo al azar). Esta idea queda resumida en el Algoritmo~\ref{alg:vec_cercano}. 
+
+\begin{algorithm}
+    \caption{An algorithm with caption}\label{alg:vec_cercano}
+    \KwData{$n \geq 0$}
+    \KwResult{$y = x^n$}
+    $y \gets 1$\;
+    $X \gets x$\;
+    $N \gets n$\;
+    \While{$N \neq 0$}{
+      \eIf{$N$ is even}{
+        $X \gets X \times X$\;
+        $N \gets \frac{N}{2}$ \Comment*[r]{This is a comment}
+      }{\If{$N$ is odd}{
+          $y \gets y \times X$\;
+          $N \gets N - 1$\;
+        }
+      }
+    }
+\end{algorithm}
+
+\subsubsection{Inserción económica}
+
+En este caso para obtener la solución final se fijan $c_1,c_2,c_3$ ciudades
+(en este caso, hemos seguido las recomendaciones de la práctica y se han
+escogido las ciudades situadas más al norte, este y oeste, respectivamente). 
+Posteriormente,
+para decidir la ciudad $c_{i+1}$ que se insertará en el conjunto de solución,
+se elige aquella que, al insertarse en un determinado arco del ciclo 
+$0 \leq j \leq i$, minimice la variación en el ciclo formado por las ciudades
+$c_1,c_2,\cdots,c_{i}$. Dicha ciudad se añade intercalado entre las ciudades
+$c_{j},c_{j+1}$.
+
+\begin{algorithm}
+    \caption{Algoritmo basado en inserción}\label{alg:insercion}
+    \KwData{$n \geq 3$}
+    $S = []$\;
+    $S \gets c_\alpha $, con $\alpha \in \{j \in \mathbb N : c_j.y \geq c_i.y, \forall i \in \mathbb \{1,2,\cdots,n\}\}$ \Comment*[r]{Ciudad más al norte}
+    $S \gets c_\beta $, con $\beta \in \{j \in \mathbb N : c_j.x \geq c_i.x, \forall i \in \mathbb \{1,2,\cdots,n\}\}$ \Comment*[r]{Ciudad más al este}
+    \While{$N \neq 0$}{
+      \eIf{$N$ is even}{
+        $X \gets X \times X$\;
+        $N \gets \frac{N}{2}$ \Comment*[r]{This is a comment}
+      }{\If{$N$ is odd}{
+          $y \gets y \times X$\;
+          $N \gets N - 1$\;
+        }
+      }
+    }
+\end{algorithm}
