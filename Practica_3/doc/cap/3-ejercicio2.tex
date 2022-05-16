@@ -56,21 +56,96 @@ $c_1,c_2,\cdots,c_{i}$. Dicha ciudad se añade intercalado entre las ciudades
 $c_{j},c_{j+1}$. El algoritmo asociado a esta heurística se encuentra en 
 Algoritmo~\ref{alg:insercion}. 
 
-\begin{algorithm}[h]
-    \caption{Algoritmo basado en inserción}\label{alg:insercion}
-    \KwData{$C$ (vector de ciudades)}
-    $Ady = MatrizAdyacencia(C)$\;
-    $N = C.\text{tamaño}$\;
-    $S = []$\;
-    $S$.añadir($c_\alpha$), con $\alpha \in \{j \in \mathbb N : c_j.x \geq c.x, \forall c \in C\}$ \Comment*[r]{Ciudad más al este}
-    $S$.añadir($c_\beta$), con $\beta \in \{j \in \mathbb N : c_j.x \leq c.x, \forall c \in C\}$ \Comment*[r]{Ciudad más al oeste}
-    $S$.añadir($c_\gamma$), con $\gamma \in \{j \in \mathbb N : c_j.y \geq c.y, \forall c \in C\}$ \Comment*[r]{Ciudad más al norte}
-    \While{$S.\text{tamaño} \leq N$}{
-      $(i,pos) = CiudadEconomica(C, S, Ady)$\;
-      $S$.insertar(pos, $c_i$)\;
-      $C$.quitar($c_i$)\;
+\begin{algorithm}[H]
+  \caption{Algoritmo auxiliar para la inserción. CiudadEconomica}\label{alg:insercion-aux-2}
+  \begin{minipage}{0.92\textwidth}
+    \textbf{Parámetro}: ady (matriz de adyacencia)
+
+    \textbf{Parámetro}: ciclo (solución parcial)
+
+    \textbf{Parámetro}: banderas
+  \end{minipage}
+
+  ind = 0\;
+
+  \While{banderas[ind] e ind valido}{
+    ind++\;
+  }
+
+  $(c_a, c_{a+1}, var_a)$ = InsercionEconomica(ady,ciclo,ind)\;
+
+  \For{i desde ind+1 hasta ady.tamaño}{
+    \If{banderas[i] no activado}{
+      $(c_{n}, c_{n+1}, var_n)$ = InsercionEconomica(ady, ciclo, i)\;
+
+      \If{$var_n < var_a$ }{
+        $(c_a, c_{a+1}, var_a)$ = $(c_{n}, c_{n+1}, var_n)$\;
+      }
     }
+  }
+
+  \Return{$(c_a,c_{a+1})$}
+  
+\end{algorithm}
+
+\begin{algorithm}[H]
+    \caption{Algoritmo basado en inserción. CicloInsercionEconomica}\label{alg:insercion}
+    \begin{minipage}{0.92\textwidth}
+      \textbf{Parámetro}: puntos (vector de posiciones)
+      
+      \textbf{Parámetro}: ady (matriz de adyacencia)
+    \end{minipage}
+    % $Ady = MatrizAdyacencia(C)$\;
+    % $N = C.\text{tamaño}$\;
+    % $S = []$\;
+    % $S$.añadir($c_\alpha$), con $\alpha \in \{j \in \mathbb N : c_j.x \geq c.x, \forall c \in C\}$ \Comment*[r]{Ciudad más al este}
+    % $S$.añadir($c_\beta$), con $\beta \in \{j \in \mathbb N : c_j.x \leq c.x, \forall c \in C\}$ \Comment*[r]{Ciudad más al oeste}
+    % $S$.añadir($c_\gamma$), con $\gamma \in \{j \in \mathbb N : c_j.y \geq c.y, \forall c \in C\}$ \Comment*[r]{Ciudad más al norte}
+    % \While{$S.\text{tamaño} \leq N$}{
+    %   $(i,pos) = CiudadEconomica(C, S, Ady)$\;
+    %   $S$.insertar(pos, $c_i$)\;
+    %   $C$.quitar($c_i$)\;
+    % }
+
+    ciclo = []\;
+
+    N = puntos.tamaño;
+    Banderas = []\;
+
+    \For(){i desde 0 hasta N-1}{
+      Banderas.insertar(false)
+    }
+
+    \Comment*{Añadimos las tres primeras ciudades}
+
+    ind\_este = IndCiudadEste(puntos);
+    banderas[ind\_este] = true\;
+
+    ind\_oeste = IndCiudadOeste(puntos);
+    banderas[ind\_oeste] = true\;
+
+    ind\_este = IndCiudadNorte(puntos);
+    banderas[ind\_norte] = true\;
+
+
+    ciclo.insertar((ind\_este, ind\_oeste));
+    ciclo.insertar((ind\_oeste, ind\_norte))\;
+    ciclo.insertar((ind\_norte, ind\_este))\;
+
+    % $S$.añadir(puntos[ind_este])\;
+    % $S$.añadir(puntos[ind_oeste])\;
+    % $S$.añadir(puntos[ind_norte])\;
+
+    \Comment*{Añadimos el resto de ciudades}
+    \For(){i desde 3 hasta N-1}{
+      $(c_i,pos)$ = CiudadEconomica(ady, ciclo, banderas)\;
+      $(c_j, c_{j+1})$ = s[pos]\;
+      banderas[$c_i$] = true\;
+      ciclo.insertar(pos, $(c_i,c_{j+1})$)\;
+      ciclo.insetar(pos, $(c_j,c_i)$)\;
+    }
+    \Return{ciclo}
 \end{algorithm}
 
 El código asociado al algoritmo Algoritmo~\ref{alg:insercion} viene especificado
-a continuación.
+a continuación. 
