@@ -46,29 +46,31 @@ un nodo al azar). Esta idea queda resumida en el Algoritmo~\ref{alg:vec_cercano}
 \subsubsection{Inserción económica}
 
 En este caso para obtener la solución final se fijan $c_1,c_2,c_3$ ciudades
-(en este caso, hemos seguido las recomendaciones de la práctica y se han
-escogido las ciudades situadas más al norte, este y oeste, respectivamente). 
+(siguiendo las indicaciones de la práctica, se han
+escogido las ciudades situadas más al norte, este y oeste). 
 Posteriormente,
 para decidir la ciudad $c_{i+1}$ que se insertará en el conjunto de solución,
 se elige aquella que, al insertarse en un determinado arco del ciclo 
 $0 \leq j \leq i$, minimice la variación en el ciclo formado por las ciudades
 $c_1,c_2,\cdots,c_{i}$. Dicha ciudad se añade intercalado entre las ciudades
-$c_{j},c_{j+1}$.
+$c_{j},c_{j+1}$. El algoritmo asociado a esta heurística se encuentra en 
+Algoritmo~\ref{alg:insercion}. 
 
-\begin{algorithm}
+\begin{algorithm}[h]
     \caption{Algoritmo basado en inserción}\label{alg:insercion}
-    \KwData{$n \geq 3$}
+    \KwData{$C$ (vector de ciudades)}
+    $Ady = MatrizAdyacencia(C)$\;
+    $N = C.\text{tamaño}$\;
     $S = []$\;
-    $S \gets c_\alpha $, con $\alpha \in \{j \in \mathbb N : c_j.y \geq c_i.y, \forall i \in \mathbb \{1,2,\cdots,n\}\}$ \Comment*[r]{Ciudad más al norte}
-    $S \gets c_\beta $, con $\beta \in \{j \in \mathbb N : c_j.x \geq c_i.x, \forall i \in \mathbb \{1,2,\cdots,n\}\}$ \Comment*[r]{Ciudad más al este}
-    \While{$N \neq 0$}{
-      \eIf{$N$ is even}{
-        $X \gets X \times X$\;
-        $N \gets \frac{N}{2}$ \Comment*[r]{This is a comment}
-      }{\If{$N$ is odd}{
-          $y \gets y \times X$\;
-          $N \gets N - 1$\;
-        }
-      }
+    $S$.añadir($c_\alpha$), con $\alpha \in \{j \in \mathbb N : c_j.x \geq c.x, \forall c \in C\}$ \Comment*[r]{Ciudad más al este}
+    $S$.añadir($c_\beta$), con $\beta \in \{j \in \mathbb N : c_j.x \leq c.x, \forall c \in C\}$ \Comment*[r]{Ciudad más al oeste}
+    $S$.añadir($c_\gamma$), con $\gamma \in \{j \in \mathbb N : c_j.y \geq c.y, \forall c \in C\}$ \Comment*[r]{Ciudad más al norte}
+    \While{$S.\text{tamaño} \leq N$}{
+      $(i,pos) = CiudadEconomica(C, S, Ady)$\;
+      $S$.insertar(pos, $c_i$)\;
+      $C$.quitar($c_i$)\;
     }
 \end{algorithm}
+
+El código asociado al algoritmo Algoritmo~\ref{alg:insercion} viene especificado
+a continuación.
