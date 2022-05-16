@@ -244,9 +244,9 @@ vector<Camino> CicloInsercionEconomica(const vector<vector<int>> &matriz_adyacen
 	vector<bool> banderas(total, false);
 	vector<int> ind_iniciales;
 
-	ind_iniciales.push_back(IndPuntoNorte(distancias));
 	ind_iniciales.push_back(IndPuntoEste(distancias));
 	ind_iniciales.push_back(IndPuntoOeste(distancias));
+	ind_iniciales.push_back(IndPuntoNorte(distancias));
 
 	int tam_inicial = ind_iniciales.size();
 
