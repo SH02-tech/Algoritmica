@@ -1,5 +1,79 @@
-\subsubsection{Algoritmo óptimo}
+En este ejercicio dado un buque mercante cuya capacidad de carga es de K toneladas y un conjunto de contenedores $c_1,...,c_n$ cuyos
+pesos respectivos son $p_1,...,p_n$, debemos hallar un algoritmo que maximice el número de contenedores cargados y otro que intente 
+maximizar el número de toneladas cargadas.
 
+\subsection{Maximización de contenedores}
+
+En primer lugar, debemos ser conscientes de que la capacidad del buque debe ser menor que la suma total de los pesos 
+de los contenedores, pues en caso contrario, no estaría bien definido el problema. Para resolver este problema tenemos que darnos cuenta
+que lo que nos interesa es ir cogiendo aquellos contenedores cuyo peso sea más pequeño e ir introduciéndolos en el buque mientras que su suma 
+sea menor que la capacidad de carga del buque, puesto que el resultado debe tener el mayor número de contenedores posible, sin importar las 
+toneladas totales. 
+
+\begin{algorithm}[H]
+    \caption{Algoritmo para maximizar el número de contenedores}\label{alg:max_containers}
+    \begin{minipage}{0.92\textwidth}
+    \textbf{Parámetro}: containers (vector de enteros)
+
+    \textbf{Parámetro}: K (capacidad del buque)
+
+    \end{minipage}
+
+    weight = 0\;
+	container = 0\;
+    vector result\;
+  
+    sort(pesos.begin(), pesos.end());
+
+    \While{$weight <= K$ y $container <= containers.size$}{
+        result.push\_back(containers.at(container))\;
+        weight += containers.at(container)\;
+        container++\;
+    }
+  
+    \Return{result}
+    
+\end{algorithm}
+
+Como vemos en el algoritmo la clave del proceso es antes de añadir los contenedores, ordenarlos de forma creciente para que 
+en el ciclo siempre se vaya añadiendo el contenedor con menor peso.
+
+\subsubsection{Condición de optimalidad}
 En esta sección discutiremos si el algoritmo presentado es óptimo. Veremos que,
 efectivamente, la estrategia greedy maximiza el número de contenedores 
 en la solución final que se ha propuesto. 
+
+\textbf{Notación.} Sean $K$ la capacidad máxima de carga del buque y
+$P = \{p_1,p_2,\cdots,p_n\}$ el conjuntos de pesos asociados
+a los contenedores. Consideramos $\mathcal{S} = \{S \subset P : 
+\sum_{p \in S} p \leq K\}$ el conjunto de soluciones. Decimos que una solución
+$T \in \mathcal{S}$ es \textbf{óptima} cuando se verifica que $|S| \leq |T|,
+\forall S \in \mathcal{S}$.
+
+Verificaremos varias propiedades, antes de realizar la demostración de la optimalidad.
+
+\begin{lemma}
+    $\mathcal{S} = \{S \subset P : \sum_{p \in S} p \leq K\}$ el conjunto de soluciones. Entonces
+    existen soluciones óptimas.
+\end{lemma}
+
+\begin{proof}
+    La demostración es bastante evidente. Como $|P| = n$, tenemos que $|\mathcal S| \leq |\mathcal P (P)| = 2^n$. 
+    Empleando un algoritmo por fuerza bruta, podríamos probar un 
+\end{proof}
+
+\begin{lemma}
+    Sea $m \in \mathbb N$ tal que $a_{m} = min\{S\}$. Entonces existe $S_m \in \mathcal S$ tal que
+    $a_m \in S_m$. 
+\end{lemma}
+
+\begin{proposition}
+    El algoritmo greedy proporciona una solución $S_{g} \in \mathcal{S}$ óptima. 
+\end{proposition}
+
+\begin{proof}
+    Sea $S \in \mathcal{S}$. 
+\end{proof}
+
+\subsection{Maximización de toneladas}
+En este caso tenemos que maximizar las toneladas por lo que para ello una buena estrategia es ir cogiendo 

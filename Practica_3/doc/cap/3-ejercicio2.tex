@@ -6,7 +6,7 @@ Por tanto, para abordar este problema se emplearán 3 heurísticas diferentes qu
 si bien no siempre encuentran la solución óptima, determinan soluciones 
 aceptables en tiempos razonables. Para cada una de
 estas heurísticas se comparará su rendimiento en un conjunto de prueba,
-midiendo los tiempos de ejecución.
+midiendo los tiempos de ejecución. 
 
 \subsection{Descripción de las heurísticas}
 
@@ -56,32 +56,34 @@ $c_1,c_2,\cdots,c_{i}$. Dicha ciudad se añade intercalado entre las ciudades
 $c_{j},c_{j+1}$. El algoritmo asociado a esta heurística se encuentra en 
 Algoritmo~\ref{alg:insercion}. 
 
-\begin{algorithm}[h]
+\begin{algorithm}[H]
   \caption{Algoritmo auxiliar para la inserción. InsercionEconomica}\label{alg:insercion-aux-1}
   \begin{minipage}{0.92\textwidth}
     \textbf{Parámetro}: ady (matriz de adyacencia)
 
     \textbf{Parámetro}: ciclo (solución parcial)
 
-    \textbf{Parámetro}: i (pos)
+    \textbf{Parámetro}: pos
   \end{minipage}
 
   $(c_{ini}, c_{fin}) = (-1,-1)$\;
   $var = \infty$\;
+  ind = -1\;
 
   \For{i desde 0 hasta ciclo.size-1}{
     $(c_a, c_b)$ = ciclo[i]\;
     nueva\_variacion = $ady[c_a][c_i] + ady[c_i][c_b] - ady[c_a][c_b]$\;
 
-    \If{nueva\_variacion < variacion}{
+    \If{nueva\_variacion $<$ variacion}{
       $(c_{ini}, c_{fin}) = (c_a, c_b)$\;
+      ind = i\;
     }
   }
   
-  \Return{$(c_{ini}, c_{fin}, var)$}
+  \Return{$(ind, pos, var)$}
 \end{algorithm}
 
-\begin{algorithm}[h]
+\begin{algorithm}[H]
   \caption{Algoritmo auxiliar para la inserción. CiudadEconomica (se usa el Algoritmo~\ref{alg:insercion-aux-1})}\label{alg:insercion-aux-2}
   \begin{minipage}{0.92\textwidth}
     \textbf{Parámetro}: ady (matriz de adyacencia)
@@ -97,23 +99,29 @@ Algoritmo~\ref{alg:insercion}.
     ind++\;
   }
 
-  $(c_a, c_{a+1}, var_a)$ = InsercionEconomica(ady,ciclo,ind)\;
+  $(ind_a, pos_a, var_a)$ = InsercionEconomica(ady,ciclo,ind)\;
 
   \For{i desde ind+1 hasta ady.tamaño}{
     \If{banderas[i] no activado}{
-      $(c_{n}, c_{n+1}, var_n)$ = InsercionEconomica(ady, ciclo, i)\;
+      $(ind_n, pos_n, var_n)$ = InsercionEconomica(ady, ciclo, i)\;
+      % $(c_{n}, c_{n+1}, var_n)$ = InsercionEconomica(ady, ciclo, i)\;
 
       \If{$var_n < var_a$ }{
-        $(c_a, c_{a+1}, var_a)$ = $(c_{n}, c_{n+1}, var_n)$\;
+        $(ind_a, pos_a, var_a)$ = $(ind_n, pos_n, var_n$\;
       }
     }
   }
 
-  \Return{$(c_a,c_{a+1})$}
+  \Return{$(c_{ind_a},pos_a)$}
   
 \end{algorithm}
 
-\begin{algorithm}[h]
+El Algoritmo~\ref{alg:insercion-aux-1} y el Algoritmo~\ref{alg:insercion-aux-2}
+se emplean como funciones auxiliales sobre los que se basa el algoritmo maestro. 
+
+Se presenta el algoritmo máster.
+
+\begin{algorithm}[H]
     \caption{Algoritmo basado en inserción. CicloInsercionEconomica (se usan los algoritmos 
     auxiliares Algoritmo~\ref{alg:insercion-aux-1} y Algoritmo~\ref{alg:insercion-aux-2})}\label{alg:insercion}
     \begin{minipage}{0.92\textwidth}
@@ -174,4 +182,7 @@ Algoritmo~\ref{alg:insercion}.
 \end{algorithm}
 
 El código asociado al algoritmo Algoritmo~\ref{alg:insercion} viene especificado
-a continuación. 
+a continuación, en el Código~\ref{cod:tsp1}. 
+
+\lstinputlisting[label={cod:tsp1}, firstline=119, lastline=300, language=C++,
+caption=Implementación del algoritmo de inserción en TSP.]{../src/tsp.cpp}
