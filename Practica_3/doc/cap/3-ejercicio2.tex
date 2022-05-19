@@ -56,8 +56,33 @@ $c_1,c_2,\cdots,c_{i}$. Dicha ciudad se añade intercalado entre las ciudades
 $c_{j},c_{j+1}$. El algoritmo asociado a esta heurística se encuentra en 
 Algoritmo~\ref{alg:insercion}. 
 
-\begin{algorithm}[H]
-  \caption{Algoritmo auxiliar para la inserción. CiudadEconomica}\label{alg:insercion-aux-2}
+\begin{algorithm}[h]
+  \caption{Algoritmo auxiliar para la inserción. InsercionEconomica}\label{alg:insercion-aux-1}
+  \begin{minipage}{0.92\textwidth}
+    \textbf{Parámetro}: ady (matriz de adyacencia)
+
+    \textbf{Parámetro}: ciclo (solución parcial)
+
+    \textbf{Parámetro}: i (pos)
+  \end{minipage}
+
+  $(c_{ini}, c_{fin}) = (-1,-1)$\;
+  $var = \infty$\;
+
+  \For{i desde 0 hasta ciclo.size-1}{
+    $(c_a, c_b)$ = ciclo[i]\;
+    nueva\_variacion = $ady[c_a][c_i] + ady[c_i][c_b] - ady[c_a][c_b]$\;
+
+    \If{nueva\_variacion < variacion}{
+      $(c_{ini}, c_{fin}) = (c_a, c_b)$\;
+    }
+  }
+  
+  \Return{$(c_{ini}, c_{fin}, var)$}
+\end{algorithm}
+
+\begin{algorithm}[h]
+  \caption{Algoritmo auxiliar para la inserción. CiudadEconomica (se usa el Algoritmo~\ref{alg:insercion-aux-1})}\label{alg:insercion-aux-2}
   \begin{minipage}{0.92\textwidth}
     \textbf{Parámetro}: ady (matriz de adyacencia)
 
@@ -88,8 +113,9 @@ Algoritmo~\ref{alg:insercion}.
   
 \end{algorithm}
 
-\begin{algorithm}[H]
-    \caption{Algoritmo basado en inserción. CicloInsercionEconomica}\label{alg:insercion}
+\begin{algorithm}[h]
+    \caption{Algoritmo basado en inserción. CicloInsercionEconomica (se usan los algoritmos 
+    auxiliares Algoritmo~\ref{alg:insercion-aux-1} y Algoritmo~\ref{alg:insercion-aux-2})}\label{alg:insercion}
     \begin{minipage}{0.92\textwidth}
       \textbf{Parámetro}: puntos (vector de posiciones)
       
