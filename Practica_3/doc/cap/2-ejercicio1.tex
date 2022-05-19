@@ -49,7 +49,7 @@ caption=Implementación del algoritmo del máximo de contenedores.]{../src/ejerc
 
 \subsubsection{Análisis de Eficiencia}
 
-Para el análisis de eficiencia,consideramos dos formas diferentes de realizarla. 
+Para el análisis de eficiencia, llamamos $n$ a la cardinalidad del vector de pesos, nos situamos en la función \texttt{nContenedoresMax}, observamos que realizamos una llamada a \texttt{sort} de eficiencia $O(nlog(n))$, y posteriormente tenemos un bucle \texttt{while} que en el peor de los casos recorrerá el vector de pesos, y las llamadas a \texttt{esFactible} y \texttt{esSolucion} son $O(n)$, luego la eficiencia del bucle es $O(n^2)$. Por tanto, la eficiencia total del algoritmo es $O(n^2)$.
 
 \subsubsection{Condición de optimalidad}
 En esta sección discutiremos si el algoritmo presentado es óptimo. Veremos que,
@@ -192,3 +192,11 @@ las características de un algoritmo greedy en nuestro código.
 
 \lstinputlisting[label={cod:max_tons}, firstline=8, lastline=47, language=C++,
 caption=Implementación del algoritmo del máximo de contenedores.]{../src/ejercicio-1-b.cpp}
+
+\subsubsection{Análisis de eficiencia}
+
+Para el análisis de eficiencia, llamamos $n$ a la cardinalidad del vector de pesos, nos situamos en la función \texttt{maxWeight}, observamos que realizamos una llamada a \texttt{sort} de eficiencia $O(nlog(n))$, y posteriormente tenemos un bucle \texttt{while} que en el peor de los casos recorrerá el vector de pesos, y la llamada a \texttt{esSolucionOptima} es $O(1)$ y la llamada a \texttt{esSolucion} son $O(n)$, luego la eficiencia del bucle es $O(n^2)$. Por tanto, la eficiencia total del algoritmo es $O(n^2)$.
+
+
+
+
