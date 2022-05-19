@@ -1,6 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include "grafo.h"
+#include <chrono>
 #include <math.h>
 using namespace std;
 
@@ -245,6 +246,9 @@ int main(int argc, char ** argv) {
     int nNodos;
     vector<Punto2D> distancias;
     string cad;
+    clock_t tantes;    // Valor del reloj antes de la ejecución
+    clock_t tdespues;  // Valor del reloj después de la ejecución
+    double tiempo;
 
     // Entrada
 
@@ -308,8 +312,11 @@ int main(int argc, char ** argv) {
     // Calculos para resolver el PVC
 
     grafo<int,int> hamiltoniano;
+    
+    tantes = clock();
     resuelvePVC(arcos, G.size(), hamiltoniano);
-
+    tdespues = clock();
+    
     cout << endl;
 
     Presentar_Grafo(hamiltoniano);
@@ -326,6 +333,9 @@ int main(int argc, char ** argv) {
     }
 
     cout << endl;
+    
+    tiempo = (double)(tdespues-tantes)/CLOCKS_PER_SEC*1000000;
+    cout << "Tiempo consumido: " << tiempo << " μs\n";
 
     // Calculamos la distanciaTotal del grafo
 
