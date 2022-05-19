@@ -338,14 +338,14 @@ int main(int argc, char **argv) {
 
 	switch(option) {
 		case 1:
-			tantes = clock();
 			ady = CalculaMatrizAdyacencia(distancias);
+			tantes = clock();
 			ciclo = CicloVecinoMasCercano(ady);
 			tdespues = clock();
 			break;
 		case 2:
-			tantes = clock();
 			ady = CalculaMatrizAdyacencia(distancias);
+			tantes = clock();
 			ciclo = CicloInsercionEconomica(ady, distancias);
 			tdespues = clock();
 			break;
