@@ -338,14 +338,14 @@ int main(int argc, char **argv) {
 
 	switch(option) {
 		case 1:
-			tantes = clock();
 			ady = CalculaMatrizAdyacencia(distancias);
+			tantes = clock();
 			ciclo = CicloVecinoMasCercano(ady);
 			tdespues = clock();
 			break;
 		case 2:
-			tantes = clock();
 			ady = CalculaMatrizAdyacencia(distancias);
+			tantes = clock();
 			ciclo = CicloInsercionEconomica(ady, distancias);
 			tdespues = clock();
 			break;
@@ -357,17 +357,16 @@ int main(int argc, char **argv) {
 
 	tiempo = (double)(tdespues-tantes)/CLOCKS_PER_SEC*1000000;
 
-	cout << setw(20) << "Inicio" << setw(20) << "Final"
-			 << " : " << setw(40) << "Distancia recorrida" << endl;
+	cout << "Inicio -> Final" << " : " << "Distancia recorrida" << endl;
 
 	for (int i=0; i<ciclo.size(); ++i) {
 		int ind_inicio = ciclo[i].ind_inicial;
 		int ind_final = ciclo[i].ind_final;
 		Punto2D inicio = distancias[ind_inicio];
 		Punto2D final = distancias[ind_final];
-		cout << setw(5) << "(" << inicio.x << ", " << inicio.y << ")" << " -> " 
-			 << setw(10) << "(" << final.x << ", " << final.y << ")"
-			 << " : " << setw(30) << ciclo[i].distancia << " ud" << endl;
+		cout << "(" << inicio.x << ", " << inicio.y << ")" << " -> " 
+			 << "(" << final.x << ", " << final.y << ")"
+			 << " : " << ciclo[i].distancia << " ud" << endl;
 	}
 
 	cout << "Distancia total: " << DistanciaTotal(ciclo) << " ud" << endl << endl;
