@@ -39,7 +39,41 @@ Como vemos en el algoritmo la clave del proceso es antes de añadir los contened
 en el ciclo siempre se vaya añadiendo el contenedor con menor peso.
 
 \subsubsection{Condición de optimalidad}
-Sea $S = {p_1,...,p_n}$ un conjunto de soluciones para el algoritmo y $S_g = {p_{g_1},...,p_{g_n}}$ las soluciones para el algoritmo Greedy
+En esta sección discutiremos si el algoritmo presentado es óptimo. Veremos que,
+efectivamente, la estrategia greedy maximiza el número de contenedores 
+en la solución final que se ha propuesto. 
+
+\textbf{Notación.} Sean $K$ la capacidad máxima de carga del buque y
+$P = \{p_1,p_2,\cdots,p_n\}$ el conjuntos de pesos asociados
+a los contenedores. Consideramos $\mathcal{S} = \{S \subset P : 
+\sum_{p \in S} p \leq K\}$ el conjunto de soluciones. Decimos que una solución
+$T \in \mathcal{S}$ es \textbf{óptima} cuando se verifica que $|S| \leq |T|,
+\forall S \in \mathcal{S}$.
+
+Verificaremos varias propiedades, antes de realizar la demostración de la optimalidad.
+
+\begin{lemma}
+    $\mathcal{S} = \{S \subset P : \sum_{p \in S} p \leq K\}$ el conjunto de soluciones. Entonces
+    existen soluciones óptimas.
+\end{lemma}
+
+\begin{proof}
+    La demostración es bastante evidente. Como $|P| = n$, tenemos que $|\mathcal S| \leq |\mathcal P (P)| = 2^n$. 
+    Empleando un algoritmo por fuerza bruta, podríamos probar un 
+\end{proof}
+
+\begin{lemma}
+    Sea $m \in \mathbb N$ tal que $a_{m} = min\{S\}$. Entonces existe $S_m \in \mathcal S$ tal que
+    $a_m \in S_m$. 
+\end{lemma}
+
+\begin{proposition}
+    El algoritmo greedy proporciona una solución $S_{g} \in \mathcal{S}$ óptima. 
+\end{proposition}
+
+\begin{proof}
+    Sea $S \in \mathcal{S}$. 
+\end{proof}
 
 \subsection{Maximización de toneladas}
-En este caso tenemos que maximizar las toneladas por lo que para ello una buena estrategia ir cogiendo 
+En este caso tenemos que maximizar las toneladas por lo que para ello una buena estrategia es ir cogiendo 
