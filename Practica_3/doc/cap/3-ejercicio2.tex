@@ -204,7 +204,7 @@ En cuanto a la factibilidad de un candidato, tenemos \textbf{dos condiciones de 
 
 El algoritmo terminará cuando se hayan insertado tantas aristas como nodos tiene $S$, formando un circuito Hamiltoniano. La elección del arco de menor coste entre los que hay disponibles responde a la idea de intentar minimizar la \textbf{función objetivo}, que mide el coste total del circuito.
 
-\begin{algorithm}[H]
+\begin{algorithm}
 	\caption{Algoritmo basado en Kruskal}\label{alg:bas_kruscal}
 	\begin{minipage}{0.92\textwidth}
 		\textbf{Parámetro}: L (lista de arcos ordenada)
@@ -213,32 +213,22 @@ El algoritmo terminará cuando se hayan insertado tantas aristas como nodos tien
 		
 		\textbf{Parámetro}: grafoSol (grafo con la solución, parámetro de entrada/salida)
 	\end{minipage}
-	nArcInsert = 0\;
-	\While{(nArcInsert $<$ nNodos \&\& !L.vacia)}{
-		candidato = L.frente\;
-		L.eliminarFrente\;
+	nArcosInsertados = 0\;
+	\While{narcosInsertados $<$ nNodos \&\& !L.vacia()}{
+		arcoCandidato = L.frente()\;
+		L.eliminarFrente()\;
 		
-		\eIf{$(nArcInsert == nNodos-1)$}{ 
-			\Comment*[r]{Penúltima iteración, no comprobamos ciclos}
-			\If{(nodosCorrectos(candidato-$>$origen, candidato-$>$destino))}{
-				grafoSol.insertar(candidato)\;
-				nArcosInsertado++\;
-			}	
-		}{
-			\If{(nodosCorrectos(candidato-$>$origen, candidato-$>$destino))}{
-				grafoSol.insertar(candidato)\;
-				\eIf{(sinCiclos(grafoSol))}{
-					nArcosInsertado++\;
-				}{
-				\Comment*[r]{El arco insertado no es válida, la eliminamos}
-					grafoSol.eliminar(candidato)
-				}
+		\eIf{$N$ is even}{
+			$X \gets X \times X$\;
+			$N \gets \frac{N}{2}$ \Comment*[r]{This is a comment}
+		}{\If{$N$ is odd}{
+				$y \gets y \times X$\;
+				$N \gets N - 1$\;
 			}
 		}
-
+	
 	}
 \end{algorithm}
-
 
 \lstinputlisting[label={cod:cod-e2c}, firstline=7, lastline=145, language=C++,
 caption=Implementación del algoritmo de TSP basado en Kruskal.]{../src/ejercicio-2-c.cpp}
