@@ -26,7 +26,7 @@ un nodo al azar). Esta idea queda resumida en el Algoritmo~\ref{alg:vec_cercano}
 
 \begin{algorithm}
     \caption{An algorithm with caption}\label{alg:vec_cercano}
-    \KwData{$n \geq 0$}
+    \KwData{$ L (lista de arcos ordenados)$}
     \KwResult{$y = x^n$}
     $y \gets 1$\;
     $X \gets x$\;
@@ -186,3 +186,50 @@ a continuación, en el Código~\ref{cod:tsp1}.
 
 \lstinputlisting[label={cod:tsp1}, firstline=119, lastline=300, language=C++,
 caption=Implementación del algoritmo de inserción en TSP.]{../src/tsp.cpp}
+
+\subsubsection{Heurística basada en el algoritmo de Kruskal} 
+
+La siguiente heurística de elaboración propia se basa en la idea utilizada en el \textbf{algoritmo de Kruskal} para la determinación del AGM. 
+
+Dado el conjunto de $n$ ciudades conectadas entre sí, se crea un grafo $G$ que represente la red de ciudades, y un grafo $S$ que en el momento de su construcción contenga únicamente las ciudades o nodos de $G$, pero sin ninguna conexión entre nodos.
+
+A continuación, ordenamos los arcos de $G$ en orden creciente según la ponderación del arco (sin incluir lazos, es decir, ciclos entre un nodo y el mismo). Esta \textbf{lista de arcos}, $L$, constituye nuestro \textbf{conjunto de candidatos}, es decir en cada etapa del algoritmo, \textbf{la función de selección escoge el arco de menor ponderación} (primer elemento de la lista), y seguidamente comprobamos si el arco escogido cumple las condiciones de factibilidad, si las cumple será insertado en $S$, y en caso contrario ese arco será descartado de la solución. 
+
+En cuanto a la factibilidad de un candidato, tenemos \textbf{dos condiciones de factibilidad}. La primera consiste en comprobar que los nodos entre los que vamos a insertar el arco cumplen la siguiente condición: el nodo origen debe de tener como máximo un nodo incidente, y no puede tener un arco adyacente, y el nodo destino debe de tener como máximo un arco adyacente y no debe tener un arco incidente. Con esta condición nos garantizamos parte de la construcción de un circuito en el grafo $S$, de forma que \textbf{cada nodo del grafo solución tenga una única entrada y una única salida}. La segunda condición consiste en comprobar que al añadir el arco candidato al grafo solución $S$ \textbf{no se formen ciclos}, aunque esta condición no se comprueba en la última iteración del algoritmo, ya que debe formarse un circuito en la última etapa.
+
+El algoritmo terminará cuando se hayan insertado tantas aristas como nodos tiene $S$, formando un circuito Hamiltoniano. La elección del arco de menor coste entre los que hay disponibles responde a la idea de intentar minimizar la \textbf{función objetivo}, que mide el coste total del circuito.
+
+\begin{algorithm}
+	\caption{Algoritmo basado en Kruskal}\label{alg:bas_kruscal}
+	\begin{minipage}{0.92\textwidth}
+		\textbf{Parámetro}: L (lista de arcos ordenada)
+		
+		\textbf{Parámetro}: nNodos (número de nodos/ciudades)
+		
+		\textbf{Parámetro}: grafoSol (grafo con la solución, parámetro de entrada/salida)
+	\end{minipage}
+	nArcosInsertados = 0\;
+	\While{narcosInsertados $<$ nNodos \&\& !L.vacia()}{
+		arcoCandidato = L.frente()\;
+		L.eliminarFrente()\;
+		
+		\eIf{$N$ is even}{
+			$X \gets X \times X$\;
+			$N \gets \frac{N}{2}$ \Comment*[r]{This is a comment}
+		}{\If{$N$ is odd}{
+				$y \gets y \times X$\;
+				$N \gets N - 1$\;
+			}
+		}
+	
+	}
+\end{algorithm}
+
+
+
+ 
+
+
+
+
+
