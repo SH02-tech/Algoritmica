@@ -206,6 +206,27 @@ a continuación, en el Código~\ref{cod:tsp1}.
 \lstinputlisting[label={cod:tsp1}, firstline=119, lastline=300, language=C++,
 caption=Implementación del algoritmo de inserción en TSP.]{../src/tsp.cpp}
 
+\subsubsubsection{Análisis de eficiencia}
+
+Los algoritmos para encontrar las ciudades situadas más al norte, este y oeste
+recorren todas las ciudades, realizando operaciones constante, por lo que este
+primer bloque tiene eficiencia $O(n)$. El siguiente bucle for realiza un número de operaciones
+independiente del número total de ciudades a considerar. El siguiente for ya sí
+influye en el análisis del rendimiento. A medida que va avanzando el índice,
+el número de operaciones que se realizan en la función auxiliar aumenta, de la
+forma que se realizan las siguientes operaciones, con $k,k' \in \mathbb Z$ constantes.
+Cada paréntesis representa las operaciones que se realizan en una iteración del ciclo for.
+
+\begin{equation*}
+  T(n) = (k + k'·n·3) + (2 k + k'·n·4) + \cdots + ((n-3)k + k'·n·(n) = k (1 + 2 +3 +\cdots + (n-3)) + nk'(3+4+\cdots+n)
+\end{equation*}
+
+Desarrollamos:
+
+\begin{equation*}
+  T(n) = k \frac{(n-3)(n-2)}{2} + nk' \frac{(n-3)(n+3)}{2} \Rightarrow \boxed{T(n) \in \mathcal O(n^3)}
+\end{equation*}
+
 \subsubsection{Heurística basada en el algoritmo de Kruskal} 
 
 \begin{figure}[H] 
@@ -267,6 +288,26 @@ función \texttt{sinCiclos} tiene una eficiencia $O(n^2)$, luego \textbf{la efic
 Al tratarse de un problema de clase $NP$, no existe un algoritmo óptimo que encuentra siempre
 la mejor solución en un tiempo razonable. Mediante las tres heurísticas hemos realizado una aproximación
 para encontrar soluciones que, si bien no son siempre óptimas, ofrecen un buen rendimiento relativo.
+
+Los casos de prueba proporcionan las siguientes matrices de adyacencia. 
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[scale=0.5]{img/ady-bayg.png}
+  \caption{Matriz de adyacencia para el caso bayg.}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[scale=0.5]{img/ady-eil.png}
+  \caption{Matriz de adyacencia para el caso eil.}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[scale=0.5]{img/ady-ulysses.png}
+  \caption{Matriz de adyacencia para el caso ulysses.}
+\end{figure}
 
 En la siguiente tabla quedan recogidas las distancias calculadas por cada una de las heurísticas.
 
@@ -389,4 +430,16 @@ uno de los caminos de que realizan los algoritmos.
   \centering
   \includegraphics[scale=0.5]{../src/kruskal_bayg.pdf}
   \caption{Representación gráfica del camino generado por la heurística $\alpha$-Kruskal en bayg.}
+\end{figure} 
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[scale=0.5]{../src/kruskal_eil.pdf}
+  \caption{Representación gráfica del camino generado por la heurística $\alpha$-Kruskal en eil.}
+\end{figure} 
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[scale=0.5]{../src/kruskal_ulysses.pdf}
+  \caption{Representación gráfica del camino generado por la heurística $\alpha$-Kruskal en ulysses.}
 \end{figure} 
