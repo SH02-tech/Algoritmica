@@ -15,24 +15,24 @@ toneladas totales.
 \begin{algorithm}[H]
     \caption{Algoritmo para maximizar el número de contenedores}\label{alg:max_containers}
     \begin{minipage}{0.92\textwidth}
-    \textbf{Parámetro}: containers (vector de enteros)
+    \textbf{Parámetro}: contenedores (vector de enteros)
 
     \textbf{Parámetro}: K (capacidad del buque)
 
     \end{minipage}
 
-    weight = 0\;
-	container = 0\;
-    vector result\;
-  
     sort(pesos.begin(), pesos.end());
 
-    \While{$weight <= K$ y $container <= containers.size$}{
-        result.push\_back(containers.at(container))\;
-        weight += containers.at(container)\;
-        container++\;
+    peso = 0\;
+    vector resultado\;
+    lleno = false\;
+
+    \For{i desde 0 hasta contenedores.tamaño-1 y !lleno} {
+        \eIf{contenedores$[i]$ + peso $\leq$ K}{
+            peso += contenedores$[i]$\;
+        }{ lleno = true\;}
     }
-  
+
     \Return{result}
     
 \end{algorithm}
@@ -47,6 +47,10 @@ determinarán la condición de factibilidad y de solución, mientras que lo dem�
 \lstinputlisting[label={cod:max_containers}, firstline=8, lastline=47, language=C++,
 caption=Implementación del algoritmo del máximo de contenedores.]{../src/ejercicio-1-a.cpp}
 
+\subsubsection{Análisis de Eficiencia}
+
+Para el análisis de eficiencia,consideramos dos formas diferentes de realizarla. 
+
 \subsubsection{Condición de optimalidad}
 En esta sección discutiremos si el algoritmo presentado es óptimo. Veremos que,
 efectivamente, la estrategia greedy maximiza el número de contenedores 
@@ -57,31 +61,89 @@ $P = \{p_1,p_2,\cdots,p_n\}$ el conjuntos de pesos asociados
 a los contenedores. Consideramos $\mathcal{S} = \{S \subset P : 
 \sum_{p \in S} p \leq K\}$ el conjunto de soluciones. Decimos que una solución
 $T \in \mathcal{S}$ es \textbf{óptima} cuando se verifica que $|S| \leq |T|,
-\forall S \in \mathcal{S}$.
+\forall S \in \mathcal{S}$. 
+También diremos que un conjunto $W$ es una \textbf{solución parcial}
+si verifica que $\exists S \in \mathcal S$ tal que $W \subset S$. Sea $\mathcal{W}$ 
+la \textbf{familia} de todas las soluciones parciales.
 
 Verificaremos varias propiedades, antes de realizar la demostración de la optimalidad.
 
 \begin{lemma}
-    $\mathcal{S} = \{S \subset P : \sum_{p \in S} p \leq K\}$ el conjunto de soluciones. Entonces
-    existen soluciones óptimas.
+    Sea $\mathcal{S} = \{S \subset P : \sum_{p \in S} p \leq K\}$ el conjunto de soluciones. Entonces
+    existe $S_m \in \mathcal S$ óptimo. 
 \end{lemma}
 
 \begin{proof}
     La demostración es bastante evidente. Como $|P| = n$, tenemos que $|\mathcal S| \leq |\mathcal P (P)| = 2^n$. 
-    Empleando un algoritmo por fuerza bruta, podríamos probar un 
+    Empleando un algoritmo por fuerza bruta, podríamos probar todas las posibles combinaciones, determinando si
+    son conjuntos que pertenecen a $\mathcal S$, de donde $\mathcal S$ es finito por ser un subconjunto de un conjunto finito. 
+    Tenemos entonces que $\{|S| : S \in \mathcal S\}$ es finito, por lo que existe $S_m \in \mathcal S$ tal que
+    $|S| \leq |S_m|, \forall S \in \mathcal S$, de donde $S_m$ es óptimo, como queríamos. 
 \end{proof}
 
+% \begin{lemma}
+%     Sea $m \in \mathbb N$ tal que $a_{m} = min\{W\}$, con W una solución parcial. Entonces existe $S_m \in \mathcal S$ óptimo tal que
+%     $a_m \in S_m$. 
+% \end{lemma}
+
+% \begin{proof}
+%     Sea $S \in \mathcal S$ una solución óptima. Veamos que llamando $a = \min\{S\}$, se verifica que
+%     $S_m = W \backslash\{a\}\cup{\{a_m\}}$ es también una solución óptima. En efecto, $\sum_{p \in S_m} p \leq 
+%     \sum_{p \in S} p \leq K$, por lo que $S_m \in \mathcal S$. Además, es claro que
+%     $ |A| \leq |S| = |S_m|, \forall A \in \mathcal S$, por lo que $S_m$ es óptimo, con $a_m \in S_m$. 
+% \end{proof}
+
+% Nótese que este segundo lema es clave, pues admite la existencia de una solución óptima empleando
+% el algoritmo greedy. Además, la propiedad de existencia no únicamente
+% se aplica al problema original, sino que también se aplica a los subproblemas generados a
+% partir del algoritmo greedy, donde se han tomado previamente n etapas greedy. 
+% De esta manera, podemos concretar el teorema clave para la optimalidad.
+
+% \begin{theorem}
+%     El algoritmo greedy proporciona una solución $S_{n} \in \mathcal{S}$ óptima. 
+% \end{theorem}
+
+% \begin{proof}
+%     Ya hemos visto que existe una solución óptima. Veamos que la estrategia greedy proporciona
+%     una solución $S_n$ óptima. En virtud del algoritmo propuesto, es claro que 
+%     $S_n \in \mathcal S$ (pues se trata de la condición de parada). Para la optimalidad,
+%     procedemos por inducción. Para $n=1$, la solución es clara en virtud de los lemas
+%     anteriores. Para $S_n$ un subconjunto donde se ha empleado el algoritmo greedy, tenemos que,
+%     nuevamente por el lema anterior, $S_{n+1}$ también se trata de una solución óptima. 
+% \end{proof}
+
 \begin{lemma}
-    Sea $m \in \mathbb N$ tal que $a_{m} = min\{S\}$. Entonces existe $S_m \in \mathcal S$ tal que
-    $a_m \in S_m$. 
+    Sea $W \in \mathcal W$ y sea $G_k$ un conjunto formado
+    por la k primeros elementos escogidos mediante el algoritmo greedy. 
+    Entonces se verifica $\sum_{p \in G_k} \leq \sum_{p \in W}$. 
 \end{lemma}
 
-\begin{proposition}
-    El algoritmo greedy proporciona una solución $S_{g} \in \mathcal{S}$ óptima. 
-\end{proposition}
+\begin{proof}
+    Sean $W = \{w_1,\cdots, w_k\}$ y $G_k = \{g_1,\cdots,g_k\}$ los conjuntos considerados.
+    Podemos suponer, sin pérdida de generalidad, que se verifica
+    $w_1 \leq w_2 \leq \cdots \leq w_k$ y $g_1 \leq g_2 \leq \cdots \leq g_k$. 
+    Puesto que en el algoritmo greedy siempre se selecciona, en primer lugar, los elementos
+    mínimos a considerar, tenemos que se verifica $g_i \leq w_i, \forall i \in \{1,2,\cdots,k\}$,
+    de donde sumando miembro a miembro se tiene la desigualdad enunciada.
+
+\end{proof}
+
+Una vez demostradas las propiedades anteriores, podemos proceder con la condición
+de optimalidad.
+
+\begin{theorem}
+    Sean $\mathcal{S} = \{S \subset P : \sum_{p \in S} p \leq K\}$ el conjunto de soluciones y
+    $P = \{p_1,p_2,\cdots,p_n\}$ el conjuntos de pesos asociados
+a los contenedores. 
+    Sea $G \in \mathcal S$ la solución generada por el algoritmo greedy. Entonces
+    $G$ es óptimo. 
+\end{theorem}
 
 \begin{proof}
-    Sea $S \in \mathcal{S}$. 
+    Por los lemas anteriores, deducimos que existe una solución $S \in \mathcal S$ óptima.
+    Como es claro que $G \in \mathcal S$, para demostrar que $G$ también es óptimo, 
+    basta realizar $k = n$ para el lema anterior, de donde $|G| = |S|$, por lo que
+    $G$ es óptimo.
 \end{proof}
 
 \newpage
