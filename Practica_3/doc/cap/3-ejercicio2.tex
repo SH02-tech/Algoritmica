@@ -43,6 +43,11 @@ un nodo al azar). Esta idea queda resumida en el Algoritmo~\ref{alg:vec_cercano}
     }
 \end{algorithm}
 
+\subsubsubsection{Análisis de eficiencia}
+
+Aquí va la teórica.
+
+
 \subsubsection{Inserción económica}
 
 En este caso para obtener la solución final se fijan $c_1,c_2,c_3$ ciudades
@@ -240,18 +245,73 @@ caption=Implementación del algoritmo de TSP basado en Kruskal.]{../src/ejercici
 
 \subsubsubsection{Análisis de eficiencia}
 
-Empecemos con el análisis teórico, analizando la eficiencia asintótica $big(O)$. Llamaremos $n$ al número de nodos del grafo que representa la red. La función que se encargar de obtener el circuito hamiltoniano solución \texttt{resuelvePVC}, tiene un bucle \texttt{while} que realizará $n$ iteraciones. Dentro del mismo, la función \texttt{buscarNodoConIndice} tiene eficiencia $O(n)$, y también en el interior del bucle, la función \texttt{sinCiclos} tiene una eficiencia $O(n^2)$, luego \textbf{la eficiencia de \texttt{resuelvePVC} es $O(n^3)$}.
+Empecemos con el análisis teórico, analizando la eficiencia asintótica $big(O)$. Llamaremos $n$ al número 
+de nodos del grafo que representa la red. La función que se encargar de obtener el circuito hamiltoniano 
+solución \texttt{resuelvePVC}, tiene un bucle \texttt{while} que realizará $n$ iteraciones. Dentro del mismo, 
+la función \texttt{buscarNodoConIndice} tiene eficiencia $O(n)$, y también en el interior del bucle, la 
+función \texttt{sinCiclos} tiene una eficiencia $O(n^2)$, luego \textbf{la eficiencia de \texttt{resuelvePVC} es $O(n^3)$}.
 
+\subsection{Comparación de rendimientos}
 
+Al tratarse de un problema de clase $NP$, no existe un algoritmo óptimo que encuentra siempre
+la mejor solución en un tiempo razonable. Mediante las tres heurísticas hemos realizado una aproximación
+para encontrar soluciones que, si bien no son siempre óptimas, ofrecen un buen rendimiento relativo.
 
+En la siguiente tabla quedan recogidas las distancias calculadas por cada una de las heurísticas.
 
+También se han adjuntado capturas con cada una de las ejecuciones realizadas, mostrándose tanto la suma
+total como el camino recorrido.
 
+\begin{figure}[H]
+  \centering
+  \includegraphics[scale=0.5]{img/dist-vecinos-bayg.png}
+  \caption{Camino generado por la heurística del vecino más cercano en bayg.}
+\end{figure}
 
+\begin{figure}[H] 
+  \centering
+  \includegraphics[scale=0.5]{img/dist-vecinos-eil.png}
+  \caption{Camino generado por la heurística del vecino más cercano en eil.}
+\end{figure}
 
+\begin{figure}[H] 
+  \centering
+  \includegraphics[scale=0.5]{img/dist-vecino-ulysses.png}
+  \caption{Camino generado por la heurística del vecino más cercano en ulysses.}
+\end{figure}
 
- 
+\begin{figure}[H]
+  \centering
+  \includegraphics[scale=0.5]{img/dist-insercion-bayg.png}
+  \caption{Camino generado por la heurística de la inserción más económica en bayg.}
+\end{figure}
 
+\begin{figure}[H]
+  \centering
+  \includegraphics[scale=0.5]{img/dist-insercion-eil.png}
+  \caption{Camino generado por la heurística de la inserción más económica en eil.}
+\end{figure}
 
+\begin{figure}[H]
+  \centering
+  \includegraphics[scale=0.5]{img/dist-insercion-ulysses.png}
+  \caption{Camino generado por la heurística de la inserción más económica en ulysses.}
+\end{figure}
 
+\begin{figure}[H]
+  \centering
+  \includegraphics[scale=0.5]{img/dist-kr-bayg.png}
+  \caption{Camino generado por la heurística propia en bayg.}
+\end{figure}
 
+\begin{figure}[H]
+  \centering
+  \includegraphics[scale=0.5]{img/dist-kr-eil.png}
+  \caption{Camino generado por la heurística propia en eil.}
+\end{figure}
 
+\begin{figure}[H]
+  \centering
+  \includegraphics[scale=0.5]{img/dist-kr-ulysses.png}
+  \caption{Camino generado por la heurística propia en ulysses.}
+\end{figure} 
