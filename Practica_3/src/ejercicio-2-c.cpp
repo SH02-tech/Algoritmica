@@ -191,6 +191,32 @@ void Presentar_Grafo(grafo<Tn,Ta>& G){
     }
 }
 
+template<class Tn,class Ta>
+vector<Punto2D> ImprimirCiclo(grafo<Tn,Ta> &graf, const vector<Punto2D> &ciudades) {
+    vector<Punto2D> posiciones;
+
+    typename grafo<Tn,Ta>::nodoIterator n = graf.nbegin();
+    typename nodo<Tn,Ta>::arcoIterator a = n->abegin();
+
+    int comienzo = n->etiqueta();
+    int siguiente = a->nodoDestino()->etiqueta();
+
+    posiciones.push_back(ciudades[comienzo]);
+
+    while (siguiente != comienzo) {
+        posiciones.push_back(ciudades[siguiente]);
+
+        // Actualizamos
+        ++n;
+        a = n->abegin();
+        siguiente = a->nodoDestino()->etiqueta();
+    }
+
+    posiciones.push_back(ciudades[comienzo]);
+
+    return posiciones;
+}
+
 template <class Tn, class Ta>
 void Presentar_Incidentes(nodo<Tn,Ta> * n){
 
@@ -288,17 +314,31 @@ int main(int argc, char ** argv) {
 
     Presentar_Grafo(hamiltoniano);
 
+    cout << endl << endl;
+
+    vector<Punto2D> indicesCamino = ImprimirCiclo(hamiltoniano, distancias);
+
+    cout << "Camino: " << endl;
+
+    for (int i=0; i<indicesCamino.size(); ++i) {
+        Punto2D ciudad = indicesCamino[i];
+        cout << ciudad.x << " " << ciudad.y << endl;
+    }
+
     cout << endl;
 
     // Calculamos la distanciaTotal del grafo
 
     double distanciaTotal = 0;
 
+    cout << "Distancias: ";
+
     for (auto it = hamiltoniano.nbegin(); it != hamiltoniano.nend(); ++it) {
+        cout << (*(*it).abegin()).etiqueta() << " ";
         distanciaTotal += (*(*it).abegin()).etiqueta();
     }
 
-    cout << "Distancia total: " << distanciaTotal << endl;
+    cout << "\nDistancia total: " << distanciaTotal << endl;
 
     return EXIT_SUCCESS;
 }
