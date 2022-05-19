@@ -1,0 +1,45 @@
+En este ejercicio dado un buque mercante cuya capacidad de carga es de K toneladas y un conjunto de contenedores $c_1,...,c_n$ cuyos
+pesos respectivos son $p_1,...,p_n$, debemos hallar un algoritmo que maximice el número de contenedores cargados y otro que intente 
+maximizar el número de toneladas cargadas.
+
+\subsection{Maximización de contenedores}
+
+En primer lugar, debemos ser conscientes de que la capacidad del buque debe ser menor que la suma total de los pesos 
+de los contenedores, pues en caso contrario, no estaría bien definido el problema. Para resolver este problema tenemos que darnos cuenta
+que lo que nos interesa es ir cogiendo aquellos contenedores cuyo peso sea más pequeño e ir introduciéndolos en el buque mientras que su suma 
+sea menor que la capacidad de carga del buque, puesto que el resultado debe tener el mayor número de contenedores posible, sin importar las 
+toneladas totales. 
+
+\begin{algorithm}[H]
+    \caption{Algoritmo para maximizar el número de contenedores}\label{alg:max_containers}
+    \begin{minipage}{0.92\textwidth}
+    \textbf{Parámetro}: containers (vector de enteros)
+
+    \textbf{Parámetro}: K (capacidad del buque)
+
+    \end{minipage}
+
+    weight = 0\;
+	container = 0\;
+    vector result\;
+  
+    sort(pesos.begin(), pesos.end());
+
+    \While{$weight <= K$ y $container <= containers.size$}{
+        result.push\_back(containers.at(container))\;
+        weight += containers.at(container)\;
+        container++\;
+    }
+  
+    \Return{result}
+    
+\end{algorithm}
+
+Como vemos en el algoritmo la clave del proceso es antes de añadir los contenedores, ordenarlos de forma creciente para que 
+en el ciclo siempre se vaya añadiendo el contenedor con menor peso.
+
+\subsubsection{Condición de optimalidad}
+Sea $S = {p_1,...,p_n}$ un conjunto de soluciones para el algoritmo y $S_g = {p_{g_1},...,p_{g_n}}$ las soluciones para el algoritmo Greedy
+
+\subsection{Maximización de toneladas}
+En este caso tenemos que maximizar las toneladas por lo que para ello una buena estrategia ir cogiendo 
