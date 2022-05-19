@@ -11,6 +11,7 @@
 \usepackage{listings}
 \usepackage{graphicx}
 \usepackage{wrapfig}
+\usepackage{algorithm2e}
 
 \definecolor{codegreen}{rgb}{0,0.6,0}
 \definecolor{codegray}{rgb}{0.5,0.5,0.5}
@@ -87,14 +88,81 @@
 
     \begin{frame}
 		\frametitle{Ejercicio-1}
+		En este ejercicio dado un buque mercante cuya capacidad de carga es de K toneladas y un conjunto de contenedores $c_1,...,c_n$ cuyos
+		pesos respectivos son $p_1,...,p_n$, debemos hallar un algoritmo que maximice el número de contenedores cargados y otro que intente 
+		maximizar el número de toneladas cargadas.
 	\end{frame}
 
     \begin{frame}
 		\frametitle{Máximo número de contenedores}
+		\begin{center}
+			\includegraphics[scale=1.5]{./img/DibCont1.pdf}
+		\end{center}
+	\end{frame}
+
+	\begin{frame}
+		\frametitle{Pseudocódigo}
+		\begin{algorithm}[H]
+			\begin{minipage}{0.92\textwidth}
+			\textbf{Parámetro}: contenedores (vector de enteros)
+		
+			\textbf{Parámetro}: K (capacidad del buque)
+		
+			\end{minipage}
+		
+			peso = 0\;
+			vector resultado\;
+			lleno = false\;
+		
+			sort(pesos.begin(), pesos.end());
+
+			\For{i desde 0 hasta contenedores.tamaño-1 y !lleno} {
+				\eIf{contenedores$[i]$ + peso $\leq$ K}{
+					peso += contenedores$[i]$\;
+				}{ lleno = true\;}
+			}
+
+			\Return{result}
+			
+		\end{algorithm}
 	\end{frame}
 
     \begin{frame}
 		\frametitle{Máximas toneladas}
+		\begin{center}
+			\includegraphics[scale=1.5]{./img/DibCont2.pdf}
+		\end{center}
+	\end{frame}
+
+	\begin{frame}
+		\frametitle{Pseudocódigo}
+		\begin{algorithm}[H]
+			\caption{Algoritmo para maximizar las toneladas}\label{alg:max_toneladas}
+			\begin{minipage}{0.92\textwidth}
+		
+			\textbf{Parámetro}: containers (vector de enteros)
+		
+			\textbf{Parámetro}: K (capacidad del buque)
+		
+			\end{minipage}
+		
+			weight = 0\;
+			container = 0\;
+			vector result\;
+		  
+			sort(containers.begin(),containers.end(),greater$<$int$>$());
+		
+			\While{$weight  \leq K$ y $container  \leq containers.size$}{      
+				\If{$weight + containers.at(container) \leq K$}{
+					result.push\_back(containers.at(container))\;
+					$weight += containers.at(container)$\;
+				}
+				container++\;
+			}
+		  
+		
+			\Return{result}
+		\end{algorithm}
 	\end{frame}
 
     \begin{frame}
@@ -110,17 +178,49 @@
 
     \begin{frame}
 		\frametitle{Algoritmo del vecino más cercano}
+		\begin{center}
+			\includegraphics[scale=1.5]{./img/DibVecCercano.pdf}
+		\end{center}
+	\end{frame}
+
+	\begin{frame}
+		\frametitle{Pseudocódigo}
+
 	\end{frame}
 
     \begin{frame}
 		\frametitle{Algoritmo de inserción económica}
+		\begin{center}
+			\includegraphics[scale=1.5]{./img/DibInsercion.pdf}
+		\end{center}
+	\end{frame}
+
+	\begin{frame}
+		\frametitle{Pseudocódigo}
+		
 	\end{frame}
 
     \begin{frame}
 		\frametitle{Algoritmo basado en Kruskal}
+		\begin{center}
+			\includegraphics[scale=1.5]{./img/DibPropio.pdf}
+		\end{center}
 	\end{frame}
 
+	\begin{frame}
+		\frametitle{Pseudocódigo}
 
+	\end{frame}
+
+    \begin{frame}
+		\frametitle{Conclusion}
+			\begin{itemize}
+				\item Conocer y trabajar con algoritmos greedy, comprendiendo su enfoque.
+				\item Comprender el problema del TSP, uno de los más importantes en materia de algorítmica y saber trabajar con el, para proporcionar soluciones.
+				\item Estudiar la eficiencia de distintos algoritmos del problema del Viajante de Comercio.
+				\item Entender y saber utilizar grafos, así como la matriz de adyacencia, ambos aplicados a la resolución de problemas.
+			\end{itemize}		
+	\end{frame}
 
     % Bibliografía
 

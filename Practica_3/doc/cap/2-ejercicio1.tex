@@ -21,11 +21,11 @@ toneladas totales.
 
     \end{minipage}
 
-    sort(pesos.begin(), pesos.end());
-
     peso = 0\;
     vector resultado\;
     lleno = false\;
+
+    sort(pesos.begin(), pesos.end());
 
     \For{i desde 0 hasta contenedores.tamaño-1 y !lleno} {
         \eIf{contenedores$[i]$ + peso $\leq$ K}{
