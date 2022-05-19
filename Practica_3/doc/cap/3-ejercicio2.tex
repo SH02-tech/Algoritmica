@@ -249,6 +249,25 @@ para encontrar soluciones que, si bien no son siempre óptimas, ofrecen un buen 
 
 En la siguiente tabla quedan recogidas las distancias calculadas por cada una de las heurísticas.
 
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|c|c|c|c|}
+      \hline
+      & bayg & eil & ulysses \\
+      \hline
+      vecino más cercano & 10200 & 662 & 79 \\
+      \hline
+      inserción & 9607 & 575 & 70 \\
+      \hline
+      $\alpha$-Kruskal & 10845 & 710 & 78 \\
+      \hline
+    \end{tabular}
+    \caption{Tabla donde se indica la distancia total del ciclo recorrido en los conjuntos de prueba
+    en función de la heurística empleada.}
+\end{table}
+
+
+
 También se han adjuntado capturas con cada una de las ejecuciones realizadas, mostrándose tanto la suma
 total como el camino recorrido.
 
@@ -304,4 +323,49 @@ total como el camino recorrido.
   \centering
   \includegraphics[scale=0.5]{img/dist-kr-ulysses.png}
   \caption{Camino generado por la heurística propia en ulysses.}
+\end{figure} 
+
+A continuación se adjuntan también las representaciones gráficas de cada
+uno de los caminos de que realizan los algoritmos.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[scale=0.5]{../src/vecino_bayg.pdf}
+  \caption{Representación gráfica del camino generado por la heurística del vecino más cercano en bayg.}
+\end{figure} 
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[scale=0.5]{../src/vecino_eil.pdf}
+  \caption{Representación gráfica del camino generado por la heurística del vecino más cercano en eil.}
+\end{figure} 
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[scale=0.5]{../src/vecino_ulysses.pdf}
+  \caption{Representación gráfica del camino generado por la heurística del vecino más cercano en ulysses.}
+\end{figure} 
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[scale=0.5]{../src/insercion_bayg.pdf}
+  \caption{Representación gráfica del camino generado por la heurística de inserción económica en bayg.}
+\end{figure} 
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[scale=0.5]{../src/insercion_eil.pdf}
+  \caption{Representación gráfica del camino generado por la heurística de inserción económica en eil.}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[scale=0.5]{../src/insercion_ulysses.pdf}
+  \caption{Representación gráfica del camino generado por la heurística de inserción económica en ulysses.}
+\end{figure} 
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[scale=0.5]{../src/kruskal_bayg.pdf}
+  \caption{Representación gráfica del camino generado por la heurística $\alpha$-Kruskal en bayg.}
 \end{figure} 
