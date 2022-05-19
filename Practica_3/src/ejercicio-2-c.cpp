@@ -5,7 +5,7 @@
 using namespace std;
 
 ////////////////////////////////////////////////////////////////////////////////
-// Heurística basada en la idea del algoritmo de Kruscal
+// Heurística basada en la idea del algoritmo de Kruskal
 ////////////////////////////////////////////////////////////////////////////////
 
 /**
@@ -281,14 +281,24 @@ int main(int argc, char ** argv) {
     ///////////////////////////////////////////////////////////////////////////
     // Calculos para resolver el PVC
 
-    grafo<int,int> circuitoHamiltoniano;
-    resuelvePVC(arcos, G.size(), circuitoHamiltoniano);
+    grafo<int,int> hamiltoniano;
+    resuelvePVC(arcos, G.size(), hamiltoniano);
 
     cout << endl;
 
-    Presentar_Grafo(circuitoHamiltoniano);
+    Presentar_Grafo(hamiltoniano);
 
     cout << endl;
+
+    // Calculamos la distanciaTotal del grafo
+
+    double distanciaTotal = 0;
+
+    for (auto it = hamiltoniano.nbegin(); it != hamiltoniano.nend(); ++it) {
+        distanciaTotal += (*(*it).abegin()).etiqueta();
+    }
+
+    cout << "Distancia total: " << distanciaTotal << endl;
 
     return EXIT_SUCCESS;
 }
