@@ -18,6 +18,13 @@ elaboración propia.
 
 \subsubsection{Vecino más cercano}
 
+\begin{figure}[H] 
+  \centering
+  \includegraphics[scale=1.5]{img/DibVecCercano.pdf}
+  \caption{Ilustración del funcionamiento de la heurística del vecino más cercano.}
+  \label{fig:vec}
+\end{figure}
+
 La filosofía que gobierna esta heurística es bastante sencilla. La idea 
 radica en ir insertando ciudades en el conjunto de solución $S$, de manera
 que para decidir la ciudad $c_{i+1}$ que se insertará se escoge aquella que
@@ -49,6 +56,13 @@ Aquí va la teórica.
 
 
 \subsubsection{Inserción económica}
+
+\begin{figure}[H] 
+  \centering
+  \includegraphics[scale=1.5]{img/DibInsercion.pdf}
+  \caption{Ilustración del funcionamiento de la heurística de inserción.}
+  \label{fig:inser}
+\end{figure}
 
 En este caso para obtener la solución final se fijan $c_1,c_2,c_3$ ciudades
 (siguiendo las indicaciones de la práctica, se han
@@ -193,6 +207,13 @@ a continuación, en el Código~\ref{cod:tsp1}.
 caption=Implementación del algoritmo de inserción en TSP.]{../src/tsp.cpp}
 
 \subsubsection{Heurística basada en el algoritmo de Kruskal} 
+
+\begin{figure}[H] 
+  \centering
+  \includegraphics[scale=1.5]{img/DibPropio.pdf}
+  \caption{Ilustración del funcionamiento de la heurística propia, basada en el algoritmo de Kruskal.}
+  \label{fig:vec}
+\end{figure}
 
 La siguiente heurística de elaboración propia se basa en la idea utilizada en el \textbf{algoritmo de Kruskal} para la determinación del AGM. 
 
