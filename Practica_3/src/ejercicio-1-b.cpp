@@ -25,7 +25,7 @@ bool esSolucionOptima(const int K, const vector<int> & pesos) {
     return (sumaPesos(pesos) == K);
 }
 
-vector<int> pesoMax (const int K, vector<int> pesos) {
+vector<int> maxWeight (const int K, vector<int> pesos) {
 
     sort(pesos.begin(), pesos.end(), myobject);   // ordenamos en orden decreciente
     vector<int> solucion; 
@@ -81,7 +81,7 @@ int main(int argc, char const *argv[])
     cout << "Vector de los pesos de los contenedores (Peso=" << sumaPesos(pesos) << "):" << endl;
     imprimeVector(pesos);
 
-    vector<int> solucion(pesoMax(K, pesos));
+    vector<int> solucion(maxWeight(K, pesos));
 
     cout << "Vector de los pesos de la solucion (Peso=" << sumaPesos(solucion) << "):" << endl;
     imprimeVector(solucion);

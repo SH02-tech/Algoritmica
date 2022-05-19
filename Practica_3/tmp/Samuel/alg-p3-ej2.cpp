@@ -10,10 +10,12 @@ vector<int> max_weight(vector<int> containers,int capacity){
     int container = 0;
     vector<int> result;
     
+    //Ordenamos el vector de forma decreciente.
     sort(containers.begin(),containers.end(),greater<int>());
     
     while(weight <= capacity && container < containers.size()){
         
+        //Si el peso es menor que capacidad se introduce, en caso contrario se sigue tratando de maximizar la carga.
         if(weight+containers.at(container)<=capacity){
             result.push_back(containers.at(container));
             weight += containers.at(container);

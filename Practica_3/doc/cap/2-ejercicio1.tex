@@ -10,6 +10,8 @@ que lo que nos interesa es ir cogiendo aquellos contenedores cuyo peso sea más 
 sea menor que la capacidad de carga del buque, puesto que el resultado debe tener el mayor número de contenedores posible, sin importar las 
 toneladas totales. 
 
+\subsubsection{Pseudocódigo}
+
 \begin{algorithm}[H]
     \caption{Algoritmo para maximizar el número de contenedores}\label{alg:max_containers}
     \begin{minipage}{0.92\textwidth}
@@ -36,7 +38,14 @@ toneladas totales.
 \end{algorithm}
 
 Como vemos en el algoritmo la clave del proceso es antes de añadir los contenedores, ordenarlos de forma creciente para que 
-en el ciclo siempre se vaya añadiendo el contenedor con menor peso.
+en el ciclo siempre se vaya añadiendo el contenedor con menor peso. 
+Para llevar a cabo la implementación de este algoritmo, según lo visto en clase, lo hemos dividido en ciertas funciones que 
+determinarán la condición de factibilidad y de solución, mientras que lo demás lo hemos unificado todo en una función. 
+
+\subsubsection{Implementación}
+
+\lstinputlisting[label={cod:max_containers}, firstline=8, lastline=47, language=C++,
+caption=Implementación del algoritmo del máximo de contenedores.]{../src/ejercicio-1-a.cpp}
 
 \subsubsection{Condición de optimalidad}
 En esta sección discutiremos si el algoritmo presentado es óptimo. Veremos que,
@@ -75,5 +84,49 @@ Verificaremos varias propiedades, antes de realizar la demostración de la optim
     Sea $S \in \mathcal{S}$. 
 \end{proof}
 
+\newpage
+
 \subsection{Maximización de toneladas}
-En este caso tenemos que maximizar las toneladas por lo que para ello una buena estrategia es ir cogiendo 
+En este caso tenemos que maximizar las toneladas por lo que para ello una buena estrategia es ir cogiendo los valores 
+de mayor a menor peso, sin terminar las iteraciones cuando el introducir un contenedor hace que se supere la capacidad del
+buque, pues como nos interesa maximizar la carga podemos aumentarla con contenedores con pesos más pequeños, siempre y cuando 
+estos sumados al peso existente no supere la capacidad del buque.
+
+\subsubsection{Pseudocódigo}
+
+\begin{algorithm}[H]
+    \caption{Algoritmo para maximizar las toneladas}\label{alg:max_toneladas}
+    \begin{minipage}{0.92\textwidth}
+
+    \textbf{Parámetro}: containers (vector de enteros)
+
+    \textbf{Parámetro}: K (capacidad del buque)
+
+    \end{minipage}
+
+    weight = 0\;
+	container = 0\;
+    vector result\;
+  
+    sort(containers.begin(),containers.end(),greater$<$int$>$());
+
+    \While{$weight  \leq K$ y $container  \leq containers.size$}{      
+        \If{$weight + containers.at(container) \leq K$}{
+            result.push\_back(containers.at(container))\;
+            $weight += containers.at(container)$\;
+        }
+        container++\;
+    }
+  
+
+    \Return{result}
+\end{algorithm}
+
+En este apartado también hemos divido la función principal encargada de hallar el máximo de toneladas, en varias funciones
+booleanas, una para determinar si una solución es factible y otra para ver si puede ser solución. Todo ello para distinguir 
+las características de un algoritmo greedy en nuestro código.
+
+\subsubsection{Implementación}
+
+\lstinputlisting[label={cod:max_tons}, firstline=8, lastline=47, language=C++,
+caption=Implementación del algoritmo del máximo de contenedores.]{../src/ejercicio-1-b.cpp}
