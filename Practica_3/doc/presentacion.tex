@@ -99,8 +99,32 @@
 		\end{itemize}
 	\end{frame}
 
+	\begin{frame}
+		\frametitle{Objetivos}
+			\begin{itemize}
+				\item Conocer y trabajar con algoritmos greedy, comprendiendo su enfoque.
+				\item Comprender el problema del TSP, uno de los más importantes en materia de algorítmica y saber trabajar con el, para proporcionar soluciones.
+				\item Estudiar la eficiencia de distintos algoritmos del problema del Viajante de Comercio.
+				\item Entender y saber utilizar grafos, así como la matriz de adyacencia, ambos aplicados a la resolución de problemas.
+			\end{itemize}		
+	\end{frame}
+
+
     \begin{frame}
-		\frametitle{Ejercicio-1}
+        \frametitle{Equipo empleado}
+
+        \begin{block}{Especificaciones técnicas del equipo}
+            \begin{itemize}
+                \item \textbf{Procesador}: Intel(R) Core(TM) i7-9750H CPU @ 2.60GHz
+                \item \textbf{Memoria RAM:} 32 GB DDR4
+                \item \textbf{Sistema Operativo}: Ubuntu 20.04.4 LTS
+            \end{itemize}
+        \end{block}
+    \end{frame}
+
+
+    \begin{frame}
+		\frametitle{Ejercicio 1}
 		En este ejercicio dado un buque mercante cuya capacidad de carga es de K toneladas y un conjunto de contenedores $c_1,...,c_n$ cuyos
 		pesos respectivos son $p_1,...,p_n$, debemos hallar un algoritmo que maximice el número de contenedores cargados y otro que intente 
 		maximizar el número de toneladas cargadas.
@@ -140,6 +164,37 @@
 		\end{algorithm}
 	\end{frame}
 
+	\begin{frame}
+		\frametitle{Análisis de eficiencia}
+		\begin{block}{Eficiencia Teórica}
+			$$T(n) \in \mathcal{O}(n^2)$$
+		\end{block}
+	\end{frame}
+
+	\begin{frame}
+		\frametitle{Condición de optimalidad}
+
+		\begin{lemma}
+			Sea $\mathcal{S} = \{S \subset P : \sum_{p \in S} p \leq K\}$ el conjunto de soluciones. Entonces
+			existe $S_m \in \mathcal S$ óptimo. 
+		\end{lemma}
+
+		\begin{lemma}
+			Sea $W \in \mathcal W$ y sea $G_k$ un conjunto formado
+			por la k primeros elementos escogidos mediante el algoritmo greedy. 
+			Entonces se verifica $\sum_{p \in G_k} \leq \sum_{p \in W}$. 
+		\end{lemma}
+
+		\begin{theorem}
+			Sean $\mathcal{S} = \{S \subset P : \sum_{p \in S} p \leq K\}$ el conjunto de soluciones y
+			$P = \{p_1,p_2,\cdots,p_n\}$ el conjuntos de pesos asociados
+		a los contenedores. 
+			Sea $G \in \mathcal S$ la solución generada por el algoritmo greedy. Entonces
+			$G$ es óptimo. 
+		\end{theorem}
+
+	\end{frame}
+
     \begin{frame}
 		\frametitle{Máximas toneladas}
 		\begin{center}
@@ -150,7 +205,6 @@
 	\begin{frame}
 		\frametitle{Pseudocódigo}
 		\begin{algorithm}[H]
-			\caption{Algoritmo para maximizar las toneladas}\label{alg:max_toneladas}
 			\begin{minipage}{0.92\textwidth}
 		
 			\textbf{Parámetro}: containers (vector de enteros)
@@ -178,6 +232,13 @@
 		\end{algorithm}
 	\end{frame}
 
+	\begin{frame}
+		\frametitle{Análisis de eficiencia}
+		\begin{block}{Eficiencia Teórica}
+			$$T(n) \in \mathcal{O}(n^2)$$
+		\end{block}
+	\end{frame}
+
     \begin{frame}
 		\frametitle{Problema del Viajante del Comercio}
 
@@ -186,6 +247,12 @@
             \item Algoritmo de inserción económica.
             \item Algoritmo basado en Kruskal.
         \end{itemize}
+
+		\begin{center}
+			\includegraphics[scale=0.35]{../src/PVC.png}
+			\includegraphics[scale=0.35]{../src/PVC1.png}
+			\includegraphics[scale=0.35]{../src/PVC2.png}
+		\end{center}
 
 	\end{frame}
 
@@ -251,6 +318,46 @@
 			\begin{center}
 				\includegraphics[scale=0.2]{../src/kruskal_eil.pdf}
 			\end{center}
+	\end{frame}
+	
+	\begin{frame}
+		\frametitle{Estudio de los tiempos}
+		\begin{table}[H]
+			\centering
+			\begin{tabular}{|c|c|c|c|}
+			  \hline
+			  & bayg & eil & ulysses \\
+			  \hline
+			  vecino más cercano & 76 & 248 & 39 \\
+			  \hline
+			  inserción & 402 & 2240 & 120 \\
+			  \hline
+			  $\alpha$-Kruskal & 8859 & 16048 & 2559 \\
+			  \hline
+			\end{tabular}
+			\caption{Tabla donde se indica el tiempo empleado en microsegundos en los conjuntos de prueba en función de la heurística empleada.}
+		\end{table}
+	\end{frame}
+
+	\begin{frame}
+		\frametitle{Análisis de eficiencia}
+		
+		\begin{table}[H]
+			\centering
+			\begin{tabular}{|c|c|c|c|}
+			\hline
+			& bayg & eil & ulysses \\
+			\hline
+			vecino más cercano & 10200 & 662 & 79 \\
+			\hline
+			inserción & 9607 & 575 & 70 \\
+			\hline
+			$\alpha$-Kruskal & 10845 & 710 & 78 \\
+			\hline
+			\end{tabular}
+			\caption{Tabla donde se indica la distancia total del ciclo recorrido en los conjuntos de prueba
+			en función de la heurística empleada.}
+		\end{table}	
 	\end{frame}
 
     \begin{frame}
