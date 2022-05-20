@@ -193,24 +193,24 @@
 	\begin{frame}
 		\frametitle{Condición de optimalidad}
 
-		\begin{lemma}
+		\begin{block}{Existencia}
 			Sea $\mathcal{S} = \{S \subset P : \sum_{p \in S} p \leq K\}$ el conjunto de soluciones. Entonces
 			existe $S_m \in \mathcal S$ óptimo. 
-		\end{lemma}
+		\end{block}
 
-		\begin{lemma}
+		\begin{alertblock}{Lema clave}
 			Sea $W \in \mathcal W$ y sea $G_k$ un conjunto formado
 			por la k primeros elementos escogidos mediante el algoritmo greedy. 
 			Entonces se verifica $\sum_{p \in G_k} \leq \sum_{p \in W}$. 
-		\end{lemma}
+		\end{alertblock}
 
-		\begin{theorem}
+		\begin{alertblock}{Propiedad de optimalidad}
 			Sean $\mathcal{S} = \{S \subset P : \sum_{p \in S} p \leq K\}$ el conjunto de soluciones y
 			$P = \{p_1,p_2,\cdots,p_n\}$ el conjuntos de pesos asociados
 		a los contenedores. 
 			Sea $G \in \mathcal S$ la solución generada por el algoritmo greedy. Entonces
 			$G$ es óptimo. 
-		\end{theorem}
+		\end{alertblock}
 
 	\end{frame}
 
@@ -368,7 +368,7 @@
 	\end{frame}
 
 	\begin{frame}
-		\frametitle{Análisis de eficiencia}
+		\frametitle{Optimalidad de las heurísticas}
 		
 		\begin{table}[H]
 			\centering
