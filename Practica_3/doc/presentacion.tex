@@ -13,6 +13,23 @@
 \usepackage{wrapfig}
 \usepackage{algorithm2e}
 
+\RestyleAlgo{ruled}
+\SetKwComment{Comment}{/* }{ */}
+
+\makeatletter
+\renewcommand{\algorithmcfname}{Algoritmo}
+\makeatother
+
+\SetKwFor{While}{mientras }{}{fin}
+\SetKwFor{For}{para cada }{}{fin}
+\SetKwFor{If}{si}{}{fin}
+%\SetKwFor{eIf}{si}{}{en otro caso}
+% \SetKwFor{For}{para cada:}{}{}
+%\SetKwFor{KwData}{Dato:}{}{}
+%\SetKwFor{Data}{Dato:}{}{}
+\SetKwFor{Results}{resultado}{}{}
+
+
 \definecolor{codegreen}{rgb}{0,0.6,0}
 \definecolor{codegray}{rgb}{0.5,0.5,0.5}
 \definecolor{codepurple}{rgb}{0.58,0,0.82}
