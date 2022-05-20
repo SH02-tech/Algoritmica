@@ -31,29 +31,26 @@ que para decidir la ciudad $c_{i+1}$ que se insertará se escoge aquella que
 dista la menor distancia de la ciudad $c_i$ (para $c_0$ se escoge
 un nodo al azar). Esta idea queda resumida en el Algoritmo~\ref{alg:vec_cercano}. 
 
-\begin{algorithm}
-    \caption{An algorithm with caption}\label{alg:vec_cercano}
-    \KwData{$ L (lista de arcos ordenados)$}
-    \KwResult{$y = x^n$}
-    $y \gets 1$\;
-    $X \gets x$\;
-    $N \gets n$\;
-    \While{$N \neq 0$}{
-      \eIf{$N$ is even}{
-        $X \gets X \times X$\;
-        $N \gets \frac{N}{2}$ \Comment*[r]{This is a comment}
-      }{\If{$N$ is odd}{
-          $y \gets y \times X$\;
-          $N \gets N - 1$\;
-        }
-      }
-    }
-\end{algorithm}
+Una implementación del algoritmo propuesto está expuesto en el Código~\ref{cod:vec}. 
+
+\lstinputlisting[label={cod:vec}, firstline=70, lastline=118, language=C++,
+caption=Implementación del algoritmo del vecino más cercano en TSP.]{../src/tsp.cpp}
 
 \subsubsubsection{Análisis de eficiencia}
 
-Aquí va la teórica.
+La variable respecto al cual realizamos el análisis de eficiencia teórico es el número
+de ciudades $n$. Consideramos simultáneamente tanto la función maestra como la función
+auxiliar de este algoritmo para el análisis. 
 
+Las operaciones tanto antes como después del bucle \texttt{while} son operaciones constantes
+donde no influye el número total de ciudades $n$ y pueden ser acotadas por una
+constante. Dentro del bucle, tenemos que
+el primer bucle  \texttt{while} realiza $kn$ con iteraciones de otro bucle \texttt{for}, con 
+$k \in \mathbb Z$ constante. A su vez, dentro de este bucle for (dentro de la función auxiliar) 
+también se realizan n repeticiones,
+por lo que se realiza un total de $k'n$ operaciones elementales dentro de ella, 
+con $k' \in \mathbb Z$ constante. Por tanto, tenemos que su orden de 
+eficiencia es $\boxed{\mathcal O(n^2)}$. 
 
 \subsubsection{Inserción económica}
 
@@ -363,7 +360,7 @@ total como el camino recorrido.
 
 \begin{figure}[H]
   \centering
-  \includegraphics[scale=0.5]{img/dist-vecinos-bayg.png}
+  \includegraphics[scale=0.7]{img/dist-vecinos-bayg.png}
   \caption{Camino generado por la heurística del vecino más cercano en bayg.}
 \end{figure}
 
