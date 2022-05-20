@@ -1,6 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include "grafo.h"
+#include <iomanip>
 #include <chrono>
 #include <math.h>
 using namespace std;
@@ -324,6 +325,15 @@ int main(int argc, char ** argv) {
     cout << endl << endl;
 
     vector<Punto2D> indicesCamino = ImprimirCiclo(hamiltoniano, distancias);
+
+    cout << "Matriz de adyacencia: " << endl;
+
+    for(int i=0; i < mAdyacencia.size(); i++) {
+        for(int j=0; j < mAdyacencia[0].size(); j++) {
+            cout << setw(3) << mAdyacencia[i][j];
+        }
+        cout << endl;
+    }
 
     cout << "Camino: " << endl;
 

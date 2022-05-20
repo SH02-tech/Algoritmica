@@ -41,9 +41,12 @@ int DistanciaEuclidea(const Punto2D &uno, const Punto2D &otro) {
 }
 
 vector<vector<int>> CalculaMatrizAdyacencia(const vector<Punto2D> &puntos) {
-	vector<vector<int>> matriz_adyacencia(puntos.size());
+	vector<vector<int>> matriz_adyacencia;
+
+	matriz_adyacencia.resize(puntos.size());
 
 	for (int i=0; i<puntos.size(); ++i) {
+		matriz_adyacencia[i].resize(0);
 		for (int j=0; j<puntos.size(); ++j) {
 			int distancia = DistanciaEuclidea(puntos[i], puntos[j]);
 			matriz_adyacencia[i].push_back(distancia);
@@ -356,6 +359,16 @@ int main(int argc, char **argv) {
 	}
 
 	tiempo = (double)(tdespues-tantes)/CLOCKS_PER_SEC*1000000;
+
+	cout << "Matriz de adyacencia: " << endl;
+
+	for (int i=0; i<ady.size(); ++i) {
+		for (int j=0; j<ady[i].size(); ++j) {
+			cout << setw(8) << ady[i][j];
+		}
+
+		cout << endl;
+	}
 
 	cout << "Inicio -> Final" << " : " << "Distancia recorrida" << endl;
 
