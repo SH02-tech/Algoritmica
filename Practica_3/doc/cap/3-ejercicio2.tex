@@ -252,21 +252,35 @@ El algoritmo terminará cuando se hayan insertado tantas aristas como nodos tien
 		
 		\textbf{Parámetro}: grafoSol (grafo con la solución, parámetro de entrada/salida)
 	\end{minipage}
-	nArcosInsertados = 0\;
-	\While{narcosInsertados $<$ nNodos \&\& !L.vacia()}{
-		arcoCandidato = L.frente()\;
-		L.eliminarFrente()\;
-		
-		\eIf{$N$ is even}{
-			$X \gets X \times X$\;
-			$N \gets \frac{N}{2}$ \Comment*[r]{This is a comment}
-		}{\If{$N$ is odd}{
-				$y \gets y \times X$\;
-				$N \gets N - 1$\;
-			}
-		}
-	
-	}
+
+  S = $\{\}$\;
+  nArcos = 0\;
+  
+  \While{nArcos < nNodos y L.novacio}{
+    arcoCandidato = L.frente()\;
+    L.eliminaFrente()\;
+
+    \eIf{nArcos == nNodos-1}{
+      \If{nodosCorrectos(arcoCandidato.origen,arcoCandidato.destino)}{
+        S = S $\cup$ $\{$arcoCandidato$\}$\;
+        nArcos++\;
+      }
+    }{
+      \eIf{nodosCorrectos(arcoCandidato.origen,arcoCandidato.destino)}{
+        S = S $\cup$ $\{$arcoCandidato$\}$\;
+        \If{sinCiclos(solucion)}{
+          nArcos++\;
+        }
+      }{
+        nOrigen = buscarNodoConIndice(arcoCandidato.origen)\;
+        nDestino = buscarNodoConIndice(arcoCandidato.destino)\;
+        borrarAdyacencia(nOrigen)\;
+        borrarIncidencia(nDestino)\;
+      }
+    }
+  }
+
+  \Return{S}
 \end{algorithm}
 
 \lstinputlisting[label={cod:cod-e2c}, firstline=7, lastline=145, language=C++,
