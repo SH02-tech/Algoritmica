@@ -31,6 +31,7 @@ que para decidir la ciudad $c_{i+1}$ que se insertará se escoge aquella que
 dista la menor distancia de la ciudad $c_i$ (para $c_0$ se escoge
 un nodo al azar). Esta idea queda resumida en el Algoritmo~\ref{alg:vec_cercano}. 
 
+<<<<<<< HEAD
 \begin{algorithm}
     \caption{Algoritmo del vecino más cercano, para el TSP}\label{alg:vec_cercano}
     $vector<int> candidates,result$\;
@@ -46,11 +47,28 @@ un nodo al azar). Esta idea queda resumida en el Algoritmo~\ref{alg:vec_cercano}
       $i \gets index$\;
     }
 \end{algorithm}
+=======
+Una implementación del algoritmo propuesto está expuesto en el Código~\ref{cod:vec}. 
+
+\lstinputlisting[label={cod:vec}, firstline=70, lastline=118, language=C++,
+caption=Implementación del algoritmo del vecino más cercano en TSP.]{../src/tsp.cpp}
+>>>>>>> 09dca36470d4c2b3d6eb250fa2af886f05134ecc
 
 \subsubsubsection{Análisis de eficiencia}
 
-Aquí va la teórica.
+La variable respecto al cual realizamos el análisis de eficiencia teórico es el número
+de ciudades $n$. Consideramos simultáneamente tanto la función maestra como la función
+auxiliar de este algoritmo para el análisis. 
 
+Las operaciones tanto antes como después del bucle \texttt{while} son operaciones constantes
+donde no influye el número total de ciudades $n$ y pueden ser acotadas por una
+constante. Dentro del bucle, tenemos que
+el primer bucle  \texttt{while} realiza $kn$ con iteraciones de otro bucle \texttt{for}, con 
+$k \in \mathbb Z$ constante. A su vez, dentro de este bucle for (dentro de la función auxiliar) 
+también se realizan n repeticiones,
+por lo que se realiza un total de $k'n$ operaciones elementales dentro de ella, 
+con $k' \in \mathbb Z$ constante. Por tanto, tenemos que su orden de 
+eficiencia es $\boxed{\mathcal O(n^2)}$. 
 
 \subsubsection{Inserción económica}
 
@@ -252,21 +270,35 @@ El algoritmo terminará cuando se hayan insertado tantas aristas como nodos tien
 		
 		\textbf{Parámetro}: grafoSol (grafo con la solución, parámetro de entrada/salida)
 	\end{minipage}
-	nArcosInsertados = 0\;
-	\While{narcosInsertados $<$ nNodos \&\& !L.vacia()}{
-		arcoCandidato = L.frente()\;
-		L.eliminarFrente()\;
-		
-		\eIf{$N$ is even}{
-			$X \gets X \times X$\;
-			$N \gets \frac{N}{2}$ \Comment*[r]{This is a comment}
-		}{\If{$N$ is odd}{
-				$y \gets y \times X$\;
-				$N \gets N - 1$\;
-			}
-		}
-	
-	}
+
+  S = $\{\}$\;
+  nArcos = 0\;
+  
+  \While{nArcos < nNodos y L.novacio}{
+    arcoCandidato = L.frente()\;
+    L.eliminaFrente()\;
+
+    \eIf{nArcos == nNodos-1}{
+      \If{nodosCorrectos(arcoCandidato.origen,arcoCandidato.destino)}{
+        S = S $\cup$ $\{$arcoCandidato$\}$\;
+        nArcos++\;
+      }
+    }{
+      \eIf{nodosCorrectos(arcoCandidato.origen,arcoCandidato.destino)}{
+        S = S $\cup$ $\{$arcoCandidato$\}$\;
+        \If{sinCiclos(solucion)}{
+          nArcos++\;
+        }
+      }{
+        nOrigen = buscarNodoConIndice(arcoCandidato.origen)\;
+        nDestino = buscarNodoConIndice(arcoCandidato.destino)\;
+        borrarAdyacencia(nOrigen)\;
+        borrarIncidencia(nDestino)\;
+      }
+    }
+  }
+
+  \Return{S}
 \end{algorithm}
 
 \lstinputlisting[label={cod:cod-e2c}, firstline=7, lastline=145, language=C++,
@@ -364,7 +396,7 @@ total como el camino recorrido.
 
 \begin{figure}[H]
   \centering
-  \includegraphics[scale=0.5]{img/dist-vecinos-bayg.png}
+  \includegraphics[scale=0.7]{img/dist-vecinos-bayg.png}
   \caption{Camino generado por la heurística del vecino más cercano en bayg.}
 \end{figure}
 
