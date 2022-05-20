@@ -32,21 +32,18 @@ dista la menor distancia de la ciudad $c_i$ (para $c_0$ se escoge
 un nodo al azar). Esta idea queda resumida en el Algoritmo~\ref{alg:vec_cercano}. 
 
 \begin{algorithm}
-    \caption{An algorithm with caption}\label{alg:vec_cercano}
-    \KwData{$ L (lista de arcos ordenados)$}
-    \KwResult{$y = x^n$}
-    $y \gets 1$\;
-    $X \gets x$\;
-    $N \gets n$\;
-    \While{$N \neq 0$}{
-      \eIf{$N$ is even}{
-        $X \gets X \times X$\;
-        $N \gets \frac{N}{2}$ \Comment*[r]{This is a comment}
-      }{\If{$N$ is odd}{
-          $y \gets y \times X$\;
-          $N \gets N - 1$\;
-        }
-      }
+    \caption{Algoritmo del vecino más cercano, para el TSP}\label{alg:vec_cercano}
+    $vector<int> candidates,result$\;
+    index\;
+    $i \gets 0$\;
+    $size \gets v[0].size$\;
+
+    $candidates.push\_back(i)$\;
+
+    \While{$candidates.size < size$}{
+      $index \gets nearest\_point(v[i],candidates)$\;
+      $candidates.push\_back(index)$\;
+      $i \gets index$\;
     }
 \end{algorithm}
 
@@ -308,7 +305,7 @@ con bastante diferencia respecto a los otros dos, siendo el del vecino el algori
 \begin{figure}[H]
   \centering
   \includegraphics[scale=0.15]{../src/Comparación_de_algoritmos.pdf}
-  \caption{Tabla donde se indica el tiempo empleado en microsegundos en los conjuntos de prueba en función de la heurística empleada.}
+  \caption{Gŕafica de barras donde se indica el tiempo empleado en microsegundos en los conjuntos de prueba en función de la heurística empleada.}
 \end{figure}
 
 \subsection{Comparación de rendimientos}
@@ -356,7 +353,11 @@ En la siguiente tabla quedan recogidas las distancias calculadas por cada una de
     en función de la heurística empleada.}
 \end{table}
 
-
+\begin{figure}[H]
+  \centering
+  \includegraphics[scale=0.15]{../src/Comparacion_distancias.pdf}
+  \caption{Gŕafica de barras donde se indica la distancia total del ciclo recorrido en los conjuntos de prueba en función de la heurística empleada.}
+\end{figure}
 
 También se han adjuntado capturas con cada una de las ejecuciones realizadas, mostrándose tanto la suma
 total como el camino recorrido.
