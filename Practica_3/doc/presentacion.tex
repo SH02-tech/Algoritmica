@@ -199,7 +199,7 @@
 		\end{block}
 
 		\begin{alertblock}{Lema clave}
-			Sea $W \in \mathcal W$ y sea $G_k$ un conjunto formado
+			Sea $W$ una solución parcial (esto es, $\exists S \in \mathcal S: W \subset S$) y sea $G_k$ un conjunto formado
 			por la k primeros elementos escogidos mediante el algoritmo greedy. 
 			Entonces se verifica $\sum_{p \in G_k} \leq \sum_{p \in W}$. 
 		\end{alertblock}
@@ -278,7 +278,7 @@
 	\end{frame}
 
     \begin{frame}
-		\frametitle{Algoritmo del vecino más cercano}
+		\frametitle{Ejemplo ilustrativo del algoritmo del vecino más cercano}
 		\begin{center}
 			\includegraphics[scale=1.5]{./img/DibVecCercano.pdf}
 		\end{center}
@@ -292,11 +292,10 @@
 	\end{frame}
 
 	\begin{frame}
-		\frametitle{Análisis de Eficiencia}
-		\begin{block}{Eficiencia Teórica}
+		\frametitle{Eficiencia teórica}
+		\begin{block}{Orden de eficiencia}
 			$$T(n) \in \mathcal{O}(n^2)$$
 		\end{block}
-
 	\end{frame}
 
 	\
@@ -311,7 +310,7 @@
 
 
     \begin{frame}
-		\frametitle{Algoritmo de inserción económica}
+		\frametitle{Ejemplo ilustrativo del algoritmo de inserción económica}
 		\begin{center}
 			\includegraphics[scale=1.5]{./img/DibInsercion.pdf}
 		\end{center}
@@ -325,6 +324,13 @@
 	\end{frame}
 
 	\begin{frame}
+		\frametitle{Eficiencia teórica}
+		\begin{block}{Orden de eficiencia}
+			$$T(n) \in \mathcal{O}(n^3)$$
+		\end{block}
+	\end{frame}
+
+	\begin{frame}
 		\frametitle{Algoritmo de inserción económica}
 			\includegraphics[scale=0.2]{../src/insercion_ulysses.pdf}
 			\includegraphics[scale=0.2]{../src/insercion_bayg.pdf}
@@ -334,7 +340,7 @@
 	\end{frame}
 
     \begin{frame}
-		\frametitle{Algoritmo basado en Kruskal}
+		\frametitle{Representación conceptual}
 		\begin{center}
 			\includegraphics[scale=1.5]{./img/DibPropio.pdf}
 		\end{center}
@@ -348,7 +354,7 @@
 	\end{frame}
 
 	\begin{frame}
-		\frametitle{Algoritmo basado en Kruskal}
+		\frametitle{Ejemplos de funcionamiento del algoritmo basado en Kruskal}
 			\includegraphics[scale=0.2]{../src/kruskal_ulysses.pdf}
 			\includegraphics[scale=0.2]{../src/kruskal_bayg.pdf}
 			\begin{center}
