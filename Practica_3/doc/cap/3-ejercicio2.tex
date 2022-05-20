@@ -31,7 +31,6 @@ que para decidir la ciudad $c_{i+1}$ que se insertará se escoge aquella que
 dista la menor distancia de la ciudad $c_i$ (para $c_0$ se escoge
 un nodo al azar). Esta idea queda resumida en el Algoritmo~\ref{alg:vec_cercano}. 
 
-<<<<<<< HEAD
 \begin{algorithm}
     \caption{Algoritmo del vecino más cercano, para el TSP}\label{alg:vec_cercano}
     $vector<int> candidates,result$\;
@@ -47,12 +46,10 @@ un nodo al azar). Esta idea queda resumida en el Algoritmo~\ref{alg:vec_cercano}
       $i \gets index$\;
     }
 \end{algorithm}
-=======
 Una implementación del algoritmo propuesto está expuesto en el Código~\ref{cod:vec}. 
 
 \lstinputlisting[label={cod:vec}, firstline=70, lastline=118, language=C++,
 caption=Implementación del algoritmo del vecino más cercano en TSP.]{../src/tsp.cpp}
->>>>>>> 09dca36470d4c2b3d6eb250fa2af886f05134ecc
 
 \subsubsubsection{Análisis de eficiencia}
 
