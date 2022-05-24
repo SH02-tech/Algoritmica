@@ -1,0 +1,101 @@
+\documentclass{homework}
+
+\usepackage[nottoc,numbib]{tocbibind}
+\usepackage{amsthm}
+\usepackage{titlesec}
+\usepackage{caption}
+\usepackage{wrapfig,lipsum,booktabs}
+
+\usepackage{algorithm2e}
+\RestyleAlgo{ruled}
+\SetKwComment{Comment}{/* }{ */}
+
+\makeatletter
+\renewcommand{\algorithmcfname}{Algoritmo}
+\makeatother
+
+\SetKwFor{While}{mientras }{}{fin}
+\SetKwFor{For}{para cada }{}{fin}
+\SetKwFor{If}{si}{}{fin}
+%\SetKwFor{eIf}{si}{}{en otro caso}
+% \SetKwFor{For}{para cada:}{}{}
+%\SetKwFor{KwData}{Dato:}{}{}
+%\SetKwFor{Data}{Dato:}{}{}
+\SetKwFor{Results}{resultado}{}{}
+
+\titleclass{\subsubsubsection}{straight}[\subsection]
+
+\newcounter{subsubsubsection}[subsubsection]
+\renewcommand\thesubsubsubsection{\thesubsubsection.\arabic{subsubsubsection}}
+\renewcommand\theparagraph{\thesubsubsubsection.\arabic{paragraph}} % optional; useful if paragraphs are to be numbered
+
+\titleformat{\subsubsubsection}
+  {\normalfont\normalsize\bfseries}{\thesubsubsubsection.}{1em}{}
+\titlespacing*{\subsubsubsection}
+{0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
+
+\makeatletter
+\renewcommand\paragraph{\@startsection{paragraph}{5}{\z@}%
+  {3.25ex \@plus1ex \@minus.2ex}%
+  {-1em}%
+  {\normalfont\normalsize\bfseries}}
+\renewcommand\subparagraph{\@startsection{subparagraph}{6}{\parindent}%
+  {3.25ex \@plus1ex \@minus .2ex}%
+  {-1em}%
+  {\normalfont\normalsize\bfseries}}
+\def\toclevel@subsubsubsection{4}
+\def\toclevel@paragraph{5}
+\def\toclevel@paragraph{6}
+\def\l@subsubsubsection{\@dottedtocline{4}{7em}{4em}}
+\def\l@paragraph{\@dottedtocline{5}{10em}{5em}}
+\def\l@subparagraph{\@dottedtocline{6}{14em}{6em}}
+\makeatother
+
+\setcounter{secnumdepth}{4}
+\setcounter{tocdepth}{4}
+
+
+\newtheorem{theorem}{Teorema}[section]
+\newtheorem{corollary}{Corolario}[theorem]
+\newtheorem{lemma}[theorem]{Lema}
+\newtheorem{proposition}[theorem]{Proposición}
+
+\renewcommand{\lstlistingname}{Código}
+\captionsetup[table]{name=Tabla}
+
+
+\title{Práctica 4: Programación Dinámica}
+\author{Shao Jie Hu Chen \\ Mario Megías Mateo \\ Jesús Samuel García Carballo}
+\renewcommand{\course}{Algorítmica}
+% \date{1 de abril de 2022}
+
+\begin{document}
+    \renewcommand{\refname}{Bibliografía}
+    \renewcommand{\contentsname}{Índice de Contenidos}
+    \renewcommand{\listtablename}{Lista de Tablas}
+    
+    \maketitle
+    \tableofcontents
+    \newpage
+
+    \section{Introducción}
+    \input{cap/1-introduccion.tex}
+    \newpage
+
+    \section{Logística de contenedores}
+    \input{cap/2-ejercicio1.tex}
+    \newpage
+
+    \section{Problema del Viajante de Comercio}
+    \input{cap/3-ejercicio2.tex}
+    \newpage
+
+    \section{Conclusión}
+    \input{cap/4-conclusion.tex}
+
+    \begin{thebibliography}{0}
+        \bibitem{Verdegay2017} Verdegay Galdeano. (2017). Lecciones de Algorítmica / José Luis Verdegay. Técnica Avicam.
+        \bibitem{Cormen2017} Cormen. (2017). Introduction to algorithms / Thomas H. Cormen... [et al.] (3rd ed.). PHI Learning.
+        \bibitem{Garrido2018} Garrido Carrillo. (2018). Estructuras de datos avanzadas: con soluciones en C++ / A. Garrido. Universidad de Granada.  
+    \end{thebibliography}
+\end{document}
