@@ -8,7 +8,7 @@ entre estos posibles hermanos, $($como es un ejemplo lo haremos para 2 entradas 
 
 \begin{figure}[h]
   \centering
-  \includegraphics[scale=0.6]{img/dibujito.pdf}
+  \includegraphics[scale=1.0]{img/dibujito.pdf}
   \caption{Ilustración del funcionamiento del algoritmo basado en programación dinámica.}
 \end{figure}
 
@@ -62,7 +62,7 @@ la fila y la columna correspondiente.
 \end{algorithm}
 
 \subsubsection{Implementación}
-\lstinputlisting[label={cod:simil}, firstline=26, lastline=36, language=C++,
+\lstinputlisting[label={cod:simil}, firstline=28, lastline=68, language=C++,
 caption=Algoritmo para la matriz que calcula la subsecuencia con mayor similitud.]{../src/similitud.cpp}
 
 \subsection{Aplicabilidad de la programación dinámica}
@@ -178,7 +178,7 @@ a continuación.
 La implementación del algoritmo del algoritmo de similitud en C++ usando la técnica programación dinámica es la siguiente:
 
 
-\lstinputlisting[label={cod:cod-pd}, firstline=20, lastline=63, language=C++,
+\lstinputlisting[label={cod:cod-pd}, firstline=20, lastline=71, language=C++,
 caption=Implementación del algoritmo de similitud basado en PD.]{../src/similitud.cpp}
 
 
@@ -226,8 +226,8 @@ una captura de la salida del programa para el primer caso en la Figura~\ref{fig:
 
 \begin{figure}
   \centering
-  \caption{Salida para el primer caso.}
   \includegraphics[scale=0.67]{img/LettersMatrixResult.png}
+  \caption{Salida para el primer caso.}
   \label{fig:1}
 \end{figure}
 
@@ -242,7 +242,7 @@ o subcadena común de mayor longitud.
 
 Su implementación en C++ sería la siguiente:
 
-\lstinputlisting[label={cod:cod-fb}, firstline=13, lastline=90, language=C++,
+\lstinputlisting[label={cod:cod-fb}, firstline=14, lastline=91, language=C++,
 caption=Implementación del algoritmo de similitud basado en fuerza bruta.]{../src/fbruta.cpp}
 
 En cuanto al análisis de eficiencia teórico de este algoritmo, como tenemos que calcular el conjunto de las partes de un conjunto, operación realizada en la función 
@@ -252,3 +252,32 @@ En comparación con el algoritmo basado en programación dinámica, \textbf{el o
 tamaño de $n=10$, luego no tiene sentido realizar ejecuciones con este algoritmo
 para valores mayores, usaremos en su lugar el algoritmo basado en PD.
 
+Para ilustrar la gran diferencia de rendimiento, se ha realizado una ejecución
+para un valor de $n=5$ de ambos algoritmos en un equipo con un procesador 
+Intel(R) Core(TM) i5-8250U CPU @ 1.60GHz, obteniéndose en el algoritmo de fuerza
+bruta un tiempo de ejecución $T = 298 \text{ }\mu s $ y para el algoritmo en el que se 
+ha empleado programación dinámica se ha requerido de un tiempo $ T = 12 \text{ } \mu s$. 
+Para ilustrar la gran diferencia de tiempo entre ambos, se han representado en
+la Gráfica~\ref{graph:comp}, donde efectivamente se puede apreciar la supremacía
+de nuestro algoritmo sobre el caso por fuerza bruta. 
+
+% \begin{table}[h]
+%   \centering
+%   \begin{tabular}{|c|c|}
+%     \hline
+%     $T_B$ & $T_D$ \\
+%     \hline
+%     298 & 12 \\
+%     \hline
+%   \end{tabular}
+%   \caption{Tiempos (en $\mu s$) en la ejecución de los algoritmos de fuerza bruta
+%   y dinámicos para $n=5$. }
+% \end{table}
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[scale=0.7]{comparativa.pdf}
+  \caption{Gráfica con los tiempos de ejecución (en $\mu s$) en la ejecución de los algoritmos de fuerza bruta
+  y dinámicos para $n=5$. }
+  \label{graph:comp}
+\end{figure}

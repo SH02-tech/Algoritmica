@@ -78,7 +78,7 @@
 \lstset{style=mystyle, basicstyle=\scriptsize}
 
 \author{Shao Jie Hu Chen \and Mario Megías Mateo \and Jesús Samuel García Carballo}
-\title{Práctica 3. Algoritmos Voraces}
+\title{Práctica 4. Programación Dinámica}
 \subtitle{Algorítmica}
 %\logo{\includegraphics[scale=0.05]{logo-ugr.jpeg}}
 \institute{Equipo Rojo}
@@ -142,7 +142,7 @@
         \end{itemize}
 	\end{frame}
 
-	\section{Ejercicio}
+	\section{Comparación de ADN}
 
     \begin{frame}
         \frametitle{Enunciado}
@@ -185,6 +185,16 @@
           \end{algorithm}
     \end{frame}
 
+	\begin{frame}
+		\frametitle{Análisis de eficiencia}
+		
+		\begin{block}{Eficiencia teórica}
+			\centering
+			$O(n^{2})$
+		\end{block}
+		
+	\end{frame}
+
     \begin{frame}
 		\frametitle{Aplicabilidad de la programación dinámica}
         \begin{enumerate}
@@ -203,7 +213,8 @@
 
     \begin{frame}
 		\frametitle{Verificación del principio de optimalidad de Bellman}
-        \begin{theorem}
+
+        \begin{alertblock}{Teorema de optimalidad}
             Sean $X=(x_1,x_2,\cdots, x_m),Y=(y_1,y_2, \cdots, y_n)$ secuencias de caracteres 
             y sea $Z$ cualquier subsecuencia común máxima 
             de $X$ e $Y$. Entonces:
@@ -216,7 +227,7 @@
                 \item $z_k \neq y_n$ implica que $Z$ es una subsecuencia común máxima para $X$ e $Y_{n-1}$. 
               \end{enumerate}
             \end{enumerate}
-        \end{theorem}
+        \end{alertblock}
 	\end{frame}
 
     \begin{frame}
@@ -237,6 +248,8 @@
         \]
 	\end{frame}
 
+
+
     \begin{frame}
 		\frametitle{Cálculo de la solución}
         \begin{figure}
@@ -253,8 +266,34 @@
             \includegraphics[scale=0.55]{LettersMatrixResult.png}
           \end{figure}
 	\end{frame}
+	
+	\section{Comparativa con fuerza bruta}
+	
+	\begin{frame}
+		\frametitle{Fuerza bruta}
+		\begin{figure}
+			Calculamos todas las subcadenas de cada cadena y nos quedamos con la
+			común de mayor longitud.
+			
+			\begin{block}{Eficiencia teórica}
+				\centering
+				$O(2^{n})$
+			\end{block}
+			
+		\end{figure}
+	\end{frame}
 
-
+    \begin{frame}
+		\frametitle{Comparación de tiempos}
+		\begin{figure}[h]
+            \centering
+            \includegraphics[scale=0.7]{comparativa.pdf}
+            \caption{Gráfica con los tiempos de ejecución (en $\mu s$) en la ejecución de los algoritmos de fuerza bruta
+            y dinámicos para $n=5$. }
+            \label{graph:comp}
+          \end{figure}
+	\end{frame}
+	
 	\section{Conclusion}
 
     \begin{frame}
