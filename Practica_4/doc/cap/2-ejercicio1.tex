@@ -102,7 +102,9 @@ subpolíticas óptimas.
 
 \subsubsection{Construcción de la ecuación recurrente}
 
-\section{Análisis de eficiencia teórico}
+Construimos ahora la ecuación recurrente asociada. 
+
+\subsection{Análisis de eficiencia teórico}
 
 A continuación, analizaremos la eficiencia del algoritmo en notación asintótica $BigO$.
 Llamamos $n$ a la longitud de las secuencias (ambas tienen el mismo número de componentes). En primer lugar nos encontramos con un doble ciclo for que recorre ambas
@@ -111,11 +113,23 @@ Posteriormente tenemos sentencias de asignación que serán despreciadas, y lleg
 ciclo while que realiza $n$ iteraciones, en cuyo interior tenemos operaciones elementales que son $O(1)$, y finalmente obtemos la subsecuencia con otro bucle while, que puede realizar un número inferior o igual a $n$ operaciones. Por tanto, aplicando la regla del máximo, obtenemos que \textbf{nuestro algoritmo tiene una eficiencia de $O(n^{2})$}.
  
 
+\subsection{Resultados}
 
+Ahora resolvemos el problema inicialmente planteado. Tenemos que, en el primer caso, 
+las secuencias que nos piden comparar son:
 
+\texttt{abbcdefabcdxzyccd}
 
+\texttt{abbcdeafbcdzxyccd}
 
+Tenemos que ejecutando el programa que hemos implementado se proporciona
+la siguiente salida:
 
+\begin{figure}
+  \centering
+  \includegraphics[scale=0.67]{img/LettersMatrixResult.png}
+  \caption{Salida para el primer caso.}
+\end{figure}
 
 
 
