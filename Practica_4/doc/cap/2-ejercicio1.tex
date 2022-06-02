@@ -134,19 +134,35 @@ las secuencias que nos piden comparar son:
 \texttt{abbcdeafbcdzxyccd}
 
 Tenemos que ejecutando el programa que hemos implementado se proporciona
-la salida de la Figura. 
+la salida de la Figura~\ref{fig:1}. 
 
-% \begin[h]{figure}
-%   \centering
-%   \includegraphics[scale=0.67]{img/LettersMatrixResult.png}
-%   \caption{Salida para el primer caso.}
-% \end{figure}
+\begin{figure}
+  \centering
+  \caption{Salida para el primer caso.}
+  \includegraphics[scale=0.67]{img/LettersMatrixResult.png}
+  \label{fig:1}
+\end{figure}
 
-Tenemos entonces que el índice de similitud es del $88 \%$. 
+Por tanto, deducimos que la subsecuencia más larga es: 
+
+\framebox[3cm]{\texttt{abbcdefbcdxyccd}}
+
+Por tanto,
+el índice de similitud es del $88 \%$. 
 
 
+Por su parte, para la segunda comparación tenemos las secuencias:
 
+\texttt{010111000100010101010010001001001001}
 
+\texttt{110000100100101010001010010011010100}
+
+Pasando nuevamente el programa, tenemos que la subsecuencia común más larga es: 
+
+\framebox[8cm]{\texttt{100001000101010001000100100100}}
+
+Por tanto,
+el índice de similitud es del $83.33 \%$. 
 
 
 
