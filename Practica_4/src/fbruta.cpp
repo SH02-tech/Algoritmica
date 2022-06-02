@@ -107,12 +107,12 @@ int main() {
     subcadenasPalabra(subcadenasPalabra1, palabra1);
     subcadenasPalabra(subcadenasPalabra2, palabra2);
 
-    subsecuenciaMasLarga = buscaSubcadenaMasLarga(subcadenasPalabra1, subcadenasPalabra2);
+    // subsecuenciaMasLarga = buscaSubcadenaMasLarga(subcadenasPalabra1, subcadenasPalabra2);
 
-    // ---------------------------------------------------- Salida
+    // // ---------------------------------------------------- Salida
 
-    cout << subsecuenciaMasLarga << " (longitud " << subsecuenciaMasLarga.size() << ")\n";
-    cout << "Longitud total de las palabras: " << palabra1.size() << "\n";
+    // cout << subsecuenciaMasLarga << " (longitud " << subsecuenciaMasLarga.size() << ")\n";
+    // cout << "Longitud total de las palabras: " << palabra1.size() << "\n";
 
     // vector<string> cadenas;
     // subcadenasPalabra(cadenas, "hola");
