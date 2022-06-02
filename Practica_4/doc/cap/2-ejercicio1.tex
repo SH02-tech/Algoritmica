@@ -16,9 +16,9 @@ que se define como:
   L(i,j) = 
   \left \{
     \begin{aligned}
-      0 &,\ \text{si} \ i = 0 o j = 0\\
-      L(i,j) + 1 &,\ \text{si} \ i \neq  1 , j \neq  0  y x_i = y_j\\
-      max(L(i,j-1) , L(i-1,j))&,\ \text{si} \ i \neq 1 , j \neq 0 y x_i \neq y_j
+      0 &,\ \text{si} \ i = 0 \ o \ j = 0\\
+      L(i,j) + 1 &,\ \text{si} \ i \neq  1 , j \neq  0 \ y \ x_i = y_j\\
+      max(L(i,j-1) , L(i-1,j))&,\ \text{si} \ i \neq 1 , j \neq 0 \ y \ x_i \neq y_j
     \end{aligned}
   \right .
 \]
@@ -26,7 +26,36 @@ que se define como:
 En esta matriz tenemos que hacer que cada elemento de la cadena X sea una posición de cada columna 
 y cada elemento de la cadena Y ocupe una posición de cada fila. Con esta disposición, vamos recorriendo
 la matriz por filas y si fijado el elemento de cada fila encontramos un elemento igual que esté en una 
-posición de las columnas, incrementamos la longitud.
+posición de las columnas, incrementamos la longitud, en caso contrario, cogemos el máximo entre el valor de 
+la fila y la columna correspondiente.
+
+\subsubsection{Pseudocódigo}
+
+\begin{algorithm}[H]
+  \caption{Algoritmo para la matriz que calcula la subsecuencia con mayor similitud.}\label{alg:simil}
+  \begin{minipage}{0.92\textwidth}
+  \textbf{Parámetro}: string (palabra1)
+  \textbf{Parámetro}: string (palabra2)
+  \textbf{Parámetro}: string (subsecuencia)
+  \textbf{Parámetro}: int (longitud=0)
+  \end{minipage}
+
+  int matriz[MAX][MAX] = {0}
+
+  \For{i desde 1 $\leq$ palabra1.size y ++i} {
+    \For{j desde 1 $\leq$ palabra2.size y ++j} {
+      \eIf{palabra1[i-1] == palabra2[j-1]}{
+        matriz[i][j] = matriz[i-1][j-1]+1\;
+      }{ matriz[i][j] = max(matriz[i][j-1],matriz[i-1][j])\;}
+    }
+  }
+
+
+\end{algorithm}
+
+\subsubsection{Implementación}
+\lstinputlisting[label={cod:simil}, firstline=26, lastline=36, language=C++,
+caption=Algoritmo para la matriz que calcula la subsecuencia con mayor similitud.]{../src/similitud.cpp}
 
 \subsection{Aplicabilidad de la programación dinámica}
 
@@ -37,6 +66,7 @@ dinámica se ha de verificar las siguientes condiciones:
     \item Comprobación de la naturaleza n-etápica del problema. 
     \item Verificación del principio de optimalidad de Bellman. 
     \item Construcción de una ecuación recurrente. 
+    \item Cálculo de la solución(enfoque adelantado o retardado). 
 \end{enumerate}
 
 \subsubsection{Naturaleza n-etápica}
@@ -56,11 +86,3 @@ problema verifica una subestructura optimal.
 \textbf{Notación}. Sea $X$ una secuencia de caracteres. Definimos prefijo i-ésimo
 de X, notado por $X_i$, al vector formado por los i primeros elementos de $X$. 
 
-\begin{theorem}
-    
-\end{theorem}
-% Pag 392
-<<<<<<< HEAD
-=======
-
->>>>>>> db5a18cef942321e5fede0e98927cd98ffa37a12
