@@ -39,7 +39,7 @@ vector<int> Base10ToN (int data, int base) {
     return solution;
 }
 
-void subcadenasPalabra(vector<string> & subcadenas, string palabra) {
+void subcadenasPalabra(vector<string> & subcadenas, const string &palabra) {
 
     subcadenas.clear();
     subcadenas.push_back("");
@@ -67,7 +67,7 @@ void subcadenasPalabra(vector<string> & subcadenas, string palabra) {
 
 }
 
-string buscaSubcadenaMasLarga(vector<string> & subcadenas1, vector<string> & subcadenas2) {
+string buscaSubcadenaMasLarga(const vector<string> & subcadenas1, const vector<string> & subcadenas2) {
 
     int longitudSubcadenas1 = subcadenas1.size();
     int longitudSubcadenas2 = subcadenas2.size();
@@ -107,12 +107,12 @@ int main() {
     subcadenasPalabra(subcadenasPalabra1, palabra1);
     subcadenasPalabra(subcadenasPalabra2, palabra2);
 
-    // subsecuenciaMasLarga = buscaSubcadenaMasLarga(subcadenasPalabra1, subcadenasPalabra2);
+    subsecuenciaMasLarga = buscaSubcadenaMasLarga(subcadenasPalabra1, subcadenasPalabra2);
 
     // // ---------------------------------------------------- Salida
 
-    // cout << subsecuenciaMasLarga << " (longitud " << subsecuenciaMasLarga.size() << ")\n";
-    // cout << "Longitud total de las palabras: " << palabra1.size() << "\n";
+    cout << subsecuenciaMasLarga << " (longitud " << subsecuenciaMasLarga.size() << ")\n";
+    cout << "Longitud total de las palabras: " << palabra1.size() << "\n";
 
     // vector<string> cadenas;
     // subcadenasPalabra(cadenas, "hola");

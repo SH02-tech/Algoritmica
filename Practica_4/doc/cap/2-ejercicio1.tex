@@ -102,3 +102,27 @@ subpolíticas óptimas.
 
 \subsubsection{Construcción de la ecuación recurrente}
 
+\section{Análisis de eficiencia teórico}
+
+A continuación, analizaremos la eficiencia del algoritmo en notación asintótica $BigO$.
+Llamamos $n$ a la longitud de las secuencias (ambas tienen el mismo número de componentes). En primer lugar nos encontramos con un doble ciclo for que recorre ambas
+secuencias y contiene operaciones $O(1)$, luego la eficiencia del bloque es $O(n^{2})$.
+Posteriormente tenemos sentencias de asignación que serán despreciadas, y llegamos a un
+ciclo while que realiza $n$ iteraciones, en cuyo interior tenemos operaciones elementales que son $O(1)$, y finalmente obtemos la subsecuencia con otro bucle while, que puede realizar un número inferior o igual a $n$ operaciones. Por tanto, aplicando la regla del máximo, obtenemos que \textbf{nuestro algoritmo tiene una eficiencia de $O(n^{2})$}.
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
