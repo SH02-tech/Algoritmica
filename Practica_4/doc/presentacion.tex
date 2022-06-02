@@ -186,6 +186,16 @@
         \end{algorithm}
     \end{frame}
 
+	\begin{frame}
+		\frametitle{Análisis de eficiencia}
+		
+		\begin{block}{Eficiencia teórica}
+			\centering
+			$O(n^{2})$
+		\end{block}
+		
+	\end{frame}
+
     \begin{frame}
 		\frametitle{Aplicabilidad de la programación dinámica}
         \begin{enumerate}
@@ -238,6 +248,8 @@
         \]
 	\end{frame}
 
+
+
     \begin{frame}
 		\frametitle{Cálculo de la solución}
         \begin{figure}
@@ -254,8 +266,23 @@
             \includegraphics[scale=0.55]{LettersMatrixResult.png}
           \end{figure}
 	\end{frame}
-
-
+	
+	\section{Comparación}
+	
+	\begin{frame}
+		\frametitle{Fuerza bruta}
+		\begin{figure}
+			Calculamos todas las subcadenas de cada cadena y nos quedamos con la
+			común de mayor longitud.
+			
+			\begin{block}{Eficiencia teórica}
+				\centering
+				$O(2^{n})$
+			\end{block}
+			
+		\end{figure}
+	\end{frame}
+	
 	\section{Conclusion}
 
     \begin{frame}
