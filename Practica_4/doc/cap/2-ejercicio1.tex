@@ -194,6 +194,27 @@ Pasando nuevamente el programa, tenemos que la subsecuencia común más larga es
 Por tanto,
 el índice de similitud es del $83.33 $. 
 
+\subsection{Comparación con el algoritmo de fuerza bruta}
+
+En este apartado vamos a presentar una resolución alternativa del problema
+usando un algoritmo de fuerza bruta, y compararemos sus prestaciones con el
+algoritmo que emplea programación dinámica anteriormente tratado.
+
+En cuanto a su funcionamiento, se trata de formar dos conjuntos, uno para cada cadena, que contengan todos los subconjuntos que pueden formarse considerando los elementos de la cadena, respetando el orden relativo de los elementos (un elemento se encuentra a la izquierda o a la derecha del otro), pero no el orden absoluto (los elementos no deben de ser adyacentes). Una vez obtenemos estos dos conjuntos, comparamos los subconjuntos de las dos cadenas y nos quedamos con el subconjunto 
+o subcadena común de mayor longitud.
+
+Su implementación en C++ sería la siguiente:
+
+\lstinputlisting[label={cod:cod-fb}, firstline=13, lastline=90, language=C++,
+caption=Implementación del algoritmo de similitud basado en fuerza bruta.]{../src/fbruta.cpp}
+
+En cuanto al análisis de eficiencia teórico de este algoritmo, como tenemos que calcular el conjunto de las partes de un conjunto, operación realizada en la función 
+\texttt{subcadenasPalabra} que es de un orden de complejidad de $O(2^{n})$, aplicando la regla del máximo con el resto de funciones que tienen complejidad polinómica, obetenmos que \textbf{la eficiencia del algoritmo es de $O(2^{n})$}.
+
+En comparación con el algoritmo basado en programación dinámica, \textbf{el orden de eficiencia del algoritmo de fuerza bruta es no polinomial, superior al que proporciona la PD}, esto hace que su tiempo de ejecución sea mayor, de forma que podemos apreciar una notable diferencia en cuanto a los tiempos a partir de un 
+tamaño de $n=10$, luego no tiene sentido realizar ejecuciones con este algoritmo
+para valores mayores, usaremos en su lugar el algoritmo basado en PD.
+
 
 
 
