@@ -1,0 +1,29 @@
+\subsection{Enunciado}
+Dos hermanos fueron separados al nacer y mediante un programa de televisión se han
+enterado que podrían ser hermanos. Ante esto, los dos están de acuerdo en hacerse un test de
+ADN para verificar si realmente son hermanos. Se debe encontrar el porcentaje de similitud que existe 
+entre estos posibles hermanos, $($como es un ejemplo lo haremos para 2 entradas posibles$)$.
+
+\subsection{Metodología}
+Para llevar a cabo este algoritmo mediante programación dinámica vamos a construir la matriz de 
+ocurrencias. Para ello vamos a construir una función que la calcule y luego la implementaremos.
+
+Sean $n,m \in \mathbb{N}$, dadas dos secuencias $X = { x_1,x_2,...,x_m}$ e $Y = { y_1,y_2,...,y_n}$, llamaremos $L(i,j)$ a la 
+longitud de la secuencia común máxima de las secuencias $X_i = {x_1,...,x_i}$ e $Y_j = {y_1,...,y_j}$ $\forall i \in {1,...,n} $ y $\forall i \in {1,...,m}$, 
+que se define como:  
+
+\[
+  L(i,j) = 
+  \left \{
+    \begin{aligned}
+      0 &,\ \text{si} \ i = 0 o j = 0\\
+      L(i,j) + 1 &,\ \text{si} \ i \neq  1 , j \neq  0  y x_i = y_j\\
+      max(L(i,j-1) , L(i-1,j))&,\ \text{si} \ i \neq 1 , j \neq 0 y x_i \neq y_j
+    \end{aligned}
+  \right .
+\]
+
+En esta matriz tenemos que hacer que cada elemento de la cadena X sea una posición de cada columna 
+y cada elemento de la cadena Y ocupe una posición de cada fila. Con esta disposición, vamos recorriendo
+la matriz por filas y si fijado el elemento de cada fila encontramos un elemento igual que esté en una 
+posición de las columnas, incrementamos la longitud.
