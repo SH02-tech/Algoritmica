@@ -39,7 +39,7 @@ int main(int argc, char *argv[]){
 	fe >> cad_h1;
 	fe >> cad_h2;
 
-		cout << "Estudio del ADN entre 2 hermanos: " << endl;
+	cout << "Estudio del ADN entre 2 hermanos: " << endl;
 	cout << "Cadena de ADN del hermano 1: " << cad_h1 << endl;
 	cout << "Cadena de ADN del hermano 2: " << cad_h2 << endl;
 	cout << "Porcentaje de simulitud entre ambos hermanos: " << simil(cad_h1,cad_h2)<<endl;
