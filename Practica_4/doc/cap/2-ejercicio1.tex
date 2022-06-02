@@ -5,6 +5,13 @@ ADN para verificar si realmente son hermanos. Se debe encontrar el porcentaje de
 entre estos posibles hermanos, $($como es un ejemplo lo haremos para 2 entradas posibles$)$.
 
 \subsection{Metodología} \label{sec:metodologia}
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[scale=0.6]{img/dibujito.pdf}
+  \caption{Ilustración del funcionamiento del algoritmo basado en programación dinámica.}
+\end{figure}
+
 Para llevar a cabo este algoritmo mediante programación dinámica vamos a construir la matriz de 
 ocurrencias. Para ello vamos a construir una función que la calcule y luego la implementaremos.
 
@@ -133,6 +140,11 @@ subpolíticas óptimas.
 Construimos ahora la ecuación recurrente asociada. Ello lo haremos aplicando
 la expresión de $C_{ij}$ que aparece en la Sección~\ref{sec:metodologia}, por lo
 que, efectivamente, se trata de una expresión recurrente. 
+
+\subsubsection{Cálculo de la solución}
+
+Para resolver el problema hemos propuesto el pseudocódigo que vamos a presentar
+a continuación. 
 
 \subsection{Pseudocódigo}
 
