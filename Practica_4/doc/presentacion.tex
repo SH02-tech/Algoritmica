@@ -154,20 +154,10 @@
 
     \begin{frame}
         \frametitle{Metodología}
-        Sean $n,m \in \mathbb{N}$, dadas dos secuencias $X = { x_1,x_2,...,x_m}$ e $Y = { y_1,y_2,...,y_n}$, llamaremos $L(i,j)$ a la 
-        longitud de la secuencia común máxima de las secuencias $X_i = {x_1,...,x_i}$ e $Y_j = {y_1,...,y_j}$ $\forall i \in {1,...,n} $ y $\forall i \in {1,...,m}$, 
-        que se define como:  
-
-        \[
-        L(i,j) = 
-        \left \{
-            \begin{aligned}
-            0 &,\ \text{si} \ i = 0 \ o \ j = 0\\
-            L(i,j) + 1 &,\ \text{si} \ i \neq  1 , j \neq  0 \ y \ x_i = y_j\\
-            max(L(i,j-1) , L(i-1,j))&,\ \text{si} \ i \neq 1 , j \neq 0 \ y \ x_i \neq y_j
-            \end{aligned}
-        \right .
-        \]
+        \begin{figure}[H] 
+            \centering
+            \includegraphics[width=0.85\textwidth]{dibujito.pdf}
+        \end{figure}
     \end{frame}
 
 
@@ -232,19 +222,39 @@
 
     \begin{frame}
 		\frametitle{Construcción de una ecuación recurrente}
-        
+        Sean $n,m \in \mathbb{N}$, dadas dos secuencias $X = { x_1,x_2,...,x_m}$ e $Y = { y_1,y_2,...,y_n}$, llamaremos $L(i,j)$ a la 
+        longitud de la secuencia común máxima de las secuencias $X_i = {x_1,...,x_i}$ e $Y_j = {y_1,...,y_j}$ $\forall i \in {1,...,n} $ y $\forall i \in {1,...,m}$, 
+        que se define como:  
+
+        \[
+        L(i,j) = 
+        \left \{
+            \begin{aligned}
+            0 &,\ \text{si} \ i = 0 \ o \ j = 0\\
+            L(i,j) + 1 &,\ \text{si} \ i \neq  1 , j \neq  0 \ y \ x_i = y_j\\
+            max(L(i,j-1) , L(i-1,j))&,\ \text{si} \ i \neq 1 , j \neq 0 \ y \ x_i \neq y_j
+            \end{aligned}
+        \right .
+        \]
 	\end{frame}
 
     \begin{frame}
 		\frametitle{Cálculo de la solución}
-        
+        \begin{figure}
+            \centering
+            \includegraphics[scale=0.35]{table.png}
+          \end{figure}
 	\end{frame}
 
 
     \begin{frame}
 		\frametitle{Resultado}
-        
+        \begin{figure}
+            \centering
+            \includegraphics[scale=0.55]{LettersMatrixResult.png}
+          \end{figure}
 	\end{frame}
+
 
 	\section{Conclusion}
 
