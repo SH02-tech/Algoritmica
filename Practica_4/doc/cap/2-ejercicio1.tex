@@ -16,9 +16,9 @@ que se define como:
   L(i,j) = 
   \left \{
     \begin{aligned}
-      0 &,\ \text{si} \ i = 0 o j = 0\\
-      L(i,j) + 1 &,\ \text{si} \ i \neq  1 , j \neq  0  y x_i = y_j\\
-      max(L(i,j-1) , L(i-1,j))&,\ \text{si} \ i \neq 1 , j \neq 0 y x_i \neq y_j
+      0 &,\ \text{si} \ i = 0 \ o \ j = 0\\
+      L(i,j) + 1 &,\ \text{si} \ i \neq  1 , j \neq  0 \ y \ x_i = y_j\\
+      max(L(i,j-1) , L(i-1,j))&,\ \text{si} \ i \neq 1 , j \neq 0 \ y \ x_i \neq y_j
     \end{aligned}
   \right .
 \]
@@ -26,7 +26,36 @@ que se define como:
 En esta matriz tenemos que hacer que cada elemento de la cadena X sea una posición de cada columna 
 y cada elemento de la cadena Y ocupe una posición de cada fila. Con esta disposición, vamos recorriendo
 la matriz por filas y si fijado el elemento de cada fila encontramos un elemento igual que esté en una 
-posición de las columnas, incrementamos la longitud.
+posición de las columnas, incrementamos la longitud, en caso contrario, cogemos el máximo entre el valor de 
+la fila y la columna correspondiente.
+
+\subsubsection{Pseudocódigo}
+
+\begin{algorithm}[H]
+  \caption{Algoritmo para la matriz que calcula la subsecuencia con mayor similitud.}\label{alg:simil}
+  \begin{minipage}{0.92\textwidth}
+  \textbf{Parámetro}: string (palabra1)
+  \textbf{Parámetro}: string (palabra2)
+  \textbf{Parámetro}: string (subsecuencia)
+  \textbf{Parámetro}: int (longitud=0)
+  \end{minipage}
+
+  int matriz[MAX][MAX] = {0}
+
+  \For{i desde 1 $\leq$ palabra1.size y ++i} {
+    \For{j desde 1 $\leq$ palabra2.size y ++j} {
+      \eIf{palabra1[i-1] == palabra2[j-1]}{
+        matriz[i][j] = matriz[i-1][j-1]+1\;
+      }{ matriz[i][j] = max(matriz[i][j-1],matriz[i-1][j])\;}
+    }
+  }
+
+
+\end{algorithm}
+
+\subsubsection{Implementación}
+\lstinputlisting[label={cod:simil}, firstline=26, lastline=36, language=C++,
+caption=Algoritmo para la matriz que calcula la subsecuencia con mayor similitud.]{../src/similitud.cpp}
 
 \subsection{Aplicabilidad de la programación dinámica}
 
@@ -37,6 +66,7 @@ dinámica se ha de verificar las siguientes condiciones:
     \item Comprobación de la naturaleza n-etápica del problema. 
     \item Verificación del principio de optimalidad de Bellman. 
     \item Construcción de una ecuación recurrente. 
+    \item Cálculo de la solución(enfoque adelantado o retardado). 
 \end{enumerate}
 
 \subsubsection{Naturaleza n-etápica}
@@ -166,6 +196,24 @@ una captura de la salida del programa para el primer caso en la Figura~\ref{fig:
   \label{fig:1}
 \end{figure}
 
+\subsection{Comparación con el algoritmo de fuerza bruta}
 
+En este apartado vamos a presentar una resolución alternativa del problema
+usando un algoritmo de fuerza bruta, y compararemos sus prestaciones con el
+algoritmo que emplea programación dinámica anteriormente tratado.
 
+En cuanto a su funcionamiento, se trata de formar dos conjuntos, uno para cada cadena, que contengan todos los subconjuntos que pueden formarse considerando los elementos de la cadena, respetando el orden relativo de los elementos (un elemento se encuentra a la izquierda o a la derecha del otro), pero no el orden absoluto (los elementos no deben de ser adyacentes). Una vez obtenemos estos dos conjuntos, comparamos los subconjuntos de las dos cadenas y nos quedamos con el subconjunto 
+o subcadena común de mayor longitud.
+
+Su implementación en C++ sería la siguiente:
+
+\lstinputlisting[label={cod:cod-fb}, firstline=13, lastline=90, language=C++,
+caption=Implementación del algoritmo de similitud basado en fuerza bruta.]{../src/fbruta.cpp}
+
+En cuanto al análisis de eficiencia teórico de este algoritmo, como tenemos que calcular el conjunto de las partes de un conjunto, operación realizada en la función 
+\texttt{subcadenasPalabra} que es de un orden de complejidad de $O(2^{n})$, aplicando la regla del máximo con el resto de funciones que tienen complejidad polinómica, obetenmos que \textbf{la eficiencia del algoritmo es de $O(2^{n})$}.
+
+En comparación con el algoritmo basado en programación dinámica, \textbf{el orden de eficiencia del algoritmo de fuerza bruta es no polinomial, superior al que proporciona la PD}, esto hace que su tiempo de ejecución sea mayor, de forma que podemos apreciar una notable diferencia en cuanto a los tiempos a partir de un 
+tamaño de $n=10$, luego no tiene sentido realizar ejecuciones con este algoritmo
+para valores mayores, usaremos en su lugar el algoritmo basado en PD.
 
