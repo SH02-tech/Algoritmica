@@ -3,6 +3,7 @@
 #include <string>
 #include <stack>
 #include <iomanip>
+#include <chrono>
 using namespace std;
 
 #define MAX 50
@@ -13,11 +14,16 @@ int main() {
     string subsecuencia;  // Salida
     int longitud_subsecuencia = 0; // Salida
 
+    clock_t tantes;    // Valor del reloj antes de la ejecución
+	clock_t tdespues;  // Valor del reloj después de la ejecución
+
     // ---------------------------------------------------- Entrada de datos
 
     cin >> palabra1 >> palabra2; 
 
     // ---------------------------------------------------- Operaciones
+
+    tantes = clock();
 
     int matriz[MAX][MAX] = {0};
 
@@ -61,6 +67,8 @@ int main() {
         sec_invertida.pop();
     }
 
+    tdespues = clock();
+
     // ---------------------------------------------------- Salida de datos
 
     cout << "Matriz obtenida: " << endl;
@@ -74,6 +82,8 @@ int main() {
 
     cout << subsecuencia << " (longitud " << longitud_subsecuencia << ")\n";
     cout << "Longitud total de las palabras: " << palabra1.size() << "\n";
+
+    cout << "Tiempo: " << ((double)(tdespues-tantes))/(CLOCKS_PER_SEC*1E-3) << " ms" << endl; // Tiempo en milisegundos. 
 
     return 0;
 }

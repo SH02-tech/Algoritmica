@@ -6,6 +6,7 @@
 #include <stack>
 #include <iomanip>
 #include <string>
+#include <chrono>
 #define MAX_BASE 16
 using namespace std;
 
@@ -97,6 +98,9 @@ int main() {
 
     vector<string> subcadenasPalabra1;
     vector<string> subcadenasPalabra2;
+
+    clock_t tantes;    // Valor del reloj antes de la ejecución
+	clock_t tdespues;  // Valor del reloj después de la ejecución
     
     // ---------------------------------------------------- Entrada de datos
 
@@ -104,22 +108,21 @@ int main() {
 
     // ---------------------------------------------------- Operaciones
 
+    tantes = clock();
+
     subcadenasPalabra(subcadenasPalabra1, palabra1);
     subcadenasPalabra(subcadenasPalabra2, palabra2);
 
     subsecuenciaMasLarga = buscaSubcadenaMasLarga(subcadenasPalabra1, subcadenasPalabra2);
+
+    tdespues = clock();
 
     // // ---------------------------------------------------- Salida
 
     cout << subsecuenciaMasLarga << " (longitud " << subsecuenciaMasLarga.size() << ")\n";
     cout << "Longitud total de las palabras: " << palabra1.size() << "\n";
 
-    // vector<string> cadenas;
-    // subcadenasPalabra(cadenas, "hola");
-
-    // for (int i=0;i<cadenas.size(); ++i) {
-    //     cout << cadenas[i] << endl;
-    // }
+    cout << "Tiempo: " << ((double)(tdespues-tantes))/(CLOCKS_PER_SEC*1E-3) << " ms" << endl; // Tiempo en milisegundos. 
 
     return 0;
 }
