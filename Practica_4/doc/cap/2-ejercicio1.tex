@@ -158,19 +158,24 @@ a continuación.
   posx = palabra1.size\;
   posy = palabra2.size\;
 
-  \While{posx $\neq$ 0 $&&$ posy $\neq$ 0}{
+
+  \While{posx $\neq$ 0 && posy $\neq$ 0}{
     \eIf{palabra1[posx-1] == palabra2[posy-1]}{
-      sec_invertida.push(palabra1[posx-1])\;
+      invertida.push(palabra1[posx-1])\;
       $--posx$\;
       $--posy$\;
     }{
       \eIf{matriz[posx][$posy-1$] $>$ matriz[$posx-1$][posy]}{
         $--posy$\;
-      }{
-        $--posx$\;   
-      }
+      }{$--posx$\;}
     }
   }
+
+  \While{!invertida.empty}{
+    subsecuencia.push_back(invertida.top)\;
+    invertida.pop\;
+  }
+
 \end{algorithm}
 
 \subsection{Implementación}
