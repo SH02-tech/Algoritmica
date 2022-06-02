@@ -146,7 +146,10 @@
 
     \begin{frame}
         \frametitle{Enunciado}
-        
+        Dos hermanos fueron separados al nacer y mediante un programa de televisión se han
+        enterado que podrían ser hermanos. Ante esto, los dos están de acuerdo en hacerse un test de
+        ADN para verificar si realmente son hermanos. Se debe encontrar el porcentaje de similitud que existe 
+        entre estos posibles hermanos, $($como es un ejemplo lo haremos para 2 entradas posibles$)$.
     \end{frame}
 
     \begin{frame}
@@ -195,14 +198,78 @@
 
     \begin{frame}
 		\frametitle{Aplicabilidad de la programación dinámica}
+        \begin{enumerate}
+            \item Comprobación de la naturaleza n-etápica del problema. 
+            \item Verificación del principio de optimalidad de Bellman. 
+            \item Construcción de una ecuación recurrente. 
+            \item Cálculo de la solución(enfoque adelantado o retardado). 
+        \end{enumerate}
+	\end{frame}
 
+    \begin{frame}
+		\frametitle{Comprobación de la naturaleza n-etápica del problema}
+        En efecto, como primera etapa se ha de conseguir las subsecuencias más largas de longitud 1, 
+        después obtener las subsecuencias más largas de longitud 2 y, así, sucesivamente. 
+	\end{frame}
+
+    \begin{frame}
+		\frametitle{Verificación del principio de optimalidad de Bellman}
+        \begin{theorem}
+            Sean $X=(x_1,x_2,\cdots, x_m),Y=(y_1,y_2, \cdots, y_n)$ secuencias de caracteres 
+            y sea $Z$ cualquier subsecuencia común máxima 
+            de $X$ e $Y$. Entonces:
+            \begin{enumerate}
+              \item Si $x_m = y_n$, entonces $z_k = x_m = y_n$ y $Z_{k-1}$ es una subsecuencia
+              común máxima de $X_{m-1}$ e $Y_{n-1}$. 
+              \item Si $x_m \neq y_n$, entonces:
+              \begin{enumerate}
+                \item $z_k \neq x_m$ implica que $Z$ es una subsecuencia común máxima para $X_{m-1}$ e $Y$. 
+                \item $z_k \neq y_n$ implica que $Z$ es una subsecuencia común máxima para $X$ e $Y_{n-1}$. 
+              \end{enumerate}
+            \end{enumerate}
+        \end{theorem}
+	\end{frame}
+
+    \begin{frame}
+		\frametitle{Construcción de una ecuación recurrente}
+        
+	\end{frame}
+
+    \begin{frame}
+		\frametitle{Cálculo de la solución}
+        
+	\end{frame}
+
+
+    \begin{frame}
+		\frametitle{Resultado}
+        
 	\end{frame}
 
 	\section{Conclusion}
 
     \begin{frame}
 		\frametitle{Conclusion}
+        \begin{itemize}
+            
+            \item Existen problemas cuya resolución por medio de algoritmos de fuerza 
+            bruta presentan una complejidad no polinomial, sin embargo con el uso de la 
+            técnica de programación dinámica \textbf{podemos reducir la eficiencia a un orden 
+            polinomial}. En nuestro ejemplo, \textbf{pasamos de un orden de eficiencia exponencial
+            a un orden polinómico}, lo cual \textbf{supone una enorme mejora en cuanto al tiempo de 
+            ejecución}.
+            
+            \item La técnica de programación dinámica proporciona algoritmos con órdenes de eficiencia
+            polinomiales, pero esta mejora en tiempo de ejecución supone una \textbf{mayor sobrecarga en cuanto 
+            a los recursos de memoria consumidos}. En nuestro ejemplo, el problema trabaja sobre dos cadenas de
+            $n$ componentes, pero para la realización del algoritmo \textbf{necesitamos construir una matriz de $n^{2}$ 
+            entradas, aumentando considerablemente el uso de la memoria del computador}.
 
+            \item Además de la mejora en eficiencia respecto de algoritmos triviales, la técnica de programación
+            dinámica se destaca por la \textbf{obtención de soluciones óptimas respecto a la toma de la primera decisión}.
+            
+            
+        \end{itemize}
 	\end{frame}
 
     % Bibliografía
