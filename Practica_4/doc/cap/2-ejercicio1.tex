@@ -5,22 +5,28 @@ Como se ha discutido previamente, para aplicar un algoritmo basado en programaci
 dinámica se ha de verificar las siguientes condiciones:
 
 \begin{enumerate}
-    \item \textbf{Comprobación de la naturaleza n-etápica del problema}. En efecto, 
-    para encontrar la subcadena $c_n$ más larga de longitud n, hemos de empezar 
-    previamente con las subcadenas más largas de longitud 1,2... ($c_1$, $c_2$, ...). 
-
-    \item \textbf{Verificación del principio de optimalidad de Bellman}. Para ello, 
-    veamos que 
+    \item Comprobación de la naturaleza n-etápica del problema. 
+    \item Verificación del principio de optimalidad de Bellman. 
     \item Construcción de una ecuación recurrente. 
 \end{enumerate}
 
+\subsubsection{Naturaleza n-etápica}
+En efecto, 
+% para encontrar la subcadena $c_n$ más larga de longitud n, hemos de empezar 
+% previamente con las subcadenas más largas de longitud 1,2... ($c_1$, $c_2$, ...). 
+como primera etapa se ha de conseguir las subcadenas más largas de longitud 1, 
+después obtener las subcadenas más largas de longitud 2 y, así, sucesivamente. 
 
 
-% \subsection{Verificación del principio de optimalidad de Bellman}
+\subsubsection{Verificación del principio de optimalidad de Bellman}
 
-% En esta parte, vamos a determinar que el problema que hemos expuesto verifica,
-% efectivamente, el principio de optimalidad de Bellman. Para ello, consideraremos
-% dos cadenas de longitud $m,n \in \mathbb N$. Lo que vamos a considerar es 
-% fijar $m \in \mathbb N$ y variar $n$ mediante un proceso inductivo.
+En esta parte, vamos a determinar que el problema que hemos expuesto verifica,
+efectivamente, el principio de optimalidad de Bellman. Para ello, veamos que el
+problema verifica una subestructura optimal.
 
-% Pag 392
+\textbf{Notación}. Sea $X$ una secuencia de caracteres. Definimos prefijo i-ésimo
+de X, notado por $X_i$, al vector formado por los i primeros elementos de $X$. 
+
+\begin{theorem}
+    
+\end{theorem}
