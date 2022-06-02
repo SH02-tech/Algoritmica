@@ -41,23 +41,64 @@ dinámica se ha de verificar las siguientes condiciones:
 
 \subsubsection{Naturaleza n-etápica}
 En efecto, 
-% para encontrar la subcadena $c_n$ más larga de longitud n, hemos de empezar 
-% previamente con las subcadenas más largas de longitud 1,2... ($c_1$, $c_2$, ...). 
-como primera etapa se ha de conseguir las subcadenas más largas de longitud 1, 
-después obtener las subcadenas más largas de longitud 2 y, así, sucesivamente. 
+% para encontrar la subsecuencia $c_n$ más larga de longitud n, hemos de empezar 
+% previamente con las subsecuencias más largas de longitud 1,2... ($c_1$, $c_2$, ...). 
+como primera etapa se ha de conseguir las subsecuencias más largas de longitud 1, 
+después obtener las subsecuencias más largas de longitud 2 y, así, sucesivamente. 
 
 
 \subsubsection{Verificación del principio de optimalidad de Bellman}
 
 En esta parte, vamos a determinar que el problema que hemos expuesto verifica,
 efectivamente, el principio de optimalidad de Bellman. Para ello, veamos que el
-problema verifica una subestructura optimal.
+problema verifica una subestructura optimal. El método y el teorema se pueden encontrar
+en \cite{Cormen2017}. 
 
-\textbf{Notación}. Sea $X$ una secuencia de caracteres. Definimos prefijo i-ésimo
+\textbf{Notación}. Sea $X$ una secuencia de caracteres. Definimos \textbf{prefijo i-ésimo}
 de X, notado por $X_i$, al vector formado por los i primeros elementos de $X$. 
+También definimos por \textbf{subsecuencia común} a dos secuencias de caracteres $X,Y$ a cualquier sucesión de caracteres
+cuyo orden ascendente se encuentre tanto en $X$ como en $Y$. Además, diremos que la
+subsecuencia común es \textbf{máxima} cuando su número de caracteres sea igual o superior 
+a cualquier otra subsecuencia común. 
 
 \begin{theorem}
-    
+    Sean $X=(x_1,x_2,\cdots, x_m),Y=(y_1,y_2, \cdots, y_n)$ secuencias de caracteres 
+    y sea $Z$ cualquier subsecuencia común máxima 
+    de $X$ e $Y$. Entonces:
+    \begin{enumerate}
+      \item Si $x_m = y_n$, entonces $z_k = x_m = y_n$ y $Z_{k-1}$ es una subsecuencia
+      común máxima de $X_{m-1}$ e $Y_{n-1}$. 
+      \item Si $x_m \neq y_n$, entonces:
+      \begin{enumerate}
+        \item $z_k \neq x_m$ implica que $Z$ es una subsecuencia común máxima para $X_{m-1}$ e $Y$. 
+        \item $z_k \neq y_n$ implica que $Z$ es una subsecuencia común máxima para $X$ e $Y_{n-1}$. 
+      \end{enumerate}
+    \end{enumerate}
 \end{theorem}
 % Pag 392
+
+\begin{proof}
+  Empezamos probando (1). Supongamos que $x_m = y_n$. Si fuese $z_k \neq x_m$,
+  podríamos añadir $x_m = y_n$ para obtener una subsecuencia común de $X$ e $Y$ 
+  de longitud k+1, contradiciendo la hipótesis de subsecuencia común máxima de Z. 
+  Por tanto, ha de ser $z_k = x_m = y_n$. Ahora, el prefijo $Z_{k-1}$ es una
+  subsecuencia común de k-1 caracteres, subsecuencia común de $X_{m-1}$ e $Y_{n-1}$.
+  Veamos que se trata de una subsecuencia común máxima. Para ello, procedemos
+  nuevamente por reducción al absurdo. Supongamos que existe una subsecuencia común $W$ de
+  $X_{m-1}$ e $Y_{n-1}$ con longitud mayor que $k-1$. Entonces, añadiendo $x_m$ a $W$
+  se produce una subsecuencia común de $X$ e $Y$ cuya longitud es mayor que k, lo
+  que sería contradictorio.
+
+  Para (2), empezamos probando el primero. Si $z_k \neq x_m$, entonces $Z$ es una
+  subsecuencia común de $X_{m-1}$ e $Y$. Si hubiese una subsecuencia común $W$
+  de longitud mayor que $k$, entonces $W$ sería nuevamente una subsecuencia común 
+  de $X_m$ e $Y$, contradiciendo que $Z$ sea una subsecuencia común máxima.
+  Análogamente se haría para el caso $z_k \neq y_n$. 
+\end{proof}
+
+Este teorema demuestra que el problema verifica el principio de optimalidad de
+Bellman, pues cualquier política óptima únicamente puede estar formado por
+subpolíticas óptimas. 
+
+\subsubsection{Construcción de la ecuación recurrente}
 
