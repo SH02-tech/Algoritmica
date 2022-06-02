@@ -43,11 +43,12 @@ la fila y la columna correspondiente.
   \begin{minipage}{0.92\textwidth}
   \textbf{Parámetro}: string (palabra1)
   \textbf{Parámetro}: string (palabra2)
-  \textbf{Parámetro}: string (subsecuencia)
-  \textbf{Parámetro}: int (longitud=0)
+  \textbf{Parámetro}: 
   \end{minipage}
 
-  int matriz[MAX][MAX] = {0}
+  int matriz[MAX][MAX] = {0}\;
+  int longitud=0\;
+  string subsecuencia\;
 
   \For{i desde 1 $\leq$ palabra1.size y ++i} {
     \For{j desde 1 $\leq$ palabra2.size y ++j} {
@@ -56,6 +57,8 @@ la fila y la columna correspondiente.
       }{ matriz[i][j] = max(matriz[i][j-1],matriz[i-1][j])\;}
     }
   }
+
+  longitud = matriz[palabra1.size][palabra2.size]\;  
 \end{algorithm}
 
 \subsubsection{Implementación}
@@ -147,6 +150,28 @@ Para resolver el problema hemos propuesto el pseudocódigo que vamos a presentar
 a continuación. 
 
 \subsection{Pseudocódigo}
+
+\begin{algorithm}[H]
+  \caption{Cálculo de la secuencia.}
+
+  stack$<char>$ invertida\;
+  posx = palabra1.size\;
+  posy = palabra2.size\;
+
+  \While{posx $\neq$ 0 $&&$ posy $\neq$ 0}{
+    \eIf{palabra1[posx-1] == palabra2[posy-1]}{
+      sec_invertida.push(palabra1[posx-1])\;
+      $--posx$\;
+      $--posy$\;
+    }{
+      \eIf{matriz[posx][$posy-1$] $>$ matriz[$posx-1$][posy]}{
+        $--posy$\;
+      }{
+        $--posx$\;   
+      }
+    }
+  }
+\end{algorithm}
 
 \subsection{Implementación}
 

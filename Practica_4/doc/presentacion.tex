@@ -164,26 +164,25 @@
 
     \begin{frame}
         \frametitle{Pseudocódigo}
-    
         \begin{algorithm}[H]
             \caption{Algoritmo para la matriz que calcula la subsecuencia con mayor similitud.}\label{alg:simil}
             \begin{minipage}{0.92\textwidth}
-            \textbf{Parámetro}: string (palabra1)
+            \textbf{Parámetro}: string (palabra1)\;
             \textbf{Parámetro}: string (palabra2)
-            \textbf{Parámetro}: string (subsecuencia)
-            \textbf{Parámetro}: int (longitud=0)
             \end{minipage}
-
-            int matriz[MAX][MAX] = {0}
-
+          
+            int matriz[MAX][MAX] = {0}\;
+            int longitud=0\;
+            string subsecuencia\;
+          
             \For{i desde 1 $\leq$ palabra1.size y ++i} {
-                \For{j desde 1 $\leq$ palabra2.size y ++j} {
+              \For{j desde 1 $\leq$ palabra2.size y ++j} {
                 \eIf{palabra1[i-1] == palabra2[j-1]}{
-                    matriz[i][j] = matriz[i-1][j-1]+1\;
+                  matriz[i][j] = matriz[i-1][j-1]+1\;
                 }{ matriz[i][j] = max(matriz[i][j-1],matriz[i-1][j])\;}
-                }
+              }
             }
-        \end{algorithm}
+          \end{algorithm}
     \end{frame}
 
     \begin{frame}
@@ -242,7 +241,7 @@
 		\frametitle{Cálculo de la solución}
         \begin{figure}
             \centering
-            \includegraphics[scale=0.35]{table.png}
+            \includegraphics[width=10cm, height=5cm]{table.png}
           \end{figure}
 	\end{frame}
 
@@ -262,13 +261,21 @@
 		\frametitle{Conclusion}
         \begin{itemize}
             
-            \item Con el uso de la técnica de programación dinámica \textbf{podemos reducir la eficiencia a un orden polinomial}. En nuestro ejemplo, \textbf{pasamos de un orden de eficiencia exponencial
-            a un orden polinómico}.
+            \item Existen problemas cuya resolución por medio de algoritmos de fuerza 
+            bruta presentan una complejidad no polinomial, sin embargo con el uso de la 
+            técnica de programación dinámica \textbf{podemos reducir la eficiencia a un orden 
+            polinomial}. En nuestro ejemplo, \textbf{pasamos de un orden de eficiencia exponencial
+            a un orden polinómico}, lo cual \textbf{supone una enorme mejora en cuanto al tiempo de 
+            ejecución}.
             
-            \item La mejora en tiempo de ejecución supone una \textbf{mayor sobrecarga en cuanto a los recursos de memoria consumidos}.  \textbf{Necesitamos construir una matriz de $n^{2}$ 
-            entradas} aumentando considerablemente el uso de la memoria del computador.
+            \item La técnica de programación dinámica proporciona algoritmos con órdenes de eficiencia
+            polinomiales, pero esta mejora en tiempo de ejecución supone una \textbf{mayor sobrecarga en cuanto 
+            a los recursos de memoria consumidos}. En nuestro ejemplo, el problema trabaja sobre dos cadenas de
+            $n$ componentes, pero para la realización del algoritmo \textbf{necesitamos construir una matriz de $n^{2}$ 
+            entradas, aumentando considerablemente el uso de la memoria del computador}.
 
-            \item \textbf{Obtención de soluciones óptimas} respecto a la toma de la primera decisión.
+            \item Además de la mejora en eficiencia respecto de algoritmos triviales, la técnica de programación
+            dinámica se destaca por la \textbf{obtención de soluciones óptimas respecto a la toma de la primera decisión}.
             
             
         \end{itemize}
