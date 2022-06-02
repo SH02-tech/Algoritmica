@@ -1,6 +1,8 @@
 \documentclass[13pt]{beamer}
 \usetheme{Frankfurt}
 \usecolortheme{beaver}
+\graphicspath{ {img/} }
+
 
 \usepackage[spanish]{babel}
 \usepackage{amsmath}
@@ -104,32 +106,97 @@
     \section{Introducción}
 
 	\begin{frame}
-		\frametitle{Introducción}
-
+		\frametitle{Objetivos}
+        \begin{itemize}
+            \item Conocer qué es la programación dinámica.
+            \item Saber determinar si un algoritmo es de programación dinámica.
+            \item Ser capaces de implementar un algoritmo de programación dinámica.
+        \end{itemize}
 	\end{frame}
 
 	\begin{frame}
-		\frametitle{Objetivos}
-		
+		\frametitle{Programación Dinámica}
+        La programación dinámica es un método de diseño de algoritmos que se puede usar cuando la solución del 
+        problema se puede ver como el resultado de una sucesión de decisiones. 
+        Proporciona un procedimiento sistemático para encontrar la combinación de decisiones que maximice la efectividad
+        total, al descomponer el problema en etapas, todas ellas enlazadas mediante algoritmos recursivos.
 	\end{frame}
 
-
     \begin{frame}
-        \frametitle{Equipo empleado}
-
-        \begin{block}{Especificaciones técnicas del equipo}
-            \begin{itemize}
-                \item \textbf{Procesador}: Intel(R) Core(TM) i7-9750H CPU @ 2.60GHz
-                \item \textbf{Memoria RAM:} 32 GB DDR4
-                \item \textbf{Sistema Operativo}: Ubuntu 20.04.4 LTS
-            \end{itemize}
-        \end{block}
+		\frametitle{Origen}
+            \begin{figure}[H] 
+                \centering
+                \includegraphics[width=0.5\textwidth]{bellman.jpg}
+                \caption{Richard Bellman}
+            \end{figure}
     \end{frame}
+
+	\begin{frame}
+		\frametitle{Características}
+        En líneas generales un algoritmo de Programación Dinámica se aplica en cuatro fases:
+        \begin{itemize}
+        \item Naturaleza n-etápica del problema.
+        \item Verificación del Problema de Optimalidad.
+        \item Planteamiento de una recurrencia.
+        \item Cálculo de la solución(enfoque adelantado o retardado). 
+        \end{itemize}
+	\end{frame}
 
 	\section{Ejercicio}
 
+    \begin{frame}
+        \frametitle{Enunciado}
+        
+    \end{frame}
+
+    \begin{frame}
+        \frametitle{Metodología}
+        Sean $n,m \in \mathbb{N}$, dadas dos secuencias $X = { x_1,x_2,...,x_m}$ e $Y = { y_1,y_2,...,y_n}$, llamaremos $L(i,j)$ a la 
+        longitud de la secuencia común máxima de las secuencias $X_i = {x_1,...,x_i}$ e $Y_j = {y_1,...,y_j}$ $\forall i \in {1,...,n} $ y $\forall i \in {1,...,m}$, 
+        que se define como:  
+
+        \[
+        L(i,j) = 
+        \left \{
+            \begin{aligned}
+            0 &,\ \text{si} \ i = 0 \ o \ j = 0\\
+            L(i,j) + 1 &,\ \text{si} \ i \neq  1 , j \neq  0 \ y \ x_i = y_j\\
+            max(L(i,j-1) , L(i-1,j))&,\ \text{si} \ i \neq 1 , j \neq 0 \ y \ x_i \neq y_j
+            \end{aligned}
+        \right .
+        \]
+    \end{frame}
 
 
+
+    \begin{frame}
+        \frametitle{Pseudocódigo}
+    
+        \begin{algorithm}[H]
+            \caption{Algoritmo para la matriz que calcula la subsecuencia con mayor similitud.}\label{alg:simil}
+            \begin{minipage}{0.92\textwidth}
+            \textbf{Parámetro}: string (palabra1)
+            \textbf{Parámetro}: string (palabra2)
+            \textbf{Parámetro}: string (subsecuencia)
+            \textbf{Parámetro}: int (longitud=0)
+            \end{minipage}
+
+            int matriz[MAX][MAX] = {0}
+
+            \For{i desde 1 $\leq$ palabra1.size y ++i} {
+                \For{j desde 1 $\leq$ palabra2.size y ++j} {
+                \eIf{palabra1[i-1] == palabra2[j-1]}{
+                    matriz[i][j] = matriz[i-1][j-1]+1\;
+                }{ matriz[i][j] = max(matriz[i][j-1],matriz[i-1][j])\;}
+                }
+            }
+        \end{algorithm}
+    \end{frame}
+
+    \begin{frame}
+		\frametitle{Aplicabilidad de la programación dinámica}
+
+	\end{frame}
 
 	\section{Conclusion}
 
