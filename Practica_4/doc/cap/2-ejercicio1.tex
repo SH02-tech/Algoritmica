@@ -4,7 +4,7 @@ enterado que podrían ser hermanos. Ante esto, los dos están de acuerdo en hace
 ADN para verificar si realmente son hermanos. Se debe encontrar el porcentaje de similitud que existe 
 entre estos posibles hermanos, $($como es un ejemplo lo haremos para 2 entradas posibles$)$.
 
-\subsection{Metodología}
+\subsection{Metodología} \label{sec:metodologia}
 Para llevar a cabo este algoritmo mediante programación dinámica vamos a construir la matriz de 
 ocurrencias. Para ello vamos a construir una función que la calcule y luego la implementaremos.
 
@@ -102,7 +102,9 @@ subpolíticas óptimas.
 
 \subsubsection{Construcción de la ecuación recurrente}
 
-Construimos ahora la ecuación recurrente asociada. 
+Construimos ahora la ecuación recurrente asociada. Ello lo haremos aplicando
+la expresión de $C_{ij}$ que aparece en la Sección~\ref{sec:metodologia}, por lo
+que, efectivamente, se trata de una expresión recurrente. 
 
 \subsection{Pseudocódigo}
 
@@ -126,15 +128,36 @@ ciclo while que realiza $n$ iteraciones, en cuyo interior tenemos operaciones el
 
 \subsection{Resultados}
 
-Ahora resolvemos el problema inicialmente planteado. Tenemos que, en el primer caso, 
-las secuencias que nos piden comparar son:
+Ahora vamos a resolver el programa planteado inicialmente. Para ello,
+hemos ejecutado los códigos tanto para el primer como para el segundo caso,
+obteniendo las Tablas \ref{tab:s1} y \ref{tab:s2}. También podemos encontrar
+una captura de la salida del programa para el primer caso en la Figura~\ref{fig:1}. 
 
-\texttt{abbcdefabcdxzyccd}
+\begin{table}[h]
+    \footnotesize
+    \centering
+	\begin{tabular}{|l|l|l|ll}
+		\cline{1-3}
+		\textbf{Secuencias}                           & \textbf{Subsecuencia común máxima}                       & \textbf{Porcentaje de similitud}     &  &  \\ \cline{1-3}
+		abbcdefabcdxzyccd                    & \multirow{2}{*}{abbcdefbcdxyccd}                & \multirow{2}{*}{$88 \%$}    &  &  \\ \cline{1-1}
+		abbcdeafbcdzxyccd                    &                                                 &                             &  &  \\ \cline{1-3}
+	\end{tabular}
+  \caption{Datos obtenidos de la comparación de las secuencias de caracteres.}
+  \label{tab:s1}
+\end{table}
 
-\texttt{abbcdeafbcdzxyccd}
-
-Tenemos que ejecutando el programa que hemos implementado se proporciona
-la salida de la Figura~\ref{fig:1}. 
+\begin{table}[h]
+  \footnotesize
+  \centering
+\begin{tabular}{|l|l|l|ll}
+  \cline{1-3}
+  \textbf{Secuencias}                           & \textbf{Subsecuencia común máxima}                       & \textbf{Porcentaje de similitud}     &  &  \\ \cline{1-3}
+  010111000100010101010010001001001001 & \multirow{2}{*}{100001000101010001000100100100} & \multirow{2}{*}{$83.33 \%$} &  &  \\ \cline{1-1}
+  110000100100101010001010010011010100 &                                                 &                             &  &  \\ \cline{1-3}
+\end{tabular}
+\caption{Datos obtenidos de la comparación de las secuencias de números.}
+\label{tab:s2}
+\end{table}
 
 \begin{figure}
   \centering
@@ -142,27 +165,6 @@ la salida de la Figura~\ref{fig:1}.
   \includegraphics[scale=0.67]{img/LettersMatrixResult.png}
   \label{fig:1}
 \end{figure}
-
-Por tanto, deducimos que la subsecuencia más larga es: 
-
-\framebox[3cm]{\texttt{abbcdefbcdxyccd}}
-
-Por tanto,
-el índice de similitud es del $88 \%$. 
-
-
-Por su parte, para la segunda comparación tenemos las secuencias:
-
-\texttt{010111000100010101010010001001001001}
-
-\texttt{110000100100101010001010010011010100}
-
-Pasando nuevamente el programa, tenemos que la subsecuencia común más larga es: 
-
-\framebox[8cm]{\texttt{100001000101010001000100100100}}
-
-Por tanto,
-el índice de similitud es del $83.33 \%$. 
 
 
 
