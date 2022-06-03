@@ -209,12 +209,20 @@ caption=Implementación del algoritmo de similitud basado en PD.]{../src/similit
 
 \subsection{Análisis de eficiencia teórico}
 
-A continuación, analizaremos la eficiencia del algoritmo en notación asintótica $BigO$.
+A continuación, analizaremos la eficiencia del algoritmo que genera la matriz en notación asintótica $BigO$.
 Llamamos $n$ a la longitud de las secuencias (ambas tienen el mismo número de componentes). En primer lugar nos encontramos con un doble ciclo for que recorre ambas
 secuencias y contiene operaciones $O(1)$, luego la eficiencia del bloque es $O(n^{2})$.
 Posteriormente tenemos sentencias de asignación que serán despreciadas, y llegamos a un
 ciclo while que realiza $n$ iteraciones, en cuyo interior tenemos operaciones elementales que son $O(1)$, y finalmente obtemos la subsecuencia con otro bucle while, que puede realizar un número inferior o igual a $n$ operaciones. Por tanto, aplicando la regla del máximo, obtenemos que \textbf{nuestro algoritmo tiene una eficiencia de $O(n^{2})$}.
- 
+
+Procedemos ahora a analizar el algoritmo que determina una de las subcadenas comunes
+de longitud máxima. Para ello, démonos cuenta que, en el peor de los casos, en el primer bucle
+while se decrementa únicamente 1 vez la posición desde el final hasta el inicial (tanto
+en fila como en columna). Como hay n filas y n columnas, y el resto del código fuera del while
+es código con eficiencia $O(1)$, a excepción del segundo while que itera sobre todos los
+elementos de la subsecuencia (que tiene a lo sumo n elementos), deducimos que la 
+eficiencia de este segundo algoritmo
+es $O (n)$. 
 
 \subsection{Resultados}
 
