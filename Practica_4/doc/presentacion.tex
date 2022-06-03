@@ -196,6 +196,32 @@
 	\end{frame}
 
     \begin{frame}
+        \frametitle{Pseudocódigo 2}
+        
+        \begin{algorithm}[H]
+            \caption{Cálculo de la secuencia.}
+          
+            stack$<char>$ invertida; posx = palabra1.size; posy = palabra2.size\;
+          
+            \While{posx $\neq$ 0 y posy $\neq$ 0}{
+              \eIf{palabra1[posx-1] == palabra2[posy-1]}{
+                invertida.push(palabra1[posx-1]);
+                $--posx$;
+                $--posy$\;
+              }{
+                \eIf{matriz[posx][$posy-1$] $>$ matriz[$posx-1$][posy]}{
+                  $--posy$\;
+                }{$--posx$\;}
+              }
+            }
+            \While{!invertida.empty}{
+              subsecuencia.push\_back(invertida.top);
+              invertida.pop\;
+            }
+          \end{algorithm}
+    \end{frame}
+
+    \begin{frame}
 		\frametitle{Aplicabilidad de la programación dinámica}
         \begin{enumerate}
             \item Comprobación de la naturaleza n-etápica del problema. 
@@ -288,32 +314,25 @@
 		\begin{figure}[h]
             \centering
             \includegraphics[scale=0.7]{comparativa.pdf}
-            \caption{Gráfica con los tiempos de ejecución (en $\mu s$) en la ejecución de los algoritmos de fuerza bruta
-            y dinámicos para $n=5$. }
+            \caption{Gráfica con los tiempos (en $\mu s$) en la ejecución de los algoritmos de fuerza bruta
+            y dinámicos para $n=5$ en un Intel Core(TM) i5-8250U CPU @ 1.60GHz. }
             \label{graph:comp}
           \end{figure}
 	\end{frame}
 	
-	\section{Conclusion}
+	\section{Conclusión}
 
     \begin{frame}
 		\frametitle{Conclusion}
         \begin{itemize}
             
-            \item Existen problemas cuya resolución por medio de algoritmos de fuerza 
-            bruta presentan una complejidad no polinomial, sin embargo con el uso de la 
-            técnica de programación dinámica \textbf{podemos reducir la eficiencia a un orden 
-            polinomial}. En nuestro ejemplo, \textbf{pasamos de un orden de eficiencia exponencial
-            a un orden polinómico}, lo cual \textbf{supone una enorme mejora en cuanto al tiempo de 
-            ejecución}.
+            \item \textbf{Podemos reducir la eficiencia desde un orden exponencial a un orden 
+            polinomial}. 
             
-            \item La técnica de programación dinámica proporciona algoritmos con órdenes de eficiencia
-            polinomiales, pero esta mejora en tiempo de ejecución supone una \textbf{mayor sobrecarga en cuanto 
-            a los recursos de memoria consumidos}. En nuestro ejemplo, el problema trabaja sobre dos cadenas de
-            $n$ componentes, pero para la realización del algoritmo \textbf{necesitamos construir una matriz de $n^{2}$ 
-            entradas, aumentando considerablemente el uso de la memoria del computador}.
+            \item Supone una \textbf{mayor sobrecarga en cuanto 
+            a los recursos de memoria consumidos}. 
 
-            \item Además de la mejora en eficiencia respecto de algoritmos triviales, la técnica de programación
+            \item La técnica de programación
             dinámica se destaca por la \textbf{obtención de soluciones óptimas respecto a la toma de la primera decisión}.
             
             

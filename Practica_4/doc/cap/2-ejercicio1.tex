@@ -36,34 +36,34 @@ la matriz por filas y si fijado el elemento de cada fila encontramos un elemento
 posición de las columnas, incrementamos la longitud, en caso contrario, cogemos el máximo entre el valor de 
 la fila y la columna correspondiente.
 
-\subsubsection{Pseudocódigo}
+% \subsubsection{Pseudocódigo}
 
-\begin{algorithm}[H]
-  \caption{Algoritmo para la matriz que calcula la subsecuencia con mayor similitud.}\label{alg:simil}
-  \begin{minipage}{0.92\textwidth}
-  \textbf{Parámetro}: string (palabra1)
-  \textbf{Parámetro}: string (palabra2)
-  \textbf{Parámetro}: 
-  \end{minipage}
+% \begin{algorithm}[H]
+%   \caption{Algoritmo para la matriz que calcula la subsecuencia con mayor similitud.}\label{alg:simil}
+%   \begin{minipage}{0.92\textwidth}
+%   \textbf{Parámetro}: string (palabra1)
+%   \textbf{Parámetro}: string (palabra2)
+%   \textbf{Parámetro}: 
+%   \end{minipage}
 
-  int matriz[MAX][MAX] = {0}\;
-  int longitud=0\;
-  string subsecuencia\;
+%   int matriz[MAX][MAX] = {0}\;
+%   int longitud=0\;
+%   string subsecuencia\;
 
-  \For{i desde 1 $\leq$ palabra1.size y ++i} {
-    \For{j desde 1 $\leq$ palabra2.size y ++j} {
-      \eIf{palabra1[i-1] == palabra2[j-1]}{
-        matriz[i][j] = matriz[i-1][j-1]+1\;
-      }{ matriz[i][j] = max(matriz[i][j-1],matriz[i-1][j])\;}
-    }
-  }
+%   \For{i desde 1 $\leq$ palabra1.size y ++i} {
+%     \For{j desde 1 $\leq$ palabra2.size y ++j} {
+%       \eIf{palabra1[i-1] == palabra2[j-1]}{
+%         matriz[i][j] = matriz[i-1][j-1]+1\;
+%       }{ matriz[i][j] = max(matriz[i][j-1],matriz[i-1][j])\;}
+%     }
+%   }
 
-  longitud = matriz[palabra1.size][palabra2.size]\;  
-\end{algorithm}
+%   longitud = matriz[palabra1.size][palabra2.size]\;  
+% \end{algorithm}
 
-\subsubsection{Implementación}
-\lstinputlisting[label={cod:simil}, firstline=28, lastline=68, language=C++,
-caption=Algoritmo para la matriz que calcula la subsecuencia con mayor similitud.]{../src/similitud.cpp}
+% \subsubsection{Implementación}
+% \lstinputlisting[label={cod:simil}, firstline=28, lastline=68, language=C++,
+% caption=Algoritmo para la matriz que calcula la subsecuencia con mayor similitud.]{../src/similitud.cpp}
 
 \subsection{Aplicabilidad de la programación dinámica}
 
@@ -152,6 +152,29 @@ a continuación.
 \subsection{Pseudocódigo}
 
 \begin{algorithm}[H]
+  \caption{Algoritmo para la matriz que calcula la subsecuencia con mayor similitud.}\label{alg:simil}
+  \begin{minipage}{0.92\textwidth}
+  \textbf{Parámetro}: string (palabra1)
+  \textbf{Parámetro}: string (palabra2)
+  \textbf{Parámetro}: 
+  \end{minipage}
+
+  int matriz[MAX][MAX] = {0}\;
+  int longitud=0\;
+  string subsecuencia\;
+
+  \For{i desde 1 $\leq$ palabra1.size y ++i} {
+    \For{j desde 1 $\leq$ palabra2.size y ++j} {
+      \eIf{palabra1[i-1] == palabra2[j-1]}{
+        matriz[i][j] = matriz[i-1][j-1]+1\;
+      }{ matriz[i][j] = max(matriz[i][j-1],matriz[i-1][j])\;}
+    }
+  }
+
+  longitud = matriz[palabra1.size][palabra2.size]\;  
+\end{algorithm}
+
+\begin{algorithm}[H]
   \caption{Cálculo de la secuencia.}
 
   stack$<char>$ invertida\;
@@ -180,7 +203,7 @@ a continuación.
 La implementación del algoritmo del algoritmo de similitud en C++ usando la técnica programación dinámica es la siguiente:
 
 
-\lstinputlisting[label={cod:cod-pd}, firstline=20, lastline=71, language=C++,
+\lstinputlisting[label={cod:cod-pd}, firstline=28, lastline=68, language=C++,
 caption=Implementación del algoritmo de similitud basado en PD.]{../src/similitud.cpp}
 
 
@@ -219,7 +242,7 @@ una captura de la salida del programa para el primer caso en la Figura~\ref{fig:
 \begin{tabular}{|l|l|l|ll}
   \cline{1-3}
   \textbf{Secuencias}                           & \textbf{Subsecuencia común máxima}                       & \textbf{Porcentaje de similitud}     &  &  \\ \cline{1-3}
-  010111000100010101010010001001001001 & \multirow{2}{*}{100001000101010001000100100100} & \multirow{2}{*}{$83.33 \%$} &  &  \\ \cline{1-1}
+  010111000100010101010010001001001001 & \multirow{2}{*}{100001000101010001000100100100} & \multirow{2}{*}{$83 \%$} &  &  \\ \cline{1-1}
   110000100100101010001010010011010100 &                                                 &                             &  &  \\ \cline{1-3}
 \end{tabular}
 \caption{Datos obtenidos de la comparación de las secuencias de números.}
@@ -259,9 +282,9 @@ para un valor de $n=5$ de ambos algoritmos en un equipo con un procesador
 Intel(R) Core(TM) i5-8250U CPU @ 1.60GHz, obteniéndose en el algoritmo de fuerza
 bruta un tiempo de ejecución $T = 298 \text{ }\mu s $ y para el algoritmo en el que se 
 ha empleado programación dinámica se ha requerido de un tiempo $ T = 12 \text{ } \mu s$. 
-Para ilustrar la gran diferencia de tiempo entre ambos, se han representado en
+Se han representado en
 la Gráfica~\ref{graph:comp}, donde efectivamente se puede apreciar la supremacía
-de nuestro algoritmo sobre el caso por fuerza bruta. 
+de nuestro algoritmo basado en programación dinámica sobre el caso por fuerza bruta. 
 
 % \begin{table}[h]
 %   \centering
