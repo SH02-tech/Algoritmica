@@ -9,3 +9,6 @@ A total of 4 assigments were given in this course, divided into the following to
 2. The __second__ assignment was about Divide and Conquer algorithms, comparing its efficiency with respect to trivial algorithms.
 3. The __third__ assignment was about Greedy algorithms, analyzing its efficiency with respect to trivial algorithms and justifying the optimality where it was required.
 4. The __fourth__ assignment was about Dynamic Programming, analyzimg its efficiency with respect to trivial algorithms and justifying both optimality and applicability of this type of algoritm in specified problem. 
+
+In the development of these assigments, an auxiliar program has also been developed: GraphKiller, which allows to generate automatically tables, graphs and
+different types of regression. 
